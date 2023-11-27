@@ -1,0 +1,146 @@
+@use "@/assets/sass/mixins" as *;
+
+.navbar-section {
+   @include flex(space-between, center);
+   @include fixed(tl, 0, 0);
+   background-color: #282828;
+   width: 100%;
+   z-index: 1000;
+   padding: 10px 20px;
+   .logo {
+      height: 35px;
+      @include width(sm) {
+         height: 50px;
+      }
+      @include width(md) {
+         height: 70px;
+      }
+      img {
+         width: 100%;
+         height: 100%;
+         object-fit: contain;
+      }
+   }
+
+   .desktop-links {
+      @include flex(space-between, center);
+      gap: 15px;
+      display: none;
+      @include width(md) {
+         display: flex;
+      }
+      .link {
+         color: rgba(white, 0.7);
+         font-size: 1.3rem;
+         display: block;
+         padding-bottom: 10px;
+         border-bottom: 2px solid transparent;
+         &:hover {
+            color: get(white);
+            scale: 1.1;
+            border-bottom: 2px solid get(primary);
+         }
+      }
+   }
+
+   .mobile-links {
+      @include fixed(tl, 0, 0);
+      background-color: #282828;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      z-index: 1001;
+      clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+      &.open {
+         clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      }
+      @include width(sm) {
+         width: 300px;
+      }
+      @include width(md) {
+         display: none;
+      }
+      .fa-times {
+         color: get(white);
+         font-size: 2rem;
+         cursor: pointer;
+         &:hover {
+            color: get(primary);
+         }
+      }
+      .link {
+         @include flex(flex-start, center);
+         line-height: 4;
+         border-bottom: 2px solid transparent;
+         border-bottom: 2px solid rgba(orange, 0.7);
+         i {
+            color: get(white);
+            font-size: 1.3rem;
+            margin-left: 10px;
+         }
+         .anchor {
+            color: get(white);
+            width: 100%;
+            display: block;
+            padding-right: 5px;
+            font-size: 1.3rem;
+         }
+      }
+   }
+
+   .icons {
+      @include flex(space-between, center);
+      gap: 15px;
+      margin-left: 10px;
+      i {
+         color: get(white);
+         display: block;
+         opacity: 0.5;
+         font-size: 1.2rem;
+         cursor: pointer;
+         &:hover {
+            color: get(primary);
+            opacity: 1;
+         }
+         &.fa-bars {
+            display: initial;
+            @include width(md) {
+               display: none;
+            }
+         }
+      }
+   }
+
+   .search-bar {
+      @include flex(space-between, center);
+      @include fixed(tl, 120px, 50%);
+      background-color: get(white);
+      width: 100%;
+      max-width: 600px;
+      padding: 10px;
+      gap: 10px;
+      overflow: hidden;
+      border-radius: 50px;
+      box-shadow: get(shadow);
+      transform: translateX(-50%);
+      border: 2px solid rgba(orange, 0.3);
+      clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+      &.open {
+         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      }
+      input {
+         background-color: transparent;
+         width: 100%;
+         padding: 5px;
+         font-size: 1.5rem;
+      }
+      i {
+         font-size: 1.5rem;
+         display: block;
+         cursor: pointer;
+         &:hover {
+            color: get(primary);
+         }
+      }
+   }
+}

@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+   font-family: "STV";
+   src: url("@/assets/fonts/stv.ttf") format("truetype");
+}
+
+body {
+   font-family: "Poppins", sans-serif;
+   &[dir="rtl"] {
+      font-family: "STV", sans-serif;
+   }
+}
+
+* {
+   padding: 0;
+   margin: 0;
+   border: none;
+   outline: none;
+   scroll-behavior: smooth;
+   list-style: none !important;
+   box-sizing: border-box !important;
+   text-decoration: none !important;
+   transition: all 0.1s ease-in-out;
+}
+
+html {
+   width: 100vw;
+   overflow-x: hidden;
+   * ::-webkit-scrollbar {
+      width: 2px !important;
+      height: 5px !important;
+   }
+   ::-webkit-scrollbar {
+      width: 7px;
+   }
+   ::-webkit-scrollbar-thumb {
+      @apply rounded-lg bg-primary;
+   }
+   ::-webkit-scrollbar-track {
+      @apply bg-dimBlack;
+   }
+   ::selection {
+      @apply bg-primary text-black;
+      text-shadow: 5px 5px 10px get(black);
+   }
+}
+
+i {
+   @apply cursor-pointer text-dimWhite;
+   font-size: 1rem;
+   &:hover {
+      @apply scale-110 text-primary;
+   }
+}
+
+.home-section {
+   background: url("@/assets/images/home.png") no-repeat;
+   background-size: cover;
+   background-position: center;
+   min-height: 100vh;
+   width: 100%;
+}
+
+.mobile-navbar {
+   clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+   &.open {
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+   }
+}
+
+.select-box {
+   span.left-0 {
+      left: initial;
+      right: 0;
+   }
+   div.right-2 {
+      left: 0;
+      right: initial;
+   }
+}
+
+.flex-between {
+   @apply flex items-center justify-between gap-4;
+}
+
+.flex-center {
+   @apply flex items-center justify-center gap-4;
+}
+
+.flex-start {
+   @apply flex items-center gap-4;
+}
+
+.flex-end {
+   @apply flex items-center justify-end gap-4 text-primary;
+}

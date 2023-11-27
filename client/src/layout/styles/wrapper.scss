@@ -1,0 +1,17 @@
+@use "@/assets/sass/mixins" as *;
+
+.app {
+	margin-top: 55px;
+	padding: 0.5rem;
+	&.no-padding {
+		padding: 0 !important;
+	}
+	@include width(sm) {
+		margin-top: 70px;
+		padding: 1.3rem;
+	}
+	@include width(md) {
+		margin-top: 90px;
+		padding: 2rem;
+	}
+}
