@@ -37,12 +37,15 @@ export const Mobile = () => {
                         <List className="py-0">
                            {paths.map(({ name, icon, link }) => (
                               <ListItem
-                                 className="text-xl font-bold text-white hover:bg-blue-gray-700 hover:text-white"
+                                 className="group text-xl font-bold text-white hover:bg-blue-gray-700 hover:text-white"
                                  onClick={handleDrawer}
                                  key={name}
                               >
-                                 <Link to={`/${path}/${link}`} className="flex-start text-2xl text-blue-gray-600">
-                                    <i className={`${icon} text-2xl text-blue-gray-600`} />
+                                 <Link
+                                    to={`/${path}/${link}`}
+                                    className="flex-start text-2xl text-blue-gray-600 group-hover:text-white"
+                                 >
+                                    <i className={`${icon} text-2xl text-blue-gray-600 group-hover:text-white`} />
                                     <p className="">{name}</p>
                                  </Link>
                               </ListItem>

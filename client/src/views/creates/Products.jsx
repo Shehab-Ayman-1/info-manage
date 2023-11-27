@@ -94,7 +94,7 @@ export const Products = () => {
                   <Field
                      type="number"
                      min="0"
-                     label="اقل قيمة للانزار"
+                     label="حد ادني"
                      containerStyle="!w-[50%] min-w-[50%]"
                      onChange={(e) => {
                         setProduct((d) => ({ ...d, minmax: { ...d.minmax, min: e.target.value } }));
@@ -103,7 +103,7 @@ export const Products = () => {
                   <Field
                      type="number"
                      min="0"
-                     label="اكبر قيمة للانزار"
+                     label="حد متوسط"
                      containerStyle="!w-[50%] min-w-[50%]"
                      onChange={(e) => {
                         setProduct((d) => ({ ...d, minmax: { ...d.minmax, max: e.target.value } }));

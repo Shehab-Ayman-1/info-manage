@@ -29,7 +29,7 @@ export const Buy_Sale = () => {
    return (
       <Form
          onSubmit={handleSubmit}
-         headerText={`كشف حساب ${pathname === "sale" ? "بيع" : "شراء"}`}
+         headerText={`${pathname === "sale" ? "كشف حساب" : "كشف مندوب"}`}
          buttonText={`اتمام ${pathname === "sale" ? "البيع" : "الشراء"}`}
          cardStyle="w-[500px]"
       >
@@ -58,18 +58,18 @@ export const Buy_Sale = () => {
                />
             </div>
 
-            <div className="flex-between">
+            <div className="flex-between flex-wrap sm:flex-nowrap">
                <Field
                   type="number"
                   label="العدد"
                   onChange={(e) => setProduct((p) => ({ ...p, count: e.target.value }))}
-                  containerStyle="!w-[50%]"
+                  containerStyle="sm:!w-[50%] w-full"
                />
                <Field
                   type="number"
                   label="السعر"
                   onChange={(e) => setProduct((p) => ({ ...p, price: e.target.value }))}
-                  containerStyle="!w-[50%]"
+                  containerStyle="sm:!w-[50%] w-full"
                />
             </div>
 

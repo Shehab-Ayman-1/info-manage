@@ -6,7 +6,7 @@ export const Desktop = () => {
    return (
       <div className="hidden w-full items-center justify-end md:flex">
          {links.map(({ title, path, paths }) => (
-            <Menu placement="bottom" key={title} allowHover>
+            <Menu placement="bottom" key={title} allowHover className="!transition-none">
                <MenuHandler>
                   <Button
                      className="flex-start md:text-2xl lg:text-3xl"

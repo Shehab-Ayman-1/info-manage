@@ -28,14 +28,14 @@ export const links = [
       path: "statements",
       paths: [
          {
-            name: "كشف حساب شراء",
-            link: "buy",
+            name: "كشف حساب",
+            link: "sale",
             icon: "fas fa-shopping-cart",
             Component: Buy_Sale,
          },
          {
-            name: "كشف حساب بيع",
-            link: "sale",
+            name: "كشف مندوب",
+            link: "buy",
             icon: "fas fa-shopping-cart",
             Component: Buy_Sale,
          },

@@ -8,7 +8,7 @@ const schema = new Schema({
 		{
 			name: String,
 			suppliers: { type: Array, default: [] },
-			price: { type: Number, default: 0 },
+			price: { buy: { type: Number, default: 0 }, sale: { type: Number, default: 0 } },
 			minmax: {
 				min: { type: Number, default: 5 },
 				max: { type: Number, default: 10 },
