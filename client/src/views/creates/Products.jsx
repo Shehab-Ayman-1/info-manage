@@ -3,7 +3,7 @@ import { Field, Selectbox } from "@/components";
 import { Typography, Button, Card, CardBody, CardHeader, CardFooter } from "@material-tailwind/react";
 import { useState } from "react";
 
-export const AddProducts = () => {
+export const Products = () => {
    const [formData, setFormData] = useState({ category: "", company: "", products: [""] });
    const navigate = useNavigate();
 

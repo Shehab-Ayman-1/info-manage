@@ -3,7 +3,7 @@ import { Field } from "@/components";
 import { Typography, Button, Card, CardBody, CardHeader, CardFooter } from "@material-tailwind/react";
 import { useState } from "react";
 
-export const AddCategory = () => {
+export const Category = () => {
    const [formData, setFormData] = useState("");
    const navigate = useNavigate();
 

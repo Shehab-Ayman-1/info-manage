@@ -22,23 +22,26 @@ export const Mobile = () => {
             <i className="fa fa-times text-xl text-dimWhite hover:text-white" onClick={handleDrawer} />
 
             <List>
-               {links.map(({ title, paths }, i) => (
+               {links.map(({ title, path, paths }, i) => (
                   <Accordion icon={<ChevronIcon id={i + 1} />} open={openAccordion === i + 1} key={title}>
                      <ListItem className="hover:bg-blue-gray-700">
-                        <AccordionHeader className={`w-full text-2xl font-bold text-white hover:text-white`} onClick={() => handleAccordion(i + 1)}>
+                        <AccordionHeader
+                           className={`w-full text-2xl font-bold text-white hover:text-white`}
+                           onClick={() => handleAccordion(i + 1)}
+                        >
                            {title}
                         </AccordionHeader>
                      </ListItem>
 
                      <AccordionBody className="py-0">
                         <List className="py-0">
-                           {paths.map(({ name, icon, path }) => (
+                           {paths.map(({ name, icon, link }) => (
                               <ListItem
                                  className="text-xl font-bold text-white hover:bg-blue-gray-700 hover:text-white"
                                  onClick={handleDrawer}
                                  key={name}
                               >
-                                 <Link to={path} className="flex-start text-2xl text-blue-gray-600">
+                                 <Link to={`/${path}/${link}`} className="flex-start text-2xl text-blue-gray-600">
                                     <i className={`${icon} text-2xl text-blue-gray-600`} />
                                     <p className="">{name}</p>
                                  </Link>

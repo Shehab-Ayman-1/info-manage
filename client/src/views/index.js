@@ -1,14 +1,15 @@
 // Home
 export * from "./Home";
 
-// Products
-export * from "./products/ShopProducts";
-export * from "./products/StoreProducts";
-export * from "./products/BuyProducts";
-export * from "./products/SaleProducts";
-export * from "./products/EditPrices";
+// Creates
+export * from "./creates/Category";
+export * from "./creates/Company";
+export * from "./creates/Products";
 
-// Suppliers
-export * from "./suppliers/AddCategory";
-export * from "./suppliers/AddCompany";
-export * from "./suppliers/AddProducts";
+// Products
+export * from "./products/Shop";
+export * from "./products/Store";
+
+// Statements
+export * from "./statements/Buy";
+export * from "./statements/Sale";

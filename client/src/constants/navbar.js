@@ -1,71 +1,70 @@
+// Products
+import { Shop, Store } from "@/views";
+
+// Statements
+import { Buy, Sale } from "@/views";
+
+// Creates
+import { Category, Company, Products } from "@/views";
+
 export const links = [
    {
       title: "المنتجات",
+      path: "products",
       paths: [
          {
             name: "عرض بضائع المحل",
-            path: "/products/shop",
+            link: "shop",
             icon: "fas fa-store",
+            Component: Shop,
          },
          {
             name: "عرض بضائع المخزن",
-            path: "/products/store",
+            link: "store",
             icon: "fas fa-store",
-         },
-         {
-            name: "شراء بضائع",
-            path: "/products/buy-products",
-            icon: "fas fa-shopping-cart",
-         },
-         {
-            name: "بيع بضائع",
-            path: "/products/sale-products",
-            icon: "fas fa-shopping-cart",
-         },
-         {
-            name: "تعديل اسعار",
-            path: "/products/edit-prices",
-            icon: "fas fa-edit",
+            Component: Store,
          },
       ],
    },
    {
       title: "الكشوفات",
+      path: "statements",
       paths: [
          {
-            name: "اضافه قسم جديد",
-            path: "/suppliers/add-category",
-            icon: "fas fa-store-alt",
+            name: "كشف حساب شراء",
+            link: "buy",
+            icon: "fas fa-shopping-cart",
+            Component: Buy,
          },
          {
-            name: "اضافه شركة جديدة",
-            path: "/suppliers/add-company",
-            icon: "fas fa-store-alt",
-         },
-         {
-            name: "اضافه منتج جديد",
-            path: "/suppliers/add-products",
-            icon: "fas fa-store-alt",
+            name: "كشف حساب بيع",
+            link: "sale",
+            icon: "fas fa-shopping-cart",
+            Component: Sale,
          },
       ],
    },
    {
-      title: "الارصدة",
+      title: "انشاء",
+      path: "creates",
       paths: [
          {
-            name: "رصيد الخزنة",
-            path: "/balances",
-            icon: "fas fa-money-bill-wave",
-         },
-         {
-            name: "رصيد المحل",
-            path: "/balances",
-            icon: "fas fa-store",
-         },
-         {
-            name: "رصيد المخزن",
-            path: "/balances",
+            name: "قسم جديد",
+            link: "category",
             icon: "fas fa-store-alt",
+            Component: Category,
+         },
+         {
+            name: "شركة جديدة",
+            link: "company",
+            icon: "fas fa-store-alt",
+            Component: Company,
+         },
+         {
+            name: "منتج جديد",
+            link: "products",
+            icon: "fas fa-store-alt",
+            Component: Products,
          },
       ],
    },
