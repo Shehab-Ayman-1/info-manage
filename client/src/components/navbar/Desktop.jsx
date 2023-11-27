@@ -4,7 +4,7 @@ import { Button, Menu, MenuHandler, MenuList, MenuItem } from "@material-tailwin
 
 export const Desktop = () => {
    return (
-      <div className="hidden w-full items-center justify-start md:flex">
+      <div className="hidden w-full items-center justify-end md:flex">
          {links.map(({ title, path, paths }) => (
             <Menu placement="bottom" key={title} allowHover>
                <MenuHandler>

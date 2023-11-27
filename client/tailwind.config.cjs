@@ -5,7 +5,7 @@ module.exports = withMT({
    content: ["./index.html", "./src/**/*.jsx"],
    theme: {
       boxShadow: {
-         sp: "0 0 20px rgb(0 0 0 / 1)",
+         sp: "0 0 20px rgb(94 53 177 / 0.5)",
       },
       extend: {
          colors: {

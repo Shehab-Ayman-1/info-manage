@@ -45,8 +45,8 @@ html {
       @apply bg-dimBlack;
    }
    ::selection {
-      @apply bg-primary text-black;
-      text-shadow: 5px 5px 10px get(black);
+      @apply bg-primary text-white;
+      text-shadow: 5px 5px 10px black;
    }
 }
 
@@ -86,6 +86,10 @@ i {
 
 .flex-between {
    @apply flex items-center justify-between gap-4;
+}
+
+.flex-around {
+   @apply flex items-center justify-around gap-4;
 }
 
 .flex-center {

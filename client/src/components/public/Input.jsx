@@ -1,16 +1,25 @@
 import { Input } from "@material-tailwind/react";
 
-export const Field = ({ label = "", inputStyle = "", containerStyle = "", labelStyle = "", ...rest }) => {
+export const Field = ({
+   type = "text",
+   label = "",
+   inputStyle = "",
+   containerStyle = "",
+   variant = "standard",
+   labelStyle = "",
+   ...rest
+}) => {
    return (
       <Input
          {...rest}
          label={label}
+         type={type}
          size="lg"
-         variant="standard"
+         variant={variant}
          color="deep-purple"
          className={`!text-xl ${inputStyle || ""}`}
          containerProps={{
-            className: `h-20 border-b-2 border-0 border-solid border-purple-100 ${containerStyle}`,
+            className: `h-20 border-b-2 border-0 border-solid border-deep-purple-100 ${containerStyle}`,
          }}
          labelProps={{
             className: `text-xl peer-focus:text-xl peer-placeholder-shown:text-xl ${labelStyle}`,

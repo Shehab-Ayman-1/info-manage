@@ -20,6 +20,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 // Routes
 app.use("/api/users", users);
 app.use("/api/products", products);
+app.use("/*", (req, res) => res.status(500).json({ status: 500, method: req.method, url: req.url, error: "Wronge path." }));
 
 // MongoDB
 DBconnection();

@@ -7,9 +7,7 @@ export * from "./creates/Company";
 export * from "./creates/Products";
 
 // Products
-export * from "./products/Shop";
-export * from "./products/Store";
+export * from "./products/Shop_Store";
 
 // Statements
-export * from "./statements/Buy";
-export * from "./statements/Sale";
+export * from "./statements/Buy_Sale";
