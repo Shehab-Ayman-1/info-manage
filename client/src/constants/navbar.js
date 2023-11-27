@@ -44,7 +44,7 @@ export const links = [
          },
          {
             name: "اضافه منتج جديد",
-            path: "/suppliers/add-product",
+            path: "/suppliers/add-products",
             icon: "fas fa-store-alt",
          },
       ],

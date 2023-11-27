@@ -25,8 +25,8 @@ export const AddProducts = () => {
    };
 
    return (
-      <form onSubmit={handleSubmit}>
-         <Card className="m-auto mt-32 min-h-full w-96 shadow-sp">
+      <form onSubmit={handleSubmit} className="p-5 md:p-0">
+         <Card className="m-auto mt-14 min-h-full w-96 max-w-full shadow-sp md:mt-32">
             <CardHeader variant="gradient" color="deep-purple" className="mb-4 grid h-28 place-items-center">
                <Typography variant="h3" color="white">
                   اضافه منتج جديد

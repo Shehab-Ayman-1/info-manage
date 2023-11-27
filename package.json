@@ -2,6 +2,6 @@
 	"scripts": {
 		"client": "cd client && npm run dev",
 		"server": "cd server && npm run dev",
-		"deploy": "git ad && git co && git push origin main"
+		"deploy": "git ad && git co && git pm"
 	}
 }

@@ -1,21 +1,4 @@
-import { useState } from "react";
-import { links } from "@/constants";
 import { Desktop, Logo, Mobile } from "@/components";
-import {
-   Accordion,
-   AccordionBody,
-   AccordionHeader,
-   Button,
-   Drawer,
-   List,
-   ListItem,
-   Menu,
-   MenuHandler,
-   MenuItem,
-   MenuList,
-   Typography,
-} from "@material-tailwind/react";
-import { Link } from "react-router-dom";
 
 export const Navbar = () => {
    return (
