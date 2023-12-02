@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 // Routes
-app.use("/*", (req, res, next) => setTimeout(next, 500));
+// app.use("/*", (req, res, next) => setTimeout(next, 500));
 app.use("/api/users", users);
 app.use("/api/products", products);
 app.use("/*", (req, res) => res.status(500).json({ status: 500, method: req.method, url: req.url, error: "Wronge path." }));

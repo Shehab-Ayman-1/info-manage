@@ -1,0 +1,8 @@
+{
+	"scripts": {
+		"client": "cd client && npm run dev",
+		"server": "cd server && npm run dev",
+		"deploy": "git ad && git co && git pm",
+		"dev": "npm run dev"
+	}
+}
