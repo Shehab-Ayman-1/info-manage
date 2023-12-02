@@ -1,46 +1,80 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getLists, setCompanies } from "@/redux/slices/creates";
 import { Field, Form, Selectbox } from "@/components/public";
 import { productLogo } from "@/assets";
-import { useDispatch } from "react-redux";
-import { setCategories, setCompanies } from "@/redux";
+import { useAxios } from "@/hooks/useAxios";
+import { Loading } from "@/layout/loading";
 
 export const Company = () => {
    const [formData, setFormData] = useState({ img: "", category: "", company: "" });
+   const { data, loading, error, isSubmitted, refetch } = useAxios();
+   const { refetch: listsRefetch } = useAxios();
+   const { lists, categories } = useSelector(({ creates }) => creates);
    const dispatch = useDispatch();
-   const navigate = useNavigate();
 
-   const handleSubmit = (event) => {
+   useEffect(() => {
+      if (lists.length) return;
+
+      (async () => {
+         const { data, isSubmitted, error } = await listsRefetch("get", "/products/get-lists");
+         if (isSubmitted && error) return;
+         dispatch(getLists(data));
+      })();
+   }, []);
+
+   const handleSelectChange = (name, value) => {
+      setFormData((data) => ({ ...data, [name]: value }));
+   };
+
+   const handleFieldChange = (event) => {
+      if (event.target.name === "img")
+         return setFormData((data) => ({ ...data, img: URL.createObjectURL(event.target.files[0]) }));
+
+      setFormData((data) => ({ ...data, [event.target.name]: event.target.value }));
+   };
+
+   const handleSubmit = async (event) => {
       event.preventDefault();
-      console.log(formData);
 
-      // Success
-      dispatch(setCategories(formData.category));
-      dispatch(setCompanies(formData.company));
-      setTimeout(() => navigate("/creates/products"), 2000);
+      const { isSubmitted, error } = await refetch("post", "/products/create-company", formData);
+      if (isSubmitted && error) return;
+
+      dispatch(setCompanies({ category: formData.category, company: formData.company }));
    };
 
    return (
-      <Form onSubmit={handleSubmit} headerText="اضافه شركة جديد" buttonText="انشاء">
+      <Form
+         onSubmit={handleSubmit}
+         headerText="اضافه شركة جديد"
+         buttonText="انشاء"
+         loading={(isSubmitted && !error) || loading}
+      >
+         <Loading
+            isSubmitted={isSubmitted}
+            loading={loading}
+            error={error}
+            message={data}
+            to="/creates/products"
+         />
+
          <div className="w-full">
             <img
                src={formData.img || productLogo}
                alt="product"
                className="m-auto mb-4 block h-28 w-28 rounded-full shadow-sp"
             />
-            <Field
-               type="file"
-               onChange={(e) => setFormData((f) => ({ ...f, img: URL.createObjectURL(e.target.files[0]) }))}
-            />
+            <Field type="file" name="img" onChange={handleFieldChange} />
          </div>
 
          <Selectbox
             label="اختر اسم القسم..."
-            onChange={(value) => setFormData((f) => ({ ...f, category: value }))}
-            options={["القسم الاول", "القسم الثاني", "القسم الثالث", "القسم الرابع", "القسم الخامس"]}
+            onChange={(value) => handleSelectChange("category", value)}
+            options={categories}
          />
 
-         <Field label="اسم الشركة" onChange={(e) => setFormData((f) => ({ ...f, company: e.target.value }))} />
+         <Field label="اسم الشركة" name="company" onChange={handleFieldChange} />
       </Form>
    );
 };

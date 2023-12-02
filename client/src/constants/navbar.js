@@ -1,8 +1,11 @@
-// Products, Statements
-import { Shop_Store, Buy_Sale } from "@/views";
+// Products
+import { Shop_Store } from "@/views";
+
+// Statements
+import { Buy, Sale } from "@/views";
 
 // Creates
-import { Category, Company, Products } from "@/views";
+import { Category, Company, Products, Supplier } from "@/views";
 
 export const links = [
    {
@@ -31,13 +34,13 @@ export const links = [
             name: "كشف حساب",
             link: "sale",
             icon: "fas fa-shopping-cart",
-            Component: Buy_Sale,
+            Component: Sale,
          },
          {
             name: "كشف مندوب",
             link: "buy",
             icon: "fas fa-shopping-cart",
-            Component: Buy_Sale,
+            Component: Buy,
          },
       ],
    },
@@ -62,6 +65,12 @@ export const links = [
             link: "products",
             icon: "fas fa-store-alt",
             Component: Products,
+         },
+         {
+            name: "مندوب جديد",
+            link: "supplier",
+            icon: "fas fa-user",
+            Component: Supplier,
          },
       ],
    },

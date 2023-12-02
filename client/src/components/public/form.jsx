@@ -1,6 +1,13 @@
 import { Typography, Button, Card, CardBody, CardHeader, CardFooter } from "@material-tailwind/react";
 
-export const Form = ({ headerText = "", buttonText = "", cardStyle = "", onSubmit, children }) => {
+export const Form = ({
+   headerText = "",
+   buttonText = "",
+   cardStyle = "",
+   loading = false,
+   onSubmit,
+   children,
+}) => {
    return (
       <form onSubmit={onSubmit} className="p-5 md:p-0">
          <Card className={`m-auto mt-14 min-h-full w-96 max-w-full shadow-sp md:mt-32 ${cardStyle}`}>
@@ -13,7 +20,14 @@ export const Form = ({ headerText = "", buttonText = "", cardStyle = "", onSubmi
             <CardBody className="flex flex-col gap-4">{children}</CardBody>
 
             <CardFooter className="pt-0">
-               <Button type="submit" variant="gradient" color="deep-purple" className="text-2xl" fullWidth>
+               <Button
+                  type="submit"
+                  variant="gradient"
+                  disabled={loading}
+                  color="deep-purple"
+                  className="text-2xl"
+                  fullWidth
+               >
                   {buttonText}
                </Button>
             </CardFooter>

@@ -19,7 +19,7 @@ export const CREATE_CATEGORY = async (req, res) => {
 
 export const CREATE_COMPANY = async (req, res) => {
 	try {
-		const { category, company } = req.body;
+		const { img, category, company } = req.body;
 		if (!category || !company) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبة" });
 
 		// Check If The Company Is Exist
@@ -27,7 +27,7 @@ export const CREATE_COMPANY = async (req, res) => {
 		if (exists) return res.status(400).json({ error: "هذه الشركة موجودة بالفعل" });
 
 		// Create The Company
-		const newOne = new Products({ category, company });
+		const newOne = new Products({ img, category, company });
 		await newOne.save();
 
 		// Send Response
@@ -39,11 +39,12 @@ export const CREATE_COMPANY = async (req, res) => {
 
 export const CREATE_PRODUCTS = async (req, res) => {
 	try {
-		const { category, company, products } = req.body; // products: [ { name: "", suppliers: [], minmax: { min: 0, max: 0 } } ]
+		const { category, company, products } = req.body;
 		if (!category || !company || !products.length) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبه" });
 
 		// Get Company Products Names
 		const Company = await Products.findOne({ category, company });
+		if (!Company) return res.status(400).json({ error: "لم يتم العثور علي القسم او الشركة" });
 		const names = Company?.products.map(({ name }) => name) || [];
 
 		// Check The Dublecated Products
@@ -58,5 +59,31 @@ export const CREATE_PRODUCTS = async (req, res) => {
 		res.status(200).json({ success: "لقد تم اضافه المنتجات بنجاح" });
 	} catch (error) {
 		res.status(404).json(`CREATE_PRODUCTS: ${error.message}`);
+	}
+};
+
+export const CREATE_SUPPLIER = async (req, res) => {
+	try {
+		const { supplier, products } = req.body;
+		if (!supplier || !products.length) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبه" });
+
+		await products.forEach(async ({ category, company, name }) => {
+			return await Products.updateOne(
+				{
+					category,
+					company,
+					"products.name": name,
+				},
+				{
+					$addToSet: {
+						"products.$.suppliers": supplier,
+					},
+				}
+			);
+		});
+
+		res.status(200).json({ success: "لقد تم اضافه المندوب بنجاح" });
+	} catch (error) {
+		res.status(404).json(`CREATE_SUPPLIER: ${error.message}`);
 	}
 };

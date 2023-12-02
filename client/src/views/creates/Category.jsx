@@ -1,28 +1,41 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Field, Form } from "@/components/public";
 import { useDispatch } from "react-redux";
-import { setCategories, setCompanies } from "@/redux";
+import { setCategories } from "@/redux/slices/creates";
+
+import { Field, Form } from "@/components/public";
+import { useAxios } from "@/hooks/useAxios";
+import { Loading } from "@/layout/loading";
 
 export const Category = () => {
    const [formData, setFormData] = useState({ category: "", company: "" });
+   const { data, loading, error, isSubmitted, refetch } = useAxios();
    const dispatch = useDispatch();
-   const navigate = useNavigate();
 
-   const handleSubmit = (event) => {
+   const handleFieldChange = (event) => {
+      setFormData((data) => ({ ...data, [event.target.name]: event.target.value }));
+   };
+
+   const handleSubmit = async (event) => {
       event.preventDefault();
-      console.log(formData);
+
+      const { isSubmitted, error } = await refetch("post", "/products/create-category", formData);
+      if (isSubmitted && error) return;
 
       // Success
-      dispatch(setCategories(formData.category));
-      dispatch(setCompanies(formData.company));
-      setTimeout(() => navigate("/creates/company"), 2000);
+      dispatch(setCategories(formData));
    };
 
    return (
-      <Form onSubmit={handleSubmit} headerText="اضافه قسم جديد" buttonText="انشاء">
-         <Field label="اسم القسم" onChange={(e) => setFormData((d) => ({ ...d, category: e.target.value }))} />
-         <Field label="اسم الشركة" onChange={(e) => setFormData((d) => ({ ...d, company: e.target.value }))} />
+      <Form
+         onSubmit={handleSubmit}
+         headerText="اضافه قسم جديد"
+         buttonText="انشاء"
+         loading={(isSubmitted && !error) || loading}
+      >
+         <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/creates/company" />
+
+         <Field label="اسم القسم" name="category" onChange={handleFieldChange} />
+         <Field label="اسم الشركة" name="company" onChange={handleFieldChange} />
       </Form>
    );
 };

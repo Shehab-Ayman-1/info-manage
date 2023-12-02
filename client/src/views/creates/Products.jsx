@@ -1,77 +1,110 @@
-import { useNavigate } from "react-router-dom";
-import { Field, Form, Selectbox } from "@/components/public";
 import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, Typography } from "@material-tailwind/react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setProducts } from "@/redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
-const formState = {
-   category: "",
-   company: "",
-   products: [],
-};
+import { Field, Form, Selectbox } from "@/components/public";
+import { filterSelection, getLists, setProducts } from "@/redux/slices/creates";
+import { Loading } from "@/layout/loading";
+import { useAxios } from "@/hooks/useAxios";
+
+const formState = { category: "", company: "", products: [] };
 export const Products = () => {
+   const { data, loading, error, isSubmitted, refetch } = useAxios();
+   const { refetch: ccRefetch } = useAxios();
+   const [product, setProduct] = useState({ name: "", minmax: null });
    const [formData, setFormData] = useState(formState);
    const [openDialog, setOpenDialog] = useState(false);
-   const [product, setProduct] = useState({ name: "", suppliers: [""], minmax: null });
+   const { lists, categories, companies } = useSelector(({ creates }) => creates);
    const dispatch = useDispatch();
-   const navigate = useNavigate();
 
-   const addField = () => {
-      setProduct((product) => ({ ...product, suppliers: product.suppliers.concat("") }));
-   };
+   useEffect(() => {
+      if (lists.length) return;
 
-   const changeSuppliers = ({ target: { value } }, index) => {
-      setProduct((data) => {
-         data.suppliers[index] = value;
-         return data;
-      });
-   };
+      (async () => {
+         const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-lists");
+         if (isSubmitted && error) return;
+         dispatch(getLists(data));
+      })();
+   }, []);
+
+   useEffect(() => {
+      dispatch(filterSelection({ category: formData.category, company: "" }));
+   }, [formData.category]);
 
    const handleOpenDialog = () => {
       setOpenDialog((o) => !o);
    };
 
+   const handleSelectChange = (name, value) => {
+      setFormData((data) => ({ ...data, [name]: value }));
+   };
+
+   const handleFieldChange = (event) => {
+      if (event.target.name === "min" || event.target.name === "max") {
+         return setProduct((data) => {
+            const minmax = { ...data, minmax: { ...data?.minmax, [event.target.name]: event.target.value } };
+            return { ...data, minmax };
+         });
+      }
+      setProduct((data) => ({ ...data, [event.target.name]: event.target.value }));
+   };
+
    const handleSubmitProduct = () => {
       const { name, minmax } = product;
-      const suppliers = product.suppliers.filter((item) => item);
+      if (!name || !minmax) return alert("يجب ادخال جميع البيانات المطلوبه");
 
-      if (!name || !suppliers.length || !minmax) return alert("يجب ادخال جميع البيانات المطلوبه");
       setFormData((data) => ({ ...data, products: data.products.concat(product) }));
       setOpenDialog(() => false);
    };
 
-   const handleSubmit = (event) => {
-      event.preventDefault();
-      console.log(formData);
+   const handleCancel = (index) => {
+      setFormData((data) => {
+         const products = data.products.filter((_, idx) => index !== idx);
+         return { ...data, products };
+      });
+   };
 
-      // Success
+   const handleSubmitForm = async (event) => {
+      event.preventDefault();
+
+      const { isSubmitted, error } = await refetch("post", "/products/create-products", formData);
+      if (isSubmitted && error) return;
+
       dispatch(setProducts(formData));
-      setTimeout(() => navigate("/"), 2000);
    };
 
    return (
-      <Form onSubmit={handleSubmit} headerText="اضافه منتج جديد" buttonText="انشاء">
+      <Form
+         onSubmit={handleSubmitForm}
+         headerText="اضافه منتج جديد"
+         buttonText="انشاء"
+         loading={(isSubmitted && !error) || loading}
+      >
+         <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
+
          <div className="category">
             <Selectbox
                label="اختر اسم القسم..."
-               onChange={(value) => setFormData((f) => ({ ...f, category: value }))}
-               options={["القسم الاول", "القسم الثاني", "القسم الثالث", "القسم الرابع", "القسم الخامس"]}
+               onChange={(value) => handleSelectChange("category", value)}
+               options={categories}
             />
          </div>
 
          <div className="company">
             <Selectbox
                label="اختر اسم الشركة..."
-               onChange={(value) => setFormData((f) => ({ ...f, company: value }))}
-               options={["الشركة الاول", "الشركة الثاني", "الشركة الثالث", "الشركة الرابع", "الشركة الخامس"]}
+               onChange={(value) => handleSelectChange("company", value)}
+               options={companies}
             />
          </div>
 
          <div className="products">
             {formData.products.map(({ name }, i) => (
                <Typography variant="lead" color="blue-gray" key={i}>
-                  {i + 1} - {name}
+                  <i className="fa fa-times text-red-500 hover:text-red-900" onClick={() => handleCancel(i)} />
+                  <span className="mr-3">
+                     {i + 1} - {name}
+                  </span>
                </Typography>
             ))}
          </div>
@@ -83,56 +116,30 @@ export const Products = () => {
                </Typography>
                <i className="fa fa-times text-2xl" onClick={handleOpenDialog} />
             </DialogHeader>
+
             <DialogBody>
-               <Field
-                  label="اسم المنتج"
-                  name="products"
-                  onChange={(e) => setProduct((d) => ({ ...d, name: e.target.value }))}
-               />
+               <Field label="اسم المنتج" name="name" onChange={handleFieldChange} />
 
                <div className="flex-between">
                   <Field
                      type="number"
                      min="0"
-                     label="حد ادني"
+                     label="الحد الادني"
                      containerStyle="!w-[50%] min-w-[50%]"
-                     onChange={(e) => {
-                        setProduct((d) => ({ ...d, minmax: { ...d.minmax, min: e.target.value } }));
-                     }}
+                     name="min"
+                     onChange={handleFieldChange}
                   />
                   <Field
                      type="number"
                      min="0"
-                     label="حد متوسط"
+                     label="الحد المتوسط"
+                     name="max"
                      containerStyle="!w-[50%] min-w-[50%]"
-                     onChange={(e) => {
-                        setProduct((d) => ({ ...d, minmax: { ...d.minmax, max: e.target.value } }));
-                     }}
+                     onChange={handleFieldChange}
                   />
                </div>
-
-               <div className="suppliers w-full text-center">
-                  <div className="">
-                     {product.suppliers.map((_, index) => (
-                        <Field
-                           label={`اسم المندوب ${index + 1}`}
-                           name="suppliers"
-                           key={index}
-                           onChange={(e) => changeSuppliers(e, index)}
-                        />
-                     ))}
-                  </div>
-                  <Button
-                     variant="text"
-                     color="deep-purple"
-                     className="group cursor-pointer text-xl"
-                     onClick={addField}
-                  >
-                     <i className="fa fa-plus ml-2 text-primary group-hover:font-bold" />
-                     <span>اضافه مندوب اخر</span>
-                  </Button>
-               </div>
             </DialogBody>
+
             <DialogFooter>
                <Button color="deep-purple" className="text-xl" fullWidth onClick={handleSubmitProduct}>
                   اضافه
@@ -152,25 +159,3 @@ export const Products = () => {
       </Form>
    );
 };
-
-/* 
-<div className="products">
-   <div className="suppliers">
-      <Field label={`اسم المندوب `} name="suppliers" onChange={(e) => handleChange(e)} />
-
-      <Typography
-         variant="small"
-         className="group m-auto w-fit cursor-pointer text-xl font-bold text-primary/70 hover:text-primary"
-         onClick={() => addField("suppliers")}
-      >
-         <i className="fa fa-plus ml-2 text-primary group-hover:font-bold" />
-         <span>اضافه مندوب اخر</span>
-      </Typography>
-   </div>
-
-   <div className="flex-between">
-      <Field type="number" min="0" label="min" containerStyle="!w-[50%] min-w-[50%]" />
-      <Field type="number" min="0" label="max" containerStyle="!w-[50%] min-w-[50%]" />
-   </div>
-</div>
-*/

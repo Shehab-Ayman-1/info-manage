@@ -1,3 +1,4 @@
+import { cloneElement } from "react";
 import { Option, Select } from "@material-tailwind/react";
 
 export const Selectbox = ({
@@ -17,6 +18,7 @@ export const Selectbox = ({
             variant="standard"
             color="deep-purple"
             className="select-box text-xl"
+            required
             containerProps={{
                className: `h-20 border-b-2 border-0 border-solid border-deep-purple-100 ${containerStyle}`,
             }}
@@ -26,13 +28,18 @@ export const Selectbox = ({
             menuProps={{
                className: `${menuStyle}`,
             }}
-            required
          >
-            {options.map((value) => (
-               <Option className="text-xl" value={value} key={value}>
-                  {value}
+            {options.length ? (
+               options?.map((value) => (
+                  <Option className="text-xl" value={value} key={value}>
+                     {value}
+                  </Option>
+               ))
+            ) : (
+               <Option className="text-xl" value="">
+                  لا يوجد نتائج بحث
                </Option>
-            ))}
+            )}
          </Select>
       </div>
    );

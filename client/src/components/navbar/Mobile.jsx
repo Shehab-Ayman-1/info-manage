@@ -1,7 +1,7 @@
 import { Accordion, AccordionBody, AccordionHeader, Drawer, List, ListItem } from "@material-tailwind/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { links } from "@/constants";
+import { links } from "@/constants/navbar";
 
 export const Mobile = () => {
    const [openDrawer, setOpenDrawer] = useState(false);
@@ -36,19 +36,19 @@ export const Mobile = () => {
                      <AccordionBody className="py-0">
                         <List className="py-0">
                            {paths.map(({ name, icon, link }) => (
-                              <ListItem
-                                 className="group text-xl font-bold text-white hover:bg-blue-gray-700 hover:text-white"
-                                 onClick={handleDrawer}
+                              <Link
+                                 to={`/${path}/${link}`}
                                  key={name}
+                                 className="text-2xl text-blue-gray-600 group-hover:text-white"
                               >
-                                 <Link
-                                    to={`/${path}/${link}`}
-                                    className="flex-start text-2xl text-blue-gray-600 group-hover:text-white"
+                                 <ListItem
+                                    className="flex-start group text-xl font-bold text-white hover:bg-blue-gray-700 hover:text-white"
+                                    onClick={handleDrawer}
                                  >
                                     <i className={`${icon} text-2xl text-blue-gray-600 group-hover:text-white`} />
                                     <p className="">{name}</p>
-                                 </Link>
-                              </ListItem>
+                                 </ListItem>
+                              </Link>
                            ))}
                         </List>
                      </AccordionBody>

@@ -1,4 +1,15 @@
+const options = {
+   headers: { "Content-Type": "application/json" },
+   withCredentials: true,
+};
+
 export const routes = {
-	locale: "http://localhost:5000",
-	remote: "",
+   locale: {
+      baseURL: "http://localhost:5000/api",
+      ...options,
+   },
+   remote: {
+      baseURL: "",
+      ...options,
+   },
 };
