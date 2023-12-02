@@ -1,6 +1,6 @@
 const localHosts = ["http://localhost:5000", "http://localhost:5173", "http://localhost:5174"];
 const vercel = [];
-const netlify = [];
+const netlify = ["https://cars-management-client.netlify.app"];
 
 const whiteList = [...localHosts, ...vercel, ...netlify];
 

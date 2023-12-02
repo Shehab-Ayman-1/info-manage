@@ -9,7 +9,7 @@ export const routes = {
       ...options,
    },
    remote: {
-      baseURL: "",
+      baseURL: "http://cars-management-server.netlify.app",
       ...options,
    },
 };
