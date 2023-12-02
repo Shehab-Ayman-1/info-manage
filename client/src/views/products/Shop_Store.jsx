@@ -220,7 +220,7 @@ export const Shop_Store = () => {
                         >
                            {!i ? (
                               <td className={classes} rowSpan={Math.floor(products.length)}>
-                                 <Typography variant="h5" className={typography}>
+                                 <Typography variant="h5" className={typography} color="black">
                                     {company}
                                  </Typography>
                               </td>
