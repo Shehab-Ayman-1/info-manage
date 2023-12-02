@@ -8,7 +8,7 @@ import { products, users } from "./routes/index.js";
 
 // Configs
 dotenv.config();
-const app = express();
+export const app = express();
 const PORT = process.env.PORT;
 
 // Middlewares
