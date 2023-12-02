@@ -3,5 +3,8 @@
 		"client": "cd client && npm run dev",
 		"server": "cd server && npm run dev",
 		"deploy": "git ad && git co && git pm"
+	},
+	"dependencies": {
+		"serverless-http": "^3.2.0"
 	}
 }
