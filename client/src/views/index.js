@@ -14,4 +14,4 @@ export * from "./products/Shop_Store";
 // Statements
 export * from "./statements/Buy";
 export * from "./statements/Sale";
-export * from "./statements/transfer";
+export * from "./statements/Transfer";
