@@ -7,6 +7,7 @@ const schema = new Schema({
 	products: [
 		{
 			name: { type: String, trim: true },
+			barcode: { type: Number, trim: true, default: 0 },
 			suppliers: { type: [String], default: [] },
 			minmax: {
 				min: { type: Number, default: 5 },

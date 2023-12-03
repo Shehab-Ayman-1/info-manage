@@ -50,6 +50,8 @@ export const Sale = () => {
    };
 
    const handleFieldChange = (event) => {
+      if (event.target.name === "discount")
+         return setFormData((data) => ({ ...data, discount: event.target.value }));
       setProduct((data) => ({ ...data, [event.target.name]: event.target.value }));
    };
 
@@ -60,7 +62,6 @@ export const Sale = () => {
 
    const handleSubmit = async (event) => {
       event.preventDefault();
-
       await refetch("put", "/products/sale-products", formData);
    };
 

@@ -36,13 +36,13 @@ html {
       height: 5px !important;
    }
    ::-webkit-scrollbar {
-      width: 7px;
+      width: 10px;
    }
    ::-webkit-scrollbar-thumb {
-      @apply rounded-lg bg-primary;
+      @apply rounded-xl bg-primary;
    }
    ::-webkit-scrollbar-track {
-      @apply bg-dimBlack;
+      @apply bg-white;
    }
    ::selection {
       @apply bg-primary text-white;

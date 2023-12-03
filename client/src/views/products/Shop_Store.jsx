@@ -14,7 +14,7 @@ export const Shop_Store = () => {
    const [searchResult, setSearchResult] = useState(null);
    const [isBuyPrice, setIsBuyPrice] = useState(pathname === "shop");
    const { data, isSubmitted, loading, error, refetch } = useAxios();
-   const [total, setTotal] = useState(0);
+   const [total, setTotal] = useState({ all: 0, company: 0 });
 
    useEffect(() => {
       (async () => {
@@ -27,7 +27,9 @@ export const Shop_Store = () => {
 
       const result = data?.map(({ company, products }) => {
          const companyMatch = company.includes(searchText);
-         const productsMatch = products.filter(({ name }) => name.includes(searchText));
+         const productsMatch = products.filter(
+            ({ name, barcode }) => name.includes(searchText) || String(barcode).includes(searchText),
+         );
 
          return (companyMatch && { company, products }) || { company, products: productsMatch };
       });
@@ -37,13 +39,14 @@ export const Shop_Store = () => {
 
    useEffect(() => {
       if (!data?.length) return;
-      const total = data.map((company) =>
+      const all = data.map((company) =>
          company.products.map((product) => product.total).reduce((p, c) => p + c, 0),
       );
-      setTotal(() => total.reduce((prev, cur) => prev + cur, 0));
+
+      setTotal((prev) => ({ ...prev, all: all.reduce((prev, cur) => prev + cur, 0) }));
    }, [data]);
 
-   const minmax = (min, max) => {
+   const minmax = (count, min, max) => {
       if (count <= 0) return "text-blue-gray-500/50";
       else if (count > 0 && count <= min) return "text-red-500";
       else if (count > min && count <= max) return "text-orange-500";
@@ -112,7 +115,9 @@ export const Shop_Store = () => {
                      return products?.map(({ name, count, price, total, min, max }, i) => (
                         <tr
                            key={i}
-                           className={`${classes} ${index % 2 ? "bg-deep-purple-50/50" : ""} ${minmax(min, max)}`}
+                           className={`${minmax(count, min, max)} ${
+                              index % 2 ? "bg-deep-purple-50/50" : ""
+                           } ${classes}`}
                         >
                            {!i ? (
                               <td className={classes} rowSpan={Math.floor(products.length)}>
@@ -152,7 +157,7 @@ export const Shop_Store = () => {
                         (searchResult || data)?.length % 2 ? "bg-deep-purple-50/50" : ""
                      }`}
                   >
-                     <th colSpan={2} className="p-2 md:p-4">
+                     <th colSpan={3} className="p-2 md:p-4">
                         <Typography
                            variant="h5"
                            color="deep-purple"
@@ -167,7 +172,7 @@ export const Shop_Store = () => {
                            color="deep-purple"
                            className="text-center text-base font-semibold md:text-base lg:text-xl"
                         >
-                           {data?.length ? total?.toLocaleString() : 0} جنيه
+                           {data?.length ? total?.all.toLocaleString() : 0} جنيه
                         </Typography>
                      </th>
                   </tr>

@@ -42,8 +42,8 @@ export const Buy = () => {
    };
 
    const addField = () => {
-      console.log(formData);
-      setFormData((d) => ({ ...d, products: [...d.products, product] }));
+      if (!Object.values(product).every((p) => p)) return alert("يجب ادخال جميل البيانات المطلوبه");
+      setFormData((data) => ({ ...data, products: data.products.concat(product) }));
    };
 
    const handleSubmit = async (event) => {

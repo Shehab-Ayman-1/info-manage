@@ -11,7 +11,7 @@ const formState = { category: "", company: "", products: [] };
 export const Products = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const { refetch: ccRefetch } = useAxios();
-   const [product, setProduct] = useState({ name: "", minmax: null });
+   const [product, setProduct] = useState({ name: "", minmax: null, barcode: 0 });
    const [formData, setFormData] = useState(formState);
    const [openDialog, setOpenDialog] = useState(false);
    const { lists, categories, companies } = useSelector(({ creates }) => creates);
@@ -119,6 +119,7 @@ export const Products = () => {
 
             <DialogBody>
                <Field label="اسم المنتج" name="name" onChange={handleFieldChange} />
+               <Field type="number" label="الباركود" name="barcode" onChange={handleFieldChange} />
 
                <div className="flex-between">
                   <Field
