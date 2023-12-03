@@ -1,6 +1,6 @@
 // Home
 export * from "./Home";
-export * from "./balances";
+export * from "./Balances";
 
 // Creates
 export * from "./creates/Category";

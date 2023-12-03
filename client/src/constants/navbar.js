@@ -1,6 +1,5 @@
 // Directs
-import { Home } from "@/views";
-import { Balances } from "@/views/Balances";
+import { Home, Balances } from "@/views";
 
 // Products
 import { Shop_Store } from "@/views";
