@@ -1,6 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { lists: [], categories: [], companies: [], products: [], suppliersLists: [], suppliers: [] };
+const initialState = {
+   categories: [],
+   companies: [],
+   products: [],
+   lists: [],
+   searchList: [],
+   suppliersLists: [],
+   suppliers: [],
+};
 export const createsSlice = createSlice({
    name: "creates",
    initialState,
@@ -14,6 +22,11 @@ export const createsSlice = createSlice({
       getSuppliers: (state, { payload }) => {
          state.suppliersLists = state.suppliersLists.concat(payload);
          state.suppliers = state.suppliers.concat(payload.map(({ supplier }) => supplier));
+         return state;
+      },
+
+      getSearchList: (state, { payload }) => {
+         state.searchList = state.searchList.concat(payload);
          return state;
       },
 
@@ -84,5 +97,5 @@ export const createsSlice = createSlice({
    },
 });
 
-export const { getLists, getSuppliers, filterSelection } = createsSlice.actions;
+export const { getLists, getSuppliers, getSearchList, filterSelection } = createsSlice.actions;
 export const { setSuppliers, setCategories, setCompanies, setProducts } = createsSlice.actions;

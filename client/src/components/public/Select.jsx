@@ -1,4 +1,3 @@
-import { cloneElement } from "react";
 import { Option, Select } from "@material-tailwind/react";
 
 export const Selectbox = ({
@@ -30,8 +29,8 @@ export const Selectbox = ({
             }}
          >
             {options.length ? (
-               options?.map((value) => (
-                  <Option className="text-xl" value={value} key={value}>
+               options?.map((value, i) => (
+                  <Option className="text-xl" value={value} key={i}>
                      {value}
                   </Option>
                ))

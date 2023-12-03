@@ -27,6 +27,68 @@ export const GET_PRODUCTS = async (req, res) => {
 	}
 };
 
+export const GET_SEARCH_LIST = async (req, res) => {
+	try {
+		const list = await Products.aggregate([
+			{
+				$unwind: "$products",
+			},
+			{
+				$group: {
+					_id: { companyId: "$_id", productId: "$products._id" },
+					name: {
+						$addToSet: "$products.name",
+					},
+					barcode: {
+						$addToSet: "$products.barcode",
+					},
+				},
+			},
+			{
+				$project: {
+					_id: 0,
+					companyId: "$_id.companyId",
+					productId: "$_id.productId",
+					name: { $arrayElemAt: ["$name", 0] },
+					barcode: { $arrayElemAt: ["$barcode", 0] },
+				},
+			},
+		]);
+		res.status(200).json(list);
+	} catch (error) {
+		res.status(404).json(`GET_SEARCH_LIST: ${error.message}`);
+	}
+};
+
+export const GET_BALANCES = async (req, res) => {
+	try {
+		const { price } = req.query;
+		const company = await Products.find().select("products");
+
+		// company
+		const calcTotalPrice = (price, count) => {
+			return company.reduce((prev, cur) => {
+				// products
+				const product = cur.products.reduce((prev, cur) => {
+					// count
+					const totalCount = cur.count.reduce((prev, cur) => prev + cur[count], 0);
+					return prev + cur.price[price] * totalCount;
+				}, 0);
+				return prev + product;
+			}, 0);
+		};
+
+		const lock = 1000;
+		const shop = calcTotalPrice(price, "shop");
+		const store = calcTotalPrice(price, "store");
+		const total = lock + shop + store;
+
+		res.status(200).json({ lock, shop, store, total });
+	} catch (error) {
+		res.status(404).json(`GET_BALANCES: ${error.message}`);
+	}
+};
+
 export const GET_LISTS = async (req, res) => {
 	try {
 		let lists = await Products.aggregate([
@@ -161,38 +223,3 @@ export const GET_TABLES_LISTS = async (req, res) => {
 		res.status(404).json(`GET_TABLES_LISTS: ${error.message}`);
 	}
 };
-
-/* 
-	{
-		$group: {
-			_id: { catagory: "$catagory", company: "$company" }, // Group By Catagory and Company
-			total: {
-				$sum: {
-					$cond: [
-						{ $and: [{ $ne: ["$products.price", 0] }, { $ne: ["$products.count", 0] }] }, // If price and count are not 0
-						{ $multiply: ["$products.price", "$products.count"] }, // Then multiply them
-						0, // Else return 0
-					],
-				},
-			},
-			products: { $push: "$products" }, // Add the products to an array
-		},
-	},
-*/
-
-/* 
-company: 'company name',
-products: [
-	{
-		name: 'product name 1',
-		count: 'total count.store',
-		price: 'price.buy'
-	},
-	{
-		name: 'product name 2',
-		count: 'total count.store',
-		price: 'price.buy'
-	},
-	...
-]
-*/

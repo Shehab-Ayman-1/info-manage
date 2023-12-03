@@ -1,13 +1,30 @@
+// Directs
+import { Home } from "@/views";
+import { Balances } from "@/views/Balances";
+
 // Products
 import { Shop_Store } from "@/views";
 
 // Statements
-import { Buy, Sale } from "@/views";
+import { Buy, Sale, Transfer } from "@/views";
 
 // Creates
 import { Category, Company, Products, Supplier } from "@/views";
 
 export const links = [
+   {
+      path: "",
+      paths: [
+         {
+            link: "",
+            Component: Home,
+         },
+         {
+            link: "balances",
+            Component: Balances,
+         },
+      ],
+   },
    {
       title: "المنتجات",
       path: "products",
@@ -41,6 +58,10 @@ export const links = [
             link: "buy",
             icon: "fas fa-shopping-cart",
             Component: Buy,
+         },
+         {
+            link: "transfer",
+            Component: Transfer,
          },
       ],
    },
