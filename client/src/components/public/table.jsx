@@ -20,7 +20,7 @@ export function Table({ headers, rows, setFormData, allowTotal }) {
    };
 
    return (
-      <Card className="h-full w-full shadow-none">
+      <Card className="h-full w-full overflow-x-auto shadow-none">
          <table className="mb-4 w-full max-w-full table-auto rounded-3xl shadow-sp">
             {rows.length ? (
                <thead>

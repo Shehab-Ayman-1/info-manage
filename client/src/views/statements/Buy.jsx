@@ -36,10 +36,13 @@ export const Buy = () => {
    };
 
    const handleFieldChange = (event) => {
+      if (event.target.name === "discount")
+         return setFormData((data) => ({ ...data, discount: event.target.value }));
       setProduct((p) => ({ ...p, [event.target.name]: event.target.value }));
    };
 
    const addField = () => {
+      console.log(formData);
       setFormData((d) => ({ ...d, products: [...d.products, product] }));
    };
 
@@ -67,7 +70,7 @@ export const Buy = () => {
             />
          </div>
 
-         <div className="rounded-xl border border-solid border-deep-purple-500/50 px-4">
+         <div className="rounded-xl border border-solid border-deep-purple-500/50 px-2 md:px-4">
             <div className="w-full">
                <Selectbox
                   label="اختار اسم المنتج"

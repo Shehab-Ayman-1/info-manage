@@ -2,114 +2,10 @@ import { Card, Switch, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import { Table } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
 
 const TABLE_HEAD = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];
-
-const TABLE_ROWS = [
-   {
-      name: "Dale Newman",
-      count: 94,
-      price: 505,
-   },
-   {
-      name: "Tom Cole",
-      count: 27,
-      price: 186,
-   },
-   {
-      name: "Carrie Stokes",
-      count: 30,
-      price: 853,
-   },
-   {
-      name: "Walter Spencer",
-      count: 75,
-      price: 155,
-   },
-   {
-      name: "Ella Garrett",
-      count: 64,
-      price: 753,
-   },
-   {
-      name: "Rodney Craig",
-      count: 27,
-      price: 498,
-   },
-   {
-      name: "Richard Yates",
-      count: 56,
-      price: 159,
-   },
-   {
-      name: "James Rogers",
-      count: 33,
-      price: 664,
-   },
-   {
-      name: "Olivia Nash",
-      count: 62,
-      price: 446,
-   },
-   {
-      name: "Micheal Graham",
-      count: 57,
-      price: 778,
-   },
-   {
-      name: "Amanda Garrett",
-      count: 88,
-      price: 915,
-   },
-   {
-      name: "Marcus Henderson",
-      count: 54,
-      price: 130,
-   },
-   {
-      name: "Helena Ramirez",
-      count: 90,
-      price: 776,
-   },
-   {
-      name: "Rebecca Kelley",
-      count: 70,
-      price: 665,
-   },
-   {
-      name: "Jeffery Steele",
-      count: 20,
-      price: 545,
-   },
-   {
-      name: "Jane Woods",
-      count: 66,
-      price: 647,
-   },
-   {
-      name: "Mitchell Gross",
-      count: 69,
-      price: 909,
-   },
-   {
-      name: "Lucile Lopez",
-      count: 77,
-      price: 558,
-   },
-   {
-      name: "Michael Ross",
-      count: 16,
-      price: 653,
-   },
-   {
-      name: "Ryan Wagner",
-      count: 75,
-      price: 756,
-   },
-];
 
 export const Shop_Store = () => {
    const location = useLocation();
@@ -147,24 +43,31 @@ export const Shop_Store = () => {
       setTotal(() => total.reduce((prev, cur) => prev + cur, 0));
    }, [data]);
 
+   const minmax = (min, max) => {
+      if (count <= 0) return "text-blue-gray-500/50";
+      else if (count > 0 && count <= min) return "text-red-500";
+      else if (count > min && count <= max) return "text-orange-500";
+      else return "text-black";
+   };
+
    return (
       <Card>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <div className="my-10">
+         <div className="my-5 md:my-10">
             <div className="flex-between mx-auto w-[95%] overflow-hidden rounded-xl border border-solid border-deep-purple-100 bg-white px-4 py-2 shadow-sp">
                <i className="fa fa-search block text-2xl" />
                <input
                   type="search"
                   placeholder="البحث...."
                   onChange={(e) => setSearchText(() => e.target.value)}
-                  className="w-full bg-transparent p-1 pb-2 text-2xl"
+                  className="w-full bg-transparent text-xl md:p-1 md:pb-2 md:text-2xl"
                />
             </div>
          </div>
 
-         <div className="flex-between mb-2 px-4">
-            <Typography variant="h4" color="deep-purple" className="text-4xl md:text-6xl">
+         <div className="flex-between mb-2 flex-col px-4 sm:flex-row">
+            <Typography variant="h4" color="deep-purple" className="text-3xl sm:text-4xl md:text-6xl">
                عرض بضائع {pathname === "store" ? "المخزن" : "المحل"}
             </Typography>
             <Switch
@@ -182,7 +85,7 @@ export const Shop_Store = () => {
             />
          </div>
 
-         <Card className="h-full w-full shadow-none">
+         <Card className="h-full w-full overflow-x-auto pl-4 pr-2 shadow-none">
             <table className="mb-4 w-full max-w-full table-auto rounded-3xl shadow-sp">
                <thead>
                   <tr className="border-0 border-b border-solid border-deep-purple-500">
@@ -191,7 +94,7 @@ export const Shop_Store = () => {
                            <Typography
                               variant="h5"
                               color="deep-purple"
-                              className="text-center font-bold leading-none"
+                              className="text-center text-base font-semibold md:text-base lg:text-xl"
                            >
                               {head}
                            </Typography>
@@ -204,19 +107,12 @@ export const Shop_Store = () => {
                   {(searchResult || data)?.map(({ company, products }, index) => {
                      const isLast = index === (searchResult || data)?.length - 1;
                      const classes = isLast ? "p-2 md:p-4" : "border-b border-deep-purple-500 p-2 md:p-4";
-                     const typography = "text-xs md:text-md lg:text-xl text-center font-semibold";
+                     const typography = "text-center text-base font-semibold md:text-base lg:text-xl";
+
                      return products?.map(({ name, count, price, total, min, max }, i) => (
                         <tr
                            key={i}
-                           className={`${classes} ${index % 2 ? "bg-deep-purple-50/50" : ""} ${
-                              count <= 0
-                                 ? "text-blue-gray-500/50"
-                                 : count > 0 && count <= min
-                                   ? "text-red-500"
-                                   : count > min && count <= max
-                                     ? "text-orange-500"
-                                     : "text-black"
-                           }`}
+                           className={`${classes} ${index % 2 ? "bg-deep-purple-50/50" : ""} ${minmax(min, max)}`}
                         >
                            {!i ? (
                               <td className={classes} rowSpan={Math.floor(products.length)}>
@@ -260,7 +156,7 @@ export const Shop_Store = () => {
                         <Typography
                            variant="h5"
                            color="deep-purple"
-                           className="md:text-md text-center text-xs font-semibold lg:text-xl"
+                           className="text-center text-base font-semibold md:text-base lg:text-xl"
                         >
                            اجمالي البضائع
                         </Typography>
@@ -269,7 +165,7 @@ export const Shop_Store = () => {
                         <Typography
                            variant="h5"
                            color="deep-purple"
-                           className="md:text-md text-center text-xs font-semibold lg:text-xl"
+                           className="text-center text-base font-semibold md:text-base lg:text-xl"
                         >
                            {data?.length ? total?.toLocaleString() : 0} جنيه
                         </Typography>
