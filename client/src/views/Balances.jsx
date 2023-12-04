@@ -26,13 +26,13 @@ export const Balances = () => {
       return <Loading isSubmitted={sIsSubmitted} loading={sLoading} error={sError} message={saleData} />;
 
    return (
-      <Card className="min-h-screen">
+      <Card className="dark:bg-darkGray min-h-screen rounded-none">
          <Typography
             variant="h4"
             color="deep-purple"
             className="my-4 px-2 text-center text-3xl sm:px-4 sm:text-4xl md:text-6xl"
          >
-            بسعر الشراء
+            حسب سعر الشراء
          </Typography>
 
          <BalancesTable data={buyData} />
@@ -42,7 +42,7 @@ export const Balances = () => {
             color="deep-purple"
             className="my-4 px-2 text-center text-3xl sm:px-4 sm:text-4xl md:text-6xl"
          >
-            بسعر البيع
+            حسب سعر البيع
          </Typography>
 
          <BalancesTable data={saleData} />
@@ -52,15 +52,15 @@ export const Balances = () => {
 
 function BalancesTable({ data }) {
    const classes = "border-b border-deep-purple-500 p-2 md:p-4";
-   const typography = "text-center text-base font-semibold md:text-base lg:text-xl";
+   const typography = "text-center text-base font-semibold md:text-base lg:text-xl dark:text-blue-gray-500";
 
    return (
-      <Card className="h-full w-full overflow-x-auto px-4 shadow-none">
+      <Card className="h-full w-full overflow-x-auto bg-transparent p-4 shadow-none">
          <table className="mb-4 w-full max-w-full table-auto rounded-3xl shadow-sp">
             <thead>
                <tr className="border-0 border-b border-solid border-deep-purple-500">
                   {TABLE_HEAD.map((head) => (
-                     <th key={head} className="bg-deep-purple-50 p-4">
+                     <th key={head} className="bg-dimPurple p-4">
                         <Typography
                            variant="h5"
                            color="deep-purple"
@@ -88,7 +88,7 @@ function BalancesTable({ data }) {
                   </td>
                </tr>
 
-               <tr className={`${classes} bg-deep-purple-50/50`}>
+               <tr className={`${classes} bg-dimPurple`}>
                   <td className={classes}>
                      <Typography variant="h5" className={typography}>
                         المحل
@@ -117,7 +117,7 @@ function BalancesTable({ data }) {
             </tbody>
 
             <tfoot>
-               <tr className="border-0 border-t border-solid border-deep-purple-500 bg-deep-purple-50/50">
+               <tr className="bg-dimPurple border-0 border-t border-solid border-deep-purple-500">
                   <th className="p-2 md:p-4">
                      <Typography
                         variant="h5"

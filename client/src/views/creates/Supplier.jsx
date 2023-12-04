@@ -1,29 +1,40 @@
+import { Button, Typography, Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwind/react";
+import { Tab, TabPanel, Tabs, TabsBody, TabsHeader } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { filterSelection, getLists, setSuppliers } from "@/redux/slices/creates";
+import { filterSelection, getLists, getSuppliers, setSuppliers } from "@/redux/slices/creates";
 import { Field, Form, Selectbox } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
-import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, Typography } from "@material-tailwind/react";
 
 export const Supplier = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const { refetch: ccRefetch } = useAxios();
+
    const [formData, setFormData] = useState({ supplier: "", products: [] });
    const [product, setProduct] = useState({ category: "", company: "", name: "" });
    const [openDialog, setOpenDialog] = useState(false);
-   const { lists, categories, companies, products } = useSelector(({ creates }) => creates);
+
+   const { categories, companies, products, suppliers } = useSelector(({ creates }) => creates);
    const dispatch = useDispatch();
 
    useEffect(() => {
-      if (lists.length) return;
+      if (!suppliers.length) {
+         (async () => {
+            const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-suppliers-list");
+            if (isSubmitted && error) return;
+            dispatch(getSuppliers(data));
+         })();
+      }
 
-      (async () => {
-         const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-lists");
-         if (isSubmitted && error) return;
-         dispatch(getLists(data));
-      })();
+      if (!categories.length) {
+         (async () => {
+            const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-lists");
+            if (isSubmitted && error) return;
+            dispatch(getLists(data));
+         })();
+      }
    }, []);
 
    useEffect(() => {
@@ -39,6 +50,7 @@ export const Supplier = () => {
    };
 
    const handleSelectChange = (name, value) => {
+      if (name === "supplier") return setFormData((data) => ({ ...data, [name]: value }));
       setProduct((data) => ({ ...data, [name]: value }));
    };
 
@@ -73,17 +85,53 @@ export const Supplier = () => {
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
-         <Field label="اسم المندوب" name="supplier" onChange={handleFieldChange} />
+         <Tabs value="new">
+            <TabsHeader
+               className="border border-solid border-primary bg-primary/25 dark:bg-primary/10"
+               indicatorProps={{ className: "bg-primary/50" }}
+            >
+               <Tab value="new" className="text-lg font-semibold dark:text-white">
+                  مندوب جديد
+               </Tab>
+               <Tab value="old" className="text-lg font-semibold dark:text-white">
+                  مندوب قديم
+               </Tab>
+            </TabsHeader>
+
+            <TabsBody>
+               <TabPanel value="new" className="min-h-[200px] overflow-y-auto">
+                  <Field
+                     label="اسم المندوب"
+                     name="supplier"
+                     value={formData.supplier}
+                     onChange={handleFieldChange}
+                  />
+               </TabPanel>
+               <TabPanel value="old" className="min-h-[200px] overflow-y-auto">
+                  <Selectbox
+                     label="اختر اسم المندوب"
+                     value={formData.supplier}
+                     onChange={(value) => handleSelectChange("supplier", value)}
+                     options={suppliers}
+                  />
+               </TabPanel>
+            </TabsBody>
+         </Tabs>
 
          <div className="products">
             {formData.products.map(({ name }, i) => (
-               <Typography variant="lead" color="blue-gray" key={i}>
+               <Typography variant="lead" className="text-blue-gray-500" key={i}>
                   {i + 1} - {name}
                </Typography>
             ))}
          </div>
 
-         <Dialog open={openDialog} size="md" handler={handleOpenDialog} className="max-h-[80vh] overflow-y-auto">
+         <Dialog
+            open={openDialog}
+            size="md"
+            handler={handleOpenDialog}
+            className="max-h-[80vh] overflow-y-auto shadow-sp dark:bg-darkGray"
+         >
             <DialogHeader className="flex-between">
                <Typography variant="h2" color="deep-purple">
                   اضافه منتج
@@ -95,6 +143,7 @@ export const Supplier = () => {
                <div className="mt-4">
                   <Selectbox
                      label="اختر اسم القسم..."
+                     value={product.category}
                      onChange={(value) => handleSelectChange("category", value)}
                      options={categories}
                   />
@@ -103,6 +152,7 @@ export const Supplier = () => {
                <div className="mt-4">
                   <Selectbox
                      label="اختر اسم الشركة..."
+                     value={product.company}
                      onChange={(value) => handleSelectChange("company", value)}
                      options={companies}
                   />
@@ -111,6 +161,7 @@ export const Supplier = () => {
                <div className="mt-4">
                   <Selectbox
                      label="اختر اسم المنتج..."
+                     value={product.name}
                      onChange={(value) => handleSelectChange("name", value)}
                      options={products}
                   />

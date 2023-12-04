@@ -60,6 +60,26 @@ export const GET_SEARCH_LIST = async (req, res) => {
 	}
 };
 
+export const GET_PROFILE = async (req, res) => {
+	try {
+		const { companyId, productId } = req.params;
+		const company = await Products.findOne({ _id: companyId, products: { $elemMatch: { _id: productId } } });
+		if (!company) return res.status(400).json({ error: "حدث خطأ ، لم يتم العثور علي الشركة" });
+
+		const product = company.products.find((product) => String(product._id) === productId);
+		if (!product) return res.status(400).json({ error: "حدث خطأ ، لم يتم العثور علي المنتج" });
+
+		const shopCount = product.count.reduce((prev, cur) => prev + cur.shop, 0);
+		const storeCount = product.count.reduce((prev, cur) => prev + cur.store, 0);
+
+		const { count, ...docs } = product._doc;
+
+		res.status(200).json({ img: company.img, count: { shop: shopCount, store: storeCount }, ...docs });
+	} catch (error) {
+		res.status(404).json(`GET_PROFILE: ${error.message}`);
+	}
+};
+
 export const GET_BALANCES = async (req, res) => {
 	try {
 		const { price } = req.query;

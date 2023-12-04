@@ -25,12 +25,18 @@ body {
    list-style: none !important;
    box-sizing: border-box !important;
    text-decoration: none !important;
-   transition: all 0s ease !important;
+   transition: all 0.1s ease;
 }
 
 html {
    width: 100vw;
    overflow-x: hidden;
+   &.dark {
+      background-color: #222;
+      ::-webkit-scrollbar-track {
+         @apply bg-black;
+      }
+   }
    * ::-webkit-scrollbar {
       width: 2px !important;
       height: 5px !important;

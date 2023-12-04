@@ -29,9 +29,6 @@ export const Company = () => {
    };
 
    const handleFieldChange = (event) => {
-      if (event.target.name === "img")
-         return setFormData((data) => ({ ...data, img: URL.createObjectURL(event.target.files[0]) }));
-
       setFormData((data) => ({ ...data, [event.target.name]: event.target.value }));
    };
 
@@ -65,16 +62,17 @@ export const Company = () => {
                alt="product"
                className="m-auto mb-4 block h-28 w-28 rounded-full shadow-sp"
             />
-            <Field type="file" name="img" onChange={handleFieldChange} />
+            <Field label="رابط الصورة" name="img" value={formData.img} onChange={handleFieldChange} />
          </div>
 
          <Selectbox
             label="اختر اسم القسم..."
+            value={formData.category}
             onChange={(value) => handleSelectChange("category", value)}
             options={categories}
          />
 
-         <Field label="اسم الشركة" name="company" onChange={handleFieldChange} />
+         <Field label="اسم الشركة" name="company" value={formData.company} onChange={handleFieldChange} />
       </Form>
    );
 };

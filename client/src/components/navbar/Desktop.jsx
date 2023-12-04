@@ -7,7 +7,13 @@ export const Desktop = () => {
       <div className="hidden w-full items-center justify-center md:flex">
          {links.map(({ title, path, paths }, i) =>
             title ? (
-               <Menu className="!transition-none" placement="bottom" allowHover key={i}>
+               <Menu
+                  className="!transition-none !delay-0 !duration-0"
+                  animate={{ mount: { y: 0 }, unmount: { y: 25 } }}
+                  placement="bottom"
+                  allowHover
+                  key={i}
+               >
                   <MenuHandler>
                      <Button className="flex-start md:text-xl lg:text-2xl" variant="text" color="blue-gray">
                         <p>{title}</p>
@@ -15,7 +21,7 @@ export const Desktop = () => {
                      </Button>
                   </MenuHandler>
 
-                  <MenuList className="bg-dimBlack">
+                  <MenuList className="dark:bg-darkGray bg-dimBlack !transition-none !delay-0 !duration-0">
                      {paths?.map(({ name, icon, link }, i) =>
                         name ? (
                            <Link to={`/${path}/${link}`} className="whitespace-nowrap font-bold" key={i}>

@@ -1,8 +1,8 @@
 // Directs
-import { Home, Balances } from "@/views";
+import { Home, Balances, ProductProfile, Login, Register } from "@/views";
 
 // Products
-import { Shop_Store } from "@/views";
+import { ShowProducts } from "@/views";
 
 // Statements
 import { Buy, Sale, Transfer } from "@/views";
@@ -20,7 +20,26 @@ export const links = [
          },
          {
             link: "balances",
+            role: "admin",
             Component: Balances,
+         },
+         {
+            link: "profile/:companyId/:productId",
+            Component: ProductProfile,
+         },
+      ],
+   },
+   {
+      path: "auths",
+      paths: [
+         {
+            link: "login",
+            Component: Login,
+         },
+         {
+            link: "register",
+            role: "admin",
+            Component: Register,
          },
       ],
    },
@@ -32,13 +51,13 @@ export const links = [
             name: "عرض بضائع المحل",
             link: "shop",
             icon: "fas fa-store",
-            Component: Shop_Store,
+            Component: ShowProducts,
          },
          {
             name: "عرض بضائع المخزن",
             link: "store",
             icon: "fas fa-store",
-            Component: Shop_Store,
+            Component: ShowProducts,
          },
       ],
    },
@@ -49,17 +68,20 @@ export const links = [
          {
             name: "كشف حساب",
             link: "sale",
+            role: "admin",
             icon: "fas fa-shopping-cart",
             Component: Sale,
          },
          {
             name: "كشف مندوب",
             link: "buy",
+            role: "admin",
             icon: "fas fa-shopping-cart",
             Component: Buy,
          },
          {
             link: "transfer",
+            role: "admin",
             Component: Transfer,
          },
       ],
@@ -71,24 +93,28 @@ export const links = [
          {
             name: "قسم جديد",
             link: "category",
+            role: "admin",
             icon: "fas fa-store-alt",
             Component: Category,
          },
          {
             name: "شركة جديدة",
             link: "company",
+            role: "admin",
             icon: "fas fa-store-alt",
             Component: Company,
          },
          {
             name: "منتج جديد",
             link: "products",
+            role: "admin",
             icon: "fas fa-store-alt",
             Component: Products,
          },
          {
             name: "مندوب جديد",
             link: "supplier",
+            role: "admin",
             icon: "fas fa-user",
             Component: Supplier,
          },

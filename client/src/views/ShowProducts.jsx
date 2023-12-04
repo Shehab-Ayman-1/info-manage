@@ -1,13 +1,14 @@
-import { Card, Switch, Typography } from "@material-tailwind/react";
+import { Card, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
+import { Switch, Table } from "@/components/public";
 
 const TABLE_HEAD = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];
 
-export const Shop_Store = () => {
+export const ShowProducts = () => {
    const location = useLocation();
    const pathname = location.pathname.split("/")[2];
    const [searchText, setSearchText] = useState("");
@@ -39,26 +40,27 @@ export const Shop_Store = () => {
 
    useEffect(() => {
       if (!data?.length) return;
-      const all = data.map((company) =>
+
+      const all = (searchResult || data).map((company) =>
          company.products.map((product) => product.total).reduce((p, c) => p + c, 0),
       );
 
       setTotal((prev) => ({ ...prev, all: all.reduce((prev, cur) => prev + cur, 0) }));
-   }, [data]);
+   }, [data, searchResult]);
 
    const minmax = (count, min, max) => {
       if (count <= 0) return "text-blue-gray-500/50";
       else if (count > 0 && count <= min) return "text-red-500";
       else if (count > min && count <= max) return "text-orange-500";
-      else return "text-black";
+      else return "text-blue-gray-500";
    };
 
    return (
-      <Card>
+      <Card className="dark:bg-darkGray rounded-none">
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <div className="my-5 md:my-10">
-            <div className="flex-between mx-auto w-[95%] overflow-hidden rounded-xl border border-solid border-deep-purple-100 bg-white px-4 py-2 shadow-sp">
+         <div className="dark:bg-darkGray my-5 md:my-10">
+            <div className="flex-between mx-auto w-[95%] overflow-hidden rounded-xl border border-solid border-deep-purple-500 bg-transparent px-4 py-2 shadow-sp">
                <i className="fa fa-search block text-2xl" />
                <input
                   type="search"
@@ -74,26 +76,19 @@ export const Shop_Store = () => {
                عرض بضائع {pathname === "store" ? "المخزن" : "المحل"}
             </Typography>
             <Switch
-               color="indigo"
                label={isBuyPrice ? "سعر الشراء" : "سعر البيع"}
                checked={isBuyPrice}
-               onChange={(event) => setIsBuyPrice(() => event.target.checked)}
                disabled={loading}
-               containerProps={{
-                  className: "whitespace-nowrap ml-5",
-               }}
-               circleProps={{
-                  className: "ring-1 ring-primary",
-               }}
+               onChange={(event) => setIsBuyPrice(() => event.target.checked)}
             />
          </div>
 
-         <Card className="h-full w-full overflow-x-auto pl-4 pr-2 shadow-none">
+         <Card className="h-full w-full overflow-x-auto bg-transparent p-4 shadow-none">
             <table className="mb-4 w-full max-w-full table-auto rounded-3xl shadow-sp">
                <thead>
                   <tr className="border-0 border-b border-solid border-deep-purple-500">
                      {TABLE_HEAD.map((head) => (
-                        <th key={head} className="bg-deep-purple-50 p-4">
+                        <th key={head} className="bg-dimPurple p-4">
                            <Typography
                               variant="h5"
                               color="deep-purple"
@@ -115,13 +110,11 @@ export const Shop_Store = () => {
                      return products?.map(({ name, count, price, total, min, max }, i) => (
                         <tr
                            key={i}
-                           className={`${minmax(count, min, max)} ${
-                              index % 2 ? "bg-deep-purple-50/50" : ""
-                           } ${classes}`}
+                           className={`${minmax(count, min, max)} ${index % 2 ? "bg-dimPurple" : ""} ${classes}`}
                         >
                            {!i ? (
                               <td className={classes} rowSpan={Math.floor(products.length)}>
-                                 <Typography variant="h5" className={typography} color="black">
+                                 <Typography variant="h5" className={`${typography} text-blue-gray-500`}>
                                     {company}
                                  </Typography>
                               </td>
@@ -154,7 +147,7 @@ export const Shop_Store = () => {
                <tfoot>
                   <tr
                      className={`border-0 border-t border-solid border-deep-purple-500 ${
-                        (searchResult || data)?.length % 2 ? "bg-deep-purple-50/50" : ""
+                        (searchResult || data)?.length % 2 ? "bg-dimPurple" : ""
                      }`}
                   >
                      <th colSpan={3} className="p-2 md:p-4">

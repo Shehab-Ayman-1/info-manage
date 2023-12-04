@@ -1,8 +1,8 @@
-import { Button, Switch } from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
-
-import { Field, Form, Selectbox, Table } from "@/components/public";
 import { useDispatch, useSelector } from "react-redux";
+
+import { Field, Form, Selectbox, Table, Switch } from "@/components/public";
 import { filterSelection, getSuppliers } from "@/redux/slices/creates";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
@@ -19,6 +19,7 @@ export const Buy = () => {
 
    useEffect(() => {
       if (suppliers.length) return;
+
       (async () => {
          const { data, isSubmitted, error } = await sRefetch("get", "/products/get-suppliers-list");
          if (isSubmitted && error) return;
@@ -44,6 +45,7 @@ export const Buy = () => {
    const addField = () => {
       if (!Object.values(product).every((p) => p)) return alert("يجب ادخال جميل البيانات المطلوبه");
       setFormData((data) => ({ ...data, products: data.products.concat(product) }));
+      setProduct(() => ({ name: "", count: 0, price: 0 }));
    };
 
    const handleSubmit = async (event) => {
@@ -65,8 +67,9 @@ export const Buy = () => {
          <div className="supplier">
             <Selectbox
                label="اختار اسم المندوب"
-               onChange={(value) => handleSelectChange("supplier", value)}
                options={suppliers}
+               value={formData.supplier}
+               onChange={(value) => handleSelectChange("supplier", value)}
             />
          </div>
 
@@ -74,8 +77,9 @@ export const Buy = () => {
             <div className="w-full">
                <Selectbox
                   label="اختار اسم المنتج"
-                  onChange={(value) => handleSelectChange("name", value)}
                   options={products}
+                  value={product.name}
+                  onChange={(value) => handleSelectChange("name", value)}
                />
             </div>
 
@@ -84,6 +88,7 @@ export const Buy = () => {
                   type="number"
                   label="العدد"
                   name="count"
+                  value={product.count}
                   onChange={handleFieldChange}
                   containerStyle="sm:!w-[50%] w-full"
                />
@@ -91,6 +96,7 @@ export const Buy = () => {
                   type="number"
                   label="السعر"
                   name="price"
+                  value={product.price}
                   onChange={handleFieldChange}
                   containerStyle="sm:!w-[50%] w-full"
                />
@@ -101,22 +107,22 @@ export const Buy = () => {
                   اضافه
                </Button>
                <Switch
-                  color="indigo"
                   label={formData.toStore ? "المخزن" : "المحل"}
                   checked={formData.toStore}
                   onChange={(e) => setFormData((d) => ({ ...d, toStore: e.target.checked }))}
-                  containerProps={{
-                     className: "whitespace-nowrap ml-5",
-                  }}
-                  circleProps={{
-                     className: "ring-1 ring-primary",
-                  }}
                />
             </div>
          </div>
 
          <div className="mb-5">
-            <Field type="number" min="0" name="discount" label="الخصم" onChange={handleFieldChange} />
+            <Field
+               type="number"
+               min="0"
+               name="discount"
+               value={formData.discount}
+               label="الخصم"
+               onChange={handleFieldChange}
+            />
          </div>
 
          <div className="">

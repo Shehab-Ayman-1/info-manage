@@ -2,6 +2,8 @@ import { Card, IconButton, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 
 export function Table({ headers, rows, setFormData, allowTotal }) {
+   if (!rows?.length) return;
+
    const [total, setTotal] = useState(0);
    const keys = rows.length ? Object.keys(rows[0]) : [];
 
@@ -20,13 +22,13 @@ export function Table({ headers, rows, setFormData, allowTotal }) {
    };
 
    return (
-      <Card className="h-full w-full overflow-x-auto shadow-none">
-         <table className="mb-4 w-full max-w-full table-auto rounded-3xl shadow-sp">
+      <Card className="dark:bg-darkGray h-full w-full overflow-x-auto p-2 shadow-none">
+         <table className="mb-4 w-full max-w-full table-auto rounded-3xl shadow-sp dark:bg-transparent">
             {rows.length ? (
                <thead>
                   <tr className="border-0 border-b border-solid border-deep-purple-500">
                      {headers.map((head) => (
-                        <th key={head} className="bg-deep-purple-50 p-4">
+                        <th key={head} className="bg-dimPurple p-4">
                            <Typography
                               variant="h5"
                               color="deep-purple"
@@ -44,10 +46,11 @@ export function Table({ headers, rows, setFormData, allowTotal }) {
                {rows.map((row, index) => {
                   const isLast = index === rows.length - 1;
                   const classes = isLast ? "p-2 md:p-4" : "border-b border-deep-purple-500 p-2 md:p-4";
-                  const typography = "text-xs md:text-md lg:text-lg text-center font-semibold";
+                  const typography =
+                     "text-xs md:text-md lg:text-lg text-center font-semibold dark:text-blue-gray-500";
 
                   return (
-                     <tr key={index} className={`${classes} ${index % 2 ? "bg-deep-purple-50/50" : ""}`}>
+                     <tr key={index} className={`${classes} ${index % 2 ? "bg-dimPurple" : ""}`}>
                         {headers[0] === "" ? (
                            <td className="text-center">
                               <IconButton variant="text" color="red" onClick={() => deleteRow(index)}>
@@ -88,7 +91,7 @@ export function Table({ headers, rows, setFormData, allowTotal }) {
                <tfoot>
                   <tr
                      className={`border-0 border-t border-solid border-deep-purple-500 ${
-                        rows.length % 2 ? "bg-deep-purple-50/50" : ""
+                        rows.length % 2 ? "bg-dimPurple" : ""
                      }`}
                   >
                      <th colSpan={Math.floor(headers.length / 2)} className="p-2 md:p-4">

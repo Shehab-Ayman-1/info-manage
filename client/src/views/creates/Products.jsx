@@ -8,10 +8,11 @@ import { Loading } from "@/layout/loading";
 import { useAxios } from "@/hooks/useAxios";
 
 const formState = { category: "", company: "", products: [] };
+const productState = { name: "", minmax: null, barcode: "" };
 export const Products = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const { refetch: ccRefetch } = useAxios();
-   const [product, setProduct] = useState({ name: "", minmax: null, barcode: 0 });
+   const [product, setProduct] = useState(productState);
    const [formData, setFormData] = useState(formState);
    const [openDialog, setOpenDialog] = useState(false);
    const { lists, categories, companies } = useSelector(({ creates }) => creates);
@@ -55,6 +56,7 @@ export const Products = () => {
 
       setFormData((data) => ({ ...data, products: data.products.concat(product) }));
       setOpenDialog(() => false);
+      setProduct(() => productState);
    };
 
    const handleCancel = (index) => {
@@ -85,6 +87,7 @@ export const Products = () => {
          <div className="category">
             <Selectbox
                label="اختر اسم القسم..."
+               value={formData.category}
                onChange={(value) => handleSelectChange("category", value)}
                options={categories}
             />
@@ -93,6 +96,7 @@ export const Products = () => {
          <div className="company">
             <Selectbox
                label="اختر اسم الشركة..."
+               value={formData.company}
                onChange={(value) => handleSelectChange("company", value)}
                options={companies}
             />
@@ -100,7 +104,7 @@ export const Products = () => {
 
          <div className="products">
             {formData.products.map(({ name }, i) => (
-               <Typography variant="lead" color="blue-gray" key={i}>
+               <Typography variant="lead" className="text-dimWhite" key={i}>
                   <i className="fa fa-times text-red-500 hover:text-red-900" onClick={() => handleCancel(i)} />
                   <span className="mr-3">
                      {i + 1} - {name}
@@ -109,7 +113,12 @@ export const Products = () => {
             ))}
          </div>
 
-         <Dialog open={openDialog} size="md" handler={handleOpenDialog} className="max-h-[80vh] overflow-y-auto">
+         <Dialog
+            open={openDialog}
+            size="md"
+            handler={handleOpenDialog}
+            className="dark:bg-darkGray max-h-[80vh] overflow-y-auto shadow-sp"
+         >
             <DialogHeader className="flex-between">
                <Typography variant="h2" color="deep-purple">
                   اضافه منتج
@@ -118,16 +127,23 @@ export const Products = () => {
             </DialogHeader>
 
             <DialogBody>
-               <Field label="اسم المنتج" name="name" onChange={handleFieldChange} />
-               <Field type="number" label="الباركود" name="barcode" onChange={handleFieldChange} />
+               <Field label="اسم المنتج" name="name" value={product.name} onChange={handleFieldChange} />
+               <Field
+                  type="number"
+                  label="الباركود"
+                  name="barcode"
+                  value={product.barcode}
+                  onChange={handleFieldChange}
+               />
 
                <div className="flex-between">
                   <Field
                      type="number"
-                     min="0"
                      label="الحد الادني"
-                     containerStyle="!w-[50%] min-w-[50%]"
                      name="min"
+                     min="0"
+                     value={product.minmax?.min}
+                     containerStyle="!w-[50%] min-w-[50%]"
                      onChange={handleFieldChange}
                   />
                   <Field
@@ -135,6 +151,7 @@ export const Products = () => {
                      min="0"
                      label="الحد المتوسط"
                      name="max"
+                     value={product.minmax?.max}
                      containerStyle="!w-[50%] min-w-[50%]"
                      onChange={handleFieldChange}
                   />

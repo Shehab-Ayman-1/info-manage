@@ -11,7 +11,6 @@ export const Field = ({
 }) => {
    return (
       <Input
-         {...rest}
          label={label}
          type={type}
          size="lg"
@@ -25,6 +24,7 @@ export const Field = ({
             className: `text-xl peer-focus:text-xl peer-placeholder-shown:text-xl ${labelStyle}`,
          }}
          required
+         {...rest}
       />
    );
 };

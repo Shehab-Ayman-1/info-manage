@@ -34,8 +34,8 @@ export const Category = () => {
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/creates/company" />
 
-         <Field label="اسم القسم" name="category" onChange={handleFieldChange} />
-         <Field label="اسم الشركة" name="company" onChange={handleFieldChange} />
+         <Field label="اسم القسم" name="category" value={formData.category}  onChange={handleFieldChange} />
+         <Field label="اسم الشركة" name="company" value={formData.company} onChange={handleFieldChange} />
       </Form>
    );
 };

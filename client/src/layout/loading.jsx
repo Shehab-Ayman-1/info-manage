@@ -13,7 +13,7 @@ export const Loading = ({ isSubmitted, loading, error, message, to }) => {
       setTimeout(
          () => {
             setOpen(() => false);
-            isSubmitted && !error && !message.warn && to && navigate(to);
+            isSubmitted && !error && !message?.warn && to && navigate(to);
          },
          message?.warn ? 5000 : 3000,
       );
@@ -26,7 +26,7 @@ export const Loading = ({ isSubmitted, loading, error, message, to }) => {
       return (
          <Alert
             open={open}
-            className="fixed left-1/2 top-28 z-[1002] max-w-screen-sm -translate-x-1/2 text-xl"
+            className="fixed left-1/2 top-28 z-[1002] w-[95%] max-w-screen-sm -translate-x-1/2 text-xl"
             color="red"
             onClose={() => setOpen(false)}
          >
@@ -38,7 +38,7 @@ export const Loading = ({ isSubmitted, loading, error, message, to }) => {
       return (
          <Alert
             open={open}
-            className="fixed left-1/2 top-28 z-[1002] max-w-screen-sm -translate-x-1/2 text-xl"
+            className="fixed left-1/2 top-28 z-[1002] w-[95%] max-w-screen-sm -translate-x-1/2 text-xl"
             color="amber"
             onClose={() => setOpen(false)}
          >
@@ -50,7 +50,7 @@ export const Loading = ({ isSubmitted, loading, error, message, to }) => {
       return (
          <Alert
             open={open}
-            className="fixed left-1/2 top-28 z-[1002] max-w-screen-sm -translate-x-1/2 text-xl"
+            className="fixed left-1/2 top-28 z-[1002] w-[95%] max-w-screen-sm -translate-x-1/2 text-xl"
             color="green"
             onClose={() => setOpen(false)}
          >
