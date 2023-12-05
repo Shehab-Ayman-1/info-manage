@@ -11,7 +11,7 @@ export const Form = ({
    return (
       <form onSubmit={onSubmit} className="p-5 md:p-0">
          <Card
-            className={`m-auto mt-14 min-h-full w-[500px] max-w-full shadow-sp dark:bg-transparent md:mt-32 ${cardStyle}`}
+            className={`m-auto mt-14 min-h-full w-[650px] max-w-full shadow-sp dark:bg-transparent md:mt-32 ${cardStyle}`}
          >
             <CardHeader
                variant="gradient"

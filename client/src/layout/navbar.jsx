@@ -29,12 +29,12 @@ export const Navbar = () => {
          {/* Navbar Icons */}
          <div className="flex-start">
             <i
-               className={`fas ${darkMode === "dark" ? "fa-sun" : "fa-moon"} text-xl`}
+               className={`fas ${darkMode === "dark" ? "fa-sun" : "fa-moon"} text-md sm:text-xl`}
                onClick={() => handleDarkMode(darkMode)}
             />
-            <i className="fas fa-hand-holding-usd text-xl" onClick={() => navigate("/balances")} />
-            <i className="fas fa-random text-xl" onClick={() => navigate("/statements/transfer")} />
-            <i className="fa fa-bars text-xl md:!hidden" onClick={handleDrawer} />
+            <i className="fas fa-hand-holding-usd text-md sm:text-xl" onClick={() => navigate("/balances")} />
+            <i className="fas fa-random text-md sm:text-xl" onClick={() => navigate("/statements/transfer")} />
+            <i className="fa fa-bars text-md sm:text-xl md:!hidden" onClick={handleDrawer} />
 
             <User />
          </div>
