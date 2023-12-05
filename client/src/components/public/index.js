@@ -1,5 +1,5 @@
-export * from "./Form";
-export * from "./Table";
+export * from "./form";
+export * from "./table";
 export * from "./Input";
 export * from "./Select";
 export * from "./Switch";
