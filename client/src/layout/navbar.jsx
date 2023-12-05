@@ -4,7 +4,7 @@ import { User, Logo, Desktop, Mobile } from "@/components/navbar";
 
 export const Navbar = () => {
    const [openDrawer, setOpenDrawer] = useState(false);
-   const [darkMode, setDarkMode] = useState(sessionStorage.getItem("darkMode") || "light");
+   const [darkMode, setDarkMode] = useState(localStorage.getItem("darkMode") || "light");
    const navigate = useNavigate();
 
    useEffect(() => {
@@ -13,7 +13,7 @@ export const Navbar = () => {
 
    const handleDarkMode = (dark) => {
       setDarkMode(() => (dark === "dark" ? "light" : "dark"));
-      sessionStorage.setItem("darkMode", dark === "dark" ? "light" : "dark");
+      localStorage.setItem("darkMode", dark === "dark" ? "light" : "dark");
    };
 
    const handleDrawer = () => {
