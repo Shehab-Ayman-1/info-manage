@@ -1,7 +1,7 @@
 import { Card, IconButton, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 
-export function Table({ headers, rows, setFormData, allowTotal }) {
+export const Table = ({ headers, rows, setFormData, allowTotal }) => {
    if (!rows?.length) return;
 
    const [total, setTotal] = useState(0);
@@ -16,13 +16,13 @@ export function Table({ headers, rows, setFormData, allowTotal }) {
 
    const deleteRow = (index) => {
       setFormData((data) => {
-         const products = data?.products.filter((item, idx) => idx !== index);
+         const products = data?.products.filter((_, idx) => idx !== index);
          return { ...data, products };
       });
    };
 
    return (
-      <Card className="dark:bg-darkGray h-full w-full overflow-x-auto p-2 shadow-none">
+      <Card className="h-full w-full overflow-x-auto p-2 shadow-none dark:bg-darkGray">
          <table className="mb-4 w-full max-w-full table-auto rounded-3xl shadow-sp dark:bg-transparent">
             {rows.length ? (
                <thead>
@@ -118,4 +118,4 @@ export function Table({ headers, rows, setFormData, allowTotal }) {
          </table>
       </Card>
    );
-}
+};

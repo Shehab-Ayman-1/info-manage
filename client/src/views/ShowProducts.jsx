@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
-import { Switch, Table } from "@/components/public";
+import { Switch } from "@/components/public";
 
 const TABLE_HEAD = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];
 
@@ -56,10 +56,10 @@ export const ShowProducts = () => {
    };
 
    return (
-      <Card className="dark:bg-darkGray rounded-none">
+      <Card className="rounded-none dark:bg-darkGray">
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <div className="dark:bg-darkGray my-5 md:my-10">
+         <div className="my-5 dark:bg-darkGray md:my-10">
             <div className="flex-between mx-auto w-[95%] overflow-hidden rounded-xl border border-solid border-deep-purple-500 bg-transparent px-4 py-2 shadow-sp">
                <i className="fa fa-search block text-2xl" />
                <input
