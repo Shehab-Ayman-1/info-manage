@@ -99,7 +99,7 @@ export const ProductProfile = () => {
                      الموردين
                   </Typography>
                   <Typography variant="h6" className={valueTypograph}>
-                     {data.suppliers.join(" | ")}
+                     {data.suppliers.length ? data.suppliers.join(" | ") : "لا يوجد"}
                   </Typography>
                </div>
             </Fragment>
