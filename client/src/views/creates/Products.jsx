@@ -117,7 +117,7 @@ export const Products = () => {
             open={openDialog}
             size="md"
             handler={handleOpenDialog}
-            className="dark:bg-darkGray max-h-[80vh] overflow-y-auto shadow-sp"
+            className="max-h-[80vh] overflow-y-auto shadow-sp dark:bg-darkGray"
          >
             <DialogHeader className="flex-between">
                <Typography variant="h2" color="deep-purple">
@@ -136,14 +136,14 @@ export const Products = () => {
                   onChange={handleFieldChange}
                />
 
-               <div className="flex-between">
+               <div className="flex-between overflow-hidden">
                   <Field
                      type="number"
                      label="الحد الادني"
                      name="min"
                      min="0"
                      value={product.minmax?.min}
-                     containerStyle="!w-[50%] min-w-[50%]"
+                     containerStyle="!w-[50%]"
                      onChange={handleFieldChange}
                   />
                   <Field
@@ -152,7 +152,7 @@ export const Products = () => {
                      label="الحد المتوسط"
                      name="max"
                      value={product.minmax?.max}
-                     containerStyle="!w-[50%] min-w-[50%]"
+                     containerStyle="!w-[50%]"
                      onChange={handleFieldChange}
                   />
                </div>

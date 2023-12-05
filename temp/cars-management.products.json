@@ -1,0 +1,530 @@
+[{
+  "_id": {
+    "$oid": "656cbdfaf103b83246e757bc"
+  },
+  "category": "زيوت",
+  "company": "موبيل",
+  "products": [
+    {
+      "name": "منتج 1",
+      "barcode": 1,
+      "suppliers": [
+        "شهاب ايمن"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 100,
+        "sale": 0
+      },
+      "_id": {
+        "$oid": "656cbe34f103b83246e757c2"
+      },
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-03T17:40:26.189Z"
+          },
+          "store": 1,
+          "shop": 0,
+          "transferPrice": 100,
+          "_id": {
+            "$oid": "656cc02ff103b83246e757e4"
+          }
+        }
+      ]
+    },
+    {
+      "name": "منتج 2",
+      "barcode": 2,
+      "suppliers": [
+        "شهاب ايمن"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 200,
+        "sale": 0
+      },
+      "_id": {
+        "$oid": "656cbe34f103b83246e757c3"
+      },
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-03T17:40:26.189Z"
+          },
+          "store": 2,
+          "shop": 0,
+          "transferPrice": 200,
+          "_id": {
+            "$oid": "656cc02ff103b83246e757e6"
+          }
+        }
+      ]
+    },
+    {
+      "name": "منتج 3",
+      "barcode": 3,
+      "suppliers": [
+        "شهاب ايمن"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 300,
+        "sale": 0
+      },
+      "_id": {
+        "$oid": "656cbe34f103b83246e757c4"
+      },
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-03T17:40:26.189Z"
+          },
+          "store": 3,
+          "shop": 0,
+          "transferPrice": 300,
+          "_id": {
+            "$oid": "656cc02ff103b83246e757e8"
+          }
+        }
+      ]
+    },
+    {
+      "name": "موبيل عادة",
+      "barcode": 123456789,
+      "suppliers": [
+        "محمود وحيد",
+        "الحج رجب"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 300,
+        "sale": 0
+      },
+      "_id": {
+        "$oid": "656e234e89ab47d2b627a7ed"
+      },
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-04T19:03:24.090Z"
+          },
+          "store": 20,
+          "shop": 0,
+          "transferPrice": 300,
+          "_id": {
+            "$oid": "656e23ac89ab47d2b627a7f2"
+          }
+        }
+      ]
+    }
+  ],
+  "__v": 0,
+  "img": "https://th.bing.com/th/id/R.105feb1ff0869489e31624ff0fbd4e8c?rik=1MqbiSkQ4pBw8Q&pid=ImgRaw&r=0"
+},
+{
+  "_id": {
+    "$oid": "656cbe0af103b83246e757bf"
+  },
+  "img": "blob:http://localhost:5173/efd0f9d3-a8e4-4da7-b461-59efb227da30",
+  "category": "زيوت",
+  "company": "شيل",
+  "products": [
+    {
+      "name": "منتج 1",
+      "barcode": 4,
+      "suppliers": [
+        "شهاب ايمن",
+        "محمود وحيد"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 100,
+        "sale": 800
+      },
+      "_id": {
+        "$oid": "656cbe7ef103b83246e757c8"
+      },
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-03T18:24:13.903Z"
+          },
+          "store": 0,
+          "shop": 5,
+          "transferPrice": 100,
+          "_id": {
+            "$oid": "656ccd22d201ac621d299bc2"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-03T18:24:13.903Z"
+          },
+          "store": 0,
+          "shop": -3,
+          "transferPrice": 800,
+          "_id": {
+            "$oid": "656ccd92d201ac621d299c15"
+          }
+        }
+      ]
+    },
+    {
+      "name": "منتج 2",
+      "barcode": 5,
+      "suppliers": [
+        "شهاب ايمن",
+        "محمود وحيد",
+        "الحج رجب"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 0,
+        "sale": 0
+      },
+      "_id": {
+        "$oid": "656cbe7ef103b83246e757c9"
+      },
+      "count": []
+    },
+    {
+      "name": "منتج 3",
+      "barcode": 6,
+      "suppliers": [
+        "شهاب ايمن",
+        "محمود وحيد"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 800,
+        "sale": 500
+      },
+      "_id": {
+        "$oid": "656cbe7ef103b83246e757ca"
+      },
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-03T18:24:13.903Z"
+          },
+          "store": 0,
+          "shop": 8,
+          "transferPrice": 800,
+          "_id": {
+            "$oid": "656ccd22d201ac621d299bc4"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-03T18:24:13.903Z"
+          },
+          "store": 0,
+          "shop": -5,
+          "transferPrice": 500,
+          "_id": {
+            "$oid": "656cce22d201ac621d299c46"
+          }
+        }
+      ]
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656cbe9af103b83246e757cd"
+  },
+  "category": "فلاتر",
+  "company": "شركة 1",
+  "products": [
+    {
+      "name": "منتج 1",
+      "barcode": 7,
+      "suppliers": [
+        "الحج رجب"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 300,
+        "sale": 0
+      },
+      "_id": {
+        "$oid": "656cbed4f103b83246e757d3"
+      },
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-03T17:40:26.189Z"
+          },
+          "store": 0,
+          "shop": 5,
+          "transferPrice": 500,
+          "_id": {
+            "$oid": "656cc05bf103b83246e757ea"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-04T12:20:49.778Z"
+          },
+          "store": 2,
+          "shop": -2,
+          "transferPrice": 0,
+          "_id": {
+            "$oid": "656dc42bbac0dde3c821298d"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-04T12:20:49.778Z"
+          },
+          "store": -1,
+          "shop": 1,
+          "transferPrice": 0,
+          "_id": {
+            "$oid": "656dc4f8bac0dde3c8212991"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-04T12:20:49.778Z"
+          },
+          "store": 20,
+          "shop": 0,
+          "transferPrice": 300,
+          "_id": {
+            "$oid": "656dc552bac0dde3c8212995"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-04T12:35:23.707Z"
+          },
+          "store": -6,
+          "shop": 6,
+          "transferPrice": 0,
+          "_id": {
+            "$oid": "656dc7dccf23b34b90692c0d"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-04T12:35:23.707Z"
+          },
+          "store": -1,
+          "shop": 1,
+          "transferPrice": 0,
+          "_id": {
+            "$oid": "656dc7ffcf23b34b90692c11"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-04T12:35:23.707Z"
+          },
+          "store": -4,
+          "shop": 4,
+          "transferPrice": 0,
+          "_id": {
+            "$oid": "656dce6dcf23b34b90692cf0"
+          }
+        }
+      ]
+    },
+    {
+      "name": "منتج 2",
+      "barcode": 8,
+      "suppliers": [
+        "الحج رجب"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 600,
+        "sale": 0
+      },
+      "_id": {
+        "$oid": "656cbed4f103b83246e757d4"
+      },
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-03T17:40:26.189Z"
+          },
+          "store": 0,
+          "shop": 6,
+          "transferPrice": 600,
+          "_id": {
+            "$oid": "656cc05bf103b83246e757ec"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-04T12:35:23.707Z"
+          },
+          "store": -4,
+          "shop": 4,
+          "transferPrice": 0,
+          "_id": {
+            "$oid": "656dce48cf23b34b90692ceb"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-04T13:18:38.763Z"
+          },
+          "store": -5,
+          "shop": 5,
+          "transferPrice": 0,
+          "_id": {
+            "$oid": "656dd44edaf0b9313dec46b7"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-04T13:18:38.763Z"
+          },
+          "store": -5,
+          "shop": 5,
+          "transferPrice": 0,
+          "_id": {
+            "$oid": "656dd4bedaf0b9313dec46e9"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-04T13:18:38.763Z"
+          },
+          "store": -1,
+          "shop": 1,
+          "transferPrice": 0,
+          "_id": {
+            "$oid": "656dd583daf0b9313dec46fe"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-04T13:35:46.004Z"
+          },
+          "store": -1,
+          "shop": 1,
+          "transferPrice": 0,
+          "_id": {
+            "$oid": "656dd5bf280f1d3f4fed76d1"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-04T13:37:45.878Z"
+          },
+          "store": -1,
+          "shop": 1,
+          "transferPrice": 0,
+          "_id": {
+            "$oid": "656dd64c87aef1358b2cdcc9"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-04T13:40:44.470Z"
+          },
+          "store": 1,
+          "shop": -1,
+          "transferPrice": 0,
+          "_id": {
+            "$oid": "656dd6fccbd265885828e465"
+          }
+        }
+      ]
+    },
+    {
+      "name": "متج 3",
+      "barcode": 9,
+      "suppliers": [
+        "الحج رجب"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 700,
+        "sale": 0
+      },
+      "_id": {
+        "$oid": "656cbed4f103b83246e757d5"
+      },
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-03T17:40:26.189Z"
+          },
+          "store": 0,
+          "shop": 7,
+          "transferPrice": 700,
+          "_id": {
+            "$oid": "656cc05bf103b83246e757ee"
+          }
+        }
+      ]
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656cbea6f103b83246e757d0"
+  },
+  "img": "blob:http://localhost:5173/ce3cc60a-b014-4747-a87f-cbc79fda19d5",
+  "category": "فلاتر",
+  "company": "شركة 2",
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656e29273bdc25e9ae7d9881"
+  },
+  "img": "blob:http://localhost:5173/5ec7f655-ea8c-4e79-89e6-d7550349d100",
+  "category": "زيوت",
+  "company": "مصر",
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "656e2ba60727efe17100b302"
+  },
+  "img": "https://th.bing.com/th/id/R.105feb1ff0869489e31624ff0fbd4e8c?rik=1MqbiSkQ4pBw8Q&pid=ImgRaw&r=0",
+  "category": "زيوت",
+  "company": "egypt",
+  "products": [],
+  "__v": 0
+}]

@@ -18,7 +18,7 @@ export const Field = ({
          color="deep-purple"
          className={`!text-xl dark:text-white/80 ${inputStyle || ""}`}
          containerProps={{
-            className: `h-20 border-b-sp !border-deep-purple-100 ${containerStyle}`,
+            className: `h-20 border-b-sp mt-2 md:mt-4 !border-deep-purple-100 ${containerStyle}`,
          }}
          labelProps={{
             className: `text-xl peer-focus:text-xl peer-placeholder-shown:text-xl ${labelStyle}`,

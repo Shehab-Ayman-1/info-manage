@@ -10,13 +10,11 @@ export const Form = ({
 }) => {
    return (
       <form onSubmit={onSubmit} className="p-5 md:p-0">
-         <Card
-            className={`m-auto mt-14 min-h-full w-[650px] max-w-full shadow-sp dark:bg-transparent md:mt-32 ${cardStyle}`}
-         >
+         <Card className={`m-auto mb-2 mt-14 w-[650px] max-w-full bg-transparent shadow-sp md:mt-32 ${cardStyle}`}>
             <CardHeader
                variant="gradient"
                color="deep-purple"
-               className="mb-4 grid h-28 place-items-center dark:text-black"
+               className="mb-4 grid h-20 place-items-center dark:text-black sm:h-28"
             >
                <Typography variant="h3">{headerText}</Typography>
             </CardHeader>
