@@ -72,19 +72,7 @@ html {
    overflow-x: hidden;
    &.dark {
       @apply bg-gradient-to-tr from-black via-darkGray to-black;
-      .root-overlay {
-         @apply fixed left-1/2 top-1/2 h-[1000px] max-h-screen w-[1000px] max-w-[100vw] rounded-full bg-gradient-to-tr from-darkGray to-black opacity-30;
-         transform: translate(-50%, -50%) !important;
-         animation: spin 4s ease-in-out infinite;
-         @keyframes spin {
-            from {
-               transform: rotate(0);
-            }
-            to {
-               transform: rotate(360deg);
-            }
-         }
-      }
+
       ::-webkit-scrollbar-track {
          @apply bg-black;
       }
@@ -180,8 +168,4 @@ i {
 
 .border-b-sp {
    @apply border-0 border-b border-solid border-deep-purple-500;
-}
-
-.absolute-center {
-   @apply fixed  left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
 }
