@@ -33,7 +33,9 @@ export const Wrapper = () => {
    const isUser = userPaths.includes(pathname.startsWith("/profile") ? "/profile" : pathname);
 
    return (
-      <div className={pathname === "/" ? "home-bg" : ""}>
+      <Fragment>
+         <div className={`absolute -z-10 min-h-screen w-full ${pathname === "/" ? "home-bg" : ""}`} />
+         <div className={`absolute -z-10 ${pathname === "/" ? "" : "root-overlay"}`} />
          <Card className="m-auto mb-6 min-h-screen max-w-[1200px] bg-transparent">
             <Navbar />
             {isAdmin && user?.role === ADMIN ? (
@@ -54,6 +56,6 @@ export const Wrapper = () => {
                </Typography>
             )}
          </Card>
-      </div>
+      </Fragment>
    );
 };
