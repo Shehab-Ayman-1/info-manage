@@ -4,6 +4,45 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+   :root {
+      --primary: 94 53 177;
+      --dimWhite: 107 118 136;
+      --dimBlack: 24 34 46;
+      --dimPurple: 94 53 177;
+      --darkGray: 24 34 46;
+      --boxShadow: 103 58 183;
+      --deep-purple-50: 237 231 246;
+      --deep-purple-100: 209 196 233;
+      --deep-purple-200: 179 157 219;
+      --deep-purple-300: 149 117 205;
+      --deep-purple-400: 126 87 194;
+      --deep-purple-500: 103 58 183;
+      --deep-purple-600: 94 53 177;
+      --deep-purple-700: 81 45 168;
+      --deep-purple-800: 69 39 160;
+      --deep-purple-900: 49 27 146;
+   }
+   :root.dark {
+      --primary: 253 116 64;
+      --dimWhite: 107 118 136;
+      --dimBlack: 24 34 46;
+      --dimPurple: 255 74 57;
+      --darkGray: 24 34 46;
+      --boxShadow: 245 158 11;
+      --deep-purple-50: 255 251 235;
+      --deep-purple-100: 255 237 213;
+      --deep-purple-200: 254 215 170;
+      --deep-purple-300: 252 211 77;
+      --deep-purple-400: 251 191 36;
+      --deep-purple-500: 245 158 11;
+      --deep-purple-600: 217 119 6;
+      --deep-purple-700: 180 83 9;
+      --deep-purple-800: 146 64 14;
+      --deep-purple-900: 124 45 18;
+   }
+}
+
 @font-face {
    font-family: "STV";
    src: url("@/assets/fonts/stv.ttf") format("truetype");
@@ -32,7 +71,7 @@ html {
    width: 100vw;
    overflow-x: hidden;
    &.dark {
-      background-color: #222;
+      @apply bg-gradient-to-b from-darkGray to-black;
       ::-webkit-scrollbar-track {
          @apply bg-black;
       }
@@ -64,11 +103,13 @@ i {
    }
 }
 
-.home-section {
-   background: url("@/assets/images/home.png") no-repeat;
+.home-bg {
+   background:
+      linear-gradient(rgb(var(--darkGray) / 0.3), rgb(var(--dimBlack) / 0.8)),
+      url("@/assets/images/home1.jpeg") no-repeat;
    background-size: cover;
    background-position: center;
-   min-height: 100vh;
+   background-attachment: fixed;
    width: 100%;
 }
 
@@ -90,6 +131,13 @@ i {
    }
 }
 
+.card-table-outfit {
+   @apply bg-transparent p-2 shadow-none dark:border dark:border-solid dark:border-deep-purple-500;
+   table {
+      @apply rounded-3xl shadow-sp dark:shadow-none;
+   }
+}
+
 .flex-between {
    @apply flex items-center justify-between gap-4;
 }
@@ -108,4 +156,16 @@ i {
 
 .flex-end {
    @apply flex items-center justify-end gap-4 text-primary;
+}
+
+.border-sp {
+   @apply border border-solid border-deep-purple-500;
+}
+
+.border-t-sp {
+   @apply border-0 border-t border-solid border-deep-purple-500;
+}
+
+.border-b-sp {
+   @apply border-0 border-b border-solid border-deep-purple-500;
 }

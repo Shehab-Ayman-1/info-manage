@@ -22,11 +22,11 @@ export const Table = ({ headers, rows, setFormData, allowTotal }) => {
    };
 
    return (
-      <Card className="h-full w-full overflow-x-auto p-2 shadow-none dark:bg-darkGray">
-         <table className="mb-4 w-full max-w-full table-auto rounded-3xl shadow-sp dark:bg-transparent">
+      <Card className="card-table-outfit h-full w-full overflow-x-auto">
+         <table className="mb-4 w-full table-auto">
             {rows.length ? (
                <thead>
-                  <tr className="border-0 border-b border-solid border-deep-purple-500">
+                  <tr className="border-b-sp">
                      {headers.map((head) => (
                         <th key={head} className="bg-dimPurple p-4">
                            <Typography
@@ -45,9 +45,8 @@ export const Table = ({ headers, rows, setFormData, allowTotal }) => {
             <tbody>
                {rows.map((row, index) => {
                   const isLast = index === rows.length - 1;
-                  const classes = isLast ? "p-2 md:p-4" : "border-b border-deep-purple-500 p-2 md:p-4";
-                  const typography =
-                     "text-xs md:text-md lg:text-lg text-center font-semibold dark:text-blue-gray-500";
+                  const classes = isLast ? "p-2 md:p-4" : "border-b-sp p-2 md:p-4";
+                  const typography = "text-xs md:text-md lg:text-lg text-center font-semibold dark:text-dimWhite";
 
                   return (
                      <tr key={index} className={`${classes} ${index % 2 ? "bg-dimPurple" : ""}`}>
@@ -61,7 +60,7 @@ export const Table = ({ headers, rows, setFormData, allowTotal }) => {
 
                         {headers[1] === "#" || headers[0] === "#" ? (
                            <td>
-                              <Typography varient="h5" color="blue-gray" className={typography}>
+                              <Typography varient="h5" className={typography}>
                                  {index + 1}
                               </Typography>
                            </td>
@@ -69,7 +68,7 @@ export const Table = ({ headers, rows, setFormData, allowTotal }) => {
 
                         {keys.map((key) => (
                            <td className={classes} key={key}>
-                              <Typography variant="h5" color="blue-gray" className={typography}>
+                              <Typography variant="h5" className={typography}>
                                  {row[key]}
                               </Typography>
                            </td>
@@ -77,7 +76,7 @@ export const Table = ({ headers, rows, setFormData, allowTotal }) => {
 
                         {allowTotal ? (
                            <td className={classes}>
-                              <Typography variant="h5" color="blue-gray" className={typography}>
+                              <Typography variant="h5" className={typography}>
                                  {+row?.count * +row.price}
                               </Typography>
                            </td>

@@ -71,7 +71,6 @@ export const Sale = () => {
          onSubmit={handleSubmit}
          headerText="كشف حساب"
          buttonText="اتمام البيع"
-         cardStyle="w-[500px]"
          loading={(isSubmitted && !error) || loading}
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
@@ -126,7 +125,7 @@ export const Sale = () => {
             </div>
 
             <div className="flex-around">
-               <Button color="deep-purple" className="my-2 text-xl" onClick={addField}>
+               <Button color="deep-purple" className="my-2 text-xl dark:text-black" onClick={addField}>
                   اضافه
                </Button>
                <Switch

@@ -13,12 +13,12 @@ export const Field = ({
       <Input
          label={label}
          type={type}
-         size="lg"
          variant={variant}
+         size="lg"
          color="deep-purple"
-         className={`!text-xl ${inputStyle || ""}`}
+         className={`!text-xl dark:text-white/80 ${inputStyle || ""}`}
          containerProps={{
-            className: `h-20 border-b-2 border-0 border-solid border-deep-purple-100 ${containerStyle}`,
+            className: `h-20 border-b-sp !border-deep-purple-100 ${containerStyle}`,
          }}
          labelProps={{
             className: `text-xl peer-focus:text-xl peer-placeholder-shown:text-xl ${labelStyle}`,

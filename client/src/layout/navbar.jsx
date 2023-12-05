@@ -19,9 +19,8 @@ export const Navbar = () => {
    const handleDrawer = () => {
       setOpenDrawer((open) => !open);
    };
-
    return (
-      <nav className="flex-between z-[1000] w-full flex-row bg-dimBlack px-5 py-3 dark:bg-darkGray">
+      <nav className="flex-between sticky left-0 top-0 z-[1000] w-full flex-row bg-white px-5 py-3 dark:bg-darkGray">
          <Logo />
 
          {/* Desktop Menu */}
@@ -30,12 +29,12 @@ export const Navbar = () => {
          {/* Navbar Icons */}
          <div className="flex-start">
             <i
-               className={`fas ${darkMode === "dark" ? "fa-sun" : "fa-moon"} hover:text-white/70`}
+               className={`fas ${darkMode === "dark" ? "fa-sun" : "fa-moon"} text-xl`}
                onClick={() => handleDarkMode(darkMode)}
             />
-            <i className="fas fa-hand-holding-usd hover:text-white/70" onClick={() => navigate("/balances")} />
-            <i className="fas fa-random hover:text-white/70" onClick={() => navigate("/statements/transfer")} />
-            <i className="fa fa-bars hover:text-white md:!hidden" onClick={handleDrawer} />
+            <i className="fas fa-hand-holding-usd text-xl" onClick={() => navigate("/balances")} />
+            <i className="fas fa-random text-xl" onClick={() => navigate("/statements/transfer")} />
+            <i className="fa fa-bars text-xl md:!hidden" onClick={handleDrawer} />
 
             <User />
          </div>

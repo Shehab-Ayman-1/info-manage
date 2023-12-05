@@ -3,7 +3,7 @@ import { Switch as MtSwitch } from "@material-tailwind/react";
 export const Switch = ({ label = "", checked = true, onChange = () => {}, ...rest }) => {
    return (
       <MtSwitch
-         color="indigo"
+         color="deep-purple"
          label={label}
          checked={checked}
          required

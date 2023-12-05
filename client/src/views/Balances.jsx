@@ -26,7 +26,7 @@ export const Balances = () => {
       return <Loading isSubmitted={sIsSubmitted} loading={sLoading} error={sError} message={saleData} />;
 
    return (
-      <Card className="dark:bg-darkGray min-h-screen rounded-none">
+      <Card className="rounded-none bg-transparent">
          <Typography
             variant="h4"
             color="deep-purple"
@@ -51,14 +51,14 @@ export const Balances = () => {
 };
 
 function BalancesTable({ data }) {
-   const classes = "border-b border-deep-purple-500 p-2 md:p-4";
-   const typography = "text-center text-base font-semibold md:text-base lg:text-xl dark:text-blue-gray-500";
+   const classes = "border-b-sp p-2 md:p-4";
+   const typography = "text-center text-base font-semibold md:text-base lg:text-xl dark:text-dimWhite";
 
    return (
-      <Card className="h-full w-full overflow-x-auto bg-transparent p-4 shadow-none">
-         <table className="mb-4 w-full max-w-full table-auto rounded-3xl shadow-sp">
+      <Card className="card-table-outfit h-full w-full overflow-x-auto">
+         <table className="mb-4 w-full table-auto">
             <thead>
-               <tr className="border-0 border-b border-solid border-deep-purple-500">
+               <tr className="border-b-sp">
                   {TABLE_HEAD.map((head) => (
                      <th key={head} className="bg-dimPurple p-4">
                         <Typography
@@ -117,7 +117,7 @@ function BalancesTable({ data }) {
             </tbody>
 
             <tfoot>
-               <tr className="bg-dimPurple border-0 border-t border-solid border-deep-purple-500">
+               <tr className="border-0 border-t border-solid border-deep-purple-500 bg-dimPurple">
                   <th className="p-2 md:p-4">
                      <Typography
                         variant="h5"

@@ -15,7 +15,11 @@ export const User = () => {
    if (!user) return <i className="fa fa-user hover:text-white/70" onClick={() => navigate("/auths/login")} />;
 
    return (
-      <Menu offset={25} animate={{ mount: { y: 0 }, unmount: { y: 25 } }}>
+      <Menu
+         offset={25}
+         placement="bottom-end"
+         animate={{ mount: { y: 0, opacity: 1 }, unmount: { y: 25, opacity: 1 } }}
+      >
          <MenuHandler>
             <Avatar
                variant="circular"
@@ -25,55 +29,48 @@ export const User = () => {
                src={userLogo}
             />
          </MenuHandler>
-         <MenuList className="rounded-xl bg-dimBlack shadow-sp dark:bg-darkGray">
-            <MenuItem className="group flex items-center gap-2 hover:!bg-dimPurple hover:dark:text-white">
-               <i className="far fa-user-circle text-lg" />
-
-               <Typography variant="paragraph" className="font-bold group-hover:text-white">
+         <MenuList className="rounded-xl dark:bg-darkGray">
+            <MenuItem className="group flex items-center gap-2 hover:!bg-dimPurple">
+               <i className="fas fa-user-circle text-2xl group-hover:text-primary" />
+               <Typography variant="paragraph" className="text-2xl font-bold group-hover:text-primary">
                   {user.name}
                </Typography>
             </MenuItem>
 
-            <MenuItem className="group flex items-center gap-2 hover:!bg-dimPurple hover:dark:text-white">
-               <i className="far fa-envelope text-lg" />
-
-               <Typography variant="small" className="font-bold group-hover:text-white">
+            <MenuItem className="group flex items-center gap-2 hover:!bg-dimPurple">
+               <i className="fas fa-envelope-open text-2xl group-hover:text-primary" />
+               <Typography variant="paragraph" className="text-2xl font-bold group-hover:text-primary">
                   {user.email}
                </Typography>
             </MenuItem>
 
-            <hr className="my-2 border border-solid border-blue-gray-100/70" />
+            <hr className="border-b-sp my-2 !border-primary/20" />
 
             <MenuItem
-               className="group flex items-center gap-2 hover:!bg-dimPurple hover:dark:text-white"
+               className="group flex items-center gap-2 hover:!bg-dimPurple"
                onClick={() => navigate("/auths/login")}
             >
-               <i className="fas fa-sign-in-alt text-lg" />
-
-               <Typography variant="paragraph" className="font-bold group-hover:text-white">
+               <i className="fas fa-sign-in-alt text-2xl group-hover:text-primary" />
+               <Typography variant="paragraph" className="text-2xl font-bold group-hover:text-primary">
                   تسجيل حساب اخر
                </Typography>
             </MenuItem>
 
             <MenuItem
-               className="group flex items-center gap-2 hover:!bg-dimPurple hover:dark:text-white"
+               className="group flex items-center gap-2 hover:!bg-dimPurple"
                onClick={() => navigate("/auths/register")}
             >
-               <i className="fa fa-user-plus text-lg" />
-
-               <Typography variant="paragraph" className="font-bold group-hover:text-white">
+               <i className="fas fa-user text-2xl group-hover:text-primary" />
+               <Typography variant="paragraph" className="text-2xl font-bold group-hover:text-primary">
                   انشاء حساب جديد
                </Typography>
             </MenuItem>
 
-            <hr className="my-2 border border-solid border-blue-gray-100/70" />
+            <hr className="border-b-sp my-2 !border-primary/20" />
 
-            <MenuItem
-               className="group flex items-center gap-2 hover:!bg-dimPurple hover:dark:text-white "
-               onClick={handleSignout}
-            >
-               <i className="fa fa-sign-out-alt text-lg" />
-               <Typography variant="paragraph" className="font-medium group-hover:text-white">
+            <MenuItem className="group flex items-center gap-2 hover:!bg-dimPurple" onClick={handleSignout}>
+               <i className="fas fa-sign-out-alt text-2xl group-hover:text-primary" />
+               <Typography variant="paragraph" className="text-2xl font-bold group-hover:text-primary">
                   تسجيل الخروج
                </Typography>
             </MenuItem>

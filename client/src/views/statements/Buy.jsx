@@ -60,7 +60,6 @@ export const Buy = () => {
          headerText="كشف مندوب"
          buttonText="اتمام الشراء"
          loading={(isSubmitted && !error) || loading}
-         cardStyle="w-[500px]"
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
@@ -103,7 +102,7 @@ export const Buy = () => {
             </div>
 
             <div className="flex-around">
-               <Button color="deep-purple" className="my-2 text-xl" onClick={addField}>
+               <Button color="deep-purple" className="my-2 text-xl dark:text-black" onClick={addField}>
                   اضافه
                </Button>
                <Switch

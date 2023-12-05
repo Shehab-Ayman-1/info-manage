@@ -48,46 +48,44 @@ export const Home = () => {
    };
 
    return (
-      <main className="home-section">
-         <Card className="relative m-auto mt-11 w-[95%] max-w-2xl bg-transparent shadow-none">
-            <CardHeader
-               className={`flex-between px-3 dark:bg-darkGray dark:text-white md:py-3 ${
-                  open ? `rounded-3xl rounded-b-none` : `rounded-3xl shadow-sp`
-               }`}
-            >
-               <i className="fa fa-search block text-2xl" />
-               <input
-                  type="search"
-                  placeholder="البحث...."
-                  className="w-full bg-transparent p-1 pb-2 text-base sm:text-xl md:text-2xl"
-                  onChange={handleChange}
-               />
-            </CardHeader>
+      <Card className="relative m-auto mt-11 w-full max-w-2xl bg-transparent shadow-none">
+         <CardHeader
+            className={`flex-between bg-transparent bg-white px-3 text-dimWhite dark:bg-darkGray dark:text-white md:py-3 ${
+               open ? `rounded-3xl rounded-b-none` : `rounded-3xl`
+            }`}
+         >
+            <i className="fa fa-search block text-2xl" />
+            <input
+               type="search"
+               placeholder="البحث...."
+               className="w-full bg-transparent p-1 pb-2 text-base sm:text-xl md:text-2xl"
+               onChange={handleChange}
+            />
+         </CardHeader>
 
-            <CardBody
-               className={`mx-auto max-h-[50vh] w-[90%] overflow-y-auto rounded-lg p-0 shadow-sp sm:w-[95%] ${
-                  open ? "bg-white dark:bg-darkGray dark:text-white" : ""
-               }`}
-            >
-               <Collapse open={open}>
-                  <List>
-                     {(filterList || searchList).length ? (
-                        (filterList || searchList)?.map(({ name, companyId, productId }, i) => (
-                           <ListItem
-                              key={i}
-                              className="text-xl font-bold hover:bg-primary/25 hover:dark:text-white"
-                              onClick={() => handleItem(companyId, productId)}
-                           >
-                              {name}
-                           </ListItem>
-                        ))
-                     ) : (
-                        <ListItem>لا يوجد نتائج بحث</ListItem>
-                     )}
-                  </List>
-               </Collapse>
-            </CardBody>
-         </Card>
-      </main>
+         <CardBody
+            className={`mx-auto max-h-[50vh] w-[90%] overflow-y-auto rounded-lg p-0 shadow-sp sm:w-[95%] ${
+               open ? "bg-white dark:bg-darkGray dark:text-white" : ""
+            }`}
+         >
+            <Collapse open={open}>
+               <List>
+                  {(filterList || searchList).length ? (
+                     (filterList || searchList)?.map(({ name, companyId, productId }, i) => (
+                        <ListItem
+                           key={i}
+                           className="text-xl font-bold hover:bg-primary/25 hover:dark:text-white"
+                           onClick={() => handleItem(companyId, productId)}
+                        >
+                           {name}
+                        </ListItem>
+                     ))
+                  ) : (
+                     <ListItem>لا يوجد نتائج بحث</ListItem>
+                  )}
+               </List>
+            </Collapse>
+         </CardBody>
+      </Card>
    );
 };

@@ -88,7 +88,6 @@ export const Transfer = () => {
          headerText="تحويل منتجات"
          buttonText="تحويل"
          loading={(sIsSubmitted && !sError) || sLoading}
-         cardStyle="w-[500px]"
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
          <Loading isSubmitted={sIsSubmitted} loading={sLoading} error={sError} message={sendData} to="/" />

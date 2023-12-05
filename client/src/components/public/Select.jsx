@@ -17,7 +17,7 @@ export const Selectbox = ({
             label={label}
             variant="standard"
             color="deep-purple"
-            className="select-box text-xl"
+            className="select-box text-xl dark:text-white/80"
             required
             selected={(element) =>
                element &&
@@ -28,7 +28,7 @@ export const Selectbox = ({
                })
             }
             containerProps={{
-               className: `h-20 border-b-2 border-0 border-solid border-deep-purple-100 ${containerStyle}`,
+               className: `h-20 border-b-sp !border-deep-purple-100 ${containerStyle}`,
             }}
             labelProps={{
                className: `text-xl ${labelStyle}`,
@@ -44,7 +44,7 @@ export const Selectbox = ({
          >
             {options.length ? (
                options?.map((value, i) => (
-                  <Option className="hover:!bg-dimPurple text-xl hover:dark:text-white" value={value} key={i}>
+                  <Option className="text-xl hover:!bg-dimPurple hover:dark:text-white" value={value} key={i}>
                      {value}
                   </Option>
                ))

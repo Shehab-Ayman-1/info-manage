@@ -56,11 +56,11 @@ export const ShowProducts = () => {
    };
 
    return (
-      <Card className="rounded-none dark:bg-darkGray">
+      <Card className="rounded-none bg-transparent">
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <div className="my-5 dark:bg-darkGray md:my-10">
-            <div className="flex-between mx-auto w-[95%] overflow-hidden rounded-xl border border-solid border-deep-purple-500 bg-transparent px-4 py-2 shadow-sp">
+         <div className="my-5 md:my-10">
+            <div className="flex-between border-sp mx-auto overflow-hidden rounded-xl px-4 py-2 shadow-sp dark:shadow-none">
                <i className="fa fa-search block text-2xl" />
                <input
                   type="search"
@@ -72,7 +72,7 @@ export const ShowProducts = () => {
          </div>
 
          <div className="flex-between mb-2 flex-col px-4 sm:flex-row">
-            <Typography variant="h4" color="deep-purple" className="text-3xl sm:text-4xl md:text-6xl">
+            <Typography variant="h4" className="text-3xl text-primary sm:text-4xl md:text-6xl">
                عرض بضائع {pathname === "store" ? "المخزن" : "المحل"}
             </Typography>
             <Switch
@@ -83,10 +83,10 @@ export const ShowProducts = () => {
             />
          </div>
 
-         <Card className="h-full w-full overflow-x-auto bg-transparent p-4 shadow-none">
-            <table className="mb-4 w-full max-w-full table-auto rounded-3xl shadow-sp">
+         <Card className="card-table-outfit h-full w-full overflow-hidden">
+            <table className="mb-4 w-full table-auto">
                <thead>
-                  <tr className="border-0 border-b border-solid border-deep-purple-500">
+                  <tr className="border-b-sp">
                      {TABLE_HEAD.map((head) => (
                         <th key={head} className="bg-dimPurple p-4">
                            <Typography
@@ -103,8 +103,7 @@ export const ShowProducts = () => {
 
                <tbody>
                   {(searchResult || data)?.map(({ company, products }, index) => {
-                     const isLast = index === (searchResult || data)?.length - 1;
-                     const classes = isLast ? "p-2 md:p-4" : "border-b border-deep-purple-500 p-2 md:p-4";
+                     const classes = "p-2 md:p-4";
                      const typography = "text-center text-base font-semibold md:text-base lg:text-xl";
 
                      return products?.map(({ name, count, price, total, min, max }, i) => (
@@ -145,11 +144,7 @@ export const ShowProducts = () => {
                </tbody>
 
                <tfoot>
-                  <tr
-                     className={`border-0 border-t border-solid border-deep-purple-500 ${
-                        (searchResult || data)?.length % 2 ? "bg-dimPurple" : ""
-                     }`}
-                  >
+                  <tr className={`border-t-sp ${(searchResult || data)?.length % 2 ? "bg-dimPurple" : ""}`}>
                      <th colSpan={3} className="p-2 md:p-4">
                         <Typography
                            variant="h5"
