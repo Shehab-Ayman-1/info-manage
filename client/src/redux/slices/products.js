@@ -36,7 +36,7 @@ export const productsSlice = createSlice({
             const supplier = state.suppliersLists?.find((list) => list.supplier === payload.supplier);
             if (!supplier) return state;
 
-            state.products = supplier?.products;
+            state.products = supplier?.products.sort((a, b) => a.name.localeCompare(b.name));
             return state;
          }
 
@@ -52,13 +52,15 @@ export const productsSlice = createSlice({
 
          // Products
          const company = category?.companies?.find(({ company }) => company === payload?.company);
-         state.products = company?.products;
+         state.products = company?.products.sort((a, b) => a.name.localeCompare(b.name));
 
          return state;
       },
 
       setSuppliers: (state, { payload }) => {
-         const products = payload.products.map(({ name }) => name);
+         const products = payload.products
+            .map(({ name }) => ({ name, price: 0 }))
+            .sort((a, b) => a.name.localeCompare(b.name));
          state.suppliersLists = state.suppliersLists.concat({ supplier: payload.supplier, products });
          state.suppliers = state.suppliers.concat(payload.supplier);
          return state;
@@ -91,7 +93,9 @@ export const productsSlice = createSlice({
          );
 
          if (companyIndex === -1) return state;
-         const products = payload.products.map(({ name }) => ({ name, price: 0 }));
+         const products = payload.products
+            .map(({ name }) => ({ name, price: 0 }))
+            .sort((a, b) => a.name.localeCompare(b.name));
 
          state.lists[categoryIndex]?.companies[companyIndex].products.push(...products);
          return state;

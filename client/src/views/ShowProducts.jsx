@@ -1,10 +1,11 @@
 import { Card, Typography } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
 import { Switch } from "@/components/public";
+import { Table, Row, Col } from "@/components/table";
 
 const TABLE_HEAD = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];
 
@@ -49,10 +50,10 @@ export const ShowProducts = () => {
    }, [data, searchResult]);
 
    const minmax = (count, min, max) => {
-      if (count <= 0) return "text-blue-gray-500/50";
-      else if (count > 0 && count <= min) return "text-red-500";
-      else if (count > min && count <= max) return "text-orange-500";
-      else return "text-blue-gray-500";
+      if (count <= 0) return "text-blue-gray-500/50 dark:text-blue-gray-700";
+      else if (count > 0 && count <= min) return "text-red-500 dark:text-red-500";
+      else if (count > min && count <= max) return "text-orange-500 dark:text-orange-500";
+      else return "text-blue-gray-500 dark:text-blue-gray-200";
    };
 
    return (
@@ -83,96 +84,28 @@ export const ShowProducts = () => {
             />
          </div>
 
-         <Card className="card-table-outfit h-full w-full ">
-            <table className="w-full table-auto">
-               <thead>
-                  <tr className="border-b-sp">
-                     {TABLE_HEAD.map((head) => (
-                        <th key={head} className="bg-dimPurple p-2 dark:bg-primary md:p-4">
-                           <Typography
-                              variant="h5"
-                              color="deep-purple"
-                              className="text-center text-base dark:text-white lg:text-xl"
-                           >
-                              {head}
-                           </Typography>
-                        </th>
-                     ))}
-                  </tr>
-               </thead>
-
-               <tbody>
-                  {(searchResult || data)?.map(({ company, products }, index) => {
-                     const classes = "p-2 md:p-4";
-                     const typography = "text-center text-base lg:text-xl";
-
-                     return products?.map(({ name, count, price, total, min, max }, i) => (
-                        <tr
-                           key={i}
-                           className={`${minmax(count, min, max)} ${
-                              index % 2 ? "bg-deep-purple-900/20" : ""
-                           } ${classes}`}
+         <Table headers={TABLE_HEAD} rows={searchResult || data} footerSpan={[2, 3]} total={total.all}>
+            {(searchResult || data)?.map(({ company, products }, i) => {
+               return products?.map(({ name, count, price, total, min, max }, j) => (
+                  <Row key={j} index={i} className="">
+                     {!j ? (
+                        <Col
+                           rowSpan={Math.floor(products.length)}
+                           className="text-blue-gray-500 dark:text-blue-gray-200"
                         >
-                           {!i ? (
-                              <td className={classes} rowSpan={Math.floor(products.length)}>
-                                 <Typography variant="h5" className={`${typography} text-blue-gray-500`}>
-                                    {company}
-                                 </Typography>
-                              </td>
-                           ) : null}
-                           <td className={classes}>
-                              <Typography variant="h5" className={typography}>
-                                 {name}
-                              </Typography>
-                           </td>
-                           <td className={classes}>
-                              <Typography variant="h5" className={typography}>
-                                 {count}
-                              </Typography>
-                           </td>
-                           <td className={classes}>
-                              <Typography variant="h5" className={typography}>
-                                 {price}
-                              </Typography>
-                           </td>
-                           <td className={classes}>
-                              <Typography variant="h5" className={typography}>
-                                 {data?.length ? total?.toLocaleString() : 0}
-                              </Typography>
-                           </td>
-                        </tr>
-                     ));
-                  })}
-               </tbody>
-
-               <tfoot>
-                  <tr
-                     className={`border-t-sp ${
-                        (searchResult || data)?.length % 2 ? "bg-dimPurple dark:bg-primary" : ""
-                     }`}
-                  >
-                     <th colSpan={3} className="p-2 md:p-4">
-                        <Typography
-                           variant="h5"
-                           color="deep-purple"
-                           className="text-center text-base dark:text-white lg:text-xl"
-                        >
-                           اجمالي البضائع
-                        </Typography>
-                     </th>
-                     <th colSpan={3} className="p-2 md:p-4">
-                        <Typography
-                           variant="h5"
-                           color="deep-purple"
-                           className="text-center text-base dark:text-white lg:text-xl"
-                        >
-                           {data?.length ? total?.all.toLocaleString() : 0} جنيه
-                        </Typography>
-                     </th>
-                  </tr>
-               </tfoot>
-            </table>
-         </Card>
+                           {company}
+                        </Col>
+                     ) : null}
+                     <Col className={minmax(count, min, max)}>{name}</Col>
+                     <Col className={minmax(count, min, max)}>{count}</Col>
+                     <Col className={minmax(count, min, max)}>{price}</Col>
+                     <Col className={minmax(count, min, max)}>
+                        {data?.length ? total?.toLocaleString() : "00,00"}
+                     </Col>
+                  </Row>
+               ));
+            })}
+         </Table>
       </Card>
    );
 };

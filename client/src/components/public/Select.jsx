@@ -21,8 +21,7 @@ export const Selectbox = ({
             required
             selected={(element) =>
                element &&
-               value &&
-               cloneElement(element, {
+               cloneElement(value ? element : <p>{label}</p>, {
                   disabled: true,
                   className: "flex items-center opacity-100 px-0 gap-2 pointer-events-none",
                })
