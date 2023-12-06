@@ -7,9 +7,10 @@ export const Form = ({
    loading = false,
    onSubmit = () => {},
    children,
+   ...formRest
 }) => {
    return (
-      <form onSubmit={onSubmit} className="">
+      <form onSubmit={onSubmit} autoComplete="off" {...formRest}>
          <Card className={`m-auto mb-2 mt-14 w-[650px] max-w-full bg-transparent shadow-sp md:mt-32 ${cardStyle}`}>
             <CardHeader
                variant="gradient"

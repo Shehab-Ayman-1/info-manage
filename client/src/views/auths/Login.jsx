@@ -26,7 +26,12 @@ export const Login = () => {
    };
 
    return (
-      <Form onSubmit={handleSubmit} buttonText="تسجيل" headerText="تسجيل الدخول" loading={(isSubmitted && !error) || loading}>
+      <Form
+         onSubmit={handleSubmit}
+         buttonText="تسجيل"
+         headerText="تسجيل الدخول"
+         loading={(isSubmitted && !error) || loading}
+      >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
          <Field

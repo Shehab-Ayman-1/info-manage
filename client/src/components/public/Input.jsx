@@ -16,6 +16,7 @@ export const Field = ({
          variant={variant}
          size="lg"
          color="deep-purple"
+         autoComplete="off"
          className={`!text-xl dark:text-white/80 ${inputStyle || ""}`}
          containerProps={{
             className: `h-20 border-b-sp mt-2 md:mt-4 !border-deep-purple-100 ${containerStyle}`,
