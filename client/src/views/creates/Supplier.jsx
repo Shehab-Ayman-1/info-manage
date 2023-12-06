@@ -3,7 +3,7 @@ import { Tab, TabPanel, Tabs, TabsBody, TabsHeader } from "@material-tailwind/re
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { filterSelection, getLists, getSuppliers, setSuppliers } from "@/redux/slices/creates";
+import { filterSelection, getLists, getSuppliers, setSuppliers } from "@/redux/slices/products";
 import { Field, Form, Selectbox } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
@@ -16,7 +16,7 @@ export const Supplier = () => {
    const [product, setProduct] = useState({ category: "", company: "", name: "" });
    const [openDialog, setOpenDialog] = useState(false);
 
-   const { categories, companies, products, suppliers } = useSelector(({ creates }) => creates);
+   const { categories, companies, products, suppliers } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 
    useEffect(() => {
@@ -30,7 +30,7 @@ export const Supplier = () => {
 
       if (!categories.length) {
          (async () => {
-            const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-lists");
+            const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-products-list");
             if (isSubmitted && error) return;
             dispatch(getLists(data));
          })();
@@ -120,7 +120,7 @@ export const Supplier = () => {
 
          <div className="products">
             {formData.products.map(({ name }, i) => (
-               <Typography variant="lead" className="text-blue-gray-500" key={i}>
+               <Typography variant="lead" className="text-dimWhite" key={i}>
                   {i + 1} - {name}
                </Typography>
             ))}
@@ -163,13 +163,18 @@ export const Supplier = () => {
                      label="اختر اسم المنتج..."
                      value={product.name}
                      onChange={(value) => handleSelectChange("name", value)}
-                     options={products}
+                     options={products?.map(({ name }) => name).filter((n) => n) || []}
                   />
                </div>
             </DialogBody>
 
             <DialogFooter>
-               <Button color="deep-purple" className="text-xl" fullWidth onClick={handleSubmitProduct}>
+               <Button
+                  color="deep-purple"
+                  className="text-xl dark:text-black"
+                  fullWidth
+                  onClick={handleSubmitProduct}
+               >
                   اضافه
                </Button>
             </DialogFooter>

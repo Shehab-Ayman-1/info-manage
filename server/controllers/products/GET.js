@@ -1,65 +1,5 @@
 import { Products } from "../../models/index.js";
 
-export const GET_CATEGORIES = async (req, res) => {
-	try {
-		const products = await Products.find();
-		res.status(200).json(products);
-	} catch (error) {
-		res.status(404).json(`GET_CATEGORIES: ${error.message}`);
-	}
-};
-
-export const GET_COMPANIES = async (req, res) => {
-	try {
-		const products = await Products.find();
-		res.status(200).json(products);
-	} catch (error) {
-		res.status(404).json(`GET_COMPANIES: ${error.message}`);
-	}
-};
-
-export const GET_PRODUCTS = async (req, res) => {
-	try {
-		const products = await Products.find();
-		res.status(200).json(products);
-	} catch (error) {
-		res.status(404).json(`GET_PRODUCTS: ${error.message}`);
-	}
-};
-
-export const GET_SEARCH_LIST = async (req, res) => {
-	try {
-		const list = await Products.aggregate([
-			{
-				$unwind: "$products",
-			},
-			{
-				$group: {
-					_id: { companyId: "$_id", productId: "$products._id" },
-					name: {
-						$addToSet: "$products.name",
-					},
-					barcode: {
-						$addToSet: "$products.barcode",
-					},
-				},
-			},
-			{
-				$project: {
-					_id: 0,
-					companyId: "$_id.companyId",
-					productId: "$_id.productId",
-					name: { $arrayElemAt: ["$name", 0] },
-					barcode: { $arrayElemAt: ["$barcode", 0] },
-				},
-			},
-		]);
-		res.status(200).json(list);
-	} catch (error) {
-		res.status(404).json(`GET_SEARCH_LIST: ${error.message}`);
-	}
-};
-
 export const GET_PROFILE = async (req, res) => {
 	try {
 		const { companyId, productId } = req.params;
@@ -109,25 +49,96 @@ export const GET_BALANCES = async (req, res) => {
 	}
 };
 
-export const GET_LISTS = async (req, res) => {
+export const GET_SEARCH_LIST = async (req, res) => {
+	try {
+		const list = await Products.aggregate([
+			{
+				$unwind: {
+					path: "$products", // Deconstruct products array
+					preserveNullAndEmptyArrays: true, // Output document even if array is null or empty
+				},
+			},
+			{
+				$group: {
+					_id: { companyId: "$_id", productId: "$products._id" },
+					name: {
+						$addToSet: "$products.name",
+					},
+					barcode: {
+						$addToSet: "$products.barcode",
+					},
+				},
+			},
+			{
+				$project: {
+					_id: 0,
+					companyId: "$_id.companyId",
+					productId: "$_id.productId",
+					name: { $arrayElemAt: ["$name", 0] },
+					barcode: { $arrayElemAt: ["$barcode", 0] },
+				},
+			},
+			{
+				$sort: {
+					name: 1,
+				},
+			},
+		]);
+		res.status(200).json(list);
+	} catch (error) {
+		res.status(404).json(`GET_SEARCH_LIST: ${error.message}`);
+	}
+};
+
+export const GET_PRODUCTS_LIST = async (req, res) => {
 	try {
 		let lists = await Products.aggregate([
 			{
+				$unwind: {
+					path: "$products", // Deconstruct products array
+					preserveNullAndEmptyArrays: true, // Output document even if array is null or empty
+				},
+			},
+			{
 				$group: {
-					_id: "$category", // Group By Category
+					_id: {
+						category: "$category",
+						company: "$company",
+					},
 					companies: {
 						$push: {
 							company: "$company",
-							products: "$products.name",
+							products: {
+								name: "$products.name",
+								price: "$products.price.sale",
+							},
+						},
+					},
+				},
+			},
+			{
+				$group: {
+					_id: "$_id.category",
+					companies: {
+						$push: {
+							company: "$_id.company",
+							products: "$companies.products",
 						},
 					},
 				},
 			},
 			{
 				$project: {
-					_id: 0, // Exclude _id Field
-					category: "$_id", // Rename _id To category
-					companies: 1, // Include companies
+					_id: 0,
+					companies: 1,
+					category: "$_id",
+				},
+			},
+			{
+				$sort: {
+					category: 1,
+					"companies.company": 1,
+					"companies.products.name": 1,
 				},
 			},
 		]);
@@ -138,20 +149,29 @@ export const GET_LISTS = async (req, res) => {
 	}
 };
 
-export const GET_SUPPLIERS_LISTS = async (req, res) => {
+export const GET_SUPPLIERS_LIST = async (req, res) => {
 	try {
 		const lists = await Products.aggregate([
 			{
-				$unwind: "$products",
+				$unwind: {
+					path: "$products", // Deconstruct products array
+					preserveNullAndEmptyArrays: true, // Output document even if array is null or empty
+				},
 			},
 			{
-				$unwind: "$products.suppliers",
+				$unwind: {
+					path: "$products.suppliers", // Deconstruct products array
+					preserveNullAndEmptyArrays: true, // Output document even if array is null or empty
+				},
 			},
 			{
 				$group: {
 					_id: "$products.suppliers",
 					products: {
-						$push: "$products.name",
+						$push: {
+							name: "$products.name",
+							price: "$products.price.buy",
+						},
 					},
 				},
 			},
@@ -162,6 +182,12 @@ export const GET_SUPPLIERS_LISTS = async (req, res) => {
 					products: 1,
 				},
 			},
+			{
+				$sort: {
+					supplier: 1,
+					products: 1,
+				},
+			},
 		]);
 		res.status(200).json(lists);
 	} catch (error) {
@@ -169,7 +195,7 @@ export const GET_SUPPLIERS_LISTS = async (req, res) => {
 	}
 };
 
-export const GET_TABLES_LISTS = async (req, res) => {
+export const GET_TABLES_LIST = async (req, res) => {
 	try {
 		const { price, count } = req.query; // process: { price: [buy - sale], count: [shop, store] }
 
@@ -178,10 +204,16 @@ export const GET_TABLES_LISTS = async (req, res) => {
 
 		const list = await Products.aggregate([
 			{
-				$unwind: "$products",
+				$unwind: {
+					path: "$products", // Deconstruct products array
+					preserveNullAndEmptyArrays: true, // Output document even if array is null or empty
+				},
 			},
 			{
-				$unwind: "$products.count",
+				$unwind: {
+					path: "$products.count", // Deconstruct products array
+					preserveNullAndEmptyArrays: true, // Output document even if array is null or empty
+				},
 			},
 			{
 				$group: {
@@ -235,6 +267,12 @@ export const GET_TABLES_LISTS = async (req, res) => {
 					_id: 0,
 					company: "$_id", // Use the company field from the _id
 					products: 1, // Use the products array
+				},
+			},
+			{
+				$sort: {
+					company: 1,
+					"products.name": 1,
 				},
 			},
 		]);

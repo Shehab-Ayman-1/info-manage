@@ -35,8 +35,10 @@ export const Wrapper = () => {
    return (
       <Fragment>
          <div className={`absolute -z-10 min-h-screen w-full ${pathname === "/" ? "home-bg" : ""}`} />
-         <Card className="mx-auto min-h-screen max-w-[1320px] bg-transparent">
-            <Navbar />
+
+         <Navbar />
+
+         <Card className="mx-auto min-h-screen max-w-[1320px] bg-transparent p-4">
             {isAdmin && user?.role === ADMIN ? (
                <Outlet />
             ) : isUser && (user?.role === ADMIN || user?.role === USER) ? (

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getLists, setCompanies } from "@/redux/slices/creates";
+import { getLists, setCompanies } from "@/redux/slices/products";
 import { Field, Form, Selectbox } from "@/components/public";
 import { productLogo } from "@/assets";
 import { useAxios } from "@/hooks/useAxios";
@@ -11,14 +11,14 @@ export const Company = () => {
    const [formData, setFormData] = useState({ img: "", category: "", company: "" });
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const { refetch: listsRefetch } = useAxios();
-   const { lists, categories } = useSelector(({ creates }) => creates);
+   const { lists, categories } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 
    useEffect(() => {
       if (lists.length) return;
 
       (async () => {
-         const { data, isSubmitted, error } = await listsRefetch("get", "/products/get-lists");
+         const { data, isSubmitted, error } = await listsRefetch("get", "/products/get-products-list");
          if (isSubmitted && error) return;
          dispatch(getLists(data));
       })();

@@ -19,7 +19,7 @@ export const ShowProducts = () => {
 
    useEffect(() => {
       (async () => {
-         await refetch("get", `/products/get-table-lists?price=${isBuyPrice ? "buy" : "sale"}&count=${pathname}`);
+         await refetch("get", `/products/get-table-list?price=${isBuyPrice ? "buy" : "sale"}&count=${pathname}`);
       })();
    }, [pathname, isBuyPrice]);
 
@@ -83,16 +83,16 @@ export const ShowProducts = () => {
             />
          </div>
 
-         <Card className="card-table-outfit h-full w-full overflow-hidden">
-            <table className="mb-4 w-full table-auto">
+         <Card className="card-table-outfit h-full w-full ">
+            <table className="w-full table-auto">
                <thead>
                   <tr className="border-b-sp">
                      {TABLE_HEAD.map((head) => (
-                        <th key={head} className="bg-dimPurple p-4">
+                        <th key={head} className="bg-dimPurple p-2 dark:bg-primary md:p-4">
                            <Typography
                               variant="h5"
                               color="deep-purple"
-                              className="text-center text-base font-semibold md:text-base lg:text-xl"
+                              className="text-center text-base dark:text-white lg:text-xl"
                            >
                               {head}
                            </Typography>
@@ -104,12 +104,14 @@ export const ShowProducts = () => {
                <tbody>
                   {(searchResult || data)?.map(({ company, products }, index) => {
                      const classes = "p-2 md:p-4";
-                     const typography = "text-center text-base font-semibold md:text-base lg:text-xl";
+                     const typography = "text-center text-base lg:text-xl";
 
                      return products?.map(({ name, count, price, total, min, max }, i) => (
                         <tr
                            key={i}
-                           className={`${minmax(count, min, max)} ${index % 2 ? "bg-dimPurple" : ""} ${classes}`}
+                           className={`${minmax(count, min, max)} ${
+                              index % 2 ? "bg-deep-purple-900/20" : ""
+                           } ${classes}`}
                         >
                            {!i ? (
                               <td className={classes} rowSpan={Math.floor(products.length)}>
@@ -144,12 +146,16 @@ export const ShowProducts = () => {
                </tbody>
 
                <tfoot>
-                  <tr className={`border-t-sp ${(searchResult || data)?.length % 2 ? "bg-dimPurple" : ""}`}>
+                  <tr
+                     className={`border-t-sp ${
+                        (searchResult || data)?.length % 2 ? "bg-dimPurple dark:bg-primary" : ""
+                     }`}
+                  >
                      <th colSpan={3} className="p-2 md:p-4">
                         <Typography
                            variant="h5"
                            color="deep-purple"
-                           className="text-center text-base font-semibold md:text-base lg:text-xl"
+                           className="text-center text-base dark:text-white lg:text-xl"
                         >
                            اجمالي البضائع
                         </Typography>
@@ -158,7 +164,7 @@ export const ShowProducts = () => {
                         <Typography
                            variant="h5"
                            color="deep-purple"
-                           className="text-center text-base font-semibold md:text-base lg:text-xl"
+                           className="text-center text-base dark:text-white lg:text-xl"
                         >
                            {data?.length ? total?.all.toLocaleString() : 0} جنيه
                         </Typography>

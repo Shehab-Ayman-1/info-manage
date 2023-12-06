@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCategories } from "@/redux/slices/creates";
+import { setCategories } from "@/redux/slices/products";
 
 import { Field, Form } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
+import { productLogo } from "@/assets";
 
 export const Category = () => {
-   const [formData, setFormData] = useState({ category: "", company: "" });
+   const [formData, setFormData] = useState({ img: "", category: "", company: "" });
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const dispatch = useDispatch();
 
@@ -34,7 +35,16 @@ export const Category = () => {
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/creates/company" />
 
-         <Field label="اسم القسم" name="category" value={formData.category}  onChange={handleFieldChange} />
+         <div className="w-full">
+            <img
+               src={formData.img || productLogo}
+               alt="product"
+               className="m-auto mb-4 block h-28 w-28 rounded-full shadow-sp"
+            />
+            <Field label="رابط الصورة" name="img" value={formData.img} onChange={handleFieldChange} />
+         </div>
+
+         <Field label="اسم القسم" name="category" value={formData.category} onChange={handleFieldChange} />
          <Field label="اسم الشركة" name="company" value={formData.company} onChange={handleFieldChange} />
       </Form>
    );

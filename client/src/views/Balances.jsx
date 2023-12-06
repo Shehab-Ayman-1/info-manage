@@ -52,7 +52,7 @@ export const Balances = () => {
 
 function BalancesTable({ data }) {
    const classes = "border-b-sp p-2 md:p-4";
-   const typography = "text-center text-base font-semibold md:text-base lg:text-xl dark:text-dimWhite";
+   const typography = "text-center text-base lg:text-xl dark:text-dimWhite";
 
    return (
       <Card className="card-table-outfit h-full w-full overflow-x-auto">
@@ -60,11 +60,11 @@ function BalancesTable({ data }) {
             <thead>
                <tr className="border-b-sp">
                   {TABLE_HEAD.map((head) => (
-                     <th key={head} className="bg-dimPurple p-4">
+                     <th key={head} className="bg-dimPurple p-4 dark:bg-primary">
                         <Typography
                            variant="h5"
                            color="deep-purple"
-                           className="text-center text-base font-semibold md:text-base lg:text-xl"
+                           className="text-center text-base text-white lg:text-xl"
                         >
                            {head}
                         </Typography>
@@ -117,12 +117,12 @@ function BalancesTable({ data }) {
             </tbody>
 
             <tfoot>
-               <tr className="border-0 border-t border-solid border-deep-purple-500 bg-dimPurple">
+               <tr className="bg-dimPurple dark:bg-primary">
                   <th className="p-2 md:p-4">
                      <Typography
                         variant="h5"
                         color="deep-purple"
-                        className="text-center text-base font-semibold md:text-base lg:text-xl"
+                        className="text-center dark:text-white lg:text-xl"
                      >
                         اجمالي راس المال
                      </Typography>
@@ -131,7 +131,7 @@ function BalancesTable({ data }) {
                      <Typography
                         variant="h5"
                         color="deep-purple"
-                        className="text-center text-base font-semibold md:text-base lg:text-xl"
+                        className="text-center dark:text-white lg:text-xl"
                      >
                         {data?.total || 0} جنيه
                      </Typography>

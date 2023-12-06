@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+   lists: [],
    categories: [],
    companies: [],
    products: [],
-   lists: [],
    searchList: [],
    suppliersLists: [],
    suppliers: [],
 };
-export const createsSlice = createSlice({
-   name: "creates",
+export const productsSlice = createSlice({
+   name: "products",
    initialState,
    reducers: {
       getLists: (state, { payload }) => {
@@ -21,7 +21,7 @@ export const createsSlice = createSlice({
 
       getSuppliers: (state, { payload }) => {
          state.suppliersLists = state.suppliersLists.concat(payload);
-         state.suppliers = state.suppliers.concat(payload.map(({ supplier }) => supplier));
+         state.suppliers = state.suppliers.concat(payload.map(({ supplier }) => supplier).filter((s) => s));
          return state;
       },
 
@@ -35,6 +35,7 @@ export const createsSlice = createSlice({
             // payload: { process: "", supplier: "" }
             const supplier = state.suppliersLists?.find((list) => list.supplier === payload.supplier);
             if (!supplier) return state;
+
             state.products = supplier?.products;
             return state;
          }
@@ -57,7 +58,8 @@ export const createsSlice = createSlice({
       },
 
       setSuppliers: (state, { payload }) => {
-         state.suppliersLists = state.suppliersLists.concat(payload);
+         const products = payload.products.map(({ name }) => name);
+         state.suppliersLists = state.suppliersLists.concat({ supplier: payload.supplier, products });
          state.suppliers = state.suppliers.concat(payload.supplier);
          return state;
       },
@@ -89,13 +91,13 @@ export const createsSlice = createSlice({
          );
 
          if (companyIndex === -1) return state;
-         const productsNames = payload.products.map(({ name }) => name);
+         const products = payload.products.map(({ name }) => ({ name, price: 0 }));
 
-         state.lists[categoryIndex]?.companies[companyIndex].products.push(...productsNames);
+         state.lists[categoryIndex]?.companies[companyIndex].products.push(...products);
          return state;
       },
    },
 });
 
-export const { getLists, getSuppliers, getSearchList, filterSelection } = createsSlice.actions;
-export const { setSuppliers, setCategories, setCompanies, setProducts } = createsSlice.actions;
+export const { getLists, getSuppliers, getSearchList, filterSelection } = productsSlice.actions;
+export const { setSuppliers, setCategories, setCompanies, setProducts } = productsSlice.actions;

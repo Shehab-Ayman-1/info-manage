@@ -115,3 +115,27 @@ export const TRANSFER_PRODUCTS = async (req, res) => {
 		res.status(404).json(`TRANSFER_PRODUCTS: ${error.message}`);
 	}
 };
+
+export const EDIT_PRICE = async (req, res) => {
+	try {
+		const { process, value } = req.body;
+		const { companyId, productId } = req.params;
+		if (!process || !value) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبه" });
+
+		const updated = await Products.updateOne(
+			{
+				_id: companyId,
+				products: { $elemMatch: { _id: productId } },
+			},
+			{
+				$set: process === "buy" ? { "products.$.price.buy": value } : { "products.$.price.sale": value },
+			}
+		);
+
+		if (!updated.modifiedCount) return res.status(400).json({ error: "حدث خطأ ولم يتم تعديل سعر المنتج" });
+
+		res.status(200).json({ success: "لقد تم تعديل سعر المنتج بنجاح", updated });
+	} catch (error) {
+		res.status(404).json(`EDIT_PRICE: ${error.message}`);
+	}
+};

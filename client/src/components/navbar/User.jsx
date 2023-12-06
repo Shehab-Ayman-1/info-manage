@@ -18,7 +18,7 @@ export const User = () => {
       <Menu
          offset={25}
          placement="bottom-end"
-         animate={{ mount: { y: 0, opacity: 1 }, unmount: { y: 25, opacity: 1 } }}
+         animate={{ mount: { opacity: 1, scale: 1 }, unmount: { opacity: 1, scale: 1.1 } }}
       >
          <MenuHandler>
             <Avatar
@@ -59,7 +59,7 @@ export const User = () => {
                className="group flex items-center gap-2 hover:!bg-dimPurple"
                onClick={() => navigate("/auths/register")}
             >
-               <i className="fas fa-user text-2xl group-hover:text-primary" />
+               <i className="fas fa-user-plus text-2xl group-hover:text-primary" />
                <Typography variant="paragraph" className="text-2xl font-bold group-hover:text-primary">
                   انشاء حساب جديد
                </Typography>

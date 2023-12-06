@@ -28,11 +28,11 @@ export const Table = ({ headers, rows, setFormData, allowTotal }) => {
                <thead>
                   <tr className="border-b-sp">
                      {headers.map((head) => (
-                        <th key={head} className="bg-dimPurple p-4">
+                        <th key={head} className="bg-dimPurple p-4 dark:bg-primary">
                            <Typography
                               variant="h5"
                               color="deep-purple"
-                              className="text-center font-bold leading-none"
+                              className="text-center text-base dark:text-white md:text-xl"
                            >
                               {head}
                            </Typography>
@@ -44,12 +44,11 @@ export const Table = ({ headers, rows, setFormData, allowTotal }) => {
 
             <tbody>
                {rows.map((row, index) => {
-                  const isLast = index === rows.length - 1;
-                  const classes = isLast ? "p-2 md:p-4" : "border-b-sp p-2 md:p-4";
-                  const typography = "text-xs md:text-md lg:text-lg text-center font-semibold dark:text-dimWhite";
+                  const classes = "p-2 md:p-4";
+                  const typography = "text-base md:text-xl text-center dark:text-dimWhite";
 
                   return (
-                     <tr key={index} className={`${classes} ${index % 2 ? "bg-dimPurple" : ""}`}>
+                     <tr key={index} className={`${classes} ${index % 2 ? "bg-deep-purple-900/20" : ""}`}>
                         {headers[0] === "" ? (
                            <td className="text-center">
                               <IconButton variant="text" color="red" onClick={() => deleteRow(index)}>
@@ -88,16 +87,12 @@ export const Table = ({ headers, rows, setFormData, allowTotal }) => {
 
             {allowTotal && total > 0 ? (
                <tfoot>
-                  <tr
-                     className={`border-0 border-t border-solid border-deep-purple-500 ${
-                        rows.length % 2 ? "bg-dimPurple" : ""
-                     }`}
-                  >
+                  <tr className={`border-t-sp ${rows.length % 2 ? "bg-dimPurple dark:bg-primary" : ""}`}>
                      <th colSpan={Math.floor(headers.length / 2)} className="p-2 md:p-4">
                         <Typography
                            variant="h5"
                            color="deep-purple"
-                           className="md:text-md text-center text-xs font-semibold lg:text-lg"
+                           className="text-center text-base dark:text-white md:text-xl"
                         >
                            اجمالي البضائع
                         </Typography>
@@ -106,7 +101,7 @@ export const Table = ({ headers, rows, setFormData, allowTotal }) => {
                         <Typography
                            variant="h5"
                            color="deep-purple"
-                           className="md:text-md text-center text-xs font-semibold lg:text-lg"
+                           className="text-center text-base dark:text-white md:text-xl"
                         >
                            {total.toLocaleString()} جنيه
                         </Typography>

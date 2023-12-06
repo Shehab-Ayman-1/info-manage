@@ -3,7 +3,7 @@ import { Tab, TabPanel, Tabs, TabsBody, TabsHeader } from "@material-tailwind/re
 import { useDispatch, useSelector } from "react-redux";
 
 import { Field, Form, Selectbox, Switch } from "@/components/public";
-import { filterSelection, getLists, getSuppliers } from "@/redux/slices/creates";
+import { filterSelection, getLists, getSuppliers } from "@/redux/slices/products";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
 
@@ -20,13 +20,13 @@ export const Transfer = () => {
    } = useAxios();
    const [supplierData, setSupplierData] = useState(supplierState);
    const [categoryData, setCategoryData] = useState(categoryState);
-   const { categories, companies, products, suppliers } = useSelector(({ creates }) => creates);
+   const { categories, companies, products, suppliers } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 
    useEffect(() => {
       if (!suppliers.length) {
          (async () => {
-            const { data, isSubmitted, error } = await refetch("get", "/products/get-lists");
+            const { data, isSubmitted, error } = await refetch("get", "/products/get-products-list");
             if (isSubmitted && error) return;
             dispatch(getLists(data));
          })();
@@ -125,7 +125,7 @@ export const Transfer = () => {
 
                   <Selectbox
                      label="اختر اسم المنتج"
-                     options={products}
+                     options={products?.map(({ name }) => name).filter((n) => n) || []}
                      required={false}
                      value={supplierData.name}
                      onChange={(value) => handleSelectChange("name", value)}
@@ -140,12 +140,16 @@ export const Transfer = () => {
                      onChange={handleFieldChange}
                   />
 
-                  <Switch
-                     label={supplierData.toStore ? "الي المخزن" : "الي المحل"}
-                     checked={supplierData.toStore}
-                     required={false}
-                     onChange={(event) => setSupplierData((data) => ({ ...data, toStore: event.target.checked }))}
-                  />
+                  <div className="mt-5">
+                     <Switch
+                        label={supplierData.toStore ? "الي المخزن" : "الي المحل"}
+                        checked={supplierData.toStore}
+                        required={false}
+                        onChange={(event) =>
+                           setSupplierData((data) => ({ ...data, toStore: event.target.checked }))
+                        }
+                     />
+                  </div>
                </TabPanel>
 
                <TabPanel value="category" className="overflow-y-auto">
@@ -167,7 +171,7 @@ export const Transfer = () => {
 
                   <Selectbox
                      label="اختر اسم المنتج"
-                     options={products}
+                     options={products?.map(({ name }) => name).filter((n) => n) || []}
                      required={false}
                      value={categoryData.name}
                      onChange={(value) => handleSelectChange("name", value, "category")}
@@ -182,12 +186,16 @@ export const Transfer = () => {
                      onChange={(event) => handleFieldChange(event, "category")}
                   />
 
-                  <Switch
-                     label={categoryData.toStore ? "الي المخزن" : "الي المحل"}
-                     checked={categoryData.toStore}
-                     required={false}
-                     onChange={(event) => setCategoryData((data) => ({ ...data, toStore: event.target.checked }))}
-                  />
+                  <div className="mt-5">
+                     <Switch
+                        label={categoryData.toStore ? "الي المخزن" : "الي المحل"}
+                        checked={categoryData.toStore}
+                        required={false}
+                        onChange={(event) =>
+                           setCategoryData((data) => ({ ...data, toStore: event.target.checked }))
+                        }
+                     />
+                  </div>
                </TabPanel>
             </TabsBody>
          </Tabs>

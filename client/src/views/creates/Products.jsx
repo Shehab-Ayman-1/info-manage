@@ -3,26 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import { Field, Form, Selectbox } from "@/components/public";
-import { filterSelection, getLists, setProducts } from "@/redux/slices/creates";
+import { filterSelection, getLists, setProducts } from "@/redux/slices/products";
 import { Loading } from "@/layout/loading";
 import { useAxios } from "@/hooks/useAxios";
 
 const formState = { category: "", company: "", products: [] };
-const productState = { name: "", minmax: null, barcode: "" };
+const productState = { name: "", minmax: { min: 5, max: 10 }, barcode: "" };
 export const Products = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const { refetch: ccRefetch } = useAxios();
    const [product, setProduct] = useState(productState);
    const [formData, setFormData] = useState(formState);
    const [openDialog, setOpenDialog] = useState(false);
-   const { lists, categories, companies } = useSelector(({ creates }) => creates);
+   const { lists, categories, companies } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 
    useEffect(() => {
       if (lists.length) return;
 
       (async () => {
-         const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-lists");
+         const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-products-list");
          if (isSubmitted && error) return;
          dispatch(getLists(data));
       })();
@@ -43,7 +43,7 @@ export const Products = () => {
    const handleFieldChange = (event) => {
       if (event.target.name === "min" || event.target.name === "max") {
          return setProduct((data) => {
-            const minmax = { ...data, minmax: { ...data?.minmax, [event.target.name]: event.target.value } };
+            const minmax = { ...data?.minmax, [event.target.name]: event.target.value };
             return { ...data, minmax };
          });
       }
@@ -128,13 +128,7 @@ export const Products = () => {
 
             <DialogBody>
                <Field label="اسم المنتج" name="name" value={product.name} onChange={handleFieldChange} />
-               <Field
-                  type="number"
-                  label="الباركود"
-                  name="barcode"
-                  value={product.barcode}
-                  onChange={handleFieldChange}
-               />
+               <Field label="الباركود" name="barcode" value={product.barcode} onChange={handleFieldChange} />
 
                <div className="flex-between overflow-hidden">
                   <Field
@@ -159,7 +153,12 @@ export const Products = () => {
             </DialogBody>
 
             <DialogFooter>
-               <Button color="deep-purple" className="text-xl" fullWidth onClick={handleSubmitProduct}>
+               <Button
+                  color="deep-purple"
+                  className="text-xl dark:text-black"
+                  fullWidth
+                  onClick={handleSubmitProduct}
+               >
                   اضافه
                </Button>
             </DialogFooter>

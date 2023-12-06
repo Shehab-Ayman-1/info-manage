@@ -7,16 +7,7 @@ export const Desktop = () => {
       <div className="hidden w-full items-center justify-center md:flex">
          {links.map(({ title, path, paths }, i) =>
             title ? (
-               <Menu
-                  offset={10}
-                  animate={{
-                     mount: { y: 0, opacity: 1, duration: 0 },
-                     unmount: { y: 25, opacity: 1, duration: 0 },
-                  }}
-                  placement="bottom"
-                  allowHover
-                  key={i}
-               >
+               <Menu allowHover key={i}>
                   <MenuHandler>
                      <Button
                         className="flex-start group md:text-xl lg:text-2xl"
@@ -32,7 +23,7 @@ export const Desktop = () => {
                      {paths?.map(({ name, icon, link }, i) =>
                         name ? (
                            <Link to={`/${path}/${link}`} className="whitespace-nowrap font-bold" key={i}>
-                              <MenuItem className="flex-start group px-4 py-2 hover:!bg-dimPurple hover:text-primary md:text-xl lg:text-2xl">
+                              <MenuItem className="group">
                                  <i className={`${icon} text-xl group-hover:text-primary`} />
                                  {name}
                               </MenuItem>

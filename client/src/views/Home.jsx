@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useAxios } from "@/hooks/useAxios";
-import { getSearchList } from "@/redux/slices/creates";
+import { getSearchList } from "@/redux/slices/products";
 
 export const Home = () => {
-   const { searchList } = useSelector(({ creates }) => creates);
+   const { searchList } = useSelector(({ products }) => products);
    const { data, refetch } = useAxios();
    const [open, setOpen] = useState(false);
    const [searchText, setSearchText] = useState("");

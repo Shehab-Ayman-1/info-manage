@@ -51,5 +51,5 @@ export const useAxios = (method, url, body, options) => {
 
    const refetch = async (method, url, body, options) => await fetcher(method, url, body, options);
 
-   return { data, loading, error, isSubmitted, status, refetch };
+   return { data, loading, error, isSubmitted, status, refetch, setData };
 };

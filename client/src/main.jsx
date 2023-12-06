@@ -21,11 +21,42 @@ import "@/assets/fonts/fontAwasome.css";
 if (import.meta.env.MODE === "production") inject();
 if (import.meta.env.MODE === "production") disableReactDevTools();
 
+const theme = {
+   menu: {
+      defaultProps: {
+         offset: 10,
+         animate: {
+            unmount: { opacity: 1, scale: 0 },
+            mount: { opacity: 1, scale: 1 },
+         },
+      },
+      styles: {
+         base: {
+            menu: {
+               p: "px-4 py-2",
+               border: "border border-deep-purple-50",
+               borderRadius: "rounded-lg",
+               boxShadow: "shadow-lg shadow-deep-purple-500/50 dark:shadow-deep-purple-500/10",
+               fontSize: "text-md md:text-xl lg:text-2xl",
+               color: "text-primary",
+            },
+            item: {
+               initial: {
+                  display: "flex-start",
+                  bg: "hover:bg-dimPurple hover:bg-opacity-80 focus:bg-dimPurple focus:bg-opacity-80 active:bg-dimPurple active:bg-opacity-80",
+                  color: "text-dimWhite hover:text-primary focus:text-primary active:text-primary",
+               },
+            },
+         },
+      },
+   },
+};
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
    <Provider store={store}>
       <BrowserRouter>
-         <ThemeProvider>
+         <ThemeProvider value={theme}>
             <App />
          </ThemeProvider>
       </BrowserRouter>
