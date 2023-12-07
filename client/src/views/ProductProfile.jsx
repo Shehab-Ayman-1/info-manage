@@ -77,7 +77,7 @@ export const ProductProfile = () => {
                         className="fa fa-times block text-4xl text-red-500 hover:text-red-900"
                         onClick={handleDelete}
                      />
-                     <i className="fa fa-edit block text-4xl text-primary" onClick={handleOpenDialog} />
+                     <i className="fa fa-edit block text-4xl text-orange-500" onClick={handleOpenDialog} />
                   </div>
                </div>
 

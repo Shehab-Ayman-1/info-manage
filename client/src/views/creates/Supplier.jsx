@@ -88,7 +88,7 @@ export const Supplier = () => {
          <Tabs value="new">
             <TabsHeader
                className="border border-solid border-primary bg-primary/25 dark:bg-primary/10"
-               indicatorProps={{ className: "bg-primary/50" }}
+               indicatorProps={{ className: "bg-deep-purple-900" }}
             >
                <Tab value="new" className="text-lg font-semibold dark:text-white">
                   مندوب جديد

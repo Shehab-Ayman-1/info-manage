@@ -115,7 +115,7 @@ export const links = [
             name: "مندوب جديد",
             link: "supplier",
             role: "admin",
-            icon: "fas fa-user",
+            icon: "fas fa-user-plus",
             Component: Supplier,
          },
       ],
