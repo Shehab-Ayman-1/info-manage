@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getLists, setCompanies } from "@/redux/slices/products";
 import { Field, Form, Selectbox } from "@/components/public";
-import { productLogo } from "@/assets";
+import { carLogo } from "@/assets";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
 
@@ -58,7 +58,7 @@ export const Company = () => {
 
          <div className="w-full">
             <img
-               src={formData.img || productLogo}
+               src={formData.img || carLogo}
                alt="product"
                className="m-auto mb-4 block h-28 w-28 rounded-full shadow-sp"
             />

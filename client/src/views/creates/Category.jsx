@@ -5,7 +5,7 @@ import { setCategories } from "@/redux/slices/products";
 import { Field, Form } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
-import { productLogo } from "@/assets";
+import { carLogo } from "@/assets";
 
 export const Category = () => {
    const [formData, setFormData] = useState({ img: "", category: "", company: "" });
@@ -37,7 +37,7 @@ export const Category = () => {
 
          <div className="w-full">
             <img
-               src={formData.img || productLogo}
+               src={formData.img || carLogo}
                alt="product"
                className="m-auto mb-4 block h-28 w-28 rounded-full shadow-sp"
             />
