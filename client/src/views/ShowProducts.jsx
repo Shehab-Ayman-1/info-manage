@@ -61,7 +61,7 @@ export const ShowProducts = () => {
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
          <div className="my-5 md:my-10">
-            <div className="flex-between border-sp mx-auto overflow-hidden rounded-xl px-4 py-2 shadow-sp dark:shadow-none">
+            <div className="flex-between dark:border-sp mx-auto overflow-hidden rounded-xl px-4 py-2 shadow-sp dark:shadow-none">
                <i className="fa fa-search block text-2xl" />
                <input
                   type="search"

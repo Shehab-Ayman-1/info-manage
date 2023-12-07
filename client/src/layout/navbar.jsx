@@ -20,7 +20,7 @@ export const Navbar = () => {
       setOpenDrawer((open) => !open);
    };
    return (
-      <nav className="flex-between sticky left-0 top-0 z-[1000] w-full flex-row bg-white px-5 py-3 dark:bg-darkGray">
+      <nav className="flex-between sticky left-0 top-0 z-[1000] w-full flex-row bg-gradient-to-r from-blue-gray-200 to-white px-5 py-3 dark:from-[rgba(24,34,52,1)] dark:to-black">
          <Logo />
 
          {/* Desktop Menu */}

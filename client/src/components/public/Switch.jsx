@@ -9,7 +9,7 @@ export const Switch = ({ label = "", checked = true, onChange = () => {}, ...res
          required
          onChange={onChange}
          containerProps={{
-            className: "whitespace-nowrap ml-5 dark:bg-black",
+            className: "whitespace-nowrap ml-5",
          }}
          labelProps={{
             className: "text-dimWhite text-lg md:text-xl -mt-2 lg:text-2xl",

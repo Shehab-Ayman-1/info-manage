@@ -29,7 +29,7 @@
       --dimBlack: 24 34 46;
       --dimPurple: 255 74 57;
       --darkGray: 24 34 46;
-      --boxShadow: 245 158 11;
+      --boxShadow: 0 0 0;
       --deep-purple-50: 255 251 235;
       --deep-purple-100: 255 237 213;
       --deep-purple-200: 254 215 170;
@@ -69,8 +69,9 @@ body {
 html {
    width: 100vw;
    overflow-x: hidden;
+   @apply bg-gradient-to-tr from-blue-gray-200 to-white;
    &.dark {
-      @apply bg-gradient-to-tr from-black/90 via-darkGray to-black;
+      @apply from-black/90 via-darkGray to-black;
       ::-webkit-scrollbar-track {
          @apply bg-black;
       }
@@ -129,14 +130,10 @@ i {
    }
 }
 
-.text-stroke {
-   -webkit-text-stroke: 0.3px black;
-}
-
 .card-table-outfit {
-   @apply bg-transparent p-2 shadow-none dark:border dark:border-solid dark:border-deep-purple-500;
+   @apply dark:border-sp bg-transparent p-2 shadow-sp;
    table {
-      @apply rounded-3xl shadow-sp dark:shadow-none;
+      @apply rounded-3xl dark:shadow-none;
    }
 }
 
@@ -162,6 +159,10 @@ i {
 
 .border-sp {
    @apply border border-solid border-deep-purple-500;
+}
+
+.dark\:border-sp {
+   @apply dark:border dark:border-solid dark:border-deep-purple-500;
 }
 
 .border-t-sp {

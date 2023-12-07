@@ -8,7 +8,7 @@ export const Foot = ({ footerTitle, footerSpan: [colSpan1, colSpan2], total }) =
                <Typography
                   variant="h5"
                   color="deep-purple"
-                  className="text-stroke text-center text-base dark:text-white md:text-xl"
+                  className="text-center text-base dark:text-white md:text-xl"
                >
                   {footerTitle || "اجمالي البضائع"}
                </Typography>
@@ -17,7 +17,7 @@ export const Foot = ({ footerTitle, footerSpan: [colSpan1, colSpan2], total }) =
                <Typography
                   variant="h5"
                   color="deep-purple"
-                  className="text-stroke text-center text-base dark:text-white md:text-xl"
+                  className="text-center text-base dark:text-white md:text-xl"
                >
                   {total?.toLocaleString() || "00,000"} جنيه
                </Typography>

@@ -36,7 +36,6 @@ export const Balances = () => {
             حسب سعر الشراء
          </Typography>
 
-         {/* <BalancesTable data={buyData} /> */}
          <Table
             headers={TABLE_HEAD}
             rows={Object.keys(buyData || {})}
@@ -53,7 +52,7 @@ export const Balances = () => {
          <Typography
             variant="h4"
             color="deep-purple"
-            className="my-4 px-2 text-center text-2xl sm:px-4 sm:text-3xl md:text-5xl"
+            className="mb-4 mt-20 px-2 text-center text-2xl sm:px-4 sm:text-3xl md:text-5xl"
          >
             حسب سعر البيع
          </Typography>
