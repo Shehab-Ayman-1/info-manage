@@ -67,7 +67,7 @@ export const ShowProducts = () => {
                   type="search"
                   placeholder="البحث...."
                   onChange={(e) => setSearchText(() => e.target.value)}
-                  className="w-full bg-transparent text-xl md:p-1 md:pb-2 md:text-2xl"
+                  className="w-full bg-transparent text-xl caret-primary md:p-1 md:pb-2 md:text-2xl"
                />
             </div>
          </div>

@@ -7,31 +7,30 @@ module.exports = withMT({
 
    theme: {
       boxShadow: {
-         sp: "0 0 20px rgb(var(--boxShadow) / 0.9)",
+         sp: "0 0 20px var(--boxShadow)",
       },
-
+      colors: {
+         primary: "var(--primary)",
+         dimWhite: "var(--dimWhite)",
+         dimBlack: "var(--dimBlack)",
+         darkGray: "var(--darkGray)",
+         dimPurple: "var(--dimPurple)",
+         "deep-purple": {
+            50: "var(--deep-purple-50)",
+            100: "var(--deep-purple-100)",
+            200: "var(--deep-purple-200)",
+            300: "var(--deep-purple-300)",
+            400: "var(--deep-purple-400)",
+            500: "var(--deep-purple-500)",
+            600: "var(--deep-purple-600)",
+            700: "var(--deep-purple-700)",
+            800: "var(--deep-purple-800)",
+            900: "var(--deep-purple-900)",
+         },
+      },
       extend: {
          border: {
             sp: "1px solid rgb(var(--primary) / 1)",
-         },
-         colors: {
-            primary: "rgb(var(--primary) / 1)",
-            dimWhite: "rgb(var(--dimWhite) / 1)",
-            dimBlack: "rgb(var(--dimBlack) / 1)",
-            dimPurple: "rgb(var(--dimPurple) / 0.15)",
-            darkGray: "rgb(var(--darkGray) / 1)",
-            "deep-purple": {
-               50: "rgb(var(--deep-purple-50) / 1)",
-               100: "rgb(var(--deep-purple-100) / 1)",
-               200: "rgb(var(--deep-purple-200) / 1)",
-               300: "rgb(var(--deep-purple-300) / 1)",
-               400: "rgb(var(--deep-purple-400) / 1)",
-               500: "rgb(var(--deep-purple-500) / 1)",
-               600: "rgb(var(--deep-purple-600) / 1)",
-               700: "rgb(var(--deep-purple-700) / 1)",
-               800: "rgb(var(--deep-purple-800) / 1)",
-               900: "rgb(var(--deep-purple-900) / 1)",
-            },
          },
       },
    },

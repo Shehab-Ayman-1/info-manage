@@ -17,7 +17,7 @@ export const Selectbox = ({
             label={label}
             variant="standard"
             color="deep-purple"
-            className="select-box text-xl dark:text-white/80"
+            className="select-box text-xl caret-primary dark:text-white/80"
             required
             selected={(element) =>
                element &&
@@ -27,7 +27,7 @@ export const Selectbox = ({
                })
             }
             containerProps={{
-               className: `h-20 border-b-sp !border-deep-purple-100 ${containerStyle}`,
+               className: `h-20 border-b-sp !border-deep-purple-300 ${containerStyle}`,
             }}
             labelProps={{
                className: `text-xl ${labelStyle}`,

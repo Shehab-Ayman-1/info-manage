@@ -95,7 +95,7 @@ export const Transfer = () => {
          <Tabs value="supplier">
             <TabsHeader
                className="border border-solid border-primary bg-primary/25 dark:bg-primary/10"
-               indicatorProps={{ className: "bg-primary/50" }}
+               indicatorProps={{ className: "bg-primary-900" }}
             >
                <Tab
                   value="supplier"

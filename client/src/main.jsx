@@ -24,10 +24,10 @@ if (import.meta.env.MODE === "production") disableReactDevTools();
 const theme = {
    menu: {
       defaultProps: {
-         offset: 10,
+         offset: 25,
          animate: {
-            unmount: { opacity: 1, scale: 0 },
             mount: { opacity: 1, scale: 1 },
+            unmount: { opacity: 1, scale: 0 },
          },
       },
       styles: {

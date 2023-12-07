@@ -15,11 +15,7 @@ export const User = () => {
    if (!user) return <i className="fa fa-user hover:text-white/70" onClick={() => navigate("/auths/login")} />;
 
    return (
-      <Menu
-         offset={25}
-         placement="bottom-end"
-         animate={{ mount: { opacity: 1, scale: 1 }, unmount: { opacity: 1, scale: 1.1 } }}
-      >
+      <Menu offset={25} placement="bottom">
          <MenuHandler>
             <Avatar
                variant="circular"

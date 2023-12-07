@@ -12,7 +12,7 @@ export const Form = ({
    return (
       <form onSubmit={onSubmit} autoComplete="off" {...formRest}>
          <Card
-            className={`dark:border-sp m-auto mb-2 mt-14 w-[650px] max-w-full bg-transparent shadow-sp md:mt-32 ${cardStyle}`}
+            className={`dark:border-sp m-auto mb-2 mt-14 w-[650px] max-w-full bg-transparent shadow-sp dark:shadow-none md:mt-32 ${cardStyle}`}
          >
             <CardHeader
                variant="gradient"
