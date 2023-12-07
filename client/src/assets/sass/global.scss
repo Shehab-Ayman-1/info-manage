@@ -129,6 +129,10 @@ i {
    }
 }
 
+.text-stroke {
+   -webkit-text-stroke: 0.3px black;
+}
+
 .card-table-outfit {
    @apply bg-transparent p-2 shadow-none dark:border dark:border-solid dark:border-deep-purple-500;
    table {

@@ -9,7 +9,7 @@ export const Head = ({ headers }) => {
                   <Typography
                      variant="h5"
                      color="deep-purple"
-                     className="text-center text-base dark:text-white md:text-xl"
+                     className="text-stroke text-center text-base dark:text-white md:text-xl"
                   >
                      {head}
                   </Typography>
