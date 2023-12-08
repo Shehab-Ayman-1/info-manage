@@ -10,7 +10,7 @@ import { Loading } from "@/layout/loading";
 export const Company = () => {
    const [formData, setFormData] = useState({ img: "", category: "", company: "" });
    const { data, loading, error, isSubmitted, refetch } = useAxios();
-   const { refetch: listsRefetch } = useAxios();
+   const { loading: lLoading, isSubmitted: lIsSubmitted, refetch: listsRefetch } = useAxios();
    const { lists, categories } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 
@@ -68,8 +68,9 @@ export const Company = () => {
          <Selectbox
             label="اختر اسم القسم..."
             value={formData.category}
-            onChange={(value) => handleSelectChange("category", value)}
             options={categories}
+            loading={!lIsSubmitted && lLoading}
+            onChange={(value) => handleSelectChange("category", value)}
          />
 
          <Field label="اسم الشركة" name="company" value={formData.company} onChange={handleFieldChange} />

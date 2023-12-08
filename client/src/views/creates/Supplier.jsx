@@ -10,7 +10,7 @@ import { Loading } from "@/layout/loading";
 
 export const Supplier = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
-   const { refetch: ccRefetch } = useAxios();
+   const { loading: ccLoading, isSubmitted: ccIsSubmitted, refetch: ccRefetch } = useAxios();
 
    const [formData, setFormData] = useState({ supplier: "", products: [] });
    const [product, setProduct] = useState({ category: "", company: "", name: "" });
@@ -71,8 +71,6 @@ export const Supplier = () => {
 
       const { isSubmitted, error } = await refetch("post", "/products/create-supplier", formData);
       if (isSubmitted && error) return;
-
-      // Success
       dispatch(setSuppliers(formData));
    };
 
@@ -110,9 +108,10 @@ export const Supplier = () => {
                <TabPanel value="old" className="min-h-[200px] overflow-y-auto">
                   <Selectbox
                      label="اختر اسم المندوب"
-                     value={formData.supplier}
-                     onChange={(value) => handleSelectChange("supplier", value)}
                      options={suppliers}
+                     value={formData.supplier}
+                     loading={!ccIsSubmitted && ccLoading}
+                     onChange={(value) => handleSelectChange("supplier", value)}
                   />
                </TabPanel>
             </TabsBody>
@@ -143,18 +142,20 @@ export const Supplier = () => {
                <div className="mt-4">
                   <Selectbox
                      label="اختر اسم القسم..."
-                     value={product.category}
-                     onChange={(value) => handleSelectChange("category", value)}
                      options={categories}
+                     value={product.category}
+                     loading={!ccIsSubmitted && ccLoading}
+                     onChange={(value) => handleSelectChange("category", value)}
                   />
                </div>
 
                <div className="mt-4">
                   <Selectbox
                      label="اختر اسم الشركة..."
-                     value={product.company}
-                     onChange={(value) => handleSelectChange("company", value)}
                      options={companies}
+                     value={product.company}
+                     loading={!ccIsSubmitted && ccLoading}
+                     onChange={(value) => handleSelectChange("company", value)}
                   />
                </div>
 
@@ -162,6 +163,7 @@ export const Supplier = () => {
                   <Selectbox
                      label="اختر اسم المنتج..."
                      value={product.name}
+                     loading={!ccIsSubmitted && ccLoading}
                      onChange={(value) => handleSelectChange("name", value)}
                      options={products?.map(({ name }) => name).filter((n) => n) || []}
                   />

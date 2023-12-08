@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Spinner, Alert, Progress } from "@material-tailwind/react";
+import { Spinner, Alert, Progress, Typography } from "@material-tailwind/react";
 
 export const Loading = ({ subLoading, isSubmitted, loading, error, message, to }) => {
    const [open, setOpen] = useState(true);
@@ -27,10 +27,13 @@ export const Loading = ({ subLoading, isSubmitted, loading, error, message, to }
          </Fragment>
       );
 
-   if (!isSubmitted && loading && subLoading)
+   if (subLoading)
       return (
          <Fragment>
-            <Spinner className="h-10 w-10" color="deep-purple" />;
+            <Typography variant="h5" color="deep-purple" className="ml-4">
+               يتم التحميل
+            </Typography>
+            <Spinner className="h-8 w-8" color="deep-purple" />
          </Fragment>
       );
 

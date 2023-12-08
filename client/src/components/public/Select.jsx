@@ -1,5 +1,6 @@
 import { Option, Select } from "@material-tailwind/react";
 import { cloneElement } from "react";
+import { Loading } from "@/layout/loading";
 
 export const Selectbox = ({
    label = "",
@@ -8,6 +9,7 @@ export const Selectbox = ({
    labelStyle = "",
    menuStyle = "",
    value = "",
+   loading = false,
    options = [],
    ...rest
 }) => {
@@ -47,6 +49,10 @@ export const Selectbox = ({
                      {value}
                   </Option>
                ))
+            ) : loading ? (
+               <Option className="flex-start text-xl" value="">
+                  <Loading subLoading />
+               </Option>
             ) : (
                <Option className="text-xl" value="">
                   لا يوجد نتائج بحث

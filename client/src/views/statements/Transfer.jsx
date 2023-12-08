@@ -120,6 +120,7 @@ export const Transfer = () => {
                      options={suppliers}
                      required={false}
                      value={supplierData.supplier}
+                     loading={!isSubmitted && loading}
                      onChange={(value) => handleSelectChange("supplier", value)}
                   />
 
@@ -128,6 +129,7 @@ export const Transfer = () => {
                      options={products?.map(({ name }) => name).filter((n) => n) || []}
                      required={false}
                      value={supplierData.name}
+                     loading={!isSubmitted && loading}
                      onChange={(value) => handleSelectChange("name", value)}
                   />
 
@@ -135,8 +137,8 @@ export const Transfer = () => {
                      type="number"
                      label="العدد"
                      name="count"
-                     value={supplierData.count}
                      required={false}
+                     value={supplierData.count}
                      onChange={handleFieldChange}
                   />
 
@@ -158,6 +160,7 @@ export const Transfer = () => {
                      options={categories}
                      required={false}
                      value={categoryData.category}
+                     loading={!isSubmitted && loading}
                      onChange={(value) => handleSelectChange("category", value, "category")}
                   />
 
@@ -166,14 +169,16 @@ export const Transfer = () => {
                      options={companies}
                      required={false}
                      value={categoryData.company}
+                     loading={!isSubmitted && loading}
                      onChange={(value) => handleSelectChange("company", value, "category")}
                   />
 
                   <Selectbox
                      label="اختر اسم المنتج"
-                     options={products?.map(({ name }) => name).filter((n) => n) || []}
                      required={false}
                      value={categoryData.name}
+                     loading={!isSubmitted && loading}
+                     options={products?.map(({ name }) => name).filter((n) => n) || []}
                      onChange={(value) => handleSelectChange("name", value, "category")}
                   />
 

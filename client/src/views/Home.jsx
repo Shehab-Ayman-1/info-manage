@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useAxios } from "@/hooks/useAxios";
 import { getSearchList } from "@/redux/slices/products";
+import { Loading } from "@/layout/loading";
 
 export const Home = () => {
    const { searchList } = useSelector(({ products }) => products);
-   const { data, refetch } = useAxios();
+   const { data, loading, isSubmitted, refetch } = useAxios();
    const [open, setOpen] = useState(false);
    const [searchText, setSearchText] = useState("");
    const [filterList, setFilterList] = useState(null);
@@ -84,6 +85,10 @@ export const Home = () => {
                            ))}
                         </ListItem>
                      ))
+                  ) : !isSubmitted && loading ? (
+                     <ListItem>
+                        <Loading subLoading />
+                     </ListItem>
                   ) : (
                      <ListItem>لا يوجد نتائج بحث</ListItem>
                   )}

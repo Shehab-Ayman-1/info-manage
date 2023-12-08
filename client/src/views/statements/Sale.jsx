@@ -11,8 +11,8 @@ export const Sale = () => {
    const [formData, setFormData] = useState(formState);
    const [product, setProduct] = useState({ name: "", count: 0, price: 0 });
    const { data, isSubmitted, loading, error, refetch } = useAxios();
-   const { refetch: ccRefetch } = useAxios();
-   const { lists, categories, companies, products } = useSelector(({ products }) => products);
+   const { loading: ccLoading, isSubmitted: ccIsSubmitted, refetch: ccRefetch } = useAxios();
+   const { lists, categories, companies } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 
    useEffect(() => {
@@ -85,12 +85,14 @@ export const Sale = () => {
             label="اختار اسم القسم"
             options={categories}
             value={formData.category}
+            loading={!ccIsSubmitted && ccLoading}
             onChange={(value) => handleSelectChange("category", value)}
          />
          <Selectbox
             label="اختار اسم الشركة"
             options={companies}
             value={formData.company}
+            loading={!ccIsSubmitted && ccLoading}
             onChange={(value) => handleSelectChange("company", value)}
          />
       </StatementForm>

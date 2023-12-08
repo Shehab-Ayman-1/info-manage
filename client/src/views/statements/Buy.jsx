@@ -66,6 +66,7 @@ export const Buy = () => {
             label="اختار اسم المندوب"
             options={suppliers}
             value={formData.supplier}
+            loading={!isSubmitted && loading}
             onChange={(value) => handleSelectChange("supplier", value)}
          />
       </StatementForm>

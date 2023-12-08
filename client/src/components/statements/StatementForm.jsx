@@ -65,8 +65,9 @@ export const StatementForm = ({
             <div className="w-full">
                <Selectbox
                   label="اختار اسم المنتج"
-                  options={products?.map(({ name }) => name).filter((n) => n) || []}
                   value={product.name}
+                  loading={!isSubmitted && loading}
+                  options={products?.map(({ name }) => name).filter((n) => n) || []}
                   onChange={(value) => handleSelectChange("name", value)}
                />
             </div>

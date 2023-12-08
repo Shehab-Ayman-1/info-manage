@@ -11,7 +11,7 @@ const formState = { category: "", company: "", products: [] };
 const productState = { name: "", minmax: { min: 5, max: 10 }, barcode: "" };
 export const Products = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
-   const { refetch: ccRefetch } = useAxios();
+   const { loading: ccLoading, isSubmitted: ccIsSubmitted, refetch: ccRefetch } = useAxios();
    const [product, setProduct] = useState(productState);
    const [formData, setFormData] = useState(formState);
    const [openDialog, setOpenDialog] = useState(false);
@@ -87,18 +87,20 @@ export const Products = () => {
          <div className="category">
             <Selectbox
                label="اختر اسم القسم..."
+               options={categories}
+               loading={!ccIsSubmitted && ccLoading}
                value={formData.category}
                onChange={(value) => handleSelectChange("category", value)}
-               options={categories}
             />
          </div>
 
          <div className="company">
             <Selectbox
                label="اختر اسم الشركة..."
+               options={companies}
+               loading={!ccIsSubmitted && ccLoading}
                value={formData.company}
                onChange={(value) => handleSelectChange("company", value)}
-               options={companies}
             />
          </div>
 

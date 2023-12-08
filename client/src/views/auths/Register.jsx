@@ -61,8 +61,9 @@ export const Register = () => {
          <Selectbox
             label="نوع الايميل"
             name="role"
-            value={formData.role}
             options={ROLES}
+            loading={!isSubmitted && loading}
+            value={formData.role}
             onChange={(value) => handleSelectChange("role", value)}
          />
 
