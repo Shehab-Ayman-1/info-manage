@@ -50,6 +50,23 @@ const theme = {
          },
       },
    },
+
+   select: {
+      styles: {
+         base: {
+            option: {
+               initial: {
+                  background: "hover:bg-deep-purple-100 focus:bg-deep-purple-100",
+                  color: "hover:text-deep-purple-900 focus:text-deep-purple-900",
+               },
+               active: {
+                  bg: "bg-deep-purple-100 bg-opacity-80",
+                  color: "text-deep-purple-900",
+               },
+            },
+         },
+      },
+   },
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
