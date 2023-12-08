@@ -1,5 +1,5 @@
 // Directs
-import { Home, Balances, ProductProfile, Login, Register } from "@/views";
+import { Home, Balances, Profile, Login, Register } from "@/views";
 
 // Products
 import { ShowProducts } from "@/views";
@@ -25,7 +25,7 @@ export const links = [
          },
          {
             link: "profile/:companyId/:productId",
-            Component: ProductProfile,
+            Component: Profile,
          },
       ],
    },

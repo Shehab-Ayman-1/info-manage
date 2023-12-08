@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterSelection, getLists, getSuppliers, setSuppliers } from "@/redux/slices/products";
 import { Field, Form, Selectbox } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
-import { Loading } from "@/layout/Loading";
+import { Loading } from "@/layout/loading";
 
 export const Supplier = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();

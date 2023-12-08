@@ -4,7 +4,7 @@ import { setCategories } from "@/redux/slices/products";
 
 import { Field, Form } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
-import { Loading } from "@/layout/Loading";
+import { Loading } from "@/layout/loading";
 import { carLogo } from "@/assets";
 
 export const Category = () => {

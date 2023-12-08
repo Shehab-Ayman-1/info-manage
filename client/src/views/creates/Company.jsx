@@ -5,7 +5,7 @@ import { getLists, setCompanies } from "@/redux/slices/products";
 import { Field, Form, Selectbox } from "@/components/public";
 import { carLogo } from "@/assets";
 import { useAxios } from "@/hooks/useAxios";
-import { Loading } from "@/layout/Loading";
+import { Loading } from "@/layout/loading";
 
 export const Company = () => {
    const [formData, setFormData] = useState({ img: "", category: "", company: "" });

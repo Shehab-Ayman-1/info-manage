@@ -4,9 +4,9 @@ import { Fragment, useEffect, useState } from "react";
 
 import { Field, Form, Switch } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
-import { Loading } from "@/layout/Loading";
+import { Loading } from "@/layout/loading";
 
-export const ProductProfile = () => {
+export const Profile = () => {
    const { companyId, productId } = useParams();
    const [openDialog, setOpenDialog] = useState(false);
    const [price, setPrice] = useState({ process: "sale", value: "" });

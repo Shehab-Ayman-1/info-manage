@@ -2,7 +2,7 @@
 export * from "./Home";
 export * from "./Balances";
 export * from "./ShowProducts";
-export * from "./ProductProfile";
+export * from "./Profile";
 
 // Creates
 export * from "./creates/Category";
