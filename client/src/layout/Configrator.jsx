@@ -34,6 +34,7 @@ export const Configrator = () => {
       { theme: "teal", from: "from-teal-400", to: "to-teal-900", hover: "hover:bg-teal-900/50" },
       { theme: "pink", from: "from-pink-400", to: "to-pink-900", hover: "hover:bg-pink-900/50" },
       { theme: "indigo", from: "from-indigo-400", to: "to-indigo-900", hover: "hover:bg-indigo-900/50" },
+      { theme: "orange", from: "from-orange-400", to: "to-orange-900", hover: "hover:bg-orange-900/50" },
       {
          theme: "deep-orange",
          from: "from-deep-orange-400",
@@ -44,16 +45,17 @@ export const Configrator = () => {
    ];
 
    return (
-      <div className="fixed">
+      <div className="fixed z-[1003]">
          <IconButton
             color="deep-purple"
             variant="gradient"
-            className="group !fixed bottom-10 right-10 rounded-full hover:scale-110"
+            className="group !fixed bottom-10 right-10 rounded-full shadow-md shadow-black hover:scale-110 dark:shadow-white"
             size="lg"
             onClick={openDrawer}
          >
-            <i className="fa fa-gear text-2xl text-white group-hover:text-white/70" />
+            <i className="fa fa-gear text-2xl text-white group-hover:text-white" />
          </IconButton>
+
          <Drawer
             open={open}
             className={`bg-white p-5 dark:bg-darkGray ${open ? "min-w-[400px] max-w-full" : ""}`}
@@ -102,7 +104,11 @@ export const Configrator = () => {
                   يمكنك اختيار نوع المود الذي تفضله من هنا
                </Typography>
                <div className="flex-between">
-                  <Button variant="gradient" onClick={() => handleChangeMode("dark")}>
+                  <Button
+                     variant="gradient"
+                     onClick={() => handleChangeMode("dark")}
+                     className="hover:brightness-125"
+                  >
                      Dark Mode
                   </Button>
                   <Button

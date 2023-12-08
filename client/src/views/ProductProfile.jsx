@@ -4,7 +4,7 @@ import { Fragment, useEffect, useState } from "react";
 
 import { Field, Form, Switch } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
-import { Loading } from "@/layout/loading";
+import { Loading } from "@/layout/Loading";
 
 export const ProductProfile = () => {
    const { companyId, productId } = useParams();

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Spinner, Alert } from "@material-tailwind/react";
+import { Spinner, Alert, Progress } from "@material-tailwind/react";
 
-export const Loading = ({ isSubmitted, loading, error, message, to }) => {
+export const Loading = ({ subLoading, isSubmitted, loading, error, message, to }) => {
    const [open, setOpen] = useState(true);
    const navigate = useNavigate();
 
@@ -19,8 +19,20 @@ export const Loading = ({ isSubmitted, loading, error, message, to }) => {
       );
    }, [isSubmitted, loading, error, message]);
 
-   if (!isSubmitted && loading)
-      return <Spinner className="fixed left-[45%] top-1/2 z-[1002] h-24 w-24" color="indigo" />;
+   if (!isSubmitted && loading && !subLoading)
+      return (
+         <Fragment>
+            <Progress className="loading-animate bg-primary" value={0} size="sm" />
+            <Spinner className="fixed left-[45%] top-1/2 z-[1002] h-24 w-24" color="deep-purple" />;
+         </Fragment>
+      );
+
+   if (!isSubmitted && loading && subLoading)
+      return (
+         <Fragment>
+            <Spinner className="h-10 w-10" color="deep-purple" />;
+         </Fragment>
+      );
 
    if (isSubmitted && error)
       return (

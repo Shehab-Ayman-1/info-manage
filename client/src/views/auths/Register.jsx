@@ -1,6 +1,6 @@
 import { Field, Form, Selectbox } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
-import { Loading } from "@/layout/loading";
+import { Loading } from "@/layout/Loading";
 import { login } from "@/redux/slices/users";
 import { useState } from "react";
 import { useDispatch } from "react-redux";

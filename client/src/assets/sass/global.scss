@@ -109,6 +109,23 @@
          filter: hue-rotate(35deg) brightness(0.7);
       }
    }
+   :root[data-theme="orange"] {
+      --dimPurple: rgb(255 87 36 / 0.15);
+      --primary: theme(colors.orange.500);
+      --deep-purple-50: theme(colors.orange.50);
+      --deep-purple-100: theme(colors.orange.100);
+      --deep-purple-200: theme(colors.orange.200);
+      --deep-purple-300: theme(colors.orange.300);
+      --deep-purple-400: theme(colors.orange.400);
+      --deep-purple-500: theme(colors.orange.500);
+      --deep-purple-600: theme(colors.orange.600);
+      --deep-purple-700: theme(colors.orange.700);
+      --deep-purple-800: theme(colors.orange.800);
+      --deep-purple-900: theme(colors.orange.900);
+      .logo {
+         filter: hue-rotate(180deg);
+      }
+   }
    :root[data-theme="deep-orange"] {
       --dimPurple: rgb(255 87 36 / 0.15);
       --primary: theme(colors.deep-orange.500);
@@ -217,6 +234,18 @@ i {
    }
 }
 
+.loading-animate {
+   animation: loading 2s ease-in-out;
+   @keyframes loading {
+      0% {
+         width: 0;
+      }
+      100% {
+         width: 100%;
+      }
+   }
+}
+
 .select-box {
    span.left-0 {
       left: initial;
@@ -225,13 +254,6 @@ i {
    div.right-2 {
       left: 0;
       right: initial;
-   }
-}
-
-.card-table-outfit {
-   @apply dark:border-sp bg-transparent p-2 shadow-sp;
-   table {
-      @apply rounded-3xl dark:shadow-none;
    }
 }
 

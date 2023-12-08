@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Logo, Desktop, Mobile, Configrator } from "@/components/navbar";
+import { User, Logo, Desktop, Mobile } from "@/components/navbar";
 
 export const Navbar = () => {
    const [openDrawer, setOpenDrawer] = useState(false);
@@ -27,9 +27,6 @@ export const Navbar = () => {
 
          {/* Mobile Menu */}
          <Mobile openDrawer={openDrawer} handleDrawer={handleDrawer} />
-
-         {/* Configrator */}
-         <Configrator />
       </nav>
    );
 };

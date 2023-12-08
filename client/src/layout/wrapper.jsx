@@ -3,7 +3,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Fragment } from "react";
 
-import { Navbar } from "@/layout";
+import { Configrator, Navbar } from "@/layout";
 import { ADMIN, USER } from "@/constants";
 import { links } from "@/constants/navbar";
 
@@ -34,10 +34,16 @@ export const Wrapper = () => {
 
    return (
       <Fragment>
+         {/* Home Background */}
          <div className={`absolute -z-10 min-h-full w-full ${pathname === "/" ? "home-bg" : ""}`} />
 
+         {/* Configrator */}
+         <Configrator />
+
+         {/* Navbar */}
          <Navbar />
 
+         {/* Pages Card */}
          <Card className="mx-auto max-w-[1320px] bg-transparent p-4 shadow-none">
             {isAdmin && user?.role === ADMIN ? (
                <Outlet />

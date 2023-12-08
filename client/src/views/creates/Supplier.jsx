@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterSelection, getLists, getSuppliers, setSuppliers } from "@/redux/slices/products";
 import { Field, Form, Selectbox } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
-import { Loading } from "@/layout/loading";
+import { Loading } from "@/layout/Loading";
 
 export const Supplier = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
@@ -87,7 +87,7 @@ export const Supplier = () => {
 
          <Tabs value="new">
             <TabsHeader
-               className="border border-solid border-primary bg-primary/25 dark:bg-primary/10"
+               className="bg-primary/25 dark:bg-primary/10 border border-solid border-primary"
                indicatorProps={{ className: "bg-deep-purple-900" }}
             >
                <Tab value="new" className="text-lg font-semibold dark:text-white">
