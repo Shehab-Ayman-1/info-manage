@@ -28,13 +28,19 @@ export const Configrator = () => {
    };
 
    const colors = [
-      { theme: "deep-purple", from: "from-purple-400", to: "to-purple-900" },
-      { theme: "red", from: "from-red-400", to: "to-red-900" },
-      { theme: "blue", from: "from-blue-400", to: "to-blue-900" },
-      { theme: "gray", from: "from-blue-gray-400", to: "to-blue-gray-900" },
-      { theme: "green", from: "from-green-400", to: "to-green-900" },
-      { theme: "orange", from: "from-orange-400", to: "to-orange-900" },
-      { theme: "pink", from: "from-pink-400", to: "to-pink-900" },
+      { theme: "red", from: "from-red-400", to: "to-red-900", hover: "hover:bg-red-900/50" },
+      { theme: "blue", from: "from-blue-400", to: "to-blue-900", hover: "hover:bg-blue-900/50" },
+      { theme: "gray", from: "from-blue-gray-400", to: "to-blue-gray-900", hover: "hover:bg-gray-700/50" },
+      { theme: "teal", from: "from-teal-400", to: "to-teal-900", hover: "hover:bg-teal-900/50" },
+      { theme: "pink", from: "from-pink-400", to: "to-pink-900", hover: "hover:bg-pink-900/50" },
+      { theme: "indigo", from: "from-indigo-400", to: "to-indigo-900", hover: "hover:bg-indigo-900/50" },
+      {
+         theme: "deep-orange",
+         from: "from-deep-orange-400",
+         to: "to-deep-orange-900",
+         hover: "hover:bg-deep-orange-900/50",
+      },
+      { theme: "deep-purple", from: "from-purple-400", to: "to-purple-900", hover: "hover:bg-purple-900/50" },
    ];
 
    return (
@@ -50,9 +56,9 @@ export const Configrator = () => {
          </IconButton>
          <Drawer
             open={open}
-            className="bg-white p-5 dark:bg-darkGray"
+            className={`bg-white p-5 dark:bg-darkGray ${open ? "min-w-[400px] max-w-full" : ""}`}
             placement="right"
-            overlayProps={{ className: "cursor-pointer min-h-screen" }}
+            overlayProps={{ className: "cursor-pointer min-h-screen cursor-pointer" }}
             onClose={closeDrawer}
          >
             <div className="mb-6 flex items-center justify-between">
@@ -72,16 +78,16 @@ export const Configrator = () => {
                   يمكنك اختيار نوع العرض الذي تفضله من هنا
                </Typography>
                <div className="flex-between">
-                  {colors.map(({ theme, from, to }, i) => (
+                  {colors.map(({ theme, from, to, hover }, i) => (
                      <IconButton
                         key={i}
                         variant="text"
                         color="deep-purple"
                         onClick={() => handleChangeTheme(theme)}
-                        className="group"
+                        className={`group hover:scale-125 ${hover}`}
                      >
                         <div
-                           className={`h-5 w-5 cursor-pointer rounded-full border border-solid border-black bg-gradient-to-br hover:scale-110 ${from} ${to}`}
+                           className={`h-5 w-5 cursor-pointer rounded-full border border-solid border-black bg-gradient-to-br group-hover:scale-125 group-hover:brightness-125 ${from} ${to}`}
                         />
                      </IconButton>
                   ))}

@@ -33,7 +33,7 @@ export const Selectbox = ({
                className: `text-xl ${labelStyle}`,
             }}
             menuProps={{
-               className: `${menuStyle} dark:bg-darkGray`,
+               className: `from-blue-gray-200 to-blue-gray-100 px-5 py-3 bg-gradient-to-r dark:bg-darkGray ${menuStyle}`,
             }}
             animate={{
                mount: { y: 0 },

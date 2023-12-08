@@ -74,7 +74,7 @@ export const Home = () => {
                      (filterList || searchList)?.map(({ name, companyId, productId }, i) => (
                         <ListItem
                            key={i}
-                           className="text-xl font-bold hover:bg-primary/25 hover:dark:text-white"
+                           className="text-xl font-bold hover:bg-dimPurple hover:dark:text-white"
                            onClick={() => handleItem(companyId, productId)}
                         >
                            {name}

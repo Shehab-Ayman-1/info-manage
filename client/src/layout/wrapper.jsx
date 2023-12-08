@@ -38,7 +38,7 @@ export const Wrapper = () => {
 
          <Navbar />
 
-         <Card className="mx-auto max-w-[1320px] bg-transparent p-4">
+         <Card className="mx-auto max-w-[1320px] bg-transparent p-4 shadow-none">
             {isAdmin && user?.role === ADMIN ? (
                <Outlet />
             ) : isUser && (user?.role === ADMIN || user?.role === USER) ? (

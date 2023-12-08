@@ -8,6 +8,7 @@ export const Switch = ({ label = "", checked = true, onChange = () => {}, ...res
          checked={checked}
          required
          onChange={onChange}
+         className="bg-deep-purple-100"
          containerProps={{
             className: "whitespace-nowrap ml-5",
          }}

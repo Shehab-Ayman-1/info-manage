@@ -8,12 +8,11 @@
    :root {
       --dimWhite: theme(colors.blue-gray.500);
       --dimBlack: theme(colors.blue-gray.800);
+      --darkGray: rgb(24 34 46 / 1);
    }
    :root[data-theme="red"] {
-      --dimPurple: rgba(183, 28, 28, 0.15);
-      --darkGray: rgb(24 34 46);
+      --dimPurple: rgb(245 64 51 / 0.15);
       --primary: theme(colors.red.500);
-      --boxShadow: theme(colors.red.500);
       --deep-purple-50: theme(colors.red.50);
       --deep-purple-100: theme(colors.red.100);
       --deep-purple-200: theme(colors.red.200);
@@ -25,14 +24,12 @@
       --deep-purple-800: theme(colors.red.800);
       --deep-purple-900: theme(colors.red.900);
       .logo {
-         filter: hue-rotate(145deg);
+         filter: hue-rotate(160deg);
       }
    }
    :root[data-theme="blue"] {
-      --dimPurple: rgba(13, 71, 161, 0.15);
-      --darkGray: rgb(24 34 46 / 1);
+      --dimPurple: rgb(32 148 243 / 0.15);
       --primary: theme(colors.blue.500);
-      --boxShadow: theme(colors.blue.500);
       --deep-purple-50: theme(colors.blue.50);
       --deep-purple-100: theme(colors.blue.100);
       --deep-purple-200: theme(colors.blue.200);
@@ -45,10 +42,8 @@
       --deep-purple-900: theme(colors.blue.900);
    }
    :root[data-theme="gray"] {
-      --dimPurple: rgba(33, 33, 33, 0.15);
-      --darkGray: rgb(24 34 46);
+      --dimPurple: rgb(158 158 158 / 0.15);
       --primary: theme(colors.gray.500);
-      --boxShadow: theme(colors.gray.500);
       --deep-purple-50: theme(colors.gray.50);
       --deep-purple-100: theme(colors.gray.100);
       --deep-purple-200: theme(colors.gray.200);
@@ -63,49 +58,26 @@
          filter: grayscale(1);
       }
    }
-   :root[data-theme="green"] {
-      --dimPurple: rgba(27, 94, 32, 0.15);
-      --darkGray: rgb(24 34 46);
-      --primary: theme(colors.green.500);
-      --boxShadow: theme(colors.green.500);
-      --deep-purple-50: theme(colors.green.50);
-      --deep-purple-100: theme(colors.green.100);
-      --deep-purple-200: theme(colors.green.200);
-      --deep-purple-300: theme(colors.green.300);
-      --deep-purple-400: theme(colors.green.400);
-      --deep-purple-500: theme(colors.green.500);
-      --deep-purple-600: theme(colors.green.600);
-      --deep-purple-700: theme(colors.green.700);
-      --deep-purple-800: theme(colors.green.800);
-      --deep-purple-900: theme(colors.green.900);
+   :root[data-theme="teal"] {
+      --dimPurple: rgb(0 148 133 / 0.15);
+      --primary: theme(colors.teal.500);
+      --deep-purple-50: theme(colors.teal.50);
+      --deep-purple-100: theme(colors.teal.100);
+      --deep-purple-200: theme(colors.teal.200);
+      --deep-purple-300: theme(colors.teal.300);
+      --deep-purple-400: theme(colors.teal.400);
+      --deep-purple-500: theme(colors.teal.500);
+      --deep-purple-600: theme(colors.teal.600);
+      --deep-purple-700: theme(colors.teal.700);
+      --deep-purple-800: theme(colors.teal.800);
+      --deep-purple-900: theme(colors.teal.900);
       .logo {
-         filter: hue-rotate(245deg);
-      }
-   }
-   :root[data-theme="orange"] {
-      --dimPurple: rgba(230, 81, 0, 0.15);
-      --darkGray: rgb(24 34 46);
-      --primary: theme(colors.orange.500);
-      --boxShadow: theme(colors.orange.500);
-      --deep-purple-50: theme(colors.orange.50);
-      --deep-purple-100: theme(colors.orange.100);
-      --deep-purple-200: theme(colors.orange.200);
-      --deep-purple-300: theme(colors.orange.300);
-      --deep-purple-400: theme(colors.orange.400);
-      --deep-purple-500: theme(colors.orange.500);
-      --deep-purple-600: theme(colors.orange.600);
-      --deep-purple-700: theme(colors.orange.700);
-      --deep-purple-800: theme(colors.orange.800);
-      --deep-purple-900: theme(colors.orange.900);
-      .logo {
-         filter: hue-rotate(190deg);
+         filter: hue-rotate(330deg);
       }
    }
    :root[data-theme="pink"] {
-      --dimPurple: rgba(230, 81, 0, 0.15);
-      --darkGray: rgb(24 34 46);
+      --dimPurple: rgb(233 32 99 / 0.15);
       --primary: theme(colors.pink.500);
-      --boxShadow: theme(colors.pink.500);
       --deep-purple-50: theme(colors.pink.50);
       --deep-purple-100: theme(colors.pink.100);
       --deep-purple-200: theme(colors.pink.200);
@@ -120,23 +92,55 @@
          filter: hue-rotate(145deg);
       }
    }
-   :root[data-theme="deep-purple"] {
-      --dimPurple: rgba(74, 20, 140, 0.15);
-      --darkGray: rgb(24 34 46);
-      --primary: theme(colors.purple.500);
-      --boxShadow: theme(colors.purple.500);
-      --deep-purple-50: theme(colors.purple.50);
-      --deep-purple-100: theme(colors.purple.100);
-      --deep-purple-200: theme(colors.purple.200);
-      --deep-purple-300: theme(colors.purple.300);
-      --deep-purple-400: theme(colors.purple.400);
-      --deep-purple-500: theme(colors.purple.500);
-      --deep-purple-600: theme(colors.purple.600);
-      --deep-purple-700: theme(colors.purple.700);
-      --deep-purple-800: theme(colors.purple.800);
-      --deep-purple-900: theme(colors.purple.900);
+   :root[data-theme="indigo"] {
+      --dimPurple: rgb(64 81 181 / 0.15);
+      --primary: theme(colors.indigo.500);
+      --deep-purple-50: theme(colors.indigo.50);
+      --deep-purple-100: theme(colors.indigo.100);
+      --deep-purple-200: theme(colors.indigo.200);
+      --deep-purple-300: theme(colors.indigo.300);
+      --deep-purple-400: theme(colors.indigo.400);
+      --deep-purple-500: theme(colors.indigo.500);
+      --deep-purple-600: theme(colors.indigo.600);
+      --deep-purple-700: theme(colors.indigo.700);
+      --deep-purple-800: theme(colors.indigo.800);
+      --deep-purple-900: theme(colors.indigo.900);
       .logo {
-         filter: hue-rotate(90deg);
+         filter: hue-rotate(35deg) brightness(0.7);
+      }
+   }
+   :root[data-theme="deep-orange"] {
+      --dimPurple: rgb(255 87 36 / 0.15);
+      --primary: theme(colors.deep-orange.500);
+      --deep-purple-50: theme(colors.deep-orange.50);
+      --deep-purple-100: theme(colors.deep-orange.100);
+      --deep-purple-200: theme(colors.deep-orange.200);
+      --deep-purple-300: theme(colors.deep-orange.300);
+      --deep-purple-400: theme(colors.deep-orange.400);
+      --deep-purple-500: theme(colors.deep-orange.500);
+      --deep-purple-600: theme(colors.deep-orange.600);
+      --deep-purple-700: theme(colors.deep-orange.700);
+      --deep-purple-800: theme(colors.deep-orange.800);
+      --deep-purple-900: theme(colors.deep-orange.900);
+      .logo {
+         filter: hue-rotate(180deg);
+      }
+   }
+   :root[data-theme="deep-purple"] {
+      --dimPurple: rgb(103 58 182 / 0.15);
+      --primary: #673ab7;
+      --deep-purple-50: #ede7f6;
+      --deep-purple-100: #d1c4e9;
+      --deep-purple-200: #b39ddb;
+      --deep-purple-300: #9575cd;
+      --deep-purple-400: #7e57c2;
+      --deep-purple-500: #673ab7;
+      --deep-purple-600: #5e35b1;
+      --deep-purple-700: #512da8;
+      --deep-purple-800: #4527a0;
+      --deep-purple-900: #311b92;
+      .logo {
+         filter: hue-rotate(50deg);
       }
    }
 }
@@ -158,11 +162,11 @@
 }
 
 html {
+   @apply bg-gradient-to-tr from-blue-gray-200 to-white;
    width: 100vw;
    min-height: 100vh;
    overflow-x: hidden;
    font-family: "Poppins", sans-serif;
-   @apply bg-gradient-to-tr from-blue-gray-200 to-white;
    &.dark {
       @apply from-black/90 via-darkGray to-black;
       ::-webkit-scrollbar-track {
