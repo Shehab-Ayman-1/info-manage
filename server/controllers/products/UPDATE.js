@@ -132,7 +132,10 @@ export const EDIT_PRICE = async (req, res) => {
 			}
 		);
 
-		if (!updated.modifiedCount) return res.status(400).json({ error: "حدث خطأ ولم يتم تعديل سعر المنتج" });
+		console.log(updated);
+		if (!updated.modifiedCount && updated.matchedCount)
+			return res.status(200).json({ warn: `لم يتم تغير سعر المنتج لان هذا هو سعر ${process === "buy" ? "الشراء" : "البيع"} الحالي` });
+		if (!updated.modifiedCount && !updated.matchedCount) return res.status(400).json({ error: "حدث خطأ ولم يتم تعديل سعر المنتج" });
 
 		res.status(200).json({ success: "لقد تم تعديل سعر المنتج بنجاح", updated });
 	} catch (error) {

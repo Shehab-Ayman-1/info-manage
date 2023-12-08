@@ -9,7 +9,7 @@ import { Loading } from "@/layout/loading";
 export const ProductProfile = () => {
    const { companyId, productId } = useParams();
    const [openDialog, setOpenDialog] = useState(false);
-   const [price, setPrice] = useState({ process: "sale", value: "" });
+   const [price, setPrice] = useState({ process: "buy", value: "" });
    const { data, setData, loading, error, isSubmitted, refetch } = useAxios();
    const {
       data: editData,
@@ -171,14 +171,20 @@ export const ProductProfile = () => {
                   onChange={handleFieldChange}
                />
                <Switch
-                  label={`${price.process === "sale" ? "تعديل سعر الشراء" : "تعديل سعر البيع"}`}
-                  checked={price.process === "sale"}
-                  onChange={(e) => setPrice((data) => ({ ...data, process: e.target.checked ? "sale" : "buy" }))}
+                  label={price.process === "buy" ? "تعديل سعر الشراء" : "تعديل سعر البيع"}
+                  checked={price.process === "buy"}
+                  onChange={(e) => setPrice((data) => ({ ...data, process: e.target.checked ? "buy" : "sale" }))}
                />
             </DialogBody>
 
             <DialogFooter>
-               <Button color="deep-purple" className="text-xl dark:text-black" fullWidth onClick={handleSubmit}>
+               <Button
+                  color="deep-purple"
+                  className="text-xl dark:text-black"
+                  disabled={eLoading || (eIsSubmitted && !eError)}
+                  fullWidth
+                  onClick={handleSubmit}
+               >
                   تعديل
                </Button>
             </DialogFooter>
