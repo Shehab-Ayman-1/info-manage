@@ -28,7 +28,7 @@ export const Home = () => {
    useEffect(() => {
       if (!data?.length) return;
       const result = data.map((product) => {
-         const matched = product.name.includes(searchText) || String(product.barcode).includes(searchText);
+         const matched = product.name.includes(searchText.trim()) || product.barcode.includes(searchText.trim());
          return matched ? product : null;
       });
 
@@ -79,7 +79,7 @@ export const Home = () => {
                         >
                            {name.split(searchText).map((part, i) => (
                               <Fragment key={i}>
-                                 {i ? <span className="text-primary">{searchText}</span> : null} {part}
+                                 {i ? <span className="text-primary">{searchText.trim()}</span> : null} {part}
                               </Fragment>
                            ))}
                         </ListItem>

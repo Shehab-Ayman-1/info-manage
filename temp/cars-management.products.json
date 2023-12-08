@@ -16,13 +16,25 @@
         "max": 10
       },
       "price": {
-        "buy": 0,
+        "buy": 1000,
         "sale": 0
       },
       "_id": {
         "$oid": "65709d0e227d77b164b659b2"
       },
-      "count": []
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-06T20:17:13.499Z"
+          },
+          "store": 0,
+          "shop": 10,
+          "transferPrice": 1000,
+          "_id": {
+            "$oid": "6570e9b827a8a0f836553ff5"
+          }
+        }
+      ]
     },
     {
       "name": "موبيل وسط",
@@ -35,13 +47,25 @@
         "max": 10
       },
       "price": {
-        "buy": 0,
+        "buy": 800,
         "sale": 0
       },
       "_id": {
         "$oid": "65709d0e227d77b164b659b3"
       },
-      "count": []
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-06T20:17:13.499Z"
+          },
+          "store": 0,
+          "shop": 20,
+          "transferPrice": 800,
+          "_id": {
+            "$oid": "6570e9b827a8a0f836553ff7"
+          }
+        }
+      ]
     },
     {
       "name": "موبيل صغير",
@@ -54,13 +78,25 @@
         "max": 10
       },
       "price": {
-        "buy": 0,
+        "buy": 500,
         "sale": 0
       },
       "_id": {
         "$oid": "65709d0e227d77b164b659b4"
       },
-      "count": []
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-06T20:17:13.499Z"
+          },
+          "store": 0,
+          "shop": 5,
+          "transferPrice": 500,
+          "_id": {
+            "$oid": "6570e9b827a8a0f836553ff3"
+          }
+        }
+      ]
     }
   ],
   "__v": 0,
@@ -92,7 +128,19 @@
       "_id": {
         "$oid": "657091eb684679c1f122d323"
       },
-      "count": []
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-06T20:17:13.499Z"
+          },
+          "store": 10,
+          "shop": 0,
+          "transferPrice": 800,
+          "_id": {
+            "$oid": "6570e93527a8a0f836553fef"
+          }
+        }
+      ]
     },
     {
       "name": "شيل وسط",
@@ -122,6 +170,17 @@
           "transferPrice": 400,
           "_id": {
             "$oid": "6570c9d4be9799c6422c2f1a"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-06T20:17:13.499Z"
+          },
+          "store": 20,
+          "shop": 0,
+          "transferPrice": 400,
+          "_id": {
+            "$oid": "6570e93527a8a0f836553ff1"
           }
         }
       ]
@@ -154,6 +213,39 @@
           "transferPrice": 200,
           "_id": {
             "$oid": "6570c9d4be9799c6422c2f1c"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-06T20:17:13.499Z"
+          },
+          "store": 5,
+          "shop": 0,
+          "transferPrice": 200,
+          "_id": {
+            "$oid": "6570e93527a8a0f836553fed"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-06T20:17:13.499Z"
+          },
+          "store": -3,
+          "shop": 0,
+          "transferPrice": 250,
+          "_id": {
+            "$oid": "6570f07927a8a0f836554068"
+          }
+        },
+        {
+          "date": {
+            "$date": "2023-12-06T20:17:13.499Z"
+          },
+          "store": -5,
+          "shop": 0,
+          "transferPrice": 250,
+          "_id": {
+            "$oid": "6570f09627a8a0f836554076"
           }
         }
       ]
@@ -219,6 +311,172 @@
         "$oid": "6570bb9b73b8b53deebc3265"
       },
       "count": []
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6570f61b27a8a0f8365544e5"
+  },
+  "category": "فلاتر",
+  "company": "فوكس",
+  "products": [
+    {
+      "name": "فوكس كبير",
+      "barcode": "444",
+      "suppliers": [],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 0,
+        "sale": 0
+      },
+      "_id": {
+        "$oid": "6570f7b127a8a0f8365544fc"
+      },
+      "count": []
+    },
+    {
+      "name": "فوكس وسط",
+      "barcode": "555",
+      "suppliers": [],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 0,
+        "sale": 0
+      },
+      "_id": {
+        "$oid": "6570f7b127a8a0f8365544fd"
+      },
+      "count": []
+    },
+    {
+      "name": "فوكس صغير",
+      "barcode": "666",
+      "suppliers": [],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 0,
+        "sale": 0
+      },
+      "_id": {
+        "$oid": "6570f7b127a8a0f8365544fe"
+      },
+      "count": []
+    }
+  ],
+  "__v": 0,
+  "img": "https://th.bing.com/th/id/OIP.HqbGWfH6cu9eDBTW9ooLuwHaE8?w=768&h=512&rs=1&pid=ImgDetMain"
+},
+{
+  "_id": {
+    "$oid": "6570f63727a8a0f8365544e8"
+  },
+  "img": "https://th.bing.com/th/id/OIP.HqbGWfH6cu9eDBTW9ooLuwHaE8?w=768&h=512&rs=1&pid=ImgDetMain",
+  "category": "فلاتر",
+  "company": "ماكس",
+  "products": [
+    {
+      "name": "ماكس كبير",
+      "barcode": "111",
+      "suppliers": [
+        "مصطفي محمد"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 55,
+        "sale": 798
+      },
+      "_id": {
+        "$oid": "6570f6db27a8a0f8365544ec"
+      },
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-06T20:17:13.499Z"
+          },
+          "store": 0,
+          "shop": 5,
+          "transferPrice": 55,
+          "_id": {
+            "$oid": "6570f76a27a8a0f8365544f4"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ماكس وسط",
+      "barcode": "222",
+      "suppliers": [
+        "مصطفي محمد"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 780,
+        "sale": 780
+      },
+      "_id": {
+        "$oid": "6570f6db27a8a0f8365544ed"
+      },
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-06T20:17:13.499Z"
+          },
+          "store": 0,
+          "shop": 33,
+          "transferPrice": 330,
+          "_id": {
+            "$oid": "6570f76a27a8a0f8365544f6"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ماكس صغير",
+      "barcode": "333",
+      "suppliers": [
+        "مصطفي محمد"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 220,
+        "sale": 0
+      },
+      "_id": {
+        "$oid": "6570f6db27a8a0f8365544ee"
+      },
+      "count": [
+        {
+          "date": {
+            "$date": "2023-12-06T20:17:13.499Z"
+          },
+          "store": 0,
+          "shop": 2,
+          "transferPrice": 220,
+          "_id": {
+            "$oid": "6570f76a27a8a0f8365544f8"
+          }
+        }
+      ]
     }
   ],
   "__v": 0

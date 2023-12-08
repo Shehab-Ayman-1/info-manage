@@ -28,10 +28,13 @@ export const ShowProducts = () => {
       if (!data?.length) return;
 
       const result = data?.map(({ company, products }) => {
-         const companyMatch = company.includes(searchText);
-         const productsMatch = products.filter(
-            ({ name, barcode }) => name.includes(searchText) || String(barcode).includes(searchText),
-         );
+         const companyMatch = company.includes(searchText.trim());
+
+         const productsMatch = products.filter(({ name, barcode }) => {
+            const nameMatch = name?.includes(searchText.trim());
+            const barcodeMatch = barcode?.includes(searchText.trim());
+            return nameMatch || barcodeMatch;
+         });
 
          return (companyMatch && { company, products }) || { company, products: productsMatch };
       });
