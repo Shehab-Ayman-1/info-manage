@@ -1,5 +1,5 @@
 import { Card, CardBody, CardHeader, Collapse, List, ListItem } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -77,7 +77,11 @@ export const Home = () => {
                            className="text-xl font-bold hover:bg-dimPurple hover:dark:text-white"
                            onClick={() => handleItem(companyId, productId)}
                         >
-                           {name}
+                           {name.split(searchText).map((part, i) => (
+                              <Fragment key={i}>
+                                 {i ? <span className="text-primary">{searchText}</span> : null} {part}
+                              </Fragment>
+                           ))}
                         </ListItem>
                      ))
                   ) : (

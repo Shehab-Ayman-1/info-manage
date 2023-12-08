@@ -9,7 +9,7 @@ import { Loading } from "@/layout/loading";
 export const ProductProfile = () => {
    const { companyId, productId } = useParams();
    const [openDialog, setOpenDialog] = useState(false);
-   const [price, setPrice] = useState({ process: "buy", value: "" });
+   const [price, setPrice] = useState({ process: "sale", value: "" });
    const { data, setData, loading, error, isSubmitted, refetch } = useAxios();
    const {
       data: editData,
