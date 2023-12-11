@@ -15,7 +15,7 @@ export const Loading = ({ subLoading, isSubmitted, loading, error, message, to }
             setOpen(() => false);
             isSubmitted && !error && !message?.warn && to && navigate(to);
          },
-         message?.warn ? 5000 : 3000,
+         message?.warn || message?.error ? 7000 : 3000,
       );
    }, [isSubmitted, loading, error, message]);
 
@@ -23,7 +23,7 @@ export const Loading = ({ subLoading, isSubmitted, loading, error, message, to }
       return (
          <Fragment>
             <Progress className="loading-animate bg-primary" value={0} size="sm" />
-            <Spinner className="fixed left-[45%] top-1/2 z-[1002] h-24 w-24" color="deep-purple" />;
+            <Spinner className="fixed left-[45%] top-1/2 z-[1002] h-24 w-24" color="deep-purple" />
          </Fragment>
       );
 

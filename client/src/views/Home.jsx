@@ -80,7 +80,12 @@ export const Home = () => {
                         >
                            {name.split(searchText).map((part, i) => (
                               <Fragment key={i}>
-                                 {i ? <span className="text-primary">{searchText.trim()}</span> : null} {part}
+                                 {i ? (
+                                    <span className={searchText === " " ? "pr-1" : "text-primary"}>
+                                       {searchText.trim()}
+                                    </span>
+                                 ) : null}{" "}
+                                 {part}
                               </Fragment>
                            ))}
                         </ListItem>

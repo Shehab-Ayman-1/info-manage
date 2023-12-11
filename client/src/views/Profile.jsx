@@ -1,13 +1,16 @@
 import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, Typography } from "@material-tailwind/react";
-import { useParams } from "react-router-dom";
 import { Fragment, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { Field, Form, Switch } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
+import { ADMIN } from "@/constants/users";
 
 export const Profile = () => {
    const { companyId, productId } = useParams();
+   const { user } = useSelector(({ users }) => users);
    const [openDialog, setOpenDialog] = useState(false);
    const [price, setPrice] = useState({ process: "sale", value: "" });
    const { data, setData, loading, error, isSubmitted, refetch } = useAxios();
@@ -72,13 +75,15 @@ export const Profile = () => {
                      alt="profile"
                      className="object-cotain mx-auto block h-32 w-32 rounded-full shadow-sp"
                   />
-                  <div className="flex-center mt-5 w-full !gap-6">
-                     <i
-                        className="fa fa-times block text-4xl text-red-500 hover:text-red-900"
-                        onClick={handleDelete}
-                     />
-                     <i className="fa fa-edit block text-4xl text-orange-500" onClick={handleOpenDialog} />
-                  </div>
+                  {user?.role === ADMIN ? (
+                     <div className="flex-center mt-5 w-full !gap-6">
+                        <i
+                           className="fa fa-times block text-4xl text-red-500 hover:text-red-900"
+                           onClick={handleDelete}
+                        />
+                        <i className="fa fa-edit block text-4xl text-orange-500" onClick={handleOpenDialog} />
+                     </div>
+                  ) : null}
                </div>
 
                <div className="">
@@ -181,7 +186,7 @@ export const Profile = () => {
                <Button
                   color="deep-purple"
                   className="text-xl dark:text-black"
-                  disabled={eLoading || (eIsSubmitted && !eError)}
+                  disabled={eLoading || (eIsSubmitted && !eError && !editData?.warn)}
                   fullWidth
                   onClick={handleSubmit}
                >
