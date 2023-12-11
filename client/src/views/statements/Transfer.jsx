@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Field, Form, Selectbox, Switch, Tabs } from "@/components/public";
 import { filterSelection, getLists, getSuppliers } from "@/redux/slices/products";
 import { useAxios } from "@/hooks/useAxios";
-import { Loading } from "@/layout/loading";
+import { Loading } from "@/layout/Loading";
 
 const supplierState = { supplier: "", name: "", count: 0, toStore: false };
 const categoryState = { category: "", company: "", name: "", count: 0, toStore: false };

@@ -1,7 +1,7 @@
 import { Card, Typography } from "@material-tailwind/react";
 
 import { useAxios } from "@/hooks/useAxios";
-import { Loading } from "@/layout/loading";
+import { Loading } from "@/layout/Loading";
 import { Table, Row, Col } from "@/components/table";
 
 const TABLE_HEAD = ["الخزنة", "المحل", "المخزن"];

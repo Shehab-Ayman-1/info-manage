@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { Field, Form, Selectbox, Switch } from "@/components/public";
 import { Table, Row, Col } from "@/components/table";
-import { Loading } from "@/layout/loading";
+import { Loading } from "@/layout/Loading";
 import { useEffect, useState } from "react";
 
 const TABLE_HEAD = ["", "#", "المنتج", "العدد", "السعر", "الاجمالي"];

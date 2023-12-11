@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 import { Field, Form, Switch } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
-import { Loading } from "@/layout/loading";
+import { Loading } from "@/layout/Loading";
 import { ADMIN } from "@/constants/users";
 
 export const Profile = () => {

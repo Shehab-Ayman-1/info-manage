@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useAxios } from "@/hooks/useAxios";
 import { getSearchList } from "@/redux/slices/products";
-import { Loading } from "@/layout/loading";
+import { Loading } from "@/layout/Loading";
 
 export const Home = () => {
    const { searchList } = useSelector(({ products }) => products);

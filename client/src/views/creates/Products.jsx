@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { Field, Form, Selectbox } from "@/components/public";
 import { filterSelection, getLists, setProducts } from "@/redux/slices/products";
-import { Loading } from "@/layout/loading";
+import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
 
 const formState = { category: "", company: "", products: [] };
