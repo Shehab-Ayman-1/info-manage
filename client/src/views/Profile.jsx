@@ -185,7 +185,7 @@ export const Profile = () => {
             <DialogFooter>
                <Button
                   color="deep-purple"
-                  className="text-xl dark:text-black"
+                  className="text-xl hover:brightness-125"
                   disabled={eLoading || (eIsSubmitted && !eError && !editData?.warn)}
                   fullWidth
                   onClick={handleSubmit}

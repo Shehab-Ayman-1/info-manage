@@ -7,7 +7,6 @@
 @layer base {
    :root {
       --dimWhite: theme(colors.blue-gray.500);
-      --dimBlack: theme(colors.blue-gray.800);
       --darkGray: rgb(24 34 46 / 1);
    }
    :root[data-theme="red"] {
@@ -40,23 +39,6 @@
       --deep-purple-700: theme(colors.blue.700);
       --deep-purple-800: theme(colors.blue.800);
       --deep-purple-900: theme(colors.blue.900);
-   }
-   :root[data-theme="gray"] {
-      --dimPurple: rgb(158 158 158 / 0.15);
-      --primary: theme(colors.gray.500);
-      --deep-purple-50: theme(colors.gray.50);
-      --deep-purple-100: theme(colors.gray.100);
-      --deep-purple-200: theme(colors.gray.200);
-      --deep-purple-300: theme(colors.gray.300);
-      --deep-purple-400: theme(colors.gray.400);
-      --deep-purple-500: theme(colors.gray.500);
-      --deep-purple-600: theme(colors.gray.600);
-      --deep-purple-700: theme(colors.gray.700);
-      --deep-purple-800: theme(colors.gray.800);
-      --deep-purple-900: theme(colors.gray.900);
-      .logo {
-         filter: grayscale(1);
-      }
    }
    :root[data-theme="teal"] {
       --dimPurple: rgb(0 148 133 / 0.15);

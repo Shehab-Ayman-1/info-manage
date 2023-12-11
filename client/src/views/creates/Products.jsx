@@ -9,7 +9,7 @@ import { useAxios } from "@/hooks/useAxios";
 
 const formState = { category: "", company: "", products: [] };
 const productState = { name: "", minmax: { min: 5, max: 10 }, barcode: "" };
-export const Products = () => {
+export const AddProducts = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const { loading: ccLoading, isSubmitted: ccIsSubmitted, refetch: ccRefetch } = useAxios();
    const [product, setProduct] = useState(productState);
@@ -157,7 +157,7 @@ export const Products = () => {
             <DialogFooter>
                <Button
                   color="deep-purple"
-                  className="text-xl dark:text-black"
+                  className="text-xl hover:brightness-125"
                   fullWidth
                   onClick={handleSubmitProduct}
                >
@@ -168,7 +168,7 @@ export const Products = () => {
 
          <Button
             variant="text"
-            className="group m-auto w-fit text-xl"
+            className="group m-auto w-fit text-xl hover:brightness-125"
             color="deep-purple"
             onClick={handleOpenDialog}
          >

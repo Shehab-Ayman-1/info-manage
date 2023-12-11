@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { Tab, TabPanel, Tabs, TabsBody, TabsHeader } from "@material-tailwind/react";
+import { TabPanel } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Field, Form, Selectbox, Switch } from "@/components/public";
+import { Field, Form, Selectbox, Switch, Tabs } from "@/components/public";
 import { filterSelection, getLists, getSuppliers } from "@/redux/slices/products";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
 
 const supplierState = { supplier: "", name: "", count: 0, toStore: false };
 const categoryState = { category: "", company: "", name: "", count: 0, toStore: false };
-export const Transfer = () => {
+export const TransferStatement = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const {
       data: sendData,
@@ -82,6 +82,19 @@ export const Transfer = () => {
       }
    };
 
+   const tabsHeader = [
+      {
+         name: "مندوب",
+         value: "supplier",
+         reset: () => setCategoryData(categoryState),
+      },
+      {
+         name: "قسم",
+         value: "category",
+         reset: () => setSupplierData(supplierData),
+      },
+   ];
+
    return (
       <Form
          onSubmit={handleSubmit}
@@ -92,117 +105,91 @@ export const Transfer = () => {
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
          <Loading isSubmitted={sIsSubmitted} loading={sLoading} error={sError} message={sendData} to="/" />
 
-         <Tabs value="supplier">
-            <TabsHeader
-               className="bg-primary/25 dark:bg-primary/10 border border-solid border-primary"
-               indicatorProps={{ className: "bg-deep-purple-900" }}
-            >
-               <Tab
-                  value="supplier"
-                  className="text-lg font-semibold dark:text-white"
-                  onClick={() => setCategoryData(categoryState)}
-               >
-                  مندوب
-               </Tab>
-               <Tab
-                  value="category"
-                  className="text-lg font-semibold dark:text-white"
-                  onClick={() => setSupplierData(supplierState)}
-               >
-                  قسم
-               </Tab>
-            </TabsHeader>
+         <Tabs defaultValue="supplier" headers={tabsHeader}>
+            <TabPanel value="supplier" className="min-h-[350px] overflow-y-auto">
+               <Selectbox
+                  label="اختر اسم المندوب"
+                  options={suppliers}
+                  required={false}
+                  value={supplierData.supplier}
+                  loading={!isSubmitted && loading}
+                  onChange={(value) => handleSelectChange("supplier", value)}
+               />
 
-            <TabsBody>
-               <TabPanel value="supplier" className="min-h-[350px] overflow-y-auto">
-                  <Selectbox
-                     label="اختر اسم المندوب"
-                     options={suppliers}
+               <Selectbox
+                  label="اختر اسم المنتج"
+                  options={products?.map(({ name }) => name).filter((n) => n) || []}
+                  required={false}
+                  value={supplierData.name}
+                  loading={!isSubmitted && loading}
+                  onChange={(value) => handleSelectChange("name", value)}
+               />
+
+               <Field
+                  type="number"
+                  label="العدد"
+                  name="count"
+                  required={false}
+                  value={supplierData.count}
+                  onChange={handleFieldChange}
+               />
+
+               <div className="mt-5">
+                  <Switch
+                     label={supplierData.toStore ? "الي المخزن" : "الي المحل"}
+                     checked={supplierData.toStore}
                      required={false}
-                     value={supplierData.supplier}
-                     loading={!isSubmitted && loading}
-                     onChange={(value) => handleSelectChange("supplier", value)}
+                     onChange={(event) => setSupplierData((data) => ({ ...data, toStore: event.target.checked }))}
                   />
+               </div>
+            </TabPanel>
 
-                  <Selectbox
-                     label="اختر اسم المنتج"
-                     options={products?.map(({ name }) => name).filter((n) => n) || []}
+            <TabPanel value="category" className="min-h-[350px] overflow-y-auto">
+               <Selectbox
+                  label="اختر اسم القسم"
+                  options={categories}
+                  required={false}
+                  value={categoryData.category}
+                  loading={!isSubmitted && loading}
+                  onChange={(value) => handleSelectChange("category", value, "category")}
+               />
+
+               <Selectbox
+                  label="اختر اسم الشركة"
+                  options={companies}
+                  required={false}
+                  value={categoryData.company}
+                  loading={!isSubmitted && loading}
+                  onChange={(value) => handleSelectChange("company", value, "category")}
+               />
+
+               <Selectbox
+                  label="اختر اسم المنتج"
+                  required={false}
+                  value={categoryData.name}
+                  loading={!isSubmitted && loading}
+                  options={products?.map(({ name }) => name).filter((n) => n) || []}
+                  onChange={(value) => handleSelectChange("name", value, "category")}
+               />
+
+               <Field
+                  type="number"
+                  label="العدد"
+                  name="count"
+                  value={categoryData.count}
+                  required={false}
+                  onChange={(event) => handleFieldChange(event, "category")}
+               />
+
+               <div className="mt-5">
+                  <Switch
+                     label={categoryData.toStore ? "الي المخزن" : "الي المحل"}
+                     checked={categoryData.toStore}
                      required={false}
-                     value={supplierData.name}
-                     loading={!isSubmitted && loading}
-                     onChange={(value) => handleSelectChange("name", value)}
+                     onChange={(event) => setCategoryData((data) => ({ ...data, toStore: event.target.checked }))}
                   />
-
-                  <Field
-                     type="number"
-                     label="العدد"
-                     name="count"
-                     required={false}
-                     value={supplierData.count}
-                     onChange={handleFieldChange}
-                  />
-
-                  <div className="mt-5">
-                     <Switch
-                        label={supplierData.toStore ? "الي المخزن" : "الي المحل"}
-                        checked={supplierData.toStore}
-                        required={false}
-                        onChange={(event) =>
-                           setSupplierData((data) => ({ ...data, toStore: event.target.checked }))
-                        }
-                     />
-                  </div>
-               </TabPanel>
-
-               <TabPanel value="category" className="overflow-y-auto">
-                  <Selectbox
-                     label="اختر اسم القسم"
-                     options={categories}
-                     required={false}
-                     value={categoryData.category}
-                     loading={!isSubmitted && loading}
-                     onChange={(value) => handleSelectChange("category", value, "category")}
-                  />
-
-                  <Selectbox
-                     label="اختر اسم الشركة"
-                     options={companies}
-                     required={false}
-                     value={categoryData.company}
-                     loading={!isSubmitted && loading}
-                     onChange={(value) => handleSelectChange("company", value, "category")}
-                  />
-
-                  <Selectbox
-                     label="اختر اسم المنتج"
-                     required={false}
-                     value={categoryData.name}
-                     loading={!isSubmitted && loading}
-                     options={products?.map(({ name }) => name).filter((n) => n) || []}
-                     onChange={(value) => handleSelectChange("name", value, "category")}
-                  />
-
-                  <Field
-                     type="number"
-                     label="العدد"
-                     name="count"
-                     value={categoryData.count}
-                     required={false}
-                     onChange={(event) => handleFieldChange(event, "category")}
-                  />
-
-                  <div className="mt-5">
-                     <Switch
-                        label={categoryData.toStore ? "الي المخزن" : "الي المحل"}
-                        checked={categoryData.toStore}
-                        required={false}
-                        onChange={(event) =>
-                           setCategoryData((data) => ({ ...data, toStore: event.target.checked }))
-                        }
-                     />
-                  </div>
-               </TabPanel>
-            </TabsBody>
+               </div>
+            </TabPanel>
          </Tabs>
       </Form>
    );

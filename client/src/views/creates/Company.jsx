@@ -7,7 +7,7 @@ import { carLogo } from "@/assets";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
 
-export const Company = () => {
+export const AddCompany = () => {
    const [formData, setFormData] = useState({ img: "", category: "", company: "" });
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const { loading: lLoading, isSubmitted: lIsSubmitted, refetch: listsRefetch } = useAxios();

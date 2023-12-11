@@ -30,7 +30,6 @@ export const Configrator = () => {
    const colors = [
       { theme: "red", from: "from-red-400", to: "to-red-900", hover: "hover:bg-red-900/50" },
       { theme: "blue", from: "from-blue-400", to: "to-blue-900", hover: "hover:bg-blue-900/50" },
-      { theme: "gray", from: "from-blue-gray-400", to: "to-blue-gray-900", hover: "hover:bg-gray-700/50" },
       { theme: "teal", from: "from-teal-400", to: "to-teal-900", hover: "hover:bg-teal-900/50" },
       { theme: "pink", from: "from-pink-400", to: "to-pink-900", hover: "hover:bg-pink-900/50" },
       { theme: "indigo", from: "from-indigo-400", to: "to-indigo-900", hover: "hover:bg-indigo-900/50" },
@@ -58,7 +57,7 @@ export const Configrator = () => {
 
          <Drawer
             open={open}
-            className={`bg-white p-5 dark:bg-darkGray ${open ? "min-w-[400px] max-w-full" : ""}`}
+            className="bg-white p-5 dark:bg-darkGray"
             placement="right"
             overlayProps={{ className: "cursor-pointer min-h-screen cursor-pointer" }}
             onClose={closeDrawer}
@@ -79,7 +78,7 @@ export const Configrator = () => {
                <Typography className="mb-8 dark:text-blue-gray-500">
                   يمكنك اختيار نوع العرض الذي تفضله من هنا
                </Typography>
-               <div className="flex-between">
+               <div className="flex-between flex-wrap">
                   {colors.map(({ theme, from, to, hover }, i) => (
                      <IconButton
                         key={i}
@@ -114,7 +113,7 @@ export const Configrator = () => {
                   <Button
                      variant="outlined"
                      color="deep-purple"
-                     className="border-solid"
+                     className="border-solid hover:brightness-125"
                      onClick={() => handleChangeMode("light")}
                   >
                      Light Mode

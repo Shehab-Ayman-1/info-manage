@@ -24,7 +24,7 @@ if (import.meta.env.MODE === "production") disableReactDevTools();
 const theme = {
    menu: {
       defaultProps: {
-         offset: 25,
+         offset: 13,
          animate: {
             mount: { opacity: 1, scale: 1 },
             unmount: { opacity: 1, scale: 0 },
@@ -33,11 +33,11 @@ const theme = {
       styles: {
          base: {
             menu: {
-               p: "px-4 py-2",
+               p: "py-2 px-2 md:px-4",
                border: "border border-deep-purple-50",
                borderRadius: "rounded-lg",
-               boxShadow: "shadow-lg shadow-deep-purple-500/50 dark:shadow-deep-purple-500/10",
-               fontSize: "text-md md:text-xl lg:text-2xl",
+               boxShadow: "shadow-lg shadow-primary/50 dark:shadow-primary/10",
+               fontSize: "text-base lg:text-xl",
                color: "text-primary",
             },
             item: {

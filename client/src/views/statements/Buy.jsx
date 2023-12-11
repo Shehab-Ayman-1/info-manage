@@ -7,7 +7,7 @@ import { Selectbox } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 
 const formState = { supplier: "", discount: 0, toStore: true, products: [] };
-export const Buy = () => {
+export const BuyStatement = () => {
    const { refetch: sRefetch } = useAxios();
    const { data, isSubmitted, loading, error, refetch } = useAxios();
    const [formData, setFormData] = useState(formState);

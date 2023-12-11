@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { User, Logo, Desktop, Mobile } from "@/components/navbar";
 
 export const Navbar = () => {
    const [openDrawer, setOpenDrawer] = useState(false);
-   const navigate = useNavigate();
 
    const handleDrawer = () => {
       setOpenDrawer((open) => !open);
@@ -18,10 +16,7 @@ export const Navbar = () => {
 
          {/* Navbar Icons */}
          <div className="flex-start">
-            <i className="fas fa-hand-holding-usd text-md sm:text-xl" onClick={() => navigate("/balances")} />
-            <i className="fas fa-random text-md sm:text-xl" onClick={() => navigate("/statements/transfer")} />
-            <i className="fa fa-bars text-md sm:text-xl md:!hidden" onClick={handleDrawer} />
-
+            <i className="fa fa-bars text-md sm:text-xl lg:!hidden" onClick={handleDrawer} />
             <User />
          </div>
 

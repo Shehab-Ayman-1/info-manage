@@ -1,14 +1,14 @@
 import { Button, Typography, Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwind/react";
-import { Tab, TabPanel, Tabs, TabsBody, TabsHeader } from "@material-tailwind/react";
+import { Tab, TabPanel, TabsBody, TabsHeader } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { filterSelection, getLists, getSuppliers, setSuppliers } from "@/redux/slices/products";
-import { Field, Form, Selectbox } from "@/components/public";
+import { Field, Form, Selectbox, Tabs } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/loading";
 
-export const Supplier = () => {
+export const AddSupplier = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const { loading: ccLoading, isSubmitted: ccIsSubmitted, refetch: ccRefetch } = useAxios();
 
@@ -74,6 +74,17 @@ export const Supplier = () => {
       dispatch(setSuppliers(formData));
    };
 
+   const tabsHeader = [
+      {
+         name: "مندوب جديد",
+         value: "new",
+      },
+      {
+         name: "مندوب قديم",
+         value: "old",
+      },
+   ];
+
    return (
       <Form
          onSubmit={handleSubmitForm}
@@ -83,19 +94,7 @@ export const Supplier = () => {
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
-         <Tabs value="new">
-            <TabsHeader
-               className="bg-primary/25 dark:bg-primary/10 border border-solid border-primary"
-               indicatorProps={{ className: "bg-deep-purple-900" }}
-            >
-               <Tab value="new" className="text-lg font-semibold dark:text-white">
-                  مندوب جديد
-               </Tab>
-               <Tab value="old" className="text-lg font-semibold dark:text-white">
-                  مندوب قديم
-               </Tab>
-            </TabsHeader>
-
+         <Tabs defaultValue="new" headers={tabsHeader}>
             <TabsBody>
                <TabPanel value="new" className="min-h-[200px] overflow-y-auto">
                   <Field
@@ -105,6 +104,7 @@ export const Supplier = () => {
                      onChange={handleFieldChange}
                   />
                </TabPanel>
+
                <TabPanel value="old" className="min-h-[200px] overflow-y-auto">
                   <Selectbox
                      label="اختر اسم المندوب"
@@ -173,7 +173,7 @@ export const Supplier = () => {
             <DialogFooter>
                <Button
                   color="deep-purple"
-                  className="text-xl dark:text-black"
+                  className="text-xl hover:brightness-125"
                   fullWidth
                   onClick={handleSubmitProduct}
                >
@@ -184,7 +184,7 @@ export const Supplier = () => {
 
          <Button
             variant="text"
-            className="group m-auto w-fit text-xl"
+            className="group m-auto w-fit text-xl hover:brightness-125"
             color="deep-purple"
             onClick={handleOpenDialog}
          >

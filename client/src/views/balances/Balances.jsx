@@ -5,7 +5,7 @@ import { Loading } from "@/layout/loading";
 import { Table, Row, Col } from "@/components/table";
 
 const TABLE_HEAD = ["الخزنة", "المحل", "المخزن"];
-export const Balances = () => {
+export const ShowBalances = () => {
    const {
       data: buyData,
       loading: bLoading,

@@ -7,7 +7,7 @@ import { StatementForm } from "@/components/statements";
 import { useAxios } from "@/hooks/useAxios";
 
 const formState = { category: "", company: "", products: [], discount: 0, toStore: false };
-export const Sale = () => {
+export const SaleStatement = () => {
    const [formData, setFormData] = useState(formState);
    const [product, setProduct] = useState({ name: "", count: 0, price: 0 });
    const { data, isSubmitted, loading, error, refetch } = useAxios();

@@ -9,7 +9,7 @@ import { Table, Row, Col } from "@/components/table";
 
 const TABLE_HEAD = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];
 
-export const ShowProducts = () => {
+export const Show_Shop_Store = () => {
    const location = useLocation();
    const pathname = location.pathname.split("/")[2];
    const [searchText, setSearchText] = useState("");

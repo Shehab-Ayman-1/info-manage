@@ -61,7 +61,7 @@ export const StatementForm = ({
 
          {children}
 
-         <div className="border-deep-purple-500/50 rounded-xl border border-solid px-2 md:px-4">
+         <div className="border-primary/50 rounded-xl border border-solid px-2 md:px-4">
             <div className="w-full">
                <Selectbox
                   label="اختار اسم المنتج"
@@ -92,7 +92,7 @@ export const StatementForm = ({
             </div>
 
             <div className="flex-around">
-               <Button color="deep-purple" className="my-2 text-xl dark:text-black" onClick={handleAddField}>
+               <Button color="deep-purple" className="my-2 text-xl hover:brightness-125" onClick={handleAddField}>
                   اضافه
                </Button>
                <Switch

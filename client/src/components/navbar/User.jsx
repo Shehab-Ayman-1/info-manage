@@ -15,7 +15,7 @@ export const User = () => {
    if (!user) return <i className="fa fa-user hover:text-white/70" onClick={() => navigate("/auths/login")} />;
 
    return (
-      <Menu offset={25} placement="bottom">
+      <Menu>
          <MenuHandler>
             <Avatar
                variant="circular"
@@ -24,48 +24,49 @@ export const User = () => {
                src={userLogo}
             />
          </MenuHandler>
+
          <MenuList className="rounded-xl dark:bg-darkGray">
-            <MenuItem className="group flex items-center gap-2 hover:!bg-dimPurple">
-               <i className="fas fa-user-circle text-2xl group-hover:text-primary" />
-               <Typography variant="paragraph" className="text-2xl font-bold group-hover:text-primary">
+            <MenuItem className="flex-start group gap-2 hover:!bg-dimPurple">
+               <i className="fas fa-user-circle text-xl group-hover:text-primary" />
+               <Typography variant="paragraph" className="text-xl font-bold group-hover:text-primary">
                   {user.name}
                </Typography>
             </MenuItem>
 
-            <MenuItem className="group flex items-center gap-2 hover:!bg-dimPurple">
-               <i className="fas fa-envelope-open text-2xl group-hover:text-primary" />
-               <Typography variant="paragraph" className="text-2xl font-bold group-hover:text-primary">
+            <MenuItem className="flex-start group gap-2 hover:!bg-dimPurple">
+               <i className="fas fa-envelope-open text-xl group-hover:text-primary" />
+               <Typography variant="paragraph" className="text-xl font-bold group-hover:text-primary">
                   {user.email}
                </Typography>
             </MenuItem>
 
-            <hr className="border-b-sp my-2 !border-primary/20" />
+            <hr className="border-b-sp !border-primary-100 dark:!border-primary-900 my-2" />
 
             <MenuItem
-               className="group flex items-center gap-2 hover:!bg-dimPurple"
+               className="flex-start group gap-2 hover:!bg-dimPurple"
                onClick={() => navigate("/auths/login")}
             >
-               <i className="fas fa-sign-in-alt text-2xl group-hover:text-primary" />
-               <Typography variant="paragraph" className="text-2xl font-bold group-hover:text-primary">
+               <i className="fas fa-sign-in-alt text-xl group-hover:text-primary" />
+               <Typography variant="paragraph" className="text-xl font-bold group-hover:text-primary">
                   تسجيل حساب اخر
                </Typography>
             </MenuItem>
 
             <MenuItem
-               className="group flex items-center gap-2 hover:!bg-dimPurple"
+               className="flex-start group gap-2 hover:!bg-dimPurple"
                onClick={() => navigate("/auths/register")}
             >
-               <i className="fas fa-user-plus text-2xl group-hover:text-primary" />
-               <Typography variant="paragraph" className="text-2xl font-bold group-hover:text-primary">
+               <i className="fas fa-user-plus text-xl group-hover:text-primary" />
+               <Typography variant="paragraph" className="text-xl font-bold group-hover:text-primary">
                   انشاء حساب جديد
                </Typography>
             </MenuItem>
 
-            <hr className="border-b-sp my-2 !border-primary/20" />
+            <hr className="border-b-sp !border-primary-100 dark:!border-primary-900 my-2" />
 
-            <MenuItem className="group flex items-center gap-2 hover:!bg-dimPurple" onClick={handleSignout}>
-               <i className="fas fa-sign-out-alt text-2xl group-hover:text-primary" />
-               <Typography variant="paragraph" className="text-2xl font-bold group-hover:text-primary">
+            <MenuItem className="flex-start group gap-2 hover:!bg-dimPurple" onClick={handleSignout}>
+               <i className="fas fa-sign-out-alt text-xl group-hover:text-primary" />
+               <Typography variant="paragraph" className="text-xl font-bold group-hover:text-primary">
                   تسجيل الخروج
                </Typography>
             </MenuItem>

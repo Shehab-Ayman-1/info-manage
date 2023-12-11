@@ -14,7 +14,7 @@ export const Mobile = ({ openDrawer, handleDrawer }) => {
 
    return (
       <Drawer
-         className="!max-h-screen p-4 dark:bg-darkGray md:hidden"
+         className="!max-h-screen overflow-y-auto p-4 dark:bg-darkGray lg:hidden"
          placement="left"
          open={openDrawer}
          onClose={handleDrawer}
