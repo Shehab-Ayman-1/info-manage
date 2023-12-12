@@ -14,7 +14,7 @@ import { AddCategory, AddCompany, AddProducts, AddSupplier, AddClient, AddBill, 
 import { BuyStatement, SaleStatement, TransferStatement, WorkersStatement } from "@/views/statements";
 
 // Balances
-import { ShowBalances, TodayBuysSales } from "@/views/balances";
+import { ShowBalances, AddToLocker, TodayBuysSales } from "@/views/balances";
 
 // Analysis
 import { AnalysisSales, AnalysisWins, AnalysisForMonth, AnalysisForYear } from "@/views/analysis";
@@ -57,7 +57,7 @@ export const links = [
       ],
    },
 
-   // Show Products
+   // Show
    {
       title: "العرض",
       path: "show",
@@ -85,6 +85,12 @@ export const links = [
             link: "less-buys",
             icon: "fas fa-chart-gantt",
             Component: ShowLessBuys,
+         },
+         {
+            name: "عرض معاملات الخزنة",
+            link: "locker-prices",
+            icon: "fas fa-door-closed",
+            Component: ShowClients,
          },
          {
             name: "عرض العملاء",
@@ -213,6 +219,13 @@ export const links = [
             role: "admin",
             icon: "fas fa-scale-unbalanced",
             Component: ShowBalances,
+         },
+         {
+            name: "الخزنة",
+            link: "add-to-locker",
+            role: "admin",
+            icon: "fas fa-door-closed",
+            Component: AddToLocker,
          },
          {
             name: "مبيعات / مشتريات اليوم",

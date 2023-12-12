@@ -51,15 +51,15 @@ export const Home = () => {
    return (
       <Card className="relative m-auto mt-11 w-full max-w-2xl bg-transparent shadow-none">
          <CardHeader
-            className={`flex-between bg-transparent bg-white px-3 text-dimWhite dark:bg-darkGray dark:text-white md:py-3 ${
-               open ? `rounded-3xl rounded-b-none` : `rounded-3xl`
+            className={`flex-between rounded-3xl bg-white text-dimWhite dark:bg-darkGray ${
+               open ? `rounded-b-none` : ``
             }`}
          >
-            <i className="fa fa-search block text-2xl" />
+            <i className="fa fa-search block pr-3 text-xl md:text-2xl" />
             <input
                type="search"
                placeholder="البحث...."
-               className="w-full bg-transparent p-1 pb-2 text-base sm:text-xl md:text-2xl"
+               className="w-full bg-transparent p-3 text-base sm:text-xl md:p-5 md:text-2xl"
                onChange={handleChange}
             />
          </CardHeader>

@@ -1,4 +1,4 @@
-import { Products } from "../../models/index.js";
+import { Products, Locker } from "../../models/index.js";
 
 export const GET_PROFILE = async (req, res) => {
 	try {
@@ -38,12 +38,12 @@ export const GET_BALANCES = async (req, res) => {
 			}, 0);
 		};
 
-		const lock = 1000;
+		const locker = await Locker.find().findTotalPrices();
 		const shop = calcTotalPrice(price, "shop");
 		const store = calcTotalPrice(price, "store");
-		const total = lock + shop + store;
+		const total = locker + shop + store;
 
-		res.status(200).json({ lock, shop, store, total });
+		res.status(200).json({ locker, shop, store, total });
 	} catch (error) {
 		res.status(404).json(`GET_BALANCES: ${error.message}`);
 	}

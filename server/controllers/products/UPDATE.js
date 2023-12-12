@@ -1,4 +1,4 @@
-import { Products } from "../../models/index.js";
+import { Products, Locker } from "../../models/index.js";
 
 export const SALE_PRODUCTS = async (req, res) => {
 	try {
@@ -24,9 +24,16 @@ export const SALE_PRODUCTS = async (req, res) => {
 			);
 		});
 
+		// Products
 		const result = await Promise.all(created);
 		const warnIndexes = result.map((create, i) => (!create.modifiedCount ? i + 1 : null)).filter((item) => item !== null);
 
+		// Locker
+		const updatedProducts = products.filter((_, i) => !warnIndexes.includes(i + 1));
+		const totalPrices = updatedProducts.reduce((prev, cur) => prev + +cur?.price * +cur?.count, 0);
+		if (totalPrices) await Locker.create({ name: "كشف حساب", price: totalPrices - +discount });
+
+		// Response
 		if (warnIndexes.length) return res.status(200).json({ warn: `حدث خطا ولم يتم بيع المنتج رقم ${warnIndexes.join(" | ")}`, warnIndexes });
 		res.status(200).json({ success: "لقد تمت عملية البيع بنجاح" });
 	} catch (error) {
@@ -52,11 +59,18 @@ export const BUY_PRODUCTS = async (req, res) => {
 			);
 		});
 
+		// Products
 		const result = await Promise.all(created);
-		const isAnyFail = result.some((create) => !create.modifiedCount);
+		const warnIndexes = result.map((create, i) => (!create.modifiedCount ? i + 1 : null)).filter((item) => item !== null);
 
-		if (isAnyFail) return res.status(200).json({ warn: "حدث خطا ولم يتم شراء احد المنتجات او اكثر من منتج" });
-		res.status(200).json({ success: "لقد تمت عملية البيع بنجاح" });
+		// Locker
+		const updatedProducts = products.filter((_, i) => !warnIndexes.includes(i + 1));
+		const totalPrices = updatedProducts.reduce((prev, cur) => prev + +cur?.price * +cur?.count, 0);
+		if (totalPrices) await Locker.create({ name: `كشف مندوب [${supplier}]`, price: -totalPrices + +discount });
+
+		// Response
+		if (warnIndexes.length) return res.status(200).json({ warn: `حدث خطا ولم يتم شراء المنتج رقم ${warnIndexes.join(" | ")}`, warnIndexes });
+		res.status(200).json({ success: "لقد تمت عملية الشراء بنجاح" });
 	} catch (error) {
 		res.status(404).json(`BUY_PRODUCTS: ${error.message}`);
 	}
@@ -132,7 +146,6 @@ export const EDIT_PRICE = async (req, res) => {
 			}
 		);
 
-		console.log(updated);
 		if (!updated.modifiedCount && updated.matchedCount)
 			return res.status(200).json({ warn: `لم يتم تغير سعر المنتج لان هذا هو سعر ${process === "buy" ? "الشراء" : "البيع"} الحالي` });
 		if (!updated.modifiedCount && !updated.matchedCount) return res.status(400).json({ error: "حدث خطأ ولم يتم تعديل سعر المنتج" });

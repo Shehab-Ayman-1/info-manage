@@ -43,7 +43,7 @@ export const ShowBalances = () => {
             total={buyData?.total}
          >
             <Row index={0}>
-               <Col>{buyData?.lock}</Col>
+               <Col>{0 || buyData?.locker}</Col>
                <Col>{buyData?.shop}</Col>
                <Col>{buyData?.store}</Col>
             </Row>
@@ -64,7 +64,7 @@ export const ShowBalances = () => {
             total={saleData?.total}
          >
             <Row index={0}>
-               <Col>{saleData?.lock}</Col>
+               <Col>{0 || saleData?.locker}</Col>
                <Col>{saleData?.shop}</Col>
                <Col>{saleData?.store}</Col>
             </Row>

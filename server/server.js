@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookies from "cookie-parser";
 import { DBconnection, corsOrigins } from "./configs/index.js";
-import { products, users } from "./routes/index.js";
+import { users, products, locker } from "./routes/index.js";
 
 // Configs
 dotenv.config();
@@ -21,6 +21,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 // app.use("/*", (req, res, next) => setTimeout(next, 1000));
 app.use("/api/users", users);
 app.use("/api/products", products);
+app.use("/api/locker", locker);
 app.use("/*", (req, res) => res.status(500).json({ status: 500, method: req.method, url: req.url, error: "Wronge path." }));
 
 // MongoDB

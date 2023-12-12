@@ -22,7 +22,6 @@ export const AddCategory = () => {
       const { isSubmitted, error } = await refetch("post", "/products/create-category", formData);
       if (isSubmitted && error) return;
 
-      // Success
       dispatch(setCategories(formData));
    };
 
