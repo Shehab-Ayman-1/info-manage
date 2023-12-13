@@ -4,8 +4,11 @@ export const SALE_PRODUCTS = async (req, res) => {
 	try {
 		const { category, company, discount, toStore, products } = req.body;
 
+		// Get The Products By Category & Company
+		const comp = await Products.findOne({ category, company });
+
+		// Update The Products Prices & Count
 		const created = await products.map(async ({ name, count, price }) => {
-			const comp = await Products.findOne({ category, company });
 			const prod = comp.products.find((prod) => prod.name === name);
 
 			const totalCount = toStore ? prod?.count.reduce((prev, cur) => prev + cur.store, 0) : prod?.count.reduce((prev, cur) => prev + cur.shop, 0);
@@ -24,16 +27,16 @@ export const SALE_PRODUCTS = async (req, res) => {
 			);
 		});
 
-		// Products
+		// Get The Warn Indexes If Defined
 		const result = await Promise.all(created);
 		const warnIndexes = result.map((create, i) => (!create.modifiedCount ? i + 1 : null)).filter((item) => item !== null);
 
-		// Locker
+		// Push New Payment To THe Locker
 		const updatedProducts = products.filter((_, i) => !warnIndexes.includes(i + 1));
 		const totalPrices = updatedProducts.reduce((prev, cur) => prev + +cur?.price * +cur?.count, 0);
 		if (totalPrices) await Locker.create({ name: "كشف حساب", price: totalPrices - +discount });
 
-		// Response
+		// Send Response
 		if (warnIndexes.length) return res.status(200).json({ warn: `حدث خطا ولم يتم بيع المنتج رقم ${warnIndexes.join(" | ")}`, warnIndexes });
 		res.status(200).json({ success: "لقد تمت عملية البيع بنجاح" });
 	} catch (error) {
@@ -45,6 +48,12 @@ export const BUY_PRODUCTS = async (req, res) => {
 	try {
 		const { supplier, discount, toStore, products } = req.body;
 
+		// Check If The Required Cost For Buy Is In Locker
+		const requiredCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
+		const lockerPrice = await Locker.find().findTotalPrices();
+		if (lockerPrice < requiredCost) return res.status(200).json({ warn: "حدث خطأ لا يتوفر هذا المبلغ في الخزنة" });
+
+		// Update The Products Price & Count
 		const created = await products.map(async ({ name, count, price }) => {
 			return await Products.updateOne(
 				{ products: { $elemMatch: { name, suppliers: supplier } } },
@@ -59,16 +68,16 @@ export const BUY_PRODUCTS = async (req, res) => {
 			);
 		});
 
-		// Products
+		// Get The Warn Indexes If Defined
 		const result = await Promise.all(created);
 		const warnIndexes = result.map((create, i) => (!create.modifiedCount ? i + 1 : null)).filter((item) => item !== null);
 
-		// Locker
+		// Push New Payment To The Locker
 		const updatedProducts = products.filter((_, i) => !warnIndexes.includes(i + 1));
 		const totalPrices = updatedProducts.reduce((prev, cur) => prev + +cur?.price * +cur?.count, 0);
 		if (totalPrices) await Locker.create({ name: `كشف مندوب [${supplier}]`, price: -totalPrices + +discount });
 
-		// Response
+		// Send Response
 		if (warnIndexes.length) return res.status(200).json({ warn: `حدث خطا ولم يتم شراء المنتج رقم ${warnIndexes.join(" | ")}`, warnIndexes });
 		res.status(200).json({ success: "لقد تمت عملية الشراء بنجاح" });
 	} catch (error) {

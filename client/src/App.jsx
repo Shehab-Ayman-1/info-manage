@@ -10,9 +10,10 @@ export const App = () => {
 
          {links.map(({ path, paths }, i) => (
             <Route path={path} element={<Wrapper />} key={i}>
-               {paths?.map(({ link, Component }, j) => (
-                  <Route path={link} element={<Component />} key={j} />
-               ))}
+               {paths?.map(
+                  ({ Component, link, disabled }, j) =>
+                     !disabled && <Route path={link} element={<Component />} key={j} />,
+               )}
             </Route>
          ))}
       </Routes>

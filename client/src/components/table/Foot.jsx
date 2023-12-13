@@ -1,6 +1,6 @@
 import { Typography } from "@material-tailwind/react";
 
-export const Foot = ({ footerTitle, footerSpan: [colSpan1, colSpan2], total }) => {
+export const Foot = ({ total, footerTitle, footerSpan: [colSpan1, colSpan2] }) => {
    return (
       <tfoot>
          <tr className="border-t-sp bg-primary">

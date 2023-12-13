@@ -61,16 +61,14 @@ export const StatementForm = ({
 
          {children}
 
-         <div className="border-primary/50 rounded-xl border border-solid px-2 md:px-4">
-            <div className="w-full">
-               <Selectbox
-                  label="اختار اسم المنتج"
-                  value={product.name}
-                  loading={!isSubmitted && loading}
-                  options={products?.map(({ name }) => name).filter((n) => n) || []}
-                  onChange={(value) => handleSelectChange("name", value)}
-               />
-            </div>
+         <div className="w-full rounded-xl border border-solid px-2 md:px-4">
+            <Selectbox
+               label="اختار اسم المنتج"
+               value={product.name}
+               loading={!isSubmitted && loading}
+               options={products?.map(({ name }) => name).filter((n) => n) || []}
+               onChange={(value) => handleSelectChange("name", value)}
+            />
 
             <div className="flex-between flex-wrap sm:flex-nowrap">
                <Field
@@ -91,17 +89,14 @@ export const StatementForm = ({
                />
             </div>
 
-            <div className="flex-around">
-               <Button color="deep-purple" className="my-2 text-xl hover:brightness-125" onClick={handleAddField}>
-                  اضافه
-               </Button>
-               <Switch
-                  label={formData.toStore ? "المخزن" : "المحل"}
-                  checked={formData.toStore}
-                  required={false}
-                  onChange={(e) => setFormData((d) => ({ ...d, toStore: e.target.checked }))}
-               />
-            </div>
+            <Button
+               color="deep-purple"
+               className="mx-auto my-2 block text-xl hover:brightness-125"
+               onClick={handleAddField}
+            >
+               <i className="fa fa-plus ml-2 text-xl text-white hover:text-white" />
+               اضافه
+            </Button>
          </div>
 
          <div className="mb-5">
@@ -115,7 +110,14 @@ export const StatementForm = ({
             />
          </div>
 
-         <Table headers={TABLE_HEAD} rows={formData.products} footerSpan={[3, 3]} total={total}>
+         <Switch
+            label={formData.toStore ? "من المخزن" : "من المحل"}
+            checked={formData.toStore}
+            required={false}
+            onChange={(e) => setFormData((d) => ({ ...d, toStore: e.target.checked }))}
+         />
+
+         <Table headers={TABLE_HEAD} rowsLength={formData.products?.length} footerSpan={[3, 3]} total={total}>
             {formData.products.map(({ name, count, price }, i) => (
                <Row key={i} index={i}>
                   <Col>

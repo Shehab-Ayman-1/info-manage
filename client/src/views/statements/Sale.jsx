@@ -64,6 +64,7 @@ export const SaleStatement = () => {
 
    const handleSubmit = async (event) => {
       event.preventDefault();
+      if (!formData.products.length) return alert("يجب ادخال منتج واحد علي الاقل في الفاتورة");
       await refetch("put", "/products/sale-products", formData);
    };
 

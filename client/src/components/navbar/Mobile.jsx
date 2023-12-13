@@ -28,7 +28,7 @@ export const Mobile = ({ openDrawer, handleDrawer }) => {
                   <Accordion icon={<ChevronIcon id={i + 1} />} open={openAccordion === i + 1} key={i}>
                      <ListItem className="hover:bg-dimPurple">
                         <AccordionHeader
-                           className={`w-full text-2xl font-bold !text-primary`}
+                           className={`w-full text-xl font-bold !text-primary`}
                            onClick={() => handleAccordion(i + 1)}
                         >
                            {title}
@@ -37,15 +37,22 @@ export const Mobile = ({ openDrawer, handleDrawer }) => {
 
                      <AccordionBody className="py-0">
                         <List className="py-0">
-                           {paths.map(({ name, icon, link }, i) =>
+                           {paths.map(({ name, icon, link, disabled }, i) =>
                               name ? (
-                                 <Link to={`/${path}/${link}`} key={i}>
+                                 <Link
+                                    className={disabled ? "pointer-events-none" : ""}
+                                    to={`/${path}/${link}`}
+                                    key={i}
+                                 >
                                     <ListItem
-                                       className="flex-start group text-2xl font-bold text-dimWhite hover:bg-dimPurple hover:text-primary"
+                                       className="flex-between group text-lg font-bold text-dimWhite hover:bg-dimPurple hover:text-primary"
                                        onClick={handleDrawer}
                                     >
-                                       <i className={`${icon} text-2xl group-hover:text-primary`} />
-                                       <p className="">{name}</p>
+                                       <div className="flex-start">
+                                          <i className={`${icon} text-lg group-hover:text-primary`} />
+                                          <p className="">{name}</p>
+                                       </div>
+                                       <i className={`fa fa-lock ${disabled ? "" : "!hidden"}`} />
                                     </ListItem>
                                  </Link>
                               ) : null,

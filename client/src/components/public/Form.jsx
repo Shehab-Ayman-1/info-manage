@@ -4,6 +4,9 @@ export const Form = ({
    headerText = "",
    buttonText = "",
    cardStyle = "",
+   headerStyle = "",
+   bodyStyle = "",
+   footerStyle = "",
    loading = false,
    onSubmit = () => {},
    children,
@@ -17,15 +20,15 @@ export const Form = ({
             <CardHeader
                variant="gradient"
                color="deep-purple"
-               className="mx-auto -mt-12 mb-4 grid h-20 w-[80%] place-items-center sm:h-28"
+               className={`mx-auto -mt-12 mb-4 grid h-20 w-[80%] place-items-center sm:h-28 ${headerStyle || ""}`}
             >
                <Typography variant="h3">{headerText}</Typography>
             </CardHeader>
 
-            <CardBody className="flex flex-col gap-4">{children}</CardBody>
+            <CardBody className={`flex flex-col gap-4 ${bodyStyle}`}>{children}</CardBody>
 
             {buttonText && (
-               <CardFooter className="pt-0">
+               <CardFooter className={`pt-0 ${footerStyle}`}>
                   <Button
                      type="submit"
                      variant="gradient"

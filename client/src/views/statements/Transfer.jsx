@@ -100,7 +100,7 @@ export const TransferStatement = () => {
          onSubmit={handleSubmit}
          headerText="تحويل منتجات"
          buttonText="تحويل"
-         loading={(sIsSubmitted && !sError) || sLoading}
+         loading={(sIsSubmitted && !sError && !sendData?.warn) || sLoading}
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
          <Loading isSubmitted={sIsSubmitted} loading={sLoading} error={sError} message={sendData} to="/" />

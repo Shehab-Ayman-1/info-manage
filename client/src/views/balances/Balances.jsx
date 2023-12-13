@@ -38,7 +38,7 @@ export const ShowBalances = () => {
 
          <Table
             headers={TABLE_HEAD}
-            rows={Object.keys(buyData || {})}
+            rowsLength={Object.keys(buyData || {})?.length}
             footerTitle="اجمالي الارصدة"
             total={buyData?.total}
          >
@@ -59,7 +59,7 @@ export const ShowBalances = () => {
 
          <Table
             headers={TABLE_HEAD}
-            rows={Object.keys(saleData || {})}
+            rowsLength={Object.keys(saleData || {})?.length}
             footerTitle="اجمالي الارصدة"
             total={saleData?.total}
          >

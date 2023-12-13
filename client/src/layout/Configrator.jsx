@@ -48,7 +48,7 @@ export const Configrator = () => {
          <IconButton
             color="deep-purple"
             variant="gradient"
-            className="group !fixed bottom-10 right-10 rounded-full shadow-md shadow-black hover:scale-110 dark:shadow-white"
+            className="group !fixed bottom-10 right-10 rounded-full shadow-md shadow-black hover:scale-110 dark:shadow-white print:hidden"
             size="lg"
             onClick={openDrawer}
          >

@@ -87,7 +87,7 @@ export const Show_Shop_Store = () => {
             />
          </div>
 
-         <Table headers={TABLE_HEAD} rows={searchResult || data} footerSpan={[2, 3]} total={total.all}>
+         <Table headers={TABLE_HEAD} rowsLength={searchResult?.length || data?.length} footerSpan={[2, 3]} total={total.all}>
             {(searchResult || data)?.map(({ company, products }, i) => {
                return products?.map(({ name, count, price, total, min, max }, j) => (
                   <Row key={j} index={i} className="">

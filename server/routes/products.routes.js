@@ -1,5 +1,7 @@
 import express from "express";
-import { GET_PRODUCTS_LIST, GET_SUPPLIERS_LIST, GET_TABLES_LIST, GET_SEARCH_LIST, GET_BALANCES, GET_PROFILE } from "../controllers/index.js";
+import { GET_TABLES_LIST, GET_BALANCES, GET_PROFILE } from "../controllers/index.js";
+import { GET_PRODUCTS_LIST, GET_SUPPLIERS_LIST, GET_SEARCH_LIST } from "../controllers/index.js";
+import { GET_TODAY_RESET } from "../controllers/index.js";
 import { CREATE_CATEGORY, CREATE_COMPANY, CREATE_PRODUCTS, CREATE_SUPPLIER } from "../controllers/index.js";
 import { BUY_PRODUCTS, SALE_PRODUCTS, EDIT_PRICE, TRANSFER_PRODUCTS } from "../controllers/index.js";
 import { DELETE_PRODUCT } from "../controllers/index.js";
@@ -13,6 +15,7 @@ router.get("/get-table-list", GET_TABLES_LIST);
 router.get("/get-search-list", GET_SEARCH_LIST);
 router.get("/get-balances", GET_BALANCES);
 router.get("/get-profile/:companyId/:productId", GET_PROFILE);
+router.get("/get-today-reset", GET_TODAY_RESET);
 
 // CREATE
 router.post("/create-category", CREATE_CATEGORY);

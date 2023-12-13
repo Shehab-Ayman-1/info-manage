@@ -20,7 +20,7 @@ export const User = () => {
             <Avatar
                variant="circular"
                alt="profile"
-               className="h-6 w-6 cursor-pointer sm:h-8 sm:w-8 md:ml-10"
+               className="h-6 w-6 cursor-pointer sm:h-8 sm:w-8 md:ml-2"
                src={userLogo}
             />
          </MenuHandler>
@@ -40,7 +40,7 @@ export const User = () => {
                </Typography>
             </MenuItem>
 
-            <hr className="border-b-sp !border-primary-100 dark:!border-primary-900 my-2" />
+            <hr className="border-b-sp my-2 !border-primary-100 dark:!border-primary-900" />
 
             <MenuItem
                className="flex-start group gap-2 hover:!bg-dimPurple"
@@ -62,7 +62,7 @@ export const User = () => {
                </Typography>
             </MenuItem>
 
-            <hr className="border-b-sp !border-primary-100 dark:!border-primary-900 my-2" />
+            <hr className="border-b-sp my-2 !border-primary-100 dark:!border-primary-900" />
 
             <MenuItem className="flex-start group gap-2 hover:!bg-dimPurple" onClick={handleSignout}>
                <i className="fas fa-sign-out-alt text-xl group-hover:text-primary" />

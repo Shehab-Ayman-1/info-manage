@@ -1,5 +1,6 @@
 import { Products, Locker } from "../../models/index.js";
 
+// Pages
 export const GET_PROFILE = async (req, res) => {
 	try {
 		const { companyId, productId } = req.params;
@@ -49,6 +50,94 @@ export const GET_BALANCES = async (req, res) => {
 	}
 };
 
+export const GET_TABLES_LIST = async (req, res) => {
+	try {
+		const { price, count } = req.query; // process: { price: [buy - sale], count: [shop, store] }
+
+		let Count = count === "shop" ? "$products.count.shop" : count === "store" ? "$products.count.store" : "";
+		let Price = price === "buy" ? "$products.price.buy" : price === "sale" ? "$products.price.sale" : "";
+
+		const list = await Products.aggregate([
+			{
+				$unwind: {
+					path: "$products", // Deconstruct products array
+					preserveNullAndEmptyArrays: true, // Output document even if array is null or empty
+				},
+			},
+			{
+				$unwind: {
+					path: "$products.count", // Deconstruct products array
+					preserveNullAndEmptyArrays: true, // Output document even if array is null or empty
+				},
+			},
+			{
+				$group: {
+					_id: {
+						company: "$company",
+						name: "$products.name", // Group by company and product name
+					},
+					price: {
+						$addToSet: Price, // Add the product price to a set
+					},
+					count: {
+						$sum: Count, // Sum the count.shop values for each product
+					},
+					min: {
+						$addToSet: "$products.minmax.min",
+					},
+					max: {
+						$addToSet: "$products.minmax.max",
+					},
+				},
+			},
+			{
+				$project: {
+					_id: 0,
+					company: "$_id.company", // Use the company field from the _id
+					name: "$_id.name", // Use the product name field from the _id
+					count: 1, // Use the count field
+					min: { $arrayElemAt: ["$min", 0] }, // $arrayElemAt: To Get First Index On The Return Array
+					max: { $arrayElemAt: ["$max", 0] }, // $arrayElemAt: To Get First Index On The Return Array
+					price: { $arrayElemAt: ["$price", 0] }, // $arrayElemAt: To Get First Index On The Return Array
+					total: { $sum: { $multiply: [{ $arrayElemAt: ["$price", 0] }, "$count"] } },
+				},
+			},
+			{
+				$group: {
+					_id: "$company", // Group by company
+					products: {
+						$push: {
+							name: "$name", // Push the product name
+							price: "$price", // Push the product price
+							count: "$count", // Push the product count
+							total: "$total",
+							min: "$min",
+							max: "$max",
+						},
+					},
+				},
+			},
+			{
+				$project: {
+					_id: 0,
+					company: "$_id", // Use the company field from the _id
+					products: 1, // Use the products array
+				},
+			},
+			{
+				$sort: {
+					company: 1,
+					"products.name": 1,
+				},
+			},
+		]);
+		res.status(200).json(list);
+	} catch (error) {
+		res.status(404).json(`GET_TABLES_LISTS: ${error.message}`);
+	}
+};
+
+// Selectboxes
 export const GET_SEARCH_LIST = async (req, res) => {
 	try {
 		const list = await Products.aggregate([
@@ -195,69 +284,33 @@ export const GET_SUPPLIERS_LIST = async (req, res) => {
 	}
 };
 
-export const GET_TABLES_LIST = async (req, res) => {
+// Analysis
+export const GET_TODAY_RESET = async (req, res) => {
 	try {
-		const { price, count } = req.query; // process: { price: [buy - sale], count: [shop, store] }
-
-		let Count = count === "shop" ? "$products.count.shop" : count === "store" ? "$products.count.store" : "";
-		let Price = price === "buy" ? "$products.price.buy" : price === "sale" ? "$products.price.sale" : "";
+		const now = new Date();
+		const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+		console.log(today.toLocaleDateString());
 
 		const list = await Products.aggregate([
 			{
-				$unwind: {
-					path: "$products", // Deconstruct products array
-					preserveNullAndEmptyArrays: true, // Output document even if array is null or empty
-				},
+				$unwind: "$products",
 			},
 			{
-				$unwind: {
-					path: "$products.count", // Deconstruct products array
-					preserveNullAndEmptyArrays: true, // Output document even if array is null or empty
-				},
+				$unwind: "$products.count",
 			},
+			{
+				$match: { "products.count.date": { $gt: today } },
+			},
+
 			{
 				$group: {
-					_id: {
-						company: "$company",
-						name: "$products.name", // Group by company and product name
-					},
-					price: {
-						$addToSet: Price, // Add the product price to a set
-					},
-					count: {
-						$sum: Count, // Sum the count.shop values for each product
-					},
-					min: {
-						$addToSet: "$products.minmax.min",
-					},
-					max: {
-						$addToSet: "$products.minmax.max",
-					},
-				},
-			},
-			{
-				$project: {
-					_id: 0,
-					company: "$_id.company", // Use the company field from the _id
-					name: "$_id.name", // Use the product name field from the _id
-					count: 1, // Use the count field
-					min: { $arrayElemAt: ["$min", 0] }, // $arrayElemAt: To Get First Index On The Return Array
-					max: { $arrayElemAt: ["$max", 0] }, // $arrayElemAt: To Get First Index On The Return Array
-					price: { $arrayElemAt: ["$price", 0] }, // $arrayElemAt: To Get First Index On The Return Array
-					total: { $sum: { $multiply: [{ $arrayElemAt: ["$price", 0] }, "$count"] } },
-				},
-			},
-			{
-				$group: {
-					_id: "$company", // Group by company
+					_id: "$products.name",
 					products: {
-						$push: {
-							name: "$name", // Push the product name
-							price: "$price", // Push the product price
-							count: "$count", // Push the product count
-							total: "$total",
-							min: "$min",
-							max: "$max",
+						$addToSet: {
+							shop: "$products.count.shop",
+							store: "$products.count.store",
+							buy: "$products.price.buy",
+							sale: "$products.price.sale",
 						},
 					},
 				},
@@ -265,19 +318,15 @@ export const GET_TABLES_LIST = async (req, res) => {
 			{
 				$project: {
 					_id: 0,
-					company: "$_id", // Use the company field from the _id
-					products: 1, // Use the products array
-				},
-			},
-			{
-				$sort: {
-					company: 1,
-					"products.name": 1,
+					name: "$_id",
+					products: 1,
+					price: 1,
 				},
 			},
 		]);
+
 		res.status(200).json(list);
 	} catch (error) {
-		res.status(404).json(`GET_TABLES_LISTS: ${error.message}`);
+		res.status(404).json(`GET_TODAY_RESET: ${error.message}`);
 	}
 };

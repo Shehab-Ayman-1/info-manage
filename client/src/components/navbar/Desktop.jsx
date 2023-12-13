@@ -4,7 +4,7 @@ import { links } from "@/constants/navbar";
 
 export const Desktop = () => {
    return (
-      <div className="hidden w-full items-center justify-center lg:flex">
+      <div className="hidden w-full items-center justify-center print:!hidden lg:flex">
          {links.map(({ title, path, paths }, i) =>
             title ? (
                <Menu allowHover key={i}>
@@ -20,12 +20,19 @@ export const Desktop = () => {
                   </MenuHandler>
 
                   <MenuList className="dark:bg-darkGray">
-                     {paths?.map(({ name, icon, link }, i) =>
+                     {paths?.map(({ name, icon, link, disabled }, i) =>
                         name ? (
-                           <Link to={`/${path}/${link}`} className="whitespace-nowrap font-bold" key={i}>
-                              <MenuItem className="group">
-                                 <i className={`${icon} text-base group-hover:text-primary md:text-xl`} />
-                                 {name}
+                           <Link
+                              to={`/${path}/${link}`}
+                              className={`whitespace-nowrap font-bold ${disabled ? "pointer-events-none" : ""}`}
+                              key={i}
+                           >
+                              <MenuItem className="flex-between group">
+                                 <div className="flex-start">
+                                    <i className={`${icon} text-base group-hover:text-primary`} />
+                                    {name}
+                                 </div>
+                                 <i className={`fa fa-lock ${disabled ? "" : "!hidden"}`} />
                               </MenuItem>
                            </Link>
                         ) : null,
