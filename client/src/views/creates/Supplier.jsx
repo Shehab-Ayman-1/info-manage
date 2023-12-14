@@ -12,7 +12,7 @@ export const AddSupplier = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const { loading: ccLoading, isSubmitted: ccIsSubmitted, refetch: ccRefetch } = useAxios();
 
-   const [formData, setFormData] = useState({ supplier: "", products: [] });
+   const [formData, setFormData] = useState({ supplier: "", phone: "", products: [] });
    const [product, setProduct] = useState({ category: "", company: "", name: "" });
    const [openDialog, setOpenDialog] = useState(false);
 
@@ -75,14 +75,8 @@ export const AddSupplier = () => {
    };
 
    const tabsHeader = [
-      {
-         name: "مندوب جديد",
-         value: "new",
-      },
-      {
-         name: "مندوب قديم",
-         value: "old",
-      },
+      { name: "مندوب جديد", value: "new" },
+      { name: "مندوب قديم", value: "old" },
    ];
 
    return (
@@ -103,6 +97,7 @@ export const AddSupplier = () => {
                      value={formData.supplier}
                      onChange={handleFieldChange}
                   />
+                  <Field label="رقم الهاتف" name="phone" value={formData.phone} onChange={handleFieldChange} />
                </TabPanel>
 
                <TabPanel value="old" className="min-h-[200px] overflow-y-auto">

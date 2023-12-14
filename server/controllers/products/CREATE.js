@@ -64,7 +64,7 @@ export const CREATE_PRODUCTS = async (req, res) => {
 
 export const CREATE_SUPPLIER = async (req, res) => {
 	try {
-		const { supplier, products } = req.body;
+		const { supplier, phone, products } = req.body;
 		if (!supplier || !products.length) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبه" });
 
 		await products.forEach(async ({ category, company, name }) => {
@@ -81,6 +81,9 @@ export const CREATE_SUPPLIER = async (req, res) => {
 				}
 			);
 		});
+
+		// Create New Client In Bills
+		await Bills.create({ client: supplier, address: "", phone });
 
 		res.status(200).json({ success: "لقد تم اضافه المندوب بنجاح" });
 	} catch (error) {

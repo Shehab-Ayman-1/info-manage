@@ -1,13 +1,19 @@
 import express from "express";
+// GET
 import { GET_TABLES_LIST, GET_BALANCES, GET_PROFILE } from "../controllers/index.js";
 import { GET_PRODUCTS_LIST, GET_SUPPLIERS_LIST, GET_SEARCH_LIST } from "../controllers/index.js";
-import { GET_TODAY_RESET } from "../controllers/index.js";
+import { GET_TODAY_RESET, GET_NEEDED_PRODUCTS, GET_LESS_BUYS } from "../controllers/index.js";
+
+// CREATE
 import { CREATE_CATEGORY, CREATE_COMPANY, CREATE_PRODUCTS, CREATE_SUPPLIER } from "../controllers/index.js";
+
+// UPDATE
 import { BUY_PRODUCTS, SALE_PRODUCTS, EDIT_PRICE, TRANSFER_PRODUCTS } from "../controllers/index.js";
+
+// DELETE
 import { DELETE_PRODUCT } from "../controllers/index.js";
 
 export const router = express.Router();
-
 // GET
 router.get("/get-products-list", GET_PRODUCTS_LIST);
 router.get("/get-suppliers-list", GET_SUPPLIERS_LIST);
@@ -16,6 +22,8 @@ router.get("/get-search-list", GET_SEARCH_LIST);
 router.get("/get-balances", GET_BALANCES);
 router.get("/get-profile/:companyId/:productId", GET_PROFILE);
 router.get("/get-today-reset", GET_TODAY_RESET);
+router.get("/get-needed-products", GET_NEEDED_PRODUCTS);
+router.get("/get-less-buys", GET_LESS_BUYS);
 
 // CREATE
 router.post("/create-category", CREATE_CATEGORY);

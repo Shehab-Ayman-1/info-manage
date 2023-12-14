@@ -5,7 +5,8 @@ import { Home, Profile } from "@/views";
 import { Login, Register } from "@/views/auths";
 
 // Show
-import { Show_Shop_Store, ShowInsufficients, ShowLessBuys, ShowClients, ShowBills, ShowDebts } from "@/views/show";
+import { Show_Shop_Store, ShowInsufficients, ShowLessBuys, ShowClients } from "@/views/show";
+import { ShowLockerProcesses, ShowBills, ShowDebts } from "@/views/show";
 
 // Creates
 import { AddCategory, AddCompany, AddProducts, AddSupplier, AddClient, AddBill, AddDebt } from "@/views/creates";
@@ -18,6 +19,9 @@ import { ShowBalances, AddToLocker, TodayBuysSales } from "@/views/balances";
 
 // Analysis
 import { AnalysisSales, AnalysisWins, AnalysisForMonth, AnalysisForYear } from "@/views/analysis";
+
+// Bills
+import { ShowBill, UpdateBill } from "@/views/bills";
 
 /* Guide:
    - If [title] Is Defined      -> Create In Navbar Tabs
@@ -32,10 +36,12 @@ export const links = [
       paths: [
          {
             link: "",
+            role: "user",
             Component: Home,
          },
          {
             link: "profile/:companyId/:productId",
+            role: "user",
             Component: Profile,
          },
       ],
@@ -47,12 +53,32 @@ export const links = [
       paths: [
          {
             link: "login",
+            role: "user",
             Component: Login,
          },
          {
             link: "register",
             role: "admin",
             Component: Register,
+         },
+      ],
+   },
+
+   // Bills Not In Navbar
+   {
+      path: "bills",
+      paths: [
+         {
+            link: "update-bill/:id",
+            role: "admin",
+            disabled: true,
+            Component: UpdateBill,
+         },
+         {
+            link: "show-bill/:id",
+            role: "admin",
+            disabled: true,
+            Component: ShowBill,
          },
       ],
    },
@@ -65,41 +91,47 @@ export const links = [
          {
             name: "عرض المحل",
             link: "shop",
+            role: "user",
             icon: "fas fa-store-alt",
             Component: Show_Shop_Store,
          },
          {
             name: "عرض المخزن",
             link: "store",
+            role: "user",
             icon: "fas fa-warehouse",
             Component: Show_Shop_Store,
          },
          {
             name: "عرض النواقص",
             link: "insufficients",
+            role: "admin",
             icon: "fas fa-magnifying-glass-minus",
-            disabled: true,
+            // disabled: true,
             Component: ShowInsufficients,
          },
          {
             name: "عرض الاقل مبيعاً",
             link: "less-buys",
+            role: "admin",
             icon: "fas fa-chart-gantt",
-            disabled: true,
+            // disabled: true,
             Component: ShowLessBuys,
          },
          {
             name: "عرض معاملات الخزنة",
-            link: "locker-prices",
+            link: "locker-processes",
+            role: "admin",
             icon: "fas fa-door-closed",
-            disabled: true,
-            Component: ShowClients,
+            // disabled: true,
+            Component: ShowLockerProcesses,
          },
          {
             name: "عرض العملاء",
             link: "clients",
+            role: "admin",
             icon: "fas fa-users-viewfinder",
-            disabled: true,
+            // disabled: true,
             Component: ShowClients,
          },
          {
@@ -107,7 +139,7 @@ export const links = [
             link: "bills",
             role: "admin",
             icon: "fas fa-money-bill",
-            disabled: true,
+            // disabled: true,
             Component: ShowBills,
          },
          {
@@ -115,7 +147,7 @@ export const links = [
             link: "debts",
             role: "admin",
             icon: "fas fa-money-bill",
-            disabled: true,
+            // disabled: true,
             Component: ShowDebts,
          },
       ],
@@ -196,23 +228,8 @@ export const links = [
             link: "client",
             role: "admin",
             icon: "fas fa-user-tie",
+            // disabled: true,
             Component: AddClient,
-         },
-         {
-            name: "اضافه فاتورة",
-            link: "bill",
-            role: "admin",
-            icon: "fas fa-money-bills",
-            disabled: true,
-            Component: AddBill,
-         },
-         {
-            name: "اضافه مديونية",
-            link: "debt",
-            role: "admin",
-            icon: "fas fa-money-bills",
-            disabled: true,
-            Component: AddDebt,
          },
       ],
    },

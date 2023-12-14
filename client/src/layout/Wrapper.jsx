@@ -11,26 +11,30 @@ export const Wrapper = () => {
    const { user } = useSelector(({ users }) => users);
    const { pathname } = useLocation();
 
-   const adminPaths = links
-      .map(({ path, paths }) => ({ path, paths: paths.filter(({ role }) => role) }))
-      .reduce((prev, cur) => {
-         const paths = cur.paths.map((path) => {
-            return `${cur.path ? `/${cur.path}` : ""}/${path.link.startsWith("profile") ? "profile" : path.link}`;
-         });
-         return prev.concat(paths);
-      }, []);
+   const dynamicRoute = (path) => {
+      const words = ["/profile", "/bills/update-bill", "/bills/show-bill"];
+      const word = words.find((word) => path.startsWith(word));
+      return word || path;
+   };
 
-   const userPaths = links
-      .map(({ path, paths }) => ({ path, paths: paths.filter(({ role }) => !role) }))
-      .reduce((prev, cur) => {
-         const paths = cur.paths.map((path) => {
-            return `${cur.path ? `/${cur.path}` : ""}/${path.link.startsWith("profile") ? "profile" : path.link}`;
-         });
-         return prev.concat(paths);
-      }, []);
+   // Admins
+   const aPaths = links.map(({ path, paths }) => ({ path, paths: paths.filter(({ role }) => role === "admin") }));
+   const adminPaths = aPaths.reduce((prev, cur) => {
+      const paths = cur.paths.map((path) => `${cur.path ? `/${cur.path}` : ""}/${dynamicRoute(path.link)}`);
+      return prev.concat(paths);
+   }, []);
 
-   const isAdmin = adminPaths.concat(userPaths).includes(pathname.startsWith("/profile") ? "/profile" : pathname);
-   const isUser = userPaths.includes(pathname.startsWith("/profile") ? "/profile" : pathname);
+   // Users
+   const uPaths = links.map(({ path, paths }) => ({ path, paths: paths.filter(({ role }) => role === "user") }));
+   const userPaths = uPaths.reduce((prev, cur) => {
+      const paths = cur.paths.map((path) => `${cur.path ? `/${cur.path}` : ""}/${dynamicRoute(path.link)}`);
+      return prev.concat(paths);
+   }, []);
+
+   // Check Role
+   const currentPath = dynamicRoute(pathname);
+   const isAdmin = adminPaths.concat(userPaths).some((path) => path.includes(currentPath));
+   const isUser = userPaths.some((path) => path.includes(currentPath));
 
    return (
       <Fragment>

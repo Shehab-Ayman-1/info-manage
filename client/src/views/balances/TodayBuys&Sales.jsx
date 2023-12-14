@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
+
 import { Col, Row, Table } from "@/components/table";
 import { Form } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
-import { Fragment, useEffect, useState } from "react";
+import { Loading } from "@/layout/Loading";
 
 const TABLE_HEAD = ["#", "المنتج", "العملية", "المكان", "العدد", "السعر", "الاجمالي"];
 export const TodayBuysSales = () => {
@@ -39,6 +41,8 @@ export const TodayBuysSales = () => {
          buttonText="طباعه"
          headerText="مبيعات ومشتريات اليوم"
       >
+         <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
+
          <Table headers={TABLE_HEAD} rowsLength={data?.length} footerSpan={[4, 3]} total={total}>
             {data &&
                data?.map(({ name, products }, i) =>

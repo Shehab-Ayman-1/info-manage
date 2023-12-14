@@ -18,8 +18,9 @@ export const StatementForm = ({
    setFormData,
    product,
    setProduct,
-   children,
+   isAdminPay,
    handleSelectChange,
+   children,
 }) => {
    const { products } = useSelector(({ products }) => products);
    const [total, setTotal] = useState(0);
@@ -32,8 +33,12 @@ export const StatementForm = ({
    }, [formData?.products]);
 
    const handleFieldChange = (event) => {
-      if (event.target.name === "discount")
-         return setFormData((data) => ({ ...data, discount: event.target.value }));
+      if (
+         event.target.name === "discount" ||
+         event.target.name === "clientPay" ||
+         event.target.name === "adminPay"
+      )
+         return setFormData((data) => ({ ...data, [event.target.name]: event.target.value }));
       setProduct((p) => ({ ...p, [event.target.name]: event.target.value }));
    };
 
@@ -60,6 +65,13 @@ export const StatementForm = ({
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
          {children}
+
+         <Selectbox
+            label="المكان"
+            value={formData.toStore ? "من المخزن" : "من المحل"}
+            options={["من المخزن", "من المحل"]}
+            onChange={(value) => setFormData((data) => ({ ...data, toStore: value === "من المخزن" }))}
+         />
 
          <div className="w-full rounded-xl border border-solid px-2 md:px-4">
             <Selectbox
@@ -108,14 +120,26 @@ export const StatementForm = ({
                label="الخصم"
                onChange={handleFieldChange}
             />
+            {isAdminPay ? (
+               <Field
+                  type="number"
+                  min="0"
+                  name="adminPay"
+                  value={formData.adminPay}
+                  label="المبلغ المدفوع"
+                  onChange={handleFieldChange}
+               />
+            ) : (
+               <Field
+                  type="number"
+                  min="0"
+                  name="clientPay"
+                  value={formData.clientPay}
+                  label="المبلغ المحصل"
+                  onChange={handleFieldChange}
+               />
+            )}
          </div>
-
-         <Switch
-            label={formData.toStore ? "من المخزن" : "من المحل"}
-            checked={formData.toStore}
-            required={false}
-            onChange={(e) => setFormData((d) => ({ ...d, toStore: e.target.checked }))}
-         />
 
          <Table headers={TABLE_HEAD} rowsLength={formData.products?.length} footerSpan={[3, 3]} total={total}>
             {formData.products.map(({ name, count, price }, i) => (

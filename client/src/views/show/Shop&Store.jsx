@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
-import { Switch } from "@/components/public";
+import { Searchbar, Switch } from "@/components/public";
 import { Table, Row, Col } from "@/components/table";
 
 const TABLE_HEAD = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];
@@ -63,17 +63,7 @@ export const Show_Shop_Store = () => {
       <Card className="rounded-none bg-transparent">
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <div className="my-5 md:my-10">
-            <div className="flex-between dark:border-sp mx-auto overflow-hidden rounded-xl px-4 py-2 shadow-sp dark:shadow-none">
-               <i className="fa fa-search block text-2xl" />
-               <input
-                  type="search"
-                  placeholder="البحث...."
-                  onChange={(e) => setSearchText(() => e.target.value)}
-                  className="w-full bg-transparent text-xl caret-primary md:p-1 md:pb-2 md:text-2xl"
-               />
-            </div>
-         </div>
+         <Searchbar setSearchText={setSearchText} />
 
          <div className="flex-between mb-2 flex-col px-4 sm:flex-row">
             <Typography variant="h4" className="text-3xl text-primary sm:text-4xl md:text-6xl">
@@ -87,7 +77,12 @@ export const Show_Shop_Store = () => {
             />
          </div>
 
-         <Table headers={TABLE_HEAD} rowsLength={searchResult?.length || data?.length} footerSpan={[2, 3]} total={total.all}>
+         <Table
+            headers={TABLE_HEAD}
+            rowsLength={searchResult?.length || data?.length}
+            footerSpan={[2, 3]}
+            total={total.all}
+         >
             {(searchResult || data)?.map(({ company, products }, i) => {
                return products?.map(({ name, count, price, total, min, max }, j) => (
                   <Row key={j} index={i} className="">

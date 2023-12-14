@@ -6,7 +6,7 @@ import { StatementForm } from "@/components/statements";
 import { Selectbox } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 
-const formState = { supplier: "", discount: 0, toStore: true, products: [] };
+const formState = { supplier: "", discount: "", adminPay: "", toStore: true, products: [] };
 export const BuyStatement = () => {
    const { refetch: sRefetch } = useAxios();
    const { data, isSubmitted, loading, error, refetch } = useAxios();
@@ -61,6 +61,7 @@ export const BuyStatement = () => {
          setFormData={setFormData}
          product={product}
          setProduct={setProduct}
+         isAdminPay={true}
          handleSelectChange={handleSelectChange}
       >
          <Selectbox

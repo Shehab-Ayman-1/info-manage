@@ -24,7 +24,7 @@ export const TransferStatement = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      if (!suppliers.length) {
+      if (!categories.length) {
          (async () => {
             const { data, isSubmitted, error } = await refetch("get", "/products/get-products-list");
             if (isSubmitted && error) return;
@@ -32,7 +32,7 @@ export const TransferStatement = () => {
          })();
       }
 
-      if (!categories.length) {
+      if (!suppliers.length) {
          (async () => {
             const { data, isSubmitted, error } = await refetch("get", "/products/get-suppliers-list");
             if (isSubmitted && error) return;

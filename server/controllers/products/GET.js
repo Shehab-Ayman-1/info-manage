@@ -289,7 +289,6 @@ export const GET_TODAY_RESET = async (req, res) => {
 	try {
 		const now = new Date();
 		const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-		console.log(today.toLocaleDateString());
 
 		const list = await Products.aggregate([
 			{
@@ -330,3 +329,145 @@ export const GET_TODAY_RESET = async (req, res) => {
 		res.status(404).json(`GET_TODAY_RESET: ${error.message}`);
 	}
 };
+
+export const GET_NEEDED_PRODUCTS = async (req, res) => {
+	try {
+		const { supplier, store } = req.query;
+		const searchFor = store === "true" ? "$$this.store" : "$$this.shop";
+
+		const list = await Products.aggregate([
+			{
+				$unwind: "$products",
+			},
+			{
+				$match: {
+					"products.suppliers": supplier,
+				},
+			},
+			{
+				$project: {
+					_id: 0,
+					name: "$products.name",
+					price: "$products.price.buy",
+					count: {
+						$cond: {
+							if: {
+								$lt: [
+									{
+										$reduce: {
+											input: "$products.count",
+											initialValue: 0,
+											in: { $add: ["$$value", searchFor] },
+										},
+									},
+									"$products.minmax.max",
+								],
+							},
+							then: {
+								current: {
+									$reduce: {
+										input: "$products.count",
+										initialValue: 0,
+										in: { $add: ["$$value", searchFor] },
+									},
+								},
+								needed: {
+									$subtract: [
+										"$products.minmax.max",
+										{
+											$reduce: {
+												input: "$products.count",
+												initialValue: 0,
+												in: { $add: ["$$value", searchFor] },
+											},
+										},
+									],
+								},
+							},
+							else: null,
+						},
+					},
+				},
+			},
+			{
+				$match: {
+					count: { $ne: null },
+				},
+			},
+		]);
+
+		res.status(200).json(list);
+	} catch (error) {
+		res.status(404).json(`GET_NEEDED_PRODUCTS: ${error.message}`);
+	}
+};
+
+export const GET_LESS_BUYS = async (req, res) => {
+	try {
+		const now = new Date();
+		const thisMonth = new Date(now.getFullYear(), now.getMonth());
+
+		const list = await Products.aggregate([
+			{
+				$unwind: "$products",
+			},
+			{
+				$project: {
+					_id: 0,
+					name: "$products.name",
+					count: {
+						$slice: ["$products.count", -1],
+					},
+				},
+			},
+			{
+				$match: {
+					"count.date": { $lte: thisMonth },
+				},
+			},
+			{
+				$project: {
+					_id: 0,
+					name: 1,
+					date: {
+						$arrayElemAt: ["$count.date", 0],
+					},
+				},
+			},
+		]);
+		res.status(200).json(list);
+	} catch (error) {
+		res.status(404).json(`GET_LESS_BUYS: ${error.message}`);
+	}
+};
+/* 
+[
+	{
+		category: <value>,
+		company: <value>,
+		products: [
+			{
+				name: <value>,
+				count: [
+					{
+						store: <value>,
+						shop: <value>,
+						date: <value>
+					},
+					{
+						store: <value>,
+						shop: <value>,
+						date: <value>
+					},
+					{
+						store: <value>,
+						shop: <value>,
+						date: <value> // i want to check this last date if its from the last month wo return this { name: products.name, date: products.count.date // last count.date }
+					},
+				]
+				...
+			}
+		]
+	}
+]
+*/

@@ -2,17 +2,30 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getLists, filterSelection } from "@/redux/slices/products";
+import { getClients } from "@/redux/slices/bills";
 import { Selectbox } from "@/components/public";
 import { StatementForm } from "@/components/statements";
 import { useAxios } from "@/hooks/useAxios";
 
-const formState = { category: "", company: "", products: [], discount: 0, toStore: false };
+const formState = {
+   category: "",
+   company: "",
+   products: [],
+   discount: "",
+   client: "",
+   clientPay: "",
+   toStore: false,
+};
 export const SaleStatement = () => {
    const [formData, setFormData] = useState(formState);
    const [product, setProduct] = useState({ name: "", count: 0, price: 0 });
+
    const { data, isSubmitted, loading, error, refetch } = useAxios();
    const { loading: ccLoading, isSubmitted: ccIsSubmitted, refetch: ccRefetch } = useAxios();
+   const { refetch: clRefetch } = useAxios();
+
    const { lists, categories, companies } = useSelector(({ products }) => products);
+   const { clients } = useSelector(({ bills }) => bills);
    const dispatch = useDispatch();
 
    useEffect(() => {
@@ -22,6 +35,14 @@ export const SaleStatement = () => {
          const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-products-list");
          if (isSubmitted && error) return;
          dispatch(getLists(data));
+      })();
+
+      if (clients.length) return;
+
+      (async () => {
+         const { data, isSubmitted, error } = await clRefetch("get", "/bills/get-clients");
+         if (isSubmitted && error) return;
+         dispatch(getClients(data));
       })();
    }, []);
 
@@ -80,6 +101,7 @@ export const SaleStatement = () => {
          setFormData={setFormData}
          product={product}
          setProduct={setProduct}
+         isAdminPay={false}
          handleSelectChange={handleSelectChange}
       >
          <Selectbox
@@ -95,6 +117,13 @@ export const SaleStatement = () => {
             value={formData.company}
             loading={!ccIsSubmitted && ccLoading}
             onChange={(value) => handleSelectChange("company", value)}
+         />
+         <Selectbox
+            label="اختار اسم العميل"
+            options={clients}
+            value={formData.client}
+            loading={!ccIsSubmitted && ccLoading}
+            onChange={(value) => handleSelectChange("client", value)}
          />
       </StatementForm>
    );

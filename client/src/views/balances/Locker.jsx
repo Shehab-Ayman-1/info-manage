@@ -22,7 +22,7 @@ export const AddToLocker = () => {
       <Form
          onSubmit={handleSubmit}
          loading={loading || (isSubmitted && !error)}
-         buttonText={price.isAppend ? "اضافه" : "سحب"}
+         buttonText={price.isAppend ? "ايداع" : "سحب"}
          headerText="الخزنة"
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />

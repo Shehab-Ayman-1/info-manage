@@ -1,44 +1,55 @@
-import { Products, Locker } from "../../models/index.js";
+import { Products, Locker, Bills } from "../../models/index.js";
 
 export const SALE_PRODUCTS = async (req, res) => {
 	try {
-		const { category, company, discount, toStore, products } = req.body;
+		const { category, company, client, discount, toStore, clientPay, products } = req.body;
 
-		// Get The Products By Category & Company
+		// Get The Products Company
 		const comp = await Products.findOne({ category, company });
 
-		// Update The Products Prices & Count
-		const created = await products.map(async ({ name, count, price }) => {
-			const prod = comp.products.find((prod) => prod.name === name);
+		// Check If The Products Are Defined
+		const checkCount = await products.map(async ({ name, count }) => {
+			const product = comp.products.find((product) => product.name === name);
+			const productCount = product.count.reduce((prev, cur) => (toStore ? prev + cur.store : prev + cur.shop), 0);
+			return productCount < count ? name : null;
+		});
 
-			const totalCount = toStore ? prod?.count.reduce((prev, cur) => prev + cur.store, 0) : prod?.count.reduce((prev, cur) => prev + cur.shop, 0);
-			if (!totalCount || totalCount < count) return { modifiedCount: 0 };
+		const warnIndexes = (await Promise.all(checkCount)).filter((item) => item);
+		if (warnIndexes.length)
+			return res.status(200).json({ warn: `هذه المنتجات غير متوفرة في ${toStore ? "مخزن" : "محل"}: [${warnIndexes.join(" | ")}]` });
 
+		// Update Products
+		const updatePromise = await products.map(async ({ name, count, price }) => {
 			return await Products.updateOne(
 				{ category, company, "products.name": name },
 				{
-					$set: {
-						"products.$.price.sale": price,
-					},
-					$push: {
-						"products.$.count": toStore ? { store: -count, transferPrice: price } : { shop: -count, transferPrice: price },
-					},
+					$set: { "products.$.price.sale": price },
+					$push: { "products.$.count": { [toStore ? "store" : "shop"]: -count, transferPrice: price } },
 				}
 			);
 		});
 
-		// Get The Warn Indexes If Defined
-		const result = await Promise.all(created);
-		const warnIndexes = result.map((create, i) => (!create.modifiedCount ? i + 1 : null)).filter((item) => item !== null);
+		const updateResult = await Promise.all(updatePromise);
+		const isAllUpdated = updateResult.every((u) => u.modifiedCount);
+		if (!isAllUpdated) return res.status(200).json({ warn: "حدث خطأ ولم يتم تعديل كل المنتجات" });
 
-		// Push New Payment To THe Locker
-		const updatedProducts = products.filter((_, i) => !warnIndexes.includes(i + 1));
-		const totalPrices = updatedProducts.reduce((prev, cur) => prev + +cur?.price * +cur?.count, 0);
-		if (totalPrices) await Locker.create({ name: "كشف حساب", price: totalPrices - +discount });
+		// Create New Bill With The Client Pay
+		const bill = await Bills.findOne({ client });
+		const totalProductsCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
+		await Bills.create({
+			client,
+			address: bill.address,
+			phone: bill.phone,
+			type: "bill",
+			pay: { complete: +clientPay + +discount >= totalProductsCost, value: +clientPay, discount },
+			products,
+		});
+
+		// Append Client Pay To The Locker
+		await Locker.create({ name: `كشف حساب [${client}]`, price: +clientPay, discount });
 
 		// Send Response
-		if (warnIndexes.length) return res.status(200).json({ warn: `حدث خطا ولم يتم بيع المنتج رقم ${warnIndexes.join(" | ")}`, warnIndexes });
-		res.status(200).json({ success: "لقد تمت عملية البيع بنجاح" });
+		res.status(200).json({ success: "لقد تم تاكيد كشف الحساب بنجاح" });
 	} catch (error) {
 		res.status(404).json(`SALE_PRODUCTS: ${error.message}`);
 	}
@@ -46,40 +57,44 @@ export const SALE_PRODUCTS = async (req, res) => {
 
 export const BUY_PRODUCTS = async (req, res) => {
 	try {
-		const { supplier, discount, toStore, products } = req.body;
+		const { supplier, discount, adminPay, toStore, products } = req.body;
 
-		// Check If The Required Cost For Buy Is In Locker
-		const requiredCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
-		const lockerPrice = await Locker.find().findTotalPrices();
-		if (lockerPrice < requiredCost) return res.status(200).json({ warn: "حدث خطأ لا يتوفر هذا المبلغ في الخزنة" });
+		// Check If The Products Cost In The Locker
+		const lockerCost = await Locker.find().findTotalPrices();
+		const productsCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
+		if (lockerCost < productsCost) return res.status(200).json({ warn: "لا يتوفر هذا المبلغ في الخزنة" });
 
-		// Update The Products Price & Count
-		const created = await products.map(async ({ name, count, price }) => {
+		// Update Products
+		const updatePromise = await products.map(async ({ name, count, price }) => {
 			return await Products.updateOne(
 				{ products: { $elemMatch: { name, suppliers: supplier } } },
 				{
-					$set: {
-						"products.$.price.buy": price,
-					},
-					$push: {
-						"products.$.count": toStore ? { store: count, transferPrice: price } : { shop: count, transferPrice: price },
-					},
+					$set: { "products.$.price.buy": price },
+					$push: { "products.$.count": { [toStore ? "store" : "shop"]: count, transferPrice: price } },
 				}
 			);
 		});
 
-		// Get The Warn Indexes If Defined
-		const result = await Promise.all(created);
-		const warnIndexes = result.map((create, i) => (!create.modifiedCount ? i + 1 : null)).filter((item) => item !== null);
+		const updateResult = await Promise.all(updatePromise);
+		const isAllUpdated = updateResult.every((u) => u.modifiedCount);
+		if (!isAllUpdated) return res.status(200).json({ warn: "حدث خطأ ولم يتم تعديل كل المنتجات" });
 
-		// Push New Payment To The Locker
-		const updatedProducts = products.filter((_, i) => !warnIndexes.includes(i + 1));
-		const totalPrices = updatedProducts.reduce((prev, cur) => prev + +cur?.price * +cur?.count, 0);
-		if (totalPrices) await Locker.create({ name: `كشف مندوب [${supplier}]`, price: -totalPrices + +discount });
+		// Create New Bill With The Admin Pay
+		const bill = await Bills.findOne({ client: supplier });
+		const totalProductsCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
+		await Bills.create({
+			client: supplier,
+			phone: bill?.phone || "----",
+			type: "debt",
+			pay: { complete: +adminPay + +discount >= totalProductsCost, value: +adminPay, discount },
+			products,
+		});
+
+		// Append Client Pay To The Locker
+		await Locker.create({ name: `كشف مندوب [${supplier}]`, price: -adminPay, discount });
 
 		// Send Response
-		if (warnIndexes.length) return res.status(200).json({ warn: `حدث خطا ولم يتم شراء المنتج رقم ${warnIndexes.join(" | ")}`, warnIndexes });
-		res.status(200).json({ success: "لقد تمت عملية الشراء بنجاح" });
+		res.status(200).json({ success: "لقد تم تاكيد كشف المندوب بنجاح" });
 	} catch (error) {
 		res.status(404).json(`BUY_PRODUCTS: ${error.message}`);
 	}
