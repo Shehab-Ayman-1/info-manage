@@ -6,17 +6,21 @@ export const SALE_PRODUCTS = async (req, res) => {
 
 		// Get The Products Company
 		const comp = await Products.findOne({ category, company });
+		const totalProductsCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
 
 		// Check If The Products Are Defined
 		const checkCount = await products.map(async ({ name, count }) => {
 			const product = comp.products.find((product) => product.name === name);
 			const productCount = product.count.reduce((prev, cur) => (toStore ? prev + cur.store : prev + cur.shop), 0);
-			return productCount < count ? name : null;
+			return productCount < count ? `${name}: ${productCount}` : null;
 		});
 
 		const warnIndexes = (await Promise.all(checkCount)).filter((item) => item);
 		if (warnIndexes.length)
-			return res.status(200).json({ warn: `هذه المنتجات غير متوفرة في ${toStore ? "مخزن" : "محل"}: [${warnIndexes.join(" | ")}]` });
+			return res.status(200).json({ warn: `يتوفر فقط هذه الكمية في ${toStore ? "مخزن" : "محل"}: [${warnIndexes.join(" | ")}]` });
+
+		// Check If The Client Pay Is Greater Than Total Products Cost
+		if (+totalProductsCost <= +clientPay) return res.status(200).json({ warn: "المبلغ المحصل اكبر مبلغ الفاتورة" });
 
 		// Update Products
 		const updatePromise = await products.map(async ({ name, count, price }) => {
@@ -35,13 +39,13 @@ export const SALE_PRODUCTS = async (req, res) => {
 
 		// Create New Bill With The Client Pay
 		const bill = await Bills.findOne({ client });
-		const totalProductsCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
 		await Bills.create({
 			client,
 			address: bill.address,
 			phone: bill.phone,
+			place: toStore ? "store" : "shop",
 			type: "bill",
-			pay: { complete: +clientPay + +discount >= totalProductsCost, value: +clientPay, discount },
+			pay: { completed: +clientPay + +discount >= totalProductsCost, value: +clientPay, discount },
 			products,
 		});
 
@@ -64,6 +68,10 @@ export const BUY_PRODUCTS = async (req, res) => {
 		const productsCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
 		if (lockerCost < productsCost) return res.status(200).json({ warn: "لا يتوفر هذا المبلغ في الخزنة" });
 
+		// Check If The Client Pay Greater Than Total Products Cost
+		const totalProductsCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
+		if (+totalProductsCost <= +adminPay) return res.status(200).json({ warn: "المبلغ المحصل اكبر مبلغ الفاتورة" });
+
 		// Update Products
 		const updatePromise = await products.map(async ({ name, count, price }) => {
 			return await Products.updateOne(
@@ -81,12 +89,12 @@ export const BUY_PRODUCTS = async (req, res) => {
 
 		// Create New Bill With The Admin Pay
 		const bill = await Bills.findOne({ client: supplier });
-		const totalProductsCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
 		await Bills.create({
 			client: supplier,
 			phone: bill?.phone || "----",
+			place: toStore ? "store" : "shop",
 			type: "debt",
-			pay: { complete: +adminPay + +discount >= totalProductsCost, value: +adminPay, discount },
+			pay: { completed: +adminPay + +discount >= totalProductsCost, value: +adminPay, discount },
 			products,
 		});
 

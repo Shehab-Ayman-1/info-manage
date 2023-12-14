@@ -52,7 +52,7 @@ export const Configrator = () => {
             size="lg"
             onClick={openDrawer}
          >
-            <i className="fa fa-gear text-2xl text-white group-hover:text-white" />
+            <i className="fa fa-gear fa-spin text-2xl text-white group-hover:text-white" />
          </IconButton>
 
          <Drawer

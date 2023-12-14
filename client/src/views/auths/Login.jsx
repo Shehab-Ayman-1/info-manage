@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -10,6 +11,7 @@ export const Login = () => {
    const [formData, setFormData] = useState({ email: "", password: "" });
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const dispatch = useDispatch();
+   const navigate = useNavigate();
 
    const handleFieldChange = (event) => {
       setFormData((data) => ({ ...data, [event.target.name]: event.target.value }));
@@ -24,6 +26,8 @@ export const Login = () => {
 
       dispatch(login(data.user));
       sessionStorage.setItem("user", JSON.stringify(data.user));
+
+      navigate("/");
    };
 
    return (

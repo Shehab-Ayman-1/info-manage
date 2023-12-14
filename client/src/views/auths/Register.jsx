@@ -25,11 +25,7 @@ export const Register = () => {
       event.preventDefault();
       if (!Object.values(formData).every((p) => p)) return alert("ادخل جميع البيانات المطلوبة");
 
-      const { data, isSubmitted, error } = await refetch("post", "/users/register", formData);
-      if (isSubmitted && error) return;
-
-      dispatch(login(data.user));
-      sessionStorage.setItem("user", JSON.stringify(data.user));
+      await refetch("post", "/users/register", formData);
    };
 
    return (

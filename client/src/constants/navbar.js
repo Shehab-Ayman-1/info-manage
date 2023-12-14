@@ -71,13 +71,13 @@ export const links = [
          {
             link: "update-bill/:id",
             role: "admin",
-            disabled: true,
+            // disabled: true,
             Component: UpdateBill,
          },
          {
             link: "show-bill/:id",
             role: "admin",
-            disabled: true,
+            // disabled: true,
             Component: ShowBill,
          },
       ],
@@ -127,7 +127,7 @@ export const links = [
             Component: ShowLockerProcesses,
          },
          {
-            name: "عرض العملاء",
+            name: "عرض العملاء والمندوبين",
             link: "clients",
             role: "admin",
             icon: "fas fa-users-viewfinder",
@@ -269,6 +269,14 @@ export const links = [
       title: "الاحصائيات",
       path: "analysis",
       paths: [
+         {
+            name: "بيان حركة المنتج",
+            link: "movement",
+            role: "admin",
+            icon: "fas fa-chart-column",
+            disabled: true,
+            Component: AnalysisSales,
+         },
          {
             name: "احصائيات المبيعات",
             link: "sales",

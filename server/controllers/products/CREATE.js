@@ -1,4 +1,4 @@
-import { Products } from "../../models/index.js";
+import { Bills, Products } from "../../models/index.js";
 
 export const CREATE_CATEGORY = async (req, res) => {
 	try {
@@ -83,7 +83,7 @@ export const CREATE_SUPPLIER = async (req, res) => {
 		});
 
 		// Create New Client In Bills
-		await Bills.create({ client: supplier, address: "", phone });
+		await Bills.create({ client: supplier, type: "debt", address: "", phone });
 
 		res.status(200).json({ success: "لقد تم اضافه المندوب بنجاح" });
 	} catch (error) {

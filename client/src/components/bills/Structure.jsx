@@ -1,6 +1,6 @@
 import { Button, Card, IconButton, Typography } from "@material-tailwind/react";
 import { Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { Field, Searchbar } from "@/components/public";
@@ -13,6 +13,7 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
    const [filterResult, setFilterResult] = useState(null);
    const [openDialog, setOpenDialog] = useState(false);
    const [payment, setPayment] = useState(paymentState);
+
    const {
       data: deleteData,
       loading: dLoading,
@@ -38,7 +39,7 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
       const confirm = window.confirm("هل انت متاكد من حذف الفاتورة");
       if (!confirm) return;
 
-      const { isSubmitted, error } = await dRefetch("delete", `/bills/delete-bill/${id}`);
+      const { isSubmitted, error } = await dRefetch("delete", `/bills/delete-bill/${id}?type=${type}`);
       if (isSubmitted && error) return;
 
       setFilterResult((data) => {
@@ -75,6 +76,7 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
    return (
       <Card className="bg-transparent shadow-none">
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={paymentData} />
+         <Loading isSubmitted={dIsSubmitted} loading={dLoading} error={dError} message={deleteData} />
 
          <Typography variant="h3" color="deep-purple" className="text-center">
             {head}
@@ -88,7 +90,12 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
             }`}
          >
             {(filterResult || data)?.map(({ _id, client, billCost, pay }, i) => (
-               <div className={`flex-between relative py-2 ${i % 2 ? "bg-dimPurple" : ""}`} key={i}>
+               <div
+                  className={`flex-between relative py-2 ${i % 2 ? "bg-dimPurple" : ""} ${
+                     !billCost ? "!hidden" : ""
+                  }`}
+                  key={i}
+               >
                   <div
                      className={`border-sp absolute -z-10 w-full !border-primary-200 dark:!border-primary-900 ${
                         pay?.completed ? "" : "hidden"
@@ -179,6 +186,7 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
                   color="deep-purple"
                   className="text-xl hover:brightness-125"
                   fullWidth
+                  disabled={loading}
                   onClick={handlePayment}
                >
                   اضافه

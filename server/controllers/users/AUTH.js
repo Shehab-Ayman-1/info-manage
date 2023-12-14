@@ -9,7 +9,7 @@ export const LOGIN = async (req, res) => {
 
 		// [1] Check If The User If Already Register
 		const user = await Users.findOne({ $or: [{ email: email.trim() }, { phone: email.trim() }] });
-		if (!user) return res.status(400).json({ error: "الايميل او رقم الهاتف او كلمة السر غير صحيحة" });
+		if (!user) return res.status(400).json({ error: "الايميل او كلمة السر غير صحيحة" });
 
 		// [2] Check If The User Password Is Currect
 		const compare = bcrypt.compareSync(password, user.password);

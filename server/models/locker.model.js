@@ -3,7 +3,6 @@ import { model, Schema } from "mongoose";
 const schema = new Schema({
 	name: { type: String, default: "" },
 	price: { type: Number, default: 0 },
-	discount: { type: Number, default: 0 },
 	date: { type: Date, default: new Date() },
 });
 

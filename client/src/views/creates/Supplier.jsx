@@ -1,5 +1,5 @@
 import { Button, Typography, Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwind/react";
-import { Tab, TabPanel, TabsBody, TabsHeader } from "@material-tailwind/react";
+import { TabPanel, TabsBody } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -56,6 +56,13 @@ export const AddSupplier = () => {
 
    const handleFieldChange = (event) => {
       return setFormData((data) => ({ ...data, [event.target.name]: event.target.value }));
+   };
+
+   const handleDelete = (index) => {
+      setFormData((data) => {
+         const products = data.products.filter((_, idx) => idx !== index);
+         return { ...data, products };
+      });
    };
 
    const handleSubmitProduct = () => {
@@ -115,7 +122,13 @@ export const AddSupplier = () => {
          <div className="products">
             {formData.products.map(({ name }, i) => (
                <Typography variant="lead" className="text-dimWhite" key={i}>
-                  {i + 1} - {name}
+                  <i
+                     className="fa fa-times ml-2 text-lg  text-red-500 hover:text-red-900"
+                     onClick={() => handleDelete(i)}
+                  />
+                  <span>
+                     {i + 1} - {name}
+                  </span>
                </Typography>
             ))}
          </div>

@@ -5,49 +5,83 @@ import { Col, Row, Table } from "@/components/table";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
 
-const TABLE_HEAD = ["#", "العميل", "العنوان", "رقم الهاتف", "النوع", "الخصومات", "عدد الفواتير", "المبلغ المتبقي"];
+const TABLE_HEAD = ["#", "العميل", "العنوان", "رقم الهاتف", "الخصومات", "تكلفه الفواتير", "المبلغ المتبقي"];
 export const ShowClients = () => {
-   const { data, loading, error, isSubmitted, refetch } = useAxios();
-   const [total, setTotal] = useState(0);
+   const [total, setTotal] = useState({ bills: 0, debts: 0 });
+   const {
+      data: bills,
+      loading: bLoading,
+      error: bError,
+      isSubmitted: bIsSubmitted,
+   } = useAxios("get", "/bills/get-clients-list?type=bill");
+   const {
+      data: debts,
+      loading: dLoading,
+      error: dError,
+      isSubmitted: dIsSubmitted,
+   } = useAxios("get", "/bills/get-clients-list?type=debt");
 
    useEffect(() => {
-      if (data) return;
-
-      (async () => {
-         await refetch("get", "/bills/get-clients-list");
-      })();
-   }, []);
-
-   useEffect(() => {
-      if (!data) return;
-
-      setTotal(() => data.reduce((prev, cur) => prev + cur.neededCost, 0));
-   }, [data]);
+      if (bills) setTotal((total) => ({ ...total, bills: bills.reduce((prev, cur) => prev + cur.neededCost, 0) }));
+      if (debts) setTotal((total) => ({ ...total, debts: debts.reduce((prev, cur) => prev + cur.neededCost, 0) }));
+   }, [bills, debts]);
 
    return (
       <Fragment>
-         <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
+         <Loading isSubmitted={bIsSubmitted} loading={bLoading} error={bError} message={bills} />
+         <Loading isSubmitted={dIsSubmitted} loading={dLoading} error={dError} message={debts} />
 
          <Typography variant="h3" color="deep-purple">
             عرض العملاء
          </Typography>
 
+         <Typography variant="h2" color="gray" className={bills?.length ? "hidden" : "my-6"}>
+            لا يوجد فواتير للعملاء
+         </Typography>
+
          <Table
             headers={TABLE_HEAD}
-            rowsLength={data?.length}
+            rowsLength={bills?.length}
             footerSpan={[4, 4]}
             footerTitle="اجمالي المبالغ المتبقيه"
-            total={total}
+            total={total?.bills}
          >
-            {data?.map(({ client, address, phone, type, discount, billsCount, neededCost }, i) => (
+            {bills?.map(({ client, address, phone, discount, billsCost, neededCost }, i) => (
                <Row key={i} index={i}>
                   <Col>{i + 1}</Col>
                   <Col>{client}</Col>
-                  <Col>{address}</Col>
-                  <Col>{phone}</Col>
-                  <Col>{type === "bill" ? "فاتورة" : type === "debt" ? "مديونية" : "----"}</Col>
-                  <Col>{discount}</Col>
-                  <Col>{billsCount}</Col>
+                  <Col>{address || "----"}</Col>
+                  <Col>{phone || "----"}</Col>
+                  <Col>{discount || "----"}</Col>
+                  <Col>{billsCost}</Col>
+                  <Col>{neededCost}</Col>
+               </Row>
+            ))}
+         </Table>
+
+         <Typography variant="h3" color="deep-purple" className="mt-10">
+            عرض المندوبين
+         </Typography>
+
+         <Typography variant="h2" color="gray" className={debts?.length ? "hidden" : "my-6"}>
+            لا يوجد مديونيات
+         </Typography>
+
+         <Table
+            headers={TABLE_HEAD}
+            rowsLength={debts?.length}
+            footerSpan={[4, 4]}
+            footerTitle="اجمالي المبالغ المتبقيه"
+            total={total?.debts}
+         >
+            {debts?.map(({ client, address, phone, discount, billsCost, neededCost }, i) => (
+               <Row key={i} index={i}>
+                  <Col>{i + 1}</Col>
+                  <Col>{client}</Col>
+                  <Col>{address || "----"}</Col>
+                  <Col>{phone || "----"}</Col>
+                  <Col>{discount || "----"}</Col>
+                  <Col>{billsCost}</Col>
                   <Col>{neededCost}</Col>
                </Row>
             ))}

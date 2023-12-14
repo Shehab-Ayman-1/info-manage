@@ -6,12 +6,7 @@ export const GET_BILLS = async (req, res) => {
 		const bills = await Bills.find({ type }).select(["_id", "client", "products", "pay"]);
 		const clients = bills.map(({ _id, client, pay, products }) => {
 			const billCost = products.reduce((prev, cur) => prev + cur.count * cur.price, 0);
-			return {
-				_id,
-				client,
-				billCost,
-				pay,
-			};
+			return { _id, client, billCost, pay };
 		});
 
 		res.status(200).json(clients);
@@ -20,9 +15,22 @@ export const GET_BILLS = async (req, res) => {
 	}
 };
 
+export const GET_BILL = async (req, res) => {
+	try {
+		const { id } = req.params;
+
+		const bill = await Bills.findById(id);
+		if (!bill) return res.status(400).json({ error: "حدث خطأ ولم يتم العثور علي الفاتورة" });
+
+		res.status(200).json(bill);
+	} catch (error) {
+		res.status(404).json(`GET_BILL: ${error.message}`);
+	}
+};
+
 export const GET_CLIENTS_NAMES = async (req, res) => {
 	try {
-		const clients = await Bills.find().distinct("client");
+		const clients = await Bills.find({ type: "bill" }).distinct("client");
 
 		res.status(200).json(clients);
 	} catch (error) {
@@ -32,49 +40,35 @@ export const GET_CLIENTS_NAMES = async (req, res) => {
 
 export const GET_CLIENTS_LIST = async (req, res) => {
 	try {
+		const { type } = req.query;
 		const list = await Bills.aggregate([
 			{
 				$unwind: "$products",
 			},
 			{
+				$match: { type },
+			},
+			{
 				$group: {
 					_id: "$client",
-					billsCount: {
-						$count: {},
-					},
-					neededCost: {
-						$push: {
-							$sum: {
-								$multiply: ["$products.count", "$products.price"],
-							},
-						},
-					},
-					type: {
-						$addToSet: "$type",
-					},
-					phone: {
-						$addToSet: "$phone",
-					},
-					address: {
-						$addToSet: "$address",
-					},
-					discount: {
-						$push: {
-							$sum: "$pay.discount",
-						},
-					},
+					billsCost: { $push: { $sum: { $multiply: ["$products.count", "$products.price"] } } },
+					phone: { $addToSet: "$phone" },
+					address: { $addToSet: "$address" },
+					discount: { $addToSet: { $sum: "$pay.discount" } },
+					payValue: { $addToSet: "$pay.value" },
 				},
 			},
 			{
 				$project: {
 					_id: 0,
 					client: "$_id",
-					billsCount: 1,
-					neededCost: { $sum: "$neededCost" },
-					discount: { $arrayElemAt: ["$discount", 0] },
-					address: { $arrayElemAt: ["$address", 0] },
-					phone: { $arrayElemAt: ["$phone", 0] },
-					type: { $arrayElemAt: ["$type", 0] },
+					billsCost: { $sum: "$billsCost" },
+					neededCost: {
+						$subtract: [{ $sum: "$billsCost" }, { $sum: [{ $sum: "$payValue" }, { $sum: "$discount" }] }],
+					},
+					discount: { $sum: "$discount" },
+					address: { $first: "$address" },
+					phone: { $first: "$phone" },
 				},
 			},
 		]);
@@ -83,30 +77,3 @@ export const GET_CLIENTS_LIST = async (req, res) => {
 		res.status(404).json(`GET_CLIENTS_LIST: ${error.message}`);
 	}
 };
-/* 
-[
-  {
-    "billsCount": 6,
-    "neededCost": [
-      15000,
-      1700,
-      8000,
-      12000,
-		15000,
-      8400
-    ],
-    "client": "الحاج رجب",
-    "discount": 2000
-  },
-  {
-    "billsCount": 6,
-    "neededCost": [
-      24000,
-      5000,
-      20000
-    ],
-    "client": "ميدو موبيل",
-    "discount": 0
-  }
-]
-*/

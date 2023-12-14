@@ -40,7 +40,7 @@ export const AddCategory = () => {
                alt="product"
                className="m-auto mb-4 block h-28 w-28 rounded-full shadow-sp"
             />
-            <Field label="رابط الصورة" name="img" value={formData.img} onChange={handleFieldChange} />
+            <Field label="رابط صورة الشركة" name="img" value={formData.img} onChange={handleFieldChange} />
          </div>
 
          <Field label="اسم القسم" name="category" value={formData.category} onChange={handleFieldChange} />

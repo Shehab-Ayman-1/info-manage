@@ -440,34 +440,3 @@ export const GET_LESS_BUYS = async (req, res) => {
 		res.status(404).json(`GET_LESS_BUYS: ${error.message}`);
 	}
 };
-/* 
-[
-	{
-		category: <value>,
-		company: <value>,
-		products: [
-			{
-				name: <value>,
-				count: [
-					{
-						store: <value>,
-						shop: <value>,
-						date: <value>
-					},
-					{
-						store: <value>,
-						shop: <value>,
-						date: <value>
-					},
-					{
-						store: <value>,
-						shop: <value>,
-						date: <value> // i want to check this last date if its from the last month wo return this { name: products.name, date: products.count.date // last count.date }
-					},
-				]
-				...
-			}
-		]
-	}
-]
-*/

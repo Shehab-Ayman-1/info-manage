@@ -1,10 +1,11 @@
 import { model, Schema } from "mongoose";
 
 const schema = new Schema({
+	type: String, // bill or debt
+	place: String, // shop or store
 	client: { type: String, trim: true },
 	address: { type: String, trim: true },
 	phone: { type: String, trim: true },
-	type: String, // bill or debt
 	date: { type: Date, default: new Date() },
 	pay: {
 		completed: { type: Boolean, default: false },

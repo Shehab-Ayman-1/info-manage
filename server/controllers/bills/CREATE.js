@@ -8,7 +8,7 @@ export const CREATE_CLIENT = async (req, res) => {
 		const exists = await Bills.exists({ client });
 		if (exists) return res.status(400).json({ error: "حدث خطأ ، هذا العميل موجود بالفعل" });
 
-		await Bills.create({ client, address, phone, bills: [] });
+		await Bills.create({ client, address, type: "bill", phone, bills: [] });
 
 		res.status(200).json({ success: "لقد تم اضافه العميل بنجاح" });
 	} catch (error) {
