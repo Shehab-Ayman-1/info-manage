@@ -5,7 +5,7 @@ import { Home, Profile } from "@/views";
 import { Login, Register } from "@/views/auths";
 
 // Show
-import { Show_Shop_Store, ShowInsufficients, ShowLessBuys, ShowClients } from "@/views/show";
+import { Show_Shop_Store, ShowClients } from "@/views/show";
 import { ShowLockerProcesses, ShowBills, ShowDebts } from "@/views/show";
 
 // Creates
@@ -19,7 +19,7 @@ import { ShowBalances, AddToLocker, TodayBuysSales } from "@/views/balances";
 
 // Analysis
 import { AnalysisProductMovement, AnalysisForMonth, AnalysisForYear } from "@/views/analysis";
-import { AnalysisSales, AnalysisWins } from "@/views/analysis";
+import { AnalysisSales, AnalysisWins, AnalysisInsufficients, AnalysisLessBuys } from "@/views/analysis";
 
 // Bills
 import { ShowBill, UpdateBill } from "@/views/bills";
@@ -104,22 +104,6 @@ export const links = [
             Component: Show_Shop_Store,
          },
          {
-            name: "عرض النواقص",
-            link: "insufficients",
-            role: "admin",
-            icon: "fas fa-magnifying-glass-minus",
-            // disabled: true,
-            Component: ShowInsufficients,
-         },
-         {
-            name: "عرض الاقل مبيعاً",
-            link: "less-buys",
-            role: "admin",
-            icon: "fas fa-chart-gantt",
-            // disabled: true,
-            Component: ShowLessBuys,
-         },
-         {
             name: "عرض معاملات الخزنة",
             link: "locker-processes",
             role: "admin",
@@ -193,7 +177,7 @@ export const links = [
 
    // Creates
    {
-      title: "انشاء",
+      title: "جديد",
       path: "creates",
       paths: [
          {
@@ -293,6 +277,22 @@ export const links = [
             icon: "fas fa-chart-line",
             // disabled: true,
             Component: AnalysisWins,
+         },
+         {
+            name: "حصر نواقص المحل / المخزن",
+            link: "insufficients",
+            role: "admin",
+            icon: "fas fa-magnifying-glass-minus",
+            // disabled: true,
+            Component: AnalysisInsufficients,
+         },
+         {
+            name: "المنتجات الاقل مبيعاً",
+            link: "less-buys",
+            role: "admin",
+            icon: "fas fa-chart-gantt",
+            // disabled: true,
+            Component: AnalysisLessBuys,
          },
          {
             name: "المنتجات الاكثر مبيعاً (في الشهر)",

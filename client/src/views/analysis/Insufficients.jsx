@@ -2,14 +2,14 @@ import { Typography } from "@material-tailwind/react";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Selectbox, Switch } from "@/components/public";
+import { PageHead, Selectbox } from "@/components/public";
 import { getSuppliers } from "@/redux/slices/products";
 import { Col, Row, Table } from "@/components/table";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
 const TABLE_HEAD = ["#", "المنتج", "السعر", "العدد الحالي", "العدد الناقص", "الاجمالي"];
-export const ShowInsufficients = () => {
+export const AnalysisInsufficients = () => {
    const { suppliers } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 
@@ -45,9 +45,7 @@ export const ShowInsufficients = () => {
       <Fragment>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <Typography variant="h3" color="deep-purple" className="text-center">
-            عرض النواقص
-         </Typography>
+         <PageHead text="عرض النواقص" />
 
          <div className="flex-between my-5 flex-col px-4 sm:flex-row">
             <Selectbox

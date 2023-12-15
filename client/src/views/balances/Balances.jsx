@@ -3,6 +3,7 @@ import { Card, Typography } from "@material-tailwind/react";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { Table, Row, Col } from "@/components/table";
+import { PageHead } from "@/components/public";
 
 const TABLE_HEAD = ["الخزنة", "المحل", "المخزن"];
 export const ShowBalances = () => {
@@ -28,13 +29,7 @@ export const ShowBalances = () => {
 
    return (
       <Card className="rounded-none bg-transparent">
-         <Typography
-            variant="h4"
-            color="deep-purple"
-            className="my-4 px-2 text-center text-2xl sm:px-4 sm:text-3xl md:text-5xl"
-         >
-            حسب سعر الشراء
-         </Typography>
+         <PageHead text="حسب سعر الشراء" />
 
          <Table
             headers={TABLE_HEAD}
@@ -49,13 +44,7 @@ export const ShowBalances = () => {
             </Row>
          </Table>
 
-         <Typography
-            variant="h4"
-            color="deep-purple"
-            className="mb-4 mt-20 px-2 text-center text-2xl sm:px-4 sm:text-3xl md:text-5xl"
-         >
-            حسب سعر البيع
-         </Typography>
+         <PageHead text="حسب سعر البيع" className="mt-10" />
 
          <Table
             headers={TABLE_HEAD}

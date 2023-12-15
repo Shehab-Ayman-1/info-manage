@@ -4,6 +4,7 @@ import { Fragment, useEffect } from "react";
 import { Col, Row, Table } from "@/components/table";
 import { useAxios } from "@/hooks";
 import { Loading } from "@/layout/Loading";
+import { PageHead } from "@/components/public";
 
 const TABLE_HEAD = ["#", "السبب", "العملية", "المبلغ", "التاريخ"];
 export const ShowLockerProcesses = () => {
@@ -17,9 +18,7 @@ export const ShowLockerProcesses = () => {
 
    return (
       <Fragment>
-         <Typography variant="h3" color="deep-purple" className="">
-            عرض معاملات الخزنة
-         </Typography>
+         <PageHead text="عرض معاملات الخزنة" />
 
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 

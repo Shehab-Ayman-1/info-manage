@@ -3,7 +3,7 @@ import { Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwi
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { Field, Searchbar } from "@/components/public";
+import { Field, PageHead, Searchbar } from "@/components/public";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
 
@@ -78,9 +78,7 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={paymentData} />
          <Loading isSubmitted={dIsSubmitted} loading={dLoading} error={dError} message={deleteData} />
 
-         <Typography variant="h3" color="deep-purple" className="text-center">
-            {head}
-         </Typography>
+         <PageHead text={head} />
 
          <Searchbar setSearchText={setSearchText} />
 

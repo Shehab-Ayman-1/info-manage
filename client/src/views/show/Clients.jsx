@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState } from "react";
 import { Col, Row, Table } from "@/components/table";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
+import { PageHead } from "@/components/public";
 
 const TABLE_HEAD = ["#", "العميل", "رقم الهاتف", "الخصومات", "تكلفه الفواتير", "المبلغ المتبقي"];
 export const ShowClients = () => {
@@ -31,9 +32,7 @@ export const ShowClients = () => {
          <Loading isSubmitted={bIsSubmitted} loading={bLoading} error={bError} message={bills} />
          <Loading isSubmitted={dIsSubmitted} loading={dLoading} error={dError} message={debts} />
 
-         <Typography variant="h3" color="deep-purple">
-            عرض العملاء
-         </Typography>
+         <PageHead text="عرض العملاء" />
 
          <Typography variant="h2" color="gray" className={bills?.length ? "hidden" : "my-6"}>
             لا يوجد فواتير للعملاء
@@ -58,9 +57,7 @@ export const ShowClients = () => {
             ))}
          </Table>
 
-         <Typography variant="h3" color="deep-purple" className="mt-10">
-            عرض المندوبين
-         </Typography>
+         <PageHead text="عرض المندوبين" className="mt-10" />
 
          <Typography variant="h2" color="gray" className={debts?.length ? "hidden" : "my-6"}>
             لا يوجد مديونيات

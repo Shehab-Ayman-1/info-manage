@@ -5,7 +5,7 @@ import { Form } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
-const TABLE_HEAD = ["#", "المنتج", "العملية", "المكان", "العدد", "السعر", "الاجمالي"];
+const TABLE_HEAD = ["المنتج", "العملية", "المكان", "العدد", "السعر", "الاجمالي"];
 export const TodayBuysSales = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const [total, setTotal] = useState(0);
@@ -43,13 +43,17 @@ export const TodayBuysSales = () => {
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <Table headers={TABLE_HEAD} rowsLength={data?.length} footerSpan={[4, 3]} total={total}>
+         <Table
+            headers={TABLE_HEAD}
+            rowsLength={data?.length}
+            footerSpan={[4, 3]}
+            total={total}
+            tableStyle="!border-none"
+         >
             {data &&
                data?.map(({ name, products }, i) =>
                   products?.map(({ shop, store, buy, sale }, j) => (
                      <Row key={j} index={i}>
-                        {!j ? <Col rowSpan={products?.length}>{i + 1}</Col> : null}
-
                         {!j ? <Col rowSpan={products?.length}>{name}</Col> : null}
 
                         <Col>{shop < 0 || store < 0 ? "بيع" : shop > 0 || store > 0 ? "شراء" : "----"}</Col>

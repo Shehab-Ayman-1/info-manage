@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Chart } from "@/components/public";
+import { Chart, PageHead } from "@/components/public";
 import { Selectbox } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
@@ -69,9 +69,7 @@ export const AnalysisProductMovement = () => {
       <Fragment>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <Typography variant="h3" color="deep-purple">
-            بيان حركة بيع المنتج
-         </Typography>
+         <PageHead text="بيان حركة بيع المنتج" />
 
          <div className="flex-between flex-wrap md:flex-nowrap">
             <Selectbox

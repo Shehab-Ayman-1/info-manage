@@ -34,6 +34,7 @@ export const AddToLocker = () => {
             label="المبلغ"
             onChange={(event) => setPrice((p) => ({ ...p, value: +event.target.value }))}
          />
+         
          <div className="mt-5">
             <Switch
                label={price.isAppend ? "اضافه الي الخزنة" : "سحب من الخزنة"}

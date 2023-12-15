@@ -5,3 +5,4 @@ export * from "./Switch";
 export * from "./Tabs";
 export * from "./Searchbar";
 export * from "./Chart";
+export * from "./PageHead";

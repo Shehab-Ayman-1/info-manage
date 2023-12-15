@@ -4,9 +4,10 @@ import { Fragment, useEffect } from "react";
 import { Col, Row, Table } from "@/components/table";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
+import { PageHead } from "@/components/public";
 
 const TABLE_HEAD = ["#", "المنتج", "اخر بيع"];
-export const ShowLessBuys = () => {
+export const AnalysisLessBuys = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
 
    useEffect(() => {
@@ -21,9 +22,7 @@ export const ShowLessBuys = () => {
       <Fragment>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <Typography variant="h3" color="deep-purple">
-            عرض المنتجات الاقل مبيعاً
-         </Typography>
+         <PageHead text="المنتجات الاقل مبيعاً" />
 
          <Table headers={TABLE_HEAD} rowsLength={data?.length}>
             {data?.map(({ name, date }, i) => (

@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 
-import { Field } from "@/components/public";
+import { Field, PageHead } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { Col, Row, Table } from "@/components/table";
@@ -23,9 +23,8 @@ export const AnalysisForMonth = () => {
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
          <div className="flex-between flex-wrap md:flex-nowrap">
-            <Typography variant="h3" color="deep-purple">
-               المنتجات الاكثر مبيعاً في الشهر
-            </Typography>
+            <PageHead text="المنتجات الاكثر مبيعاً في الشهر" />
+
             <Field
                type="month"
                label="اختر الشهر"

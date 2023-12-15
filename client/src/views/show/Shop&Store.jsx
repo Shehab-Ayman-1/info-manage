@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
-import { Searchbar, Switch } from "@/components/public";
+import { PageHead, Searchbar, Switch } from "@/components/public";
 import { Table, Row, Col } from "@/components/table";
 
 const TABLE_HEAD = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];
@@ -66,9 +66,8 @@ export const Show_Shop_Store = () => {
          <Searchbar setSearchText={setSearchText} />
 
          <div className="flex-between mb-2 flex-col px-4 sm:flex-row">
-            <Typography variant="h4" className="text-3xl text-primary sm:text-4xl md:text-6xl">
-               عرض بضائع {pathname === "store" ? "المخزن" : "المحل"}
-            </Typography>
+            <PageHead text={`عرض بضائع ${pathname === "store" ? "المخزن" : "المحل"}`} />
+
             <Switch
                label={isBuyPrice ? "سعر الشراء" : "سعر البيع"}
                checked={isBuyPrice}
