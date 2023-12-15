@@ -31,9 +31,6 @@ export const ShowBill = () => {
                العميل: {data?.client || "----"}
             </Typography>
             <Typography variant="h4" color="white" className="whitespace-nowrap">
-               العنوان: {data?.address || "----"}
-            </Typography>
-            <Typography variant="h4" color="white" className="whitespace-nowrap">
                رقم الهاتف: {data?.phone || "----"}
             </Typography>
          </div>

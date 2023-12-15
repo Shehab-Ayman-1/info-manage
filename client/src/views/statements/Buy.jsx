@@ -31,7 +31,7 @@ export const BuyStatement = () => {
       const produc = products?.find(({ name }) => name === product.name);
       if (!produc) return;
 
-      setProduct((data) => ({ ...data, price: produc?.price || 0 }));
+      setProduct((data) => ({ ...data, price: produc?.buyPrice || 0 }));
    }, [product.name]);
 
    useEffect(() => {

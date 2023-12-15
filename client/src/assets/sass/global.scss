@@ -171,6 +171,14 @@ html {
       ::-webkit-scrollbar-track {
          @apply bg-black;
       }
+
+      [type="month"]::-webkit-calendar-picker-indicator {
+         cursor: pointer;
+         filter: invert(1);
+         &:hover {
+            opacity: 0.8;
+         }
+      }
    }
    &[dir="rtl"] {
       font-family: "STV", sans-serif;

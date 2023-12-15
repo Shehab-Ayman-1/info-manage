@@ -83,7 +83,7 @@ export const CREATE_SUPPLIER = async (req, res) => {
 		});
 
 		// Create New Client In Bills
-		await Bills.create({ client: supplier, type: "debt", address: "", phone });
+		await Bills.create({ client: supplier, type: "debt", phone });
 
 		res.status(200).json({ success: "لقد تم اضافه المندوب بنجاح" });
 	} catch (error) {

@@ -5,7 +5,7 @@ import { Col, Row, Table } from "@/components/table";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
 
-const TABLE_HEAD = ["#", "العميل", "العنوان", "رقم الهاتف", "الخصومات", "تكلفه الفواتير", "المبلغ المتبقي"];
+const TABLE_HEAD = ["#", "العميل", "رقم الهاتف", "الخصومات", "تكلفه الفواتير", "المبلغ المتبقي"];
 export const ShowClients = () => {
    const [total, setTotal] = useState({ bills: 0, debts: 0 });
    const {
@@ -46,11 +46,10 @@ export const ShowClients = () => {
             footerTitle="اجمالي المبالغ المتبقيه"
             total={total?.bills}
          >
-            {bills?.map(({ client, address, phone, discount, billsCost, neededCost }, i) => (
+            {bills?.map(({ client, phone, discount, billsCost, neededCost }, i) => (
                <Row key={i} index={i}>
                   <Col>{i + 1}</Col>
                   <Col>{client}</Col>
-                  <Col>{address || "----"}</Col>
                   <Col>{phone || "----"}</Col>
                   <Col>{discount || "----"}</Col>
                   <Col>{billsCost}</Col>
@@ -74,11 +73,10 @@ export const ShowClients = () => {
             footerTitle="اجمالي المبالغ المتبقيه"
             total={total?.debts}
          >
-            {debts?.map(({ client, address, phone, discount, billsCost, neededCost }, i) => (
+            {debts?.map(({ client, phone, discount, billsCost, neededCost }, i) => (
                <Row key={i} index={i}>
                   <Col>{i + 1}</Col>
                   <Col>{client}</Col>
-                  <Col>{address || "----"}</Col>
                   <Col>{phone || "----"}</Col>
                   <Col>{discount || "----"}</Col>
                   <Col>{billsCost}</Col>

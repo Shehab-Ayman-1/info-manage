@@ -9,7 +9,7 @@ import { Show_Shop_Store, ShowInsufficients, ShowLessBuys, ShowClients } from "@
 import { ShowLockerProcesses, ShowBills, ShowDebts } from "@/views/show";
 
 // Creates
-import { AddCategory, AddCompany, AddProducts, AddSupplier, AddClient, AddBill, AddDebt } from "@/views/creates";
+import { AddCategory, AddCompany, AddProducts, AddSupplier, AddClient } from "@/views/creates";
 
 // Statements
 import { BuyStatement, SaleStatement, TransferStatement, WorkersStatement } from "@/views/statements";
@@ -18,7 +18,8 @@ import { BuyStatement, SaleStatement, TransferStatement, WorkersStatement } from
 import { ShowBalances, AddToLocker, TodayBuysSales } from "@/views/balances";
 
 // Analysis
-import { AnalysisSales, AnalysisWins, AnalysisForMonth, AnalysisForYear } from "@/views/analysis";
+import { AnalysisProductMovement, AnalysisForMonth, AnalysisForYear } from "@/views/analysis";
+import { AnalysisSales, AnalysisWins } from "@/views/analysis";
 
 // Bills
 import { ShowBill, UpdateBill } from "@/views/bills";
@@ -270,19 +271,19 @@ export const links = [
       path: "analysis",
       paths: [
          {
-            name: "بيان حركة المنتج",
+            name: "بيان حركة بيع المنتج",
             link: "movement",
             role: "admin",
             icon: "fas fa-chart-column",
-            disabled: true,
-            Component: AnalysisSales,
+            // disabled: true,
+            Component: AnalysisProductMovement,
          },
          {
             name: "احصائيات المبيعات",
             link: "sales",
             role: "admin",
             icon: "fas fa-chart-column",
-            disabled: true,
+            // disabled: true,
             Component: AnalysisSales,
          },
          {
@@ -290,23 +291,23 @@ export const links = [
             link: "wins",
             role: "admin",
             icon: "fas fa-chart-line",
-            disabled: true,
+            // disabled: true,
             Component: AnalysisWins,
          },
          {
-            name: "جرد شهر معين",
+            name: "المنتجات الاكثر مبيعاً (في الشهر)",
             link: "month",
             role: "admin",
             icon: "far fa-calendar-days",
-            disabled: true,
+            // disabled: true,
             Component: AnalysisForMonth,
          },
          {
-            name: "جرد سنه معينه",
+            name: "المنتجات الاكثر مبيعاً (في السنه)",
             link: "year",
             role: "admin",
             icon: "far fa-calendar-check",
-            disabled: true,
+            // disabled: true,
             Component: AnalysisForYear,
          },
       ],

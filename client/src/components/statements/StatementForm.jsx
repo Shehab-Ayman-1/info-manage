@@ -1,7 +1,7 @@
 import { Button, IconButton } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 
-import { Field, Form, Selectbox, Switch } from "@/components/public";
+import { Field, Form, Selectbox } from "@/components/public";
 import { Table, Row, Col } from "@/components/table";
 import { Loading } from "@/layout/Loading";
 import { useEffect, useState } from "react";
@@ -43,9 +43,12 @@ export const StatementForm = ({
    };
 
    const handleAddField = () => {
-      if (!Object.values(product).every((p) => p)) return alert("يجب ادخال جميل البيانات المطلوبه");
+      const { buyPrice, ...data } = product;
+      if (!Object.values(data).every((p) => p)) return alert("يجب ادخال جميل البيانات المطلوبه");
       setFormData((data) => ({ ...data, products: data.products.concat(product) }));
-      setProduct(() => ({ name: null, count: 0, price: 0 }));
+
+      if (text.headerText === "كشف حساب") setProduct(() => ({ name: null, count: 0, price: 0, buyPrice: 0 }));
+      else setProduct(() => ({ name: null, count: 0, price: 0 }));
    };
 
    const handleDeleteField = (index) => {
@@ -56,12 +59,7 @@ export const StatementForm = ({
    };
 
    return (
-      <Form
-         onSubmit={onSubmit}
-         headerText={text?.headerText}
-         buttonText={text?.buttonText}
-         loading={(isSubmitted && !error && !data?.warn) || loading}
-      >
+      <Form onSubmit={onSubmit} headerText={text?.headerText} buttonText={text?.buttonText}>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
          {children}

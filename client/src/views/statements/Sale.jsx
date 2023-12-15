@@ -18,7 +18,7 @@ const formState = {
 };
 export const SaleStatement = () => {
    const [formData, setFormData] = useState(formState);
-   const [product, setProduct] = useState({ name: "", count: 0, price: 0 });
+   const [product, setProduct] = useState({ name: "", count: 0, price: 0, buyPrice: 0 });
 
    const { data, isSubmitted, loading, error, refetch } = useAxios();
    const { loading: ccLoading, isSubmitted: ccIsSubmitted, refetch: ccRefetch } = useAxios();
@@ -58,7 +58,7 @@ export const SaleStatement = () => {
       const produc = company.products.find(({ name }) => name === product.name);
       if (!produc) return;
 
-      setProduct((data) => ({ ...data, price: produc?.price || 0 }));
+      setProduct((data) => ({ ...data, price: produc?.salePrice || 0, buyPrice: produc?.buyPrice || 0 }));
    }, [product.name]);
 
    useEffect(() => {
@@ -68,15 +68,6 @@ export const SaleStatement = () => {
    useEffect(() => {
       dispatch(filterSelection({ category: formData.category, company: formData.company }));
    }, [formData.company]);
-
-   useEffect(() => {
-      if (!data?.warnIndexes) return;
-
-      setFormData((form) => {
-         const products = form.products.filter((_, index) => data.warnIndexes.includes(index + 1));
-         return { ...form, products };
-      });
-   }, [data]);
 
    const handleSelectChange = (name, value) => {
       if (name === "name") return setProduct((data) => ({ ...data, [name]: value }));

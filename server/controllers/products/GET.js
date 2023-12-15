@@ -1,4 +1,6 @@
-import { Products, Locker } from "../../models/index.js";
+import { Products, Locker, Bills } from "../../models/index.js";
+
+const monthsByName = ["", "يناير", "فبراير", "مارس", "ابريل", "مايو", "يونيو", "يوليو", "اغسطس", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"];
 
 // Pages
 export const GET_PROFILE = async (req, res) => {
@@ -199,7 +201,8 @@ export const GET_PRODUCTS_LIST = async (req, res) => {
 							company: "$company",
 							products: {
 								name: "$products.name",
-								price: "$products.price.sale",
+								salePrice: "$products.price.sale",
+								buyPrice: "$products.price.buy",
 							},
 						},
 					},
@@ -219,8 +222,8 @@ export const GET_PRODUCTS_LIST = async (req, res) => {
 			{
 				$project: {
 					_id: 0,
-					companies: 1,
 					category: "$_id",
+					companies: 1,
 				},
 			},
 			{
@@ -259,7 +262,8 @@ export const GET_SUPPLIERS_LIST = async (req, res) => {
 					products: {
 						$push: {
 							name: "$products.name",
-							price: "$products.price.buy",
+							buyPrice: "$products.price.buy",
+							salePrice: "$products.price.sale",
 						},
 					},
 				},
@@ -274,7 +278,7 @@ export const GET_SUPPLIERS_LIST = async (req, res) => {
 			{
 				$sort: {
 					supplier: 1,
-					products: 1,
+					"products.name": 1,
 				},
 			},
 		]);
@@ -300,7 +304,6 @@ export const GET_TODAY_RESET = async (req, res) => {
 			{
 				$match: { "products.count.date": { $gt: today } },
 			},
-
 			{
 				$group: {
 					_id: "$products.name",
@@ -438,5 +441,250 @@ export const GET_LESS_BUYS = async (req, res) => {
 		res.status(200).json(list);
 	} catch (error) {
 		res.status(404).json(`GET_LESS_BUYS: ${error.message}`);
+	}
+};
+
+export const GET_PRODUCT_MOVEMENT = async (req, res) => {
+	try {
+		const { category, company, name } = req.query;
+		if (!category || !company || !name) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبة" });
+
+		// Find Company
+		const comp = await Products.findOne({ category, company, "products.name": name });
+		if (!comp) return res.status(400).json({ error: "حدث خطأ ولم يتم العثور علي المنتج" });
+
+		// Find Product
+		const product = comp.products.find((product) => product.name === name);
+		if (!product) return res.status(400).json({ error: "حدث خطأ ولم يتم العثور علي المنتج" });
+
+		// Buys OR Sales
+		const limit = product.count.length - 10 < 0 ? 0 : product.count.length;
+		const buys = product.count.slice(limit).reduce((prev, cur) => {
+			if (!cur.transferPrice) return prev; // its a convert from store to shop
+			if (cur.store > 0) return prev.concat({ count: cur.store, date: cur.date });
+			if (cur.shop > 0) return prev.concat({ count: cur.store, date: cur.date });
+			return prev;
+		}, []);
+
+		const sales = product.count.slice(limit).reduce((prev, cur) => {
+			if (!cur.transferPrice) return prev; // its a convert from store to shop
+			if (cur.store < 0) return prev.concat({ count: Math.abs(cur.store), date: cur.date });
+			if (cur.shop < 0) return prev.concat({ count: Math.abs(cur.store), date: cur.date });
+			return prev;
+		}, []);
+
+		const buysChartData = {
+			categories: buys.map((item) => `${new Date(item.date).getMonth() + 1}-${new Date(item.date).getDate()}`),
+			series: buys.map((item) => item.count),
+		};
+		const salesChartData = {
+			categories: sales.map((item) => `${new Date(item.date).getMonth() + 1}-${new Date(item.date).getDate()}`),
+			series: sales.map((item) => item.count),
+		};
+
+		res.status(200).json({ buys: buysChartData, sales: salesChartData });
+	} catch (error) {
+		res.status(404).json(`PRODUCT_SALES: ${error.message}`);
+	}
+};
+
+export const GET_MONTHS_SALES = async (req, res) => {
+	try {
+		const now = new Date();
+		const startDate = new Date(`${now.getFullYear()}-01-01`);
+		const endDate = new Date(`${now.getFullYear()}-12-31`);
+
+		const list = await Bills.aggregate([
+			{
+				$match: { type: "bill", date: { $gt: startDate, $lt: endDate } },
+			},
+			{
+				$unwind: "$products",
+			},
+			{
+				$group: {
+					_id: { $month: "$date" },
+					sales: { $sum: { $multiply: ["$products.price", "$products.count"] } },
+				},
+			},
+			// Convert the month number to month name
+			{
+				$addFields: {
+					month: {
+						$let: {
+							vars: {
+								monthsByName,
+							},
+							in: {
+								$arrayElemAt: ["$$monthsByName", "$_id"],
+							},
+						},
+					},
+				},
+			},
+			{
+				$project: {
+					_id: 0,
+					monthIndex: "$_id",
+					month: 1,
+					sales: 1,
+				},
+			},
+			{
+				$sort: {
+					monthIndex: 1,
+				},
+			},
+		]);
+
+		res.status(200).json(list);
+	} catch (error) {
+		res.status(404).json(`GET_MONTHS_SALES: ${error.message}`);
+	}
+};
+
+export const GET_MONTHS_WINS = async (req, res) => {
+	try {
+		const now = new Date();
+		const startDate = new Date(`${now.getFullYear()}-01-01`);
+		const endDate = new Date(`${now.getFullYear()}-12-31`);
+
+		const list = await Bills.aggregate([
+			{
+				$match: { type: "bill", date: { $gt: startDate, $lt: endDate } },
+			},
+			{
+				$unwind: "$products",
+			},
+			{
+				$group: {
+					_id: { $month: "$date" },
+					profits: {
+						$sum: {
+							$subtract: [
+								{
+									$multiply: ["$products.price", "$products.count"], // sale price * count
+								},
+								{
+									$multiply: ["$products.buyPrice", "$products.count"],
+								},
+							],
+						},
+					},
+				},
+			},
+			// Convert the month number to month name
+			{
+				$addFields: {
+					month: {
+						$let: {
+							vars: {
+								monthsByName,
+							},
+							in: {
+								$arrayElemAt: ["$$monthsByName", "$_id"],
+							},
+						},
+					},
+				},
+			},
+			{
+				$project: {
+					_id: 0,
+					monthIndex: "$_id",
+					month: 1,
+					profits: 1,
+				},
+			},
+			{
+				$sort: {
+					monthIndex: 1,
+				},
+			},
+		]);
+
+		res.status(200).json(list);
+	} catch (error) {
+		res.status(404).json(`GET_MONTHS_WINS: ${error.message}`);
+	}
+};
+
+export const GET_PRODUCTS_BY_DATE = async (req, res) => {
+	try {
+		const { date, calender } = req.query;
+		const now = new Date(date);
+
+		let startDate;
+		let endDate;
+		if (calender === "year") {
+			startDate = new Date(`${now.getFullYear()}-01-01`);
+			endDate = new Date(`${now.getFullYear() + 1}-01-01`);
+		} else {
+			startDate = new Date(now.getFullYear(), now.getMonth());
+			endDate = new Date(now.getFullYear(), now.getMonth() + 1);
+		}
+
+		const list = await Products.aggregate([
+			{
+				$unwind: "$products",
+			},
+			{
+				$unwind: "$products.count",
+			},
+			{
+				$match: { "products.count.date": { $gt: startDate, $lt: endDate } },
+			},
+			{
+				$group: {
+					_id: {
+						month: { $month: "$products.count.date" },
+						name: "$products.name",
+					},
+					buysCount: {
+						$sum: {
+							$cond: [
+								{
+									$or: [{ $gt: ["$products.count.store", 0] }, { $gt: ["$products.count.shop", 0] }],
+								},
+								{
+									$add: ["$products.count.store", "$products.count.shop"],
+								},
+								0,
+							],
+						},
+					},
+					salesCount: {
+						$sum: {
+							$cond: [
+								{
+									$or: [{ $lt: ["$products.count.store", 0] }, { $lt: ["$products.count.shop", 0] }],
+								},
+								{
+									$abs: { $add: ["$products.count.store", "$products.count.shop"] },
+								},
+								0,
+							],
+						},
+					},
+				},
+			},
+			{
+				$project: {
+					_id: 0,
+					name: "$_id.name",
+					buysCount: 1,
+					salesCount: 1,
+				},
+			},
+			{
+				$sort: {
+					salesCount: -1,
+				},
+			},
+		]);
+
+		res.status(200).json(list);
+	} catch (error) {
+		res.status(404).json(`GET_PRODUCTS_BY_DATE: ${error.message}`);
 	}
 };

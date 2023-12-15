@@ -3,6 +3,7 @@ import express from "express";
 import { GET_TABLES_LIST, GET_BALANCES, GET_PROFILE } from "../controllers/index.js";
 import { GET_PRODUCTS_LIST, GET_SUPPLIERS_LIST, GET_SEARCH_LIST } from "../controllers/index.js";
 import { GET_TODAY_RESET, GET_NEEDED_PRODUCTS, GET_LESS_BUYS } from "../controllers/index.js";
+import { GET_PRODUCT_MOVEMENT, GET_MONTHS_SALES, GET_MONTHS_WINS, GET_PRODUCTS_BY_DATE } from "../controllers/index.js";
 
 // CREATE
 import { CREATE_CATEGORY, CREATE_COMPANY, CREATE_PRODUCTS, CREATE_SUPPLIER } from "../controllers/index.js";
@@ -14,6 +15,7 @@ import { BUY_PRODUCTS, SALE_PRODUCTS, EDIT_PRICE, TRANSFER_PRODUCTS } from "../c
 import { DELETE_PRODUCT } from "../controllers/index.js";
 
 export const router = express.Router();
+
 // GET
 router.get("/get-products-list", GET_PRODUCTS_LIST);
 router.get("/get-suppliers-list", GET_SUPPLIERS_LIST);
@@ -21,9 +23,15 @@ router.get("/get-table-list", GET_TABLES_LIST);
 router.get("/get-search-list", GET_SEARCH_LIST);
 router.get("/get-balances", GET_BALANCES);
 router.get("/get-profile/:companyId/:productId", GET_PROFILE);
+
+// GET [Analysis]
 router.get("/get-today-reset", GET_TODAY_RESET);
 router.get("/get-needed-products", GET_NEEDED_PRODUCTS);
 router.get("/get-less-buys", GET_LESS_BUYS);
+router.get("/get-product-movement", GET_PRODUCT_MOVEMENT);
+router.get("/get-months-sales", GET_MONTHS_SALES);
+router.get("/get-months-wins", GET_MONTHS_WINS);
+router.get("/get-products-by-date", GET_PRODUCTS_BY_DATE);
 
 // CREATE
 router.post("/create-category", CREATE_CATEGORY);

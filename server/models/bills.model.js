@@ -4,7 +4,6 @@ const schema = new Schema({
 	type: String, // bill or debt
 	place: String, // shop or store
 	client: { type: String, trim: true },
-	address: { type: String, trim: true },
 	phone: { type: String, trim: true },
 	date: { type: Date, default: new Date() },
 	pay: {
@@ -17,6 +16,7 @@ const schema = new Schema({
 			name: String,
 			count: Number,
 			price: Number,
+			buyPrice: Number, // To Calculate The Profits In The Bills
 		},
 	],
 });

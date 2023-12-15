@@ -85,7 +85,7 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
          <Searchbar setSearchText={setSearchText} />
 
          <div
-            className={`border-sp rounded-lg px-4 py-2 shadow-sp dark:shadow-none ${
+            className={`rounded-lg px-4 py-2 shadow-sp dark:shadow-none ${
                !filterResult?.length || !data?.length ? "hidden" : ""
             }`}
          >

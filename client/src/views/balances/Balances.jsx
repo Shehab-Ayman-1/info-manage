@@ -43,9 +43,9 @@ export const ShowBalances = () => {
             total={buyData?.total}
          >
             <Row index={0}>
-               <Col>{0 || buyData?.locker}</Col>
-               <Col>{buyData?.shop}</Col>
-               <Col>{buyData?.store}</Col>
+               <Col>{buyData?.locker.toLocaleString()}</Col>
+               <Col>{buyData?.shop.toLocaleString()}</Col>
+               <Col>{buyData?.store.toLocaleString()}</Col>
             </Row>
          </Table>
 
@@ -64,9 +64,9 @@ export const ShowBalances = () => {
             total={saleData?.total}
          >
             <Row index={0}>
-               <Col>{0 || saleData?.locker}</Col>
-               <Col>{saleData?.shop}</Col>
-               <Col>{saleData?.store}</Col>
+               <Col>{saleData?.locker.toLocaleString()}</Col>
+               <Col>{saleData?.shop.toLocaleString()}</Col>
+               <Col>{saleData?.store.toLocaleString()}</Col>
             </Row>
          </Table>
       </Card>
