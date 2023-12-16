@@ -6,7 +6,10 @@ export const Head = ({ headers }) => {
          <tr className="border-b-sp">
             {headers.map((head) => (
                <th key={head} className="bg-primary p-4">
-                  <Typography variant="h5" className="text-center text-base text-white md:text-xl">
+                  <Typography
+                     variant="h5"
+                     className="text-center text-base text-white print:text-dimWhite md:text-xl"
+                  >
                      {head}
                   </Typography>
                </th>

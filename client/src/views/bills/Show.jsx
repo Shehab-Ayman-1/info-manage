@@ -27,10 +27,10 @@ export const ShowBill = () => {
                loading || (isSubmitted && error) ? "!hidden" : ""
             }`}
          >
-            <Typography variant="h4" color="white" className="whitespace-nowrap">
+            <Typography variant="h3" className="whitespace-nowrap text-xl text-dimWhite md:text-2xl">
                العميل: {data?.client || "----"}
             </Typography>
-            <Typography variant="h4" color="white" className="whitespace-nowrap">
+            <Typography variant="h3" className="whitespace-nowrap text-xl text-dimWhite md:text-2xl">
                رقم الهاتف: {data?.phone || "----"}
             </Typography>
          </div>
@@ -38,7 +38,7 @@ export const ShowBill = () => {
          <Button
             variant="gradient"
             color="deep-purple"
-            className={`mx-auto mb-5 w-fit text-base print:hidden md:text-2xl ${
+            className={`mx-auto mb-5 w-fit text-base print:hidden md:text-xl ${
                loading || (isSubmitted && error) ? "hidden" : ""
             } `}
             onClick={() => window.print()}
@@ -70,22 +70,22 @@ export const ShowBill = () => {
                loading || (isSubmitted && error) ? "!hidden" : ""
             }`}
          >
-            <Typography variant="h4" color="white" className="whitespace-nowrap">
+            <Typography variant="h3" className="whitespace-nowrap text-xl text-dimWhite md:text-2xl">
                الخصم: {data?.pay.discount || 0}
             </Typography>
-            <Typography variant="h4" color="white" className="whitespace-nowrap">
+            <Typography variant="h3" className="whitespace-nowrap text-xl text-dimWhite md:text-2xl">
                المبلغ المدفوع: {data?.pay.value || 0}
             </Typography>
-            <Typography variant="h4" color="white" className="whitespace-nowrap">
+            <Typography variant="h3" className="whitespace-nowrap text-xl text-dimWhite md:text-2xl">
                المبلغ المتبقي: {(total - +data?.pay.value - +data?.pay.discount).toLocaleString() || 0}
             </Typography>
          </div>
 
          <div className={loading || (isSubmitted && error) ? "hidden" : "text-center"}>
-            <Typography variant="h3" color="white">
+            <Typography variant="h3" className="text-xl text-dimWhite md:text-2xl">
                المركز الدولي لقطع غيار السيارات
             </Typography>
-            <Typography variant="lead" color="white">
+            <Typography variant="small" className="text-dimWhite">
                العمرية - شارع مش عارف ايه - امام مستشفي مش عارف ايه
             </Typography>
          </div>

@@ -59,7 +59,7 @@ export const Profile = () => {
    };
 
    if (isSubmitted && error) return <Loading isSubmitted={isSubmitted} loading={loading} error={error} />;
-   const valueTypograph = `bg-dimPurple rounded-lg text-xl pr-4 p-2 dark:text-blue-gray-500`;
+   const valueTypograph = `bg-dimPurple rounded-lg text-base pr-4 p-2 dark:text-dimWhite md:text-2xl`;
 
    return (
       <Form headerText="عرض منتج">
@@ -73,21 +73,24 @@ export const Profile = () => {
                   <img
                      src={data.img}
                      alt="profile"
-                     className="object-cotain mx-auto block h-32 w-32 rounded-full shadow-sp"
+                     className="object-cotain mx-auto block h-24 w-24 rounded-full shadow-sp md:h-32 md:w-32"
                   />
                   {user?.role === ADMIN ? (
                      <div className="flex-center mt-5 w-full !gap-6">
                         <i
-                           className="fa fa-times block text-4xl text-red-500 hover:text-red-900"
+                           className="fa fa-times hover:text-red-9 00 block text-xl   text-red-500 sm:text-2xl lg:text-4xl"
                            onClick={handleDelete}
                         />
-                        <i className="fa fa-edit block text-4xl text-orange-500" onClick={handleOpenDialog} />
+                        <i
+                           className="fa fa-edit block text-xl text-orange-500 sm:text-2xl lg:text-4xl"
+                           onClick={handleOpenDialog}
+                        />
                      </div>
                   ) : null}
                </div>
 
                <div className="">
-                  <Typography variant="h4" color="deep-purple">
+                  <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
                      الاسم
                   </Typography>
                   <Typography variant="h6" className={valueTypograph}>
@@ -96,7 +99,7 @@ export const Profile = () => {
                </div>
 
                <div className="">
-                  <Typography variant="h4" color="deep-purple">
+                  <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
                      الباركود
                   </Typography>
                   <Typography variant="h6" className={valueTypograph}>
@@ -106,7 +109,7 @@ export const Profile = () => {
 
                <div className="flex-between">
                   <div className="w-full">
-                     <Typography variant="h4" color="deep-purple">
+                     <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
                         سعر الشراء
                      </Typography>
                      <Typography variant="h6" className={valueTypograph}>
@@ -115,7 +118,7 @@ export const Profile = () => {
                   </div>
 
                   <div className="w-full">
-                     <Typography variant="h4" color="deep-purple">
+                     <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
                         سعر البيع
                      </Typography>
                      <Typography variant="h6" className={valueTypograph}>
@@ -126,7 +129,7 @@ export const Profile = () => {
 
                <div className="flex-between">
                   <div className="w-full">
-                     <Typography variant="h4" color="deep-purple">
+                     <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
                         عدد المخزن
                      </Typography>
                      <Typography variant="h6" className={valueTypograph}>
@@ -135,7 +138,7 @@ export const Profile = () => {
                   </div>
 
                   <div className="w-full">
-                     <Typography variant="h4" color="deep-purple">
+                     <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
                         عدد المحل
                      </Typography>
                      <Typography variant="h6" className={valueTypograph}>
@@ -145,7 +148,7 @@ export const Profile = () => {
                </div>
 
                <div className="">
-                  <Typography variant="h4" color="deep-purple">
+                  <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
                      الموردين
                   </Typography>
                   <Typography variant="h6" className={valueTypograph}>
@@ -162,7 +165,7 @@ export const Profile = () => {
             className="max-h-[80vh] overflow-y-auto shadow-sp dark:bg-darkGray"
          >
             <DialogHeader className="flex-between">
-               <Typography variant="h2" color="deep-purple">
+               <Typography variant="h3" color="deep-purple">
                   تعديل سعر المنتج
                </Typography>
                <i className="fa fa-times text-2xl" onClick={handleOpenDialog} />

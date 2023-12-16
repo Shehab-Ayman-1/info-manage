@@ -35,7 +35,7 @@ export const ShowLockerProcesses = () => {
                   <Row key={i} index={i}>
                      <Col>{i + 1}</Col>
                      <Col>{name}</Col>
-                     <Col>{price < 0 ? "سحب" : price > 0 ? "ايداع" : "----"}</Col>
+                     <Col>{price < 0 ? "سحب" : price > 0 ? "ايداع" : "غير معروف"}</Col>
                      <Col>{Math.abs(price)}</Col>
                      <Col>{new Date(date).toLocaleDateString()}</Col>
                   </Row>

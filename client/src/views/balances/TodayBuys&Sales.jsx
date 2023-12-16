@@ -1,74 +1,72 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import { Col, Row, Table } from "@/components/table";
-import { Form } from "@/components/public";
+import { PageHead } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
+import { Button } from "@material-tailwind/react";
 
-const TABLE_HEAD = ["المنتج", "العملية", "المكان", "العدد", "السعر", "الاجمالي"];
+const TABLE_HEAD = ["المنتج", "العدد", "السعر", "الاجمالي"];
 export const TodayBuysSales = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
-   const [total, setTotal] = useState(0);
+   const [total, setTotal] = useState({ buys: 0, sales: 0 });
 
    useEffect(() => {
       if (data) return;
       (async () => {
-         await refetch("get", "/products/get-today-reset");
+         await refetch("get", "/bills/get-today-reset");
       })();
    }, [data]);
 
    useEffect(() => {
-      if (!data || total) return;
-      const result = data?.map(({ products }) => {
-         return products.reduce((prev, cur) => {
-            if (cur.shop) return prev + Math.abs(cur.shop) * cur.sale;
-            if (cur.store) return prev + Math.abs(cur.shop) * cur.buy;
-            return 0;
-         }, 0);
-      });
-      setTotal(() => result.reduce((prev, cur) => prev + cur, 0));
+      if (!data) return;
+      const buys = data.buys.reduce((prev, cur) => prev + cur.price * cur.count, 0) || 0;
+      const sales = data.sales.reduce((prev, cur) => prev + cur.price * cur.count, 0) || 0;
+      setTotal(() => ({ buys, sales }));
    }, [data]);
 
-   const handleSubmit = (event) => {
-      event.preventDefault();
-      window.print();
-   };
-
    return (
-      <Form
-         onSubmit={handleSubmit}
-         footerStyle="print:hidden"
-         buttonText="طباعه"
-         headerText="مبيعات ومشتريات اليوم"
-      >
+      <Fragment>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <Table
-            headers={TABLE_HEAD}
-            rowsLength={data?.length}
-            footerSpan={[4, 3]}
-            total={total}
-            tableStyle="!border-none"
+         <div className={!total.buys ? "hidden" : ""}>
+            <PageHead text="مشتريات اليوم" />
+            <Table headers={TABLE_HEAD} rowsLength={data?.buys.length} total={total.buys}>
+               {data?.buys.map(({ name, price, count }, i) => (
+                  <Row key={i} index={i}>
+                     <Col>{name}</Col>
+                     <Col>{count}</Col>
+                     <Col>{price}</Col>
+                     <Col>{+price * +count}</Col>
+                  </Row>
+               ))}
+            </Table>
+         </div>
+
+         <div className={!total.sales ? "hidden" : ""}>
+            <PageHead text="مبيعات اليوم" className="mt-10" />
+            <Table headers={TABLE_HEAD} rowsLength={data?.sales.length} total={total.sales}>
+               {data?.sales.map(({ name, price, count }, i) => (
+                  <Row key={i} index={i}>
+                     <Col>{name}</Col>
+                     <Col>{count}</Col>
+                     <Col>{price}</Col>
+                     <Col>{+price * +count}</Col>
+                  </Row>
+               ))}
+            </Table>
+         </div>
+
+         <Button
+            variant="gradient"
+            color="deep-purple"
+            onClick={() => window.print()}
+            className={`mt-10 text-xl hover:brightness-125 ${
+               !total.buys && !total.sales ? "hidden" : "print:hidden"
+            }`}
          >
-            {data &&
-               data?.map(({ name, products }, i) =>
-                  products?.map(({ shop, store, buy, sale }, j) => (
-                     <Row key={j} index={i}>
-                        {!j ? <Col rowSpan={products?.length}>{name}</Col> : null}
-
-                        <Col>{shop < 0 || store < 0 ? "بيع" : shop > 0 || store > 0 ? "شراء" : "----"}</Col>
-
-                        <Col>{shop ? "المحل" : store ? "المخزن" : "----"}</Col>
-
-                        <Col>{Math.abs(shop || store)}</Col>
-
-                        <Col>{shop < 0 || store < 0 ? sale : shop > 0 || store > 0 ? buy : "----"}</Col>
-
-                        <Col>{shop ? sale * Math.abs(shop) : store ? buy * Math.abs(store) : "----"}</Col>
-                     </Row>
-                  )),
-               )}
-         </Table>
-      </Form>
+            طباعه
+         </Button>
+      </Fragment>
    );
 };

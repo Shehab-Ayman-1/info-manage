@@ -1,11 +1,10 @@
 import { Chart, PageHead } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
-import { Typography } from "@material-tailwind/react";
 import { Fragment } from "react";
 
 export const AnalysisWins = () => {
-   const { data, loading, error, isSubmitted } = useAxios("get", "/products/get-months-wins");
+   const { data, loading, error, isSubmitted } = useAxios("get", "/bills/get-months-wins");
 
    return (
       <Fragment>

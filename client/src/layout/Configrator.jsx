@@ -29,10 +29,7 @@ export const Configrator = () => {
 
    const colors = [
       { theme: "red", from: "from-red-400", to: "to-red-900", hover: "hover:bg-red-900/50" },
-      { theme: "blue", from: "from-blue-400", to: "to-blue-900", hover: "hover:bg-blue-900/50" },
-      { theme: "teal", from: "from-teal-400", to: "to-teal-900", hover: "hover:bg-teal-900/50" },
       { theme: "pink", from: "from-pink-400", to: "to-pink-900", hover: "hover:bg-pink-900/50" },
-      { theme: "indigo", from: "from-indigo-400", to: "to-indigo-900", hover: "hover:bg-indigo-900/50" },
       { theme: "orange", from: "from-orange-400", to: "to-orange-900", hover: "hover:bg-orange-900/50" },
       {
          theme: "deep-orange",
@@ -40,7 +37,10 @@ export const Configrator = () => {
          to: "to-deep-orange-900",
          hover: "hover:bg-deep-orange-900/50",
       },
+      { theme: "indigo", from: "from-indigo-400", to: "to-indigo-900", hover: "hover:bg-indigo-900/50" },
+      { theme: "blue", from: "from-blue-400", to: "to-blue-900", hover: "hover:bg-blue-900/50" },
       { theme: "deep-purple", from: "from-purple-400", to: "to-purple-900", hover: "hover:bg-purple-900/50" },
+      { theme: "teal", from: "from-teal-400", to: "to-teal-900", hover: "hover:bg-teal-900/50" },
    ];
 
    return (
@@ -48,7 +48,7 @@ export const Configrator = () => {
          <IconButton
             color="deep-purple"
             variant="gradient"
-            className="group !fixed bottom-10 right-10 rounded-full shadow-md shadow-black hover:scale-110 dark:shadow-white print:hidden"
+            className="group !fixed bottom-5 right-5 rounded-full shadow-md hover:scale-110 dark:shadow-white print:hidden md:bottom-10 md:right-10"
             size="lg"
             onClick={openDrawer}
          >

@@ -1,6 +1,6 @@
 import { Button, Card, IconButton, Typography } from "@material-tailwind/react";
 import { Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwind/react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { Field, PageHead, Searchbar } from "@/components/public";
@@ -157,15 +157,15 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
             className="max-h-[80vh] overflow-y-auto shadow-sp dark:bg-darkGray"
          >
             <DialogHeader className="block">
-               <Typography variant="h3" className="flex-between text-dimWhite">
+               <Typography variant="h3" className="flex-between text-xl text-dimWhite md:text-3xl">
                   <span>تكلفه الفاتورة:</span>
                   <span>{payment?.billCost}</span>
                </Typography>
-               <Typography variant="h3" className="flex-between text-dimWhite">
+               <Typography variant="h3" className="flex-between text-xl text-dimWhite md:text-3xl">
                   <span>الخصم:</span>
                   <span>{payment?.pay.discount}</span>
                </Typography>
-               <Typography variant="h3" className="flex-between text-dimWhite">
+               <Typography variant="h3" className="flex-between text-xl text-dimWhite md:text-3xl">
                   <span>المبلغ المتبقي:</span>
                   <span>{+payment?.billCost - +payment?.pay.value - +payment?.pay.discount}</span>
                </Typography>
@@ -182,7 +182,7 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
             <DialogFooter>
                <Button
                   color="deep-purple"
-                  className="text-xl hover:brightness-125"
+                  className="text-base hover:brightness-125 md:text-xl"
                   fullWidth
                   disabled={loading}
                   onClick={handlePayment}

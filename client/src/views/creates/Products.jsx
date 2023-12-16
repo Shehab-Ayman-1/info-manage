@@ -132,14 +132,14 @@ export const AddProducts = () => {
                <Field label="اسم المنتج" name="name" value={product.name} onChange={handleFieldChange} />
                <Field label="الباركود" name="barcode" value={product.barcode} onChange={handleFieldChange} />
 
-               <div className="flex-between overflow-hidden">
+               <div className="flex-between flex-wrap overflow-hidden sm:flex-nowrap">
                   <Field
                      type="number"
                      label="الحد الادني"
                      name="min"
                      min="0"
                      value={product.minmax?.min}
-                     containerStyle="!w-[50%]"
+                     containerStyle="sm:!w-[50%]"
                      onChange={handleFieldChange}
                   />
                   <Field
@@ -148,7 +148,7 @@ export const AddProducts = () => {
                      label="الحد المتوسط"
                      name="max"
                      value={product.minmax?.max}
-                     containerStyle="!w-[50%]"
+                     containerStyle="sm:!w-[50%]"
                      onChange={handleFieldChange}
                   />
                </div>

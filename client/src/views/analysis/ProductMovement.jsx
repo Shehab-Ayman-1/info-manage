@@ -6,7 +6,6 @@ import { Selectbox } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { filterSelection, getLists } from "@/redux/slices/products";
-import { Typography } from "@material-tailwind/react";
 
 export const AnalysisProductMovement = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
@@ -58,10 +57,7 @@ export const AnalysisProductMovement = () => {
    useEffect(() => {
       if (!product.category || !product.company || !product.name) return;
       (async () => {
-         await refetch(
-            "get",
-            `/products/get-product-movement?category=${product.category}&company=${product.company}&name=${product.name}`,
-         );
+         await refetch("get", `/bills/get-product-movement?name=${product.name}`);
       })();
    }, [product.name]);
 

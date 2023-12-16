@@ -8,9 +8,7 @@ const schema = new Schema({
 
 schema.query.findTotalPrices = async function () {
 	const products = await this;
-
 	const total = products.reduce((prev, cur) => prev + cur.price, 0);
-
 	return total;
 };
 
