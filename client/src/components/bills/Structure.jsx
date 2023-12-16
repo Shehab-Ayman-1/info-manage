@@ -83,7 +83,7 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
          <Searchbar setSearchText={setSearchText} />
 
          <div
-            className={`rounded-lg px-4 py-2 shadow-sp dark:shadow-none ${
+            className={`rounded-lg py-2 shadow-sp dark:shadow-none ${
                !filterResult?.length || !data?.length ? "hidden" : ""
             }`}
          >
@@ -105,36 +105,36 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
                         <IconButton
                            variant="text"
                            color="red"
-                           className={`group ${dLoading ? "pointer-events-none" : ""}`}
+                           className={`group h-7 w-7 md:h-10 md:w-10 ${dLoading ? "pointer-events-none" : ""}`}
                            onClick={() => handleDelete(_id)}
                         >
-                           <i className="fa fa-times text-xl text-red-500 group-hover:text-red-900" />
+                           <i className="fa fa-times text-base text-red-500 group-hover:text-red-900 md:text-xl" />
                         </IconButton>
                         <IconButton
                            variant="text"
                            color="orange"
-                           className="group"
+                           className="group h-7 w-7 md:h-10 md:w-10"
                            onClick={() => navigate(`/bills/update-bill/${_id}`)}
                         >
-                           <i className="fa fa-edit text-xl text-orange-500 group-hover:text-orange-900" />
+                           <i className="fa fa-edit text-base text-orange-500 group-hover:text-orange-900 md:text-xl" />
                         </IconButton>
                         <IconButton
                            variant="text"
                            color="green"
-                           className="group"
+                           className="group h-7 w-7 md:h-10 md:w-10"
                            onClick={() => handleOpenDialog({ _id, client, billCost, pay })}
                         >
-                           <i className="fa fa-money-bill-wave text-xl text-green-500 group-hover:text-green-900" />
+                           <i className="fa fa-money-bill-wave text-base text-green-500 group-hover:text-green-900 md:text-xl" />
                         </IconButton>
                      </div>
 
-                     <Typography variant="h5" className="text-dimWhite dark:text-white">
+                     <Typography variant="h5" className="text-base text-dimWhite dark:text-white md:text-xl">
                         {client}
                      </Typography>
                   </div>
                   <IconButton variant="text" color="white">
                      <i
-                        className="fa fa-eye text-xl text-dimWhite dark:text-white"
+                        className="fa fa-eye text-base text-dimWhite dark:text-white md:text-xl"
                         onClick={() => navigate(`/bills/show-bill/${_id}?type=${type}`)}
                      />
                   </IconButton>

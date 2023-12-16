@@ -6,7 +6,7 @@ export const Col = ({ head, className, typographyStyle, children, ...rest }) => 
          <th className={`p-2 md:p-4 ${className || ""}`} {...rest}>
             <Typography
                varient="h5"
-               className={`text-center text-base font-bold md:text-xl ${typographyStyle || ""}`}
+               className={`whitespace-nowrap text-center text-base font-bold md:text-xl ${typographyStyle || ""}`}
             >
                {children || " "}
             </Typography>
@@ -17,7 +17,7 @@ export const Col = ({ head, className, typographyStyle, children, ...rest }) => 
          <td className={`p-2 md:p-4 ${className || ""}`} {...rest}>
             <Typography
                varient="h5"
-               className={`text-center text-base font-bold md:text-xl ${typographyStyle || ""}`}
+               className={`whitespace-nowrap text-center text-base font-bold md:text-xl ${typographyStyle || ""}`}
             >
                {children || "0"}
             </Typography>

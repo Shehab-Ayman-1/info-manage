@@ -15,26 +15,28 @@ export const Form = ({
    return (
       <form onSubmit={onSubmit} autoComplete="off" {...formRest}>
          <Card
-            className={`dark:border-sp m-auto mb-2 mt-14 w-[650px] max-w-full bg-transparent shadow-sp dark:shadow-none md:mt-32 ${cardStyle}`}
+            className={`dark:border-sp mx-auto mb-2 mt-14 w-[650px] max-w-full bg-transparent shadow-sp dark:shadow-none md:mt-32 ${cardStyle}`}
          >
             <CardHeader
                variant="gradient"
                color="deep-purple"
                className={`mx-auto -mt-12 mb-4 grid h-20 w-[80%] place-items-center sm:h-28 ${headerStyle || ""}`}
             >
-               <Typography variant="h3">{headerText}</Typography>
+               <Typography variant="h3" className="text-2xl md:text-3xl">
+                  {headerText}
+               </Typography>
             </CardHeader>
 
-            <CardBody className={`flex flex-col gap-4 ${bodyStyle}`}>{children}</CardBody>
+            <CardBody className={`flex flex-col gap-4 p-3 ${bodyStyle}`}>{children}</CardBody>
 
             {buttonText && (
-               <CardFooter className={`pt-0 ${footerStyle}`}>
+               <CardFooter className={`p-3 ${footerStyle}`}>
                   <Button
                      type="submit"
                      variant="gradient"
                      disabled={loading}
                      color="deep-purple"
-                     className="text-2xl hover:brightness-125"
+                     className="text-xl hover:brightness-125 md:text-2xl"
                      fullWidth
                   >
                      {buttonText}

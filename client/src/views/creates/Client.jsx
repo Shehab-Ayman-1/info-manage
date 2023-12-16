@@ -23,7 +23,7 @@ export const AddClient = () => {
    return (
       <Form
          onSubmit={handleSubmit}
-         headerText="اضافه عميل جديد"
+         headerText="اضافه عميل"
          buttonText="انشاء"
          loading={(isSubmitted && !error) || loading}
       >

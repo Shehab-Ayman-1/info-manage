@@ -102,10 +102,10 @@ export const AnalysisProductMovement = () => {
                icon="fa-cart-arrow-down"
                description="يمكنك لمس الخط لرؤية سعر الشراء في ذلك الوقت"
                data={{
-                  categories: data?.buys.categories,
+                  categories: data?.buys.map((item) => item.date),
                   series: {
                      name: "المشتريات",
-                     data: data?.buys.series,
+                     data: data?.buys.map((item) => item.series),
                   },
                   type: "line",
                }}
@@ -116,10 +116,10 @@ export const AnalysisProductMovement = () => {
                icon="fa-hand-holding-usd"
                description="يمكنك لمس الخط لرؤية سعر الشراء في ذلك الوقت"
                data={{
-                  categories: data?.sales.categories,
+                  categories: data?.sales.map((item) => item.date),
                   series: {
                      name: "المبيعات",
-                     data: data?.sales.series,
+                     data: data?.sales.map((item) => item.series),
                   },
                }}
             />

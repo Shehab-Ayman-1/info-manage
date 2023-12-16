@@ -18,23 +18,23 @@ export const Selectbox = ({
          label={label}
          variant="standard"
          color="deep-purple"
-         className="select-box w-full text-xl caret-primary dark:text-white/80"
+         className="select-box w-full text-base caret-primary dark:text-white/80 md:text-xl"
          required
          selected={(element) =>
             element &&
             cloneElement(value ? element : <p>{label}</p>, {
                disabled: true,
-               className: "flex items-center opacity-100 px-0 gap-2 pointer-events-none",
+               className: "flex items-center opacity-100 gap-2 pointer-events-none",
             })
          }
          containerProps={{
-            className: `h-20 border-b-sp !border-deep-purple-300 ${containerStyle}`,
+            className: `h-14 md:h-20 border-b-sp !border-deep-purple-300 ${containerStyle}`,
          }}
          labelProps={{
-            className: `text-xl ${labelStyle}`,
+            className: `text-lg peer-focus:text-lg peer-placeholder-shown:text-lg ${labelStyle}`,
          }}
          menuProps={{
-            className: `from-blue-gray-200 to-blue-gray-100 px-5 py-3 bg-gradient-to-r dark:from-black dark:to-darkGray ${menuStyle}`,
+            className: `from-blue-gray-200 to-blue-gray-100 py-3 bg-gradient-to-r dark:from-black dark:to-darkGray ${menuStyle}`,
          }}
          animate={{
             mount: { y: 0 },

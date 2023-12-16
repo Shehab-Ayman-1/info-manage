@@ -78,7 +78,7 @@ export const AddProducts = () => {
    return (
       <Form
          onSubmit={handleSubmitForm}
-         headerText="اضافه منتج جديد"
+         headerText="اضافه منتج"
          buttonText="انشاء"
          loading={(isSubmitted && !error) || loading}
       >

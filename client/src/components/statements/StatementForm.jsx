@@ -66,9 +66,9 @@ export const StatementForm = ({
 
          <Selectbox
             label="المكان"
-            value={formData.toStore ? "من المخزن" : "من المحل"}
-            options={["من المخزن", "من المحل"]}
-            onChange={(value) => setFormData((data) => ({ ...data, toStore: value === "من المخزن" }))}
+            value={formData.toStore ? "المخزن" : "المحل"}
+            options={["المخزن", "المحل"]}
+            onChange={(value) => setFormData((data) => ({ ...data, toStore: value === "المخزن" }))}
          />
 
          <div className="w-full rounded-xl border border-solid px-2 md:px-4">
@@ -101,10 +101,10 @@ export const StatementForm = ({
 
             <Button
                color="deep-purple"
-               className="mx-auto my-2 block text-xl hover:brightness-125"
+               className="mx-auto my-2 block py-2 text-base hover:brightness-125"
                onClick={handleAddField}
             >
-               <i className="fa fa-plus ml-2 text-xl text-white hover:text-white" />
+               <i className="fa fa-plus ml-2 text-base text-white hover:text-white" />
                اضافه
             </Button>
          </div>

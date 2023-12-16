@@ -44,7 +44,7 @@ export const AddCompany = () => {
    return (
       <Form
          onSubmit={handleSubmit}
-         headerText="اضافه شركة جديد"
+         headerText="اضافه شركة"
          buttonText="انشاء"
          loading={(isSubmitted && !error) || loading}
       >
@@ -62,7 +62,7 @@ export const AddCompany = () => {
                alt="product"
                className="m-auto mb-4 block h-28 w-28 rounded-full shadow-sp"
             />
-            <Field label="رابط الصورة" name="img" value={formData.img} onChange={handleFieldChange} />
+            <Field label="رابط صورة الشركة" name="img" value={formData.img} onChange={handleFieldChange} />
          </div>
 
          <Selectbox

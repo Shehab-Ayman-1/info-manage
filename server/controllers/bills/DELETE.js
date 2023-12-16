@@ -28,7 +28,7 @@ export const DELETE_BILL = async (req, res) => {
 
 		// Delete Bill Cost From Locker
 		const totalProductsCost = bill.products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
-		await Locker.create({ name: "فاتورة ملغيه", price: totalProductsCost });
+		if (totalProductsCost) await Locker.create({ name: "فاتورة ملغيه", price: totalProductsCost });
 
 		// Delete Bill
 		const deleted = await Bills.deleteOne({ _id: id });

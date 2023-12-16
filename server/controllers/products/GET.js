@@ -444,7 +444,7 @@ export const GET_LESS_BUYS = async (req, res) => {
 	}
 };
 
-export const GET_PRODUCT_MOVEMENT = async (req, res) => {
+export const _GET_PRODUCT_MOVEMENT = async (req, res) => {
 	try {
 		const { category, company, name } = req.query;
 		if (!category || !company || !name) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبة" });
@@ -460,6 +460,7 @@ export const GET_PRODUCT_MOVEMENT = async (req, res) => {
 		// Buys OR Sales
 		const limit = product.count.length - 10 < 0 ? 0 : product.count.length;
 		const buys = product.count.slice(limit).reduce((prev, cur) => {
+			console.log(prev);
 			if (!cur.transferPrice) return prev; // its a convert from store to shop
 			if (cur.store > 0) return prev.concat({ count: cur.store, date: cur.date });
 			if (cur.shop > 0) return prev.concat({ count: cur.store, date: cur.date });
@@ -483,6 +484,57 @@ export const GET_PRODUCT_MOVEMENT = async (req, res) => {
 		};
 
 		res.status(200).json({ buys: buysChartData, sales: salesChartData });
+	} catch (error) {
+		res.status(404).json(`PRODUCT_SALES: ${error.message}`);
+	}
+};
+
+export const GET_PRODUCT_MOVEMENT = async (req, res) => {
+	try {
+		const { category, company, name } = req.query;
+		if (!category || !company || !name) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبة" });
+
+		const now = new Date();
+		const startDate = new Date(now.getFullYear(), now.getMonth());
+
+		const list = await Bills.aggregate([
+			{
+				$unwind: "$products",
+			},
+			{
+				$match: { "products.name": name, date: { $gte: startDate } },
+			},
+			{
+				$group: {
+					_id: "$type",
+					data: {
+						$push: {
+							day: { $dayOfMonth: "$date" },
+							month: { $month: "$date" },
+							series: { $add: ["$products.count", 0] },
+						},
+					},
+				},
+			},
+			{
+				$project: {
+					_id: 0,
+					type: "$_id",
+					data: 1,
+				},
+			},
+			{
+				$sort: {
+					month: 1,
+					day: 1,
+				},
+			},
+		]);
+
+		const buys = list.find(({ type }) => type === "debt")?.data.map((item) => ({ date: `${item.month}-${item.day}`, series: item.series }));
+		const sales = list.find(({ type }) => type === "bill")?.data.map((item) => ({ date: `${item.month}-${item.day}`, series: item.series }));
+
+		res.status(200).json({ buys, sales });
 	} catch (error) {
 		res.status(404).json(`PRODUCT_SALES: ${error.message}`);
 	}

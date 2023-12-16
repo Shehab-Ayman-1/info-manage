@@ -89,7 +89,7 @@ export const AddSupplier = () => {
    return (
       <Form
          onSubmit={handleSubmitForm}
-         headerText="اضافه مندوب جديد"
+         headerText="اضافه مندوب"
          buttonText="انشاء"
          loading={(isSubmitted && !error) || loading}
       >

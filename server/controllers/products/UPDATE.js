@@ -49,7 +49,7 @@ export const SALE_PRODUCTS = async (req, res) => {
 		});
 
 		// Append Client Pay To The Locker
-		await Locker.create({ name: `كشف حساب [${client}]`, price: +clientPay, discount });
+		if (clientPay) await Locker.create({ name: `كشف حساب [${client}]`, price: +clientPay });
 
 		// Send Response
 		res.status(200).json({ success: "لقد تم تاكيد كشف الحساب بنجاح" });
@@ -97,7 +97,7 @@ export const BUY_PRODUCTS = async (req, res) => {
 		});
 
 		// Append Client Pay To The Locker
-		await Locker.create({ name: `كشف مندوب [${supplier}]`, price: -adminPay, discount });
+		if (adminPay) await Locker.create({ name: `كشف مندوب [${supplier}]`, price: -adminPay });
 
 		// Send Response
 		res.status(200).json({ success: "لقد تم تاكيد كشف المندوب بنجاح" });

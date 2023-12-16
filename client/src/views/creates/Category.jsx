@@ -28,7 +28,7 @@ export const AddCategory = () => {
    return (
       <Form
          onSubmit={handleSubmit}
-         headerText="اضافه قسم جديد"
+         headerText="اضافه قسم"
          buttonText="انشاء"
          loading={(isSubmitted && !error) || loading}
       >

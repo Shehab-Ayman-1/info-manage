@@ -1,7 +1,6 @@
 import { Chart, PageHead } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
-import { Typography } from "@material-tailwind/react";
 import { Fragment } from "react";
 
 export const AnalysisSales = () => {
@@ -11,10 +10,9 @@ export const AnalysisSales = () => {
       <Fragment>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <PageHead text='احصائيات المبيعات' />
+         <PageHead text="احصائيات المبيعات" />
 
-
-         <div className="flex-between flex-nowrap: md:flex-wrap">
+         <div className="flex-between flex-wrap md:flex-nowrap">
             <Chart
                head="المبيعات خلال العام"
                icon="fa-cart-arrow-down"

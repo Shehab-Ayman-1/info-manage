@@ -17,7 +17,7 @@ export const PAYMENT = async (req, res) => {
 		if (!updated.modifiedCount) return res.status(400).json({ error: "حدث خطأ ولم يتم الدفع" });
 
 		// Append Client Pay To The Locker
-		await Locker.create({ name: `دفعه ماليه علي فاتورة ${client}`, price: type === "bill" ? value : type === "debt" ? -value : 0 });
+		if (value) await Locker.create({ name: `دفعه ماليه علي فاتورة ${client}`, price: type === "bill" ? value : type === "debt" ? -value : "----" });
 
 		res.status(200).json({ success: "لقد تمت عملية الدفع بنجاح" });
 	} catch (error) {

@@ -10,7 +10,7 @@ export const Tabs = ({ defaultValue = "", headers = [], children }) => {
             {headers.map(({ name, value, reset }) => (
                <Tab
                   value={value}
-                  className="text-lg font-semibold text-white"
+                  className="py-0 text-base font-semibold text-white md:py-1 md:text-xl"
                   onClick={reset || (() => {})}
                   key={value}
                >
