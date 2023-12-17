@@ -7,7 +7,10 @@ module.exports = withMT({
 
    theme: {
       boxShadow: {
-         sp: "0 0 20px var(--primary)",
+         sp: "0 0 20px #aaa",
+      },
+      fontFamily: {
+         sans: ["STV", "sans-serif"],
       },
       colors: {
          primary: {

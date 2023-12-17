@@ -48,20 +48,14 @@ export const Configrator = () => {
          <IconButton
             color="deep-purple"
             variant="gradient"
-            className="group !fixed bottom-5 right-5 rounded-full shadow-md hover:scale-110 dark:shadow-white print:hidden md:bottom-10 md:right-10"
             size="lg"
+            className="group !fixed bottom-5 right-5 rounded-full shadow-md hover:scale-110 dark:shadow-white print:hidden md:bottom-10 md:right-10"
             onClick={openDrawer}
          >
             <i className="fa fa-gear fa-spin text-2xl text-white group-hover:text-white" />
          </IconButton>
 
-         <Drawer
-            open={open}
-            className="bg-white p-5 dark:bg-darkGray"
-            placement="right"
-            overlayProps={{ className: "cursor-pointer min-h-screen cursor-pointer" }}
-            onClose={closeDrawer}
-         >
+         <Drawer open={open} className="bg-gradient p-5" placement="right" onClose={closeDrawer}>
             <div className="mb-6 flex items-center justify-between">
                <Typography variant="h5" className="text-dimWhite">
                   اعدادات العرض

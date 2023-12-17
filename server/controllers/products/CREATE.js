@@ -2,7 +2,7 @@ import { Bills, Products } from "../../models/index.js";
 
 export const CREATE_CATEGORY = async (req, res) => {
 	try {
-		const { category, company } = req.body;
+		const { img, category, company } = req.body;
 		if (!category || !company) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبة" });
 
 		// Check If The Category Is Exist
@@ -10,7 +10,7 @@ export const CREATE_CATEGORY = async (req, res) => {
 		if (exists) return res.status(400).json({ error: "هذا القسم موجود بالفعل" });
 
 		// Create The Category
-		await Products.create({ category, company });
+		await Products.create({ img, category, company });
 		res.status(200).json({ success: "لقد تم انشاء القسم بنجاح" });
 	} catch (error) {
 		res.status(404).json(`CREATE_CATEGORY: ${error.message}`);

@@ -1,4 +1,4 @@
-import { Products, Locker, Bills } from "../../models/index.js";
+import { Products, Locker } from "../../models/index.js";
 
 // Pages
 export const GET_PROFILE = async (req, res) => {
@@ -58,58 +58,37 @@ export const GET_TABLES_LIST = async (req, res) => {
 		let Price = price === "buy" ? "$products.price.buy" : price === "sale" ? "$products.price.sale" : "";
 
 		const list = await Products.aggregate([
-			{
-				$unwind: {
-					path: "$products", // Deconstruct products array
-					preserveNullAndEmptyArrays: true, // Output document even if array is null or empty
-				},
-			},
-			{
-				$unwind: {
-					path: "$products.count", // Deconstruct products array
-					preserveNullAndEmptyArrays: true, // Output document even if array is null or empty
-				},
-			},
+			{ $unwind: { path: "$products", preserveNullAndEmptyArrays: true } },
+			{ $unwind: { path: "$products.count", preserveNullAndEmptyArrays: true } },
 			{
 				$group: {
-					_id: {
-						company: "$company",
-						name: "$products.name", // Group by company and product name
-					},
-					price: {
-						$addToSet: Price, // Add the product price to a set
-					},
-					count: {
-						$sum: Count, // Sum the count.shop values for each product
-					},
-					min: {
-						$addToSet: "$products.minmax.min",
-					},
-					max: {
-						$addToSet: "$products.minmax.max",
-					},
+					_id: { company: "$company", name: "$products.name" },
+					price: { $addToSet: Price },
+					count: { $sum: Count },
+					min: { $addToSet: "$products.minmax.min" },
+					max: { $addToSet: "$products.minmax.max" },
 				},
 			},
 			{
 				$project: {
 					_id: 0,
-					company: "$_id.company", // Use the company field from the _id
-					name: "$_id.name", // Use the product name field from the _id
-					count: 1, // Use the count field
-					min: { $arrayElemAt: ["$min", 0] }, // $arrayElemAt: To Get First Index On The Return Array
-					max: { $arrayElemAt: ["$max", 0] }, // $arrayElemAt: To Get First Index On The Return Array
-					price: { $arrayElemAt: ["$price", 0] }, // $arrayElemAt: To Get First Index On The Return Array
+					company: "$_id.company",
+					name: "$_id.name",
+					count: 1,
+					min: 1,
+					max: 1,
+					price: 1,
 					total: { $sum: { $multiply: [{ $arrayElemAt: ["$price", 0] }, "$count"] } },
 				},
 			},
 			{
 				$group: {
-					_id: "$company", // Group by company
+					_id: "$company",
 					products: {
 						$push: {
-							name: "$name", // Push the product name
-							price: "$price", // Push the product price
-							count: "$count", // Push the product count
+							name: "$name",
+							price: "$price",
+							count: "$count",
 							total: "$total",
 							min: "$min",
 							max: "$max",
@@ -120,8 +99,8 @@ export const GET_TABLES_LIST = async (req, res) => {
 			{
 				$project: {
 					_id: 0,
-					company: "$_id", // Use the company field from the _id
-					products: 1, // Use the products array
+					company: "$_id",
+					products: 1,
 				},
 			},
 			{
@@ -131,6 +110,7 @@ export const GET_TABLES_LIST = async (req, res) => {
 				},
 			},
 		]);
+
 		res.status(200).json(list);
 	} catch (error) {
 		res.status(404).json(`GET_TABLES_LISTS: ${error.message}`);

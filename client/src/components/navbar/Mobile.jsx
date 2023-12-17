@@ -6,7 +6,9 @@ import { links } from "@/constants/navbar";
 export const Mobile = ({ openDrawer, handleDrawer }) => {
    const [openAccordion, setOpenAccordion] = useState(0);
 
-   const handleAccordion = (value) => setOpenAccordion((open) => (open === value ? 0 : value));
+   const handleAccordion = (value) => {
+      setOpenAccordion((open) => (open === value ? 0 : value));
+   };
 
    const ChevronIcon = ({ id }) => {
       return <i className={`fa fa-chevron-left text-primary ${id === openAccordion ? "-rotate-90" : ""}`} />;
@@ -14,7 +16,7 @@ export const Mobile = ({ openDrawer, handleDrawer }) => {
 
    return (
       <Drawer
-         className="!max-h-screen overflow-y-auto p-4 dark:bg-darkGray lg:hidden"
+         className="bg-gradient overflow-y-auto p-4 lg:hidden"
          placement="left"
          open={openDrawer}
          onClose={handleDrawer}

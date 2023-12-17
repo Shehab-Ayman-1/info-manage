@@ -25,7 +25,7 @@ export const User = () => {
             />
          </MenuHandler>
 
-         <MenuList className="rounded-xl dark:bg-darkGray">
+         <MenuList className="bg-gradient rounded-xl">
             <MenuItem className="flex-start group gap-2 hover:!bg-dimPurple">
                <i className="fas fa-user-circle text-xl group-hover:text-primary" />
                <Typography variant="paragraph" className="text-xl font-bold group-hover:text-primary">

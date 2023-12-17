@@ -29,6 +29,7 @@ export const TodayBuysSales = () => {
       <Fragment>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
+         <PageHead text="لا يوجد مشتريات اليوم" className={!data?.buys.length ? "" : "hidden"} />
          <div className={!total.buys ? "hidden" : ""}>
             <PageHead text="مشتريات اليوم" />
             <Table headers={TABLE_HEAD} rowsLength={data?.buys.length} total={total.buys}>
@@ -43,6 +44,7 @@ export const TodayBuysSales = () => {
             </Table>
          </div>
 
+         <PageHead text="لا يوجد مبيعات اليوم" className={!data?.sales.length ? "" : "hidden"} />
          <div className={!total.sales ? "hidden" : ""}>
             <PageHead text="مبيعات اليوم" className="mt-10" />
             <Table headers={TABLE_HEAD} rowsLength={data?.sales.length} total={total.sales}>

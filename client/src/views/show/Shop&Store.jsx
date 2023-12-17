@@ -1,4 +1,4 @@
-import { Card, Typography } from "@material-tailwind/react";
+import { Card } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -8,13 +8,12 @@ import { PageHead, Searchbar, Switch } from "@/components/public";
 import { Table, Row, Col } from "@/components/table";
 
 const TABLE_HEAD = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];
-
 export const Show_Shop_Store = () => {
    const location = useLocation();
    const pathname = location.pathname.split("/")[2];
    const [searchText, setSearchText] = useState("");
    const [searchResult, setSearchResult] = useState(null);
-   const [isBuyPrice, setIsBuyPrice] = useState(pathname === "shop");
+   const [isBuyPrice, setIsBuyPrice] = useState(pathname === "store");
    const { data, isSubmitted, loading, error, refetch } = useAxios();
    const [total, setTotal] = useState({ all: 0, company: 0 });
 

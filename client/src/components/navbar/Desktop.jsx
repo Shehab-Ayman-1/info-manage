@@ -15,11 +15,11 @@ export const Desktop = () => {
                         color="deep-purple"
                      >
                         <p>{title}</p>
-                        <i className={`fa fa-chevron-down group-hover:text-primary`} />
+                        <i className={`fa fa-chevron-down mt-3 group-hover:text-primary`} />
                      </Button>
                   </MenuHandler>
 
-                  <MenuList className="bg-gradient-to-br from-blue-gray-200 to-white dark:from-darkGray dark:to-black">
+                  <MenuList className="bg-gradient">
                      {paths?.map(({ name, icon, link, disabled }, i) =>
                         name ? (
                            <Link

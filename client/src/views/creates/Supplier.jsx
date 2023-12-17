@@ -1,4 +1,12 @@
-import { Button, Typography, Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwind/react";
+import {
+   Button,
+   Typography,
+   Dialog,
+   DialogBody,
+   DialogFooter,
+   DialogHeader,
+   IconButton,
+} from "@material-tailwind/react";
 import { TabPanel, TabsBody } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -122,13 +130,13 @@ export const AddSupplier = () => {
          <div className="products">
             {formData.products.map(({ name }, i) => (
                <Typography variant="lead" className="text-dimWhite" key={i}>
-                  <i
-                     className="fa fa-times ml-2 text-lg  text-red-500 hover:text-red-900"
-                     onClick={() => handleDelete(i)}
-                  />
-                  <span>
-                     {i + 1} - {name}
-                  </span>
+                  <IconButton variant="text" color="red" className="group">
+                     <i
+                        className="fa fa-times text-lg text-red-500 group-hover:text-red-900"
+                        onClick={() => handleDelete(i)}
+                     />
+                  </IconButton>
+                  {name}
                </Typography>
             ))}
          </div>

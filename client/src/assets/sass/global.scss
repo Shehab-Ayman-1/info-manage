@@ -161,13 +161,13 @@
 }
 
 html {
-   @apply bg-gradient-to-tr from-blue-gray-200 to-white;
+   @apply bg-gradient;
    width: 100vw;
    min-height: 100vh;
    overflow-x: hidden;
    font-family: "Poppins", sans-serif;
    &.dark {
-      @apply from-black/90 via-darkGray to-black;
+      @apply from-black via-darkGray to-black;
       ::-webkit-scrollbar-track {
          @apply bg-black;
       }
@@ -222,6 +222,10 @@ i {
    &.open {
       clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
    }
+}
+
+.bg-gradient {
+   @apply bg-gradient-to-bl from-blue-gray-200 to-white dark:from-black dark:via-darkGray dark:to-black;
 }
 
 .loading-animate {

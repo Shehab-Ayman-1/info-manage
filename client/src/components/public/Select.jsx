@@ -34,7 +34,7 @@ export const Selectbox = ({
             className: `text-lg peer-focus:text-lg peer-placeholder-shown:text-lg ${labelStyle}`,
          }}
          menuProps={{
-            className: `from-blue-gray-200 to-blue-gray-100 py-3 bg-gradient-to-r dark:from-black dark:to-darkGray ${menuStyle}`,
+            className: `bg-gradient py-3 ${menuStyle}`,
          }}
          animate={{
             mount: { y: 0 },

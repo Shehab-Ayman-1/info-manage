@@ -87,59 +87,56 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
                !filterResult?.length || !data?.length ? "hidden" : ""
             }`}
          >
-            {(filterResult || data)?.map(({ _id, client, billCost, pay }, i) => (
-               <div
-                  className={`flex-between relative py-2 ${i % 2 ? "bg-dimPurple" : ""} ${
-                     !billCost ? "!hidden" : ""
-                  }`}
-                  key={i}
-               >
-                  <div
-                     className={`border-sp absolute -z-10 w-full !border-primary-200 dark:!border-primary-900 ${
-                        pay?.completed ? "" : "hidden"
-                     }`}
-                  />
-
-                  <div className="flex-start">
-                     <div className="flex">
-                        <IconButton
-                           variant="text"
-                           color="red"
-                           className={`group h-7 w-7 md:h-10 md:w-10 ${dLoading ? "pointer-events-none" : ""}`}
-                           onClick={() => handleDelete(_id)}
-                        >
-                           <i className="fa fa-times text-base text-red-500 group-hover:text-red-900 md:text-xl" />
-                        </IconButton>
-                        <IconButton
-                           variant="text"
-                           color="orange"
-                           className="group h-7 w-7 md:h-10 md:w-10"
-                           onClick={() => navigate(`/bills/update-bill/${_id}`)}
-                        >
-                           <i className="fa fa-edit text-base text-orange-500 group-hover:text-orange-900 md:text-xl" />
-                        </IconButton>
-                        <IconButton
-                           variant="text"
-                           color="green"
-                           className="group h-7 w-7 md:h-10 md:w-10"
-                           onClick={() => handleOpenDialog({ _id, client, billCost, pay })}
-                        >
-                           <i className="fa fa-money-bill-wave text-base text-green-500 group-hover:text-green-900 md:text-xl" />
-                        </IconButton>
-                     </div>
-
-                     <Typography variant="h5" className="text-base text-dimWhite dark:text-white md:text-xl">
-                        {client}
-                     </Typography>
-                  </div>
-                  <IconButton variant="text" color="white">
-                     <i
-                        className="fa fa-eye text-base text-dimWhite dark:text-white md:text-xl"
-                        onClick={() => navigate(`/bills/show-bill/${_id}?type=${type}`)}
+            {(filterResult || data)
+               ?.filter((item) => item.billCost)
+               .map(({ _id, client, billCost, pay }, i) => (
+                  <div className={`flex-between relative py-2 ${i % 2 ? "bg-dimPurple" : ""}`} key={i}>
+                     <div
+                        className={`border-sp absolute -z-10 w-full !border-primary-200 dark:!border-primary-900 ${
+                           pay?.completed ? "" : "hidden"
+                        }`}
                      />
-                  </IconButton>
-               </div>
-            ))}
+
+                     <div className="flex-start">
+                        <div className="flex">
+                           <IconButton
+                              variant="text"
+                              color="red"
+                              className={`group h-7 w-7 md:h-10 md:w-10 ${dLoading ? "pointer-events-none" : ""}`}
+                              onClick={() => handleDelete(_id)}
+                           >
+                              <i className="fa fa-times text-base text-red-500 group-hover:text-red-900 md:text-xl" />
+                           </IconButton>
+                           <IconButton
+                              variant="text"
+                              color="orange"
+                              className="group h-7 w-7 md:h-10 md:w-10"
+                              onClick={() => navigate(`/bills/update-bill/${_id}`)}
+                           >
+                              <i className="fa fa-edit text-base text-orange-500 group-hover:text-orange-900 md:text-xl" />
+                           </IconButton>
+                           <IconButton
+                              variant="text"
+                              color="green"
+                              className="group h-7 w-7 md:h-10 md:w-10"
+                              onClick={() => handleOpenDialog({ _id, client, billCost, pay })}
+                           >
+                              <i className="fa fa-money-bill-wave text-base text-green-500 group-hover:text-green-900 md:text-xl" />
+                           </IconButton>
+                        </div>
+
+                        <Typography variant="h5" className="text-base text-dimWhite dark:text-white md:text-xl">
+                           {client}
+                        </Typography>
+                     </div>
+                     <IconButton variant="text" color="white">
+                        <i
+                           className="fa fa-eye text-base text-dimWhite dark:text-white md:text-xl"
+                           onClick={() => navigate(`/bills/show-bill/${_id}?type=${type}`)}
+                        />
+                     </IconButton>
+                  </div>
+               ))}
          </div>
 
          <Typography
@@ -154,7 +151,7 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
             open={openDialog}
             size="md"
             handler={handleOpenDialog}
-            className="max-h-[80vh] overflow-y-auto shadow-sp dark:bg-darkGray"
+            className="bg-gradient max-h-[80vh] overflow-y-auto shadow-sp"
          >
             <DialogHeader className="block">
                <Typography variant="h3" className="flex-between text-xl text-dimWhite md:text-3xl">
