@@ -18,8 +18,10 @@ export const TransferStatement = () => {
       isSubmitted: sIsSubmitted,
       refetch: sRefetch,
    } = useAxios();
+
    const [supplierData, setSupplierData] = useState(supplierState);
    const [categoryData, setCategoryData] = useState(categoryState);
+   
    const { categories, companies, products, suppliers } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 

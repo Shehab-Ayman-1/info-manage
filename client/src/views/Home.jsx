@@ -3,10 +3,10 @@ import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useAxios } from "@/hooks/useAxios";
 import { getSearchList } from "@/redux/slices/products";
-import { Loading } from "@/layout/Loading";
 import { PageHead } from "@/components/public";
+import { useAxios } from "@/hooks/useAxios";
+import { Loading } from "@/layout/Loading";
 import { ADMIN } from "@/constants/users";
 
 export const Home = () => {
@@ -66,14 +66,11 @@ export const Home = () => {
       <Fragment>
          {user?.role === ADMIN && !cashLoading ? (
             <PageHead variant="h4" text={cashData?.toLocaleString() || "00,00"} className="text-white" />
-         ) : (
-            cashLoading &&
-            !cashError && (
-               <div className="flex-center mx-auto flex-col">
-                  <Loading subLoading hideSubLoadingText />
-               </div>
-            )
-         )}
+         ) : cashLoading && !cashError ? (
+            <div className="flex-center mx-auto flex-col">
+               <Loading subLoading hideSubLoadingText />
+            </div>
+         ) : null}
 
          <Card className="relative m-auto mt-11 w-full max-w-2xl bg-transparent shadow-none">
             <CardHeader

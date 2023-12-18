@@ -1,13 +1,5 @@
-import {
-   Button,
-   Typography,
-   Dialog,
-   DialogBody,
-   DialogFooter,
-   DialogHeader,
-   IconButton,
-} from "@material-tailwind/react";
-import { TabPanel, TabsBody } from "@material-tailwind/react";
+import { TabPanel, TabsBody, Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwind/react";
+import { Button, Typography, IconButton } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

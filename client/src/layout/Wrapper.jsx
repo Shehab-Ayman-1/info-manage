@@ -1,5 +1,5 @@
-import { Card, Typography } from "@material-tailwind/react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Card } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 import { Fragment } from "react";
 

@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { Field, Form, Selectbox } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
-import { login } from "@/redux/slices/users";
 
 const ROLES = ["admin", "user"];
 

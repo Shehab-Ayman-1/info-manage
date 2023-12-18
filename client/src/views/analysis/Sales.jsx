@@ -1,7 +1,8 @@
+import { Fragment } from "react";
+
 import { Chart, PageHead } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
-import { Fragment } from "react";
 
 export const AnalysisSales = () => {
    const { data, loading, error, isSubmitted } = useAxios("get", "/bills/get-months-sales");

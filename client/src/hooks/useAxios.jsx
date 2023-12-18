@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { routes } from "@/constants/routes";
 import axios from "axios";
+
+import { routes } from "@/constants/routes";
 
 let router;
 if (import.meta.env.MODE === "production") router = axios.create(routes.remote);

@@ -6,13 +6,7 @@ import { Loading } from "@/layout/Loading";
 
 export const ShowBills = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
-   const {
-      data: paymentData,
-      loading: pLoading,
-      error: pError,
-      isSubmitted: pIsSubmitted,
-      refetch: pRefetch,
-   } = useAxios();
+   const { data: pay, loading: pLoading, error: pError, isSubmitted: IsSubmitted, refetch: pRefetch } = useAxios();
 
    useEffect(() => {
       (async () => {
@@ -38,9 +32,9 @@ export const ShowBills = () => {
             data={data}
             type="bill"
             handleSubmit={handleSubmit}
-            paymentData={paymentData}
+            paymentData={pay}
             loading={pLoading}
-            isSubmitted={pIsSubmitted}
+            isSubmitted={IsSubmitted}
             error={pError}
          />
       </Fragment>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCategories } from "@/redux/slices/products";
 
+import { setCategories } from "@/redux/slices/products";
 import { Field, Form } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";

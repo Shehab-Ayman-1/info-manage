@@ -1,4 +1,3 @@
-import { Typography } from "@material-tailwind/react";
 import { Fragment, useEffect } from "react";
 
 import { Col, Row, Table } from "@/components/table";

@@ -1,6 +1,7 @@
 import { Avatar, Menu, MenuHandler, MenuItem, MenuList, Typography } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import { userLogo } from "@/assets";
 
 export const User = () => {

@@ -1,6 +1,7 @@
 import { Accordion, AccordionBody, AccordionHeader, Drawer, List, ListItem } from "@material-tailwind/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import { links } from "@/constants/navbar";
 
 export const Mobile = ({ openDrawer, handleDrawer }) => {
