@@ -5,7 +5,7 @@ import { links } from "@/constants/navbar";
 
 export const Desktop = () => {
    return (
-      <div className="hidden w-full items-center justify-center print:!hidden lg:flex">
+      <div className="hidden items-center justify-center print:!hidden lg:flex">
          {links.map(({ title, path, paths }, i) =>
             title ? (
                <Menu allowHover key={i}>

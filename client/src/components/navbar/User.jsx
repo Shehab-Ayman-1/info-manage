@@ -21,7 +21,7 @@ export const User = () => {
             <Avatar
                variant="circular"
                alt="profile"
-               className="h-6 w-6 cursor-pointer sm:h-8 sm:w-8 md:ml-2"
+               className="h-6 w-6 cursor-pointer sm:h-8 sm:w-8"
                src={userLogo}
             />
          </MenuHandler>

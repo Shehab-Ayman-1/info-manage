@@ -30,12 +30,12 @@ export const Profile = () => {
    } = useAxios();
 
    useEffect(() => {
-      if (!companyId || !productId || data) return;
+      if (!companyId || !productId) return;
 
       (async () => {
          await refetch("get", `/products/get-profile/${companyId}/${productId}`);
       })();
-   }, []);
+   }, [companyId, productId]);
 
    const handleFieldChange = (event) => {
       setPrice((price) => ({ ...price, value: event.target.value }));

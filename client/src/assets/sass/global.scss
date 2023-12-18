@@ -211,8 +211,10 @@ i {
 }
 
 .home-bg {
-   background: url("@/assets/images/car.jpeg") no-repeat;
-   background-size: cover;
+   background:
+      linear-gradient(rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.8)),
+      url("@/assets/images/car.jpeg") no-repeat;
+   background-size: auto;
    background-position: center;
    background-attachment: fixed;
 }
