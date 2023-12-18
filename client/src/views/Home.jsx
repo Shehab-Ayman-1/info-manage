@@ -7,20 +7,29 @@ import { useAxios } from "@/hooks/useAxios";
 import { getSearchList } from "@/redux/slices/products";
 import { Loading } from "@/layout/Loading";
 import { PageHead } from "@/components/public";
+import { ADMIN } from "@/constants/users";
 
 export const Home = () => {
    const { searchList } = useSelector(({ products }) => products);
-   const { data, loading, isSubmitted, refetch } = useAxios();
+   const { user } = useSelector(({ users }) => users);
 
    const [open, setOpen] = useState(false);
    const [searchText, setSearchText] = useState("");
    const [filterList, setFilterList] = useState(null);
    const [startSearch, setStartSearch] = useState(false);
 
-   const { data: cashData } = useAxios("get", "/locker/get-total-cash");
+   const { data, loading, isSubmitted, refetch } = useAxios();
+   const { data: cashData, loading: cashLoading, error: cashError, refetch: cashRefetch } = useAxios();
 
    const dispatch = useDispatch();
    const navigate = useNavigate();
+
+   useEffect(() => {
+      if (user?.role !== ADMIN) return;
+      (async () => {
+         await cashRefetch("get", "/locker/get-total-cash");
+      })();
+   }, []);
 
    useEffect(() => {
       if (!startSearch || searchList.length) return;
@@ -55,7 +64,17 @@ export const Home = () => {
 
    return (
       <Fragment>
-         <PageHead variant="h2" text={cashData?.toLocaleString() || "00,00"} className="text-white" />
+         {user?.role === ADMIN && !cashLoading ? (
+            <PageHead variant="h4" text={cashData?.toLocaleString() || "00,00"} className="text-white" />
+         ) : (
+            cashLoading &&
+            !cashError && (
+               <div className="flex-center mx-auto flex-col">
+                  <Loading subLoading hideSubLoadingText />
+               </div>
+            )
+         )}
+
          <Card className="relative m-auto mt-11 w-full max-w-2xl bg-transparent shadow-none">
             <CardHeader
                className={`flex-between bg-gradient rounded-3xl text-dimWhite ${open ? `rounded-b-none` : ``}`}

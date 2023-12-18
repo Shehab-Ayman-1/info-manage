@@ -1,10 +1,10 @@
 import { Button, Drawer, IconButton, Typography } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 export const Configrator = () => {
    const [open, setOpen] = useState(false);
 
-   useEffect(() => {
+   useLayoutEffect(() => {
       const mode = localStorage.getItem("mode") || "light";
       const theme = localStorage.getItem("theme") || "deep-purple";
 
@@ -12,8 +12,12 @@ export const Configrator = () => {
       document.querySelector("html").setAttribute("class", mode);
    }, []);
 
-   const openDrawer = () => setOpen(true);
-   const closeDrawer = () => setOpen(false);
+   const openDrawer = () => {
+      setOpen(true);
+   };
+   const closeDrawer = () => {
+      setOpen(false);
+   };
 
    const handleChangeMode = (mode) => {
       document.querySelector("html").setAttribute("class", mode);

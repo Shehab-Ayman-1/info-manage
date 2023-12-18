@@ -10,7 +10,7 @@ module.exports = withMT({
          sp: "0 0 20px #aaa",
       },
       fontFamily: {
-         sans: ["STV", "sans-serif"],
+         sans: ["STV", "cursive", "sans-serif"],
       },
       colors: {
          primary: {

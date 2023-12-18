@@ -3,7 +3,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Fragment } from "react";
 
-import { Configrator, Navbar } from "@/layout";
+import { Configrator, Navbar, PageNotFound } from "@/layout";
 import { ADMIN, USER } from "@/constants";
 import { links } from "@/constants/navbar";
 
@@ -59,12 +59,7 @@ export const Wrapper = () => {
                   <Outlet />
                </Fragment>
             ) : (
-               <Typography
-                  variant="h2"
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 text-center text-3xl tracking-widest text-primary sm:text-5xl"
-               >
-                  يسمح فقط بدخول الادمنز
-               </Typography>
+               <PageNotFound />
             )}
          </Card>
       </Fragment>

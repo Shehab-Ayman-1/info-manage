@@ -125,7 +125,10 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
                            </IconButton>
                         </div>
 
-                        <Typography variant="h5" className="text-base text-dimWhite dark:text-white md:text-xl">
+                        <Typography
+                           variant="h5"
+                           className="pb-3 text-base text-dimWhite dark:text-white md:text-xl"
+                        >
                            {client}
                         </Typography>
                      </div>
@@ -167,6 +170,7 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
                   <span>{+payment?.billCost - +payment?.pay.value - +payment?.pay.discount}</span>
                </Typography>
             </DialogHeader>
+
             <DialogBody>
                <Field
                   type="number"
@@ -184,7 +188,7 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
                   disabled={loading}
                   onClick={handlePayment}
                >
-                  اضافه
+                  دفع
                </Button>
             </DialogFooter>
          </Dialog>

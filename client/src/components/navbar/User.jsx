@@ -12,7 +12,7 @@ export const User = () => {
       window.location.reload();
    };
 
-   if (!user) return <i className="fa fa-user hover:text-white/70" onClick={() => navigate("/auths/login")} />;
+   if (!user) return;
 
    return (
       <Menu>

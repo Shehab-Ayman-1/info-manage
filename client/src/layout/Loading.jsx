@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Spinner, Alert, Progress, Typography } from "@material-tailwind/react";
 
-export const Loading = ({ subLoading, isSubmitted, loading, error, message, to }) => {
+export const Loading = ({ subLoading, hideSubLoadingText, isSubmitted, loading, error, message, to }) => {
    const [open, setOpen] = useState(true);
    const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export const Loading = ({ subLoading, isSubmitted, loading, error, message, to }
    if (subLoading)
       return (
          <Fragment>
-            <Typography variant="h5" color="deep-purple" className="ml-4">
+            <Typography variant="h5" color="deep-purple" className={`ml-4 ${hideSubLoadingText ? "hidden" : ""}`}>
                يتم التحميل
             </Typography>
             <Spinner className="h-8 w-8" color="deep-purple" />

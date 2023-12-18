@@ -1,0 +1,743 @@
+[{
+  "_id": {
+    "$oid": "657f438263380b398e20f05c"
+  },
+  "type": "bill",
+  "client": "محمد السيد",
+  "phone": "0123456789",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f439463380b398e20f05f"
+  },
+  "type": "bill",
+  "client": "ابراهيم حسن",
+  "phone": "0102345678",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f43a963380b398e20f062"
+  },
+  "type": "bill",
+  "client": "مصطفي صابر",
+  "phone": "01554566092",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f440b63380b398e20f065"
+  },
+  "type": "debt",
+  "client": "ميدو موبيل",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f447f63380b398e20f06a"
+  },
+  "type": "debt",
+  "client": "حماده شيل",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f44a863380b398e20f06f"
+  },
+  "type": "debt",
+  "client": "صابر ماكس",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f45a963380b398e20f074"
+  },
+  "type": "debt",
+  "client": "ابراهيم فوكس",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f45f263380b398e20f079"
+  },
+  "type": "debt",
+  "client": "حسن مصر",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f46c263380b398e20f086"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "ميدو موبيل",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 60000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "موبيل صغير",
+      "count": 100,
+      "price": 500,
+      "_id": {
+        "$oid": "657f46c263380b398e20f087"
+      }
+    },
+    {
+      "name": "موبيل كبير",
+      "count": 80,
+      "price": 700,
+      "_id": {
+        "$oid": "657f46c263380b398e20f088"
+      }
+    },
+    {
+      "name": "موبيل وسط",
+      "count": 90,
+      "price": 600,
+      "_id": {
+        "$oid": "657f46c263380b398e20f089"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f490963380b398e20f0af"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "ابراهيم فوكس",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "مصر كبير",
+      "count": 50,
+      "price": 600,
+      "_id": {
+        "$oid": "657f490963380b398e20f0b0"
+      }
+    },
+    {
+      "name": "مصر وسط",
+      "count": 80,
+      "price": 500,
+      "_id": {
+        "$oid": "657f490963380b398e20f0b1"
+      }
+    },
+    {
+      "name": "مصر صغير",
+      "count": 80,
+      "price": 700,
+      "_id": {
+        "$oid": "657f490963380b398e20f0b2"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f49e763380b398e20f0bd"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "حماده شيل",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "شيل صغير",
+      "count": 50,
+      "price": 500,
+      "_id": {
+        "$oid": "657f49e763380b398e20f0be"
+      }
+    },
+    {
+      "name": "شيل كبير",
+      "count": 80,
+      "price": 700,
+      "_id": {
+        "$oid": "657f49e763380b398e20f0bf"
+      }
+    },
+    {
+      "name": "شيل وسط",
+      "count": 80,
+      "price": 600,
+      "_id": {
+        "$oid": "657f49e763380b398e20f0c0"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f4a1263380b398e20f0ca"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "صابر ماكس",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "ماكس كبير",
+      "count": 50,
+      "price": 700,
+      "_id": {
+        "$oid": "657f4a1263380b398e20f0cb"
+      }
+    },
+    {
+      "name": "ماكس وسط",
+      "count": 80,
+      "price": 800,
+      "_id": {
+        "$oid": "657f4a1263380b398e20f0cc"
+      }
+    },
+    {
+      "name": "ماكس كبير",
+      "count": 80,
+      "price": 900,
+      "_id": {
+        "$oid": "657f4a1263380b398e20f0cd"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f4a7463380b398e20f0d3"
+  },
+  "type": "debt",
+  "client": "ابراهيم فوكس",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f4aa063380b398e20f0e1"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "ابراهيم فوكس",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "فوكس كبير",
+      "count": 50,
+      "price": 400,
+      "_id": {
+        "$oid": "657f4aa063380b398e20f0e2"
+      }
+    },
+    {
+      "name": "فوكس وسط",
+      "count": 80,
+      "price": 500,
+      "_id": {
+        "$oid": "657f4aa063380b398e20f0e3"
+      }
+    },
+    {
+      "name": "فوكس صغير",
+      "count": 80,
+      "price": 600,
+      "_id": {
+        "$oid": "657f4aa063380b398e20f0e4"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f4abb63380b398e20f0ec"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "صابر ماكس",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-17T18:35:38.504Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "ماكس صغير",
+      "count": 50,
+      "price": 800,
+      "_id": {
+        "$oid": "657f4abb63380b398e20f0ed"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "657f59d1963efc091cb5b1f3"
+  },
+  "type": "bill",
+  "place": "store",
+  "client": "ابراهيم حسن",
+  "phone": "0102345678",
+  "date": {
+    "$date": "2023-12-17T20:19:58.894Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 8000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "موبيل كبير",
+      "count": 5,
+      "price": 1000,
+      "buyPrice": 700,
+      "_id": {
+        "$oid": "657f59d1963efc091cb5b1f4"
+      }
+    },
+    {
+      "name": "موبيل وسط",
+      "count": 5,
+      "price": 1200,
+      "buyPrice": 600,
+      "_id": {
+        "$oid": "657f59d1963efc091cb5b1f5"
+      }
+    },
+    {
+      "name": "موبيل صغير",
+      "count": 5,
+      "price": 1400,
+      "buyPrice": 500,
+      "_id": {
+        "$oid": "657f59d1963efc091cb5b1f6"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658057e79cfa68d6be4966cf"
+  },
+  "type": "debt",
+  "place": "shop",
+  "client": "ابراهيم فوكس",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-18T14:17:05.842Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "فوكس صغير",
+      "count": 50,
+      "price": 600,
+      "_id": {
+        "$oid": "658057e79cfa68d6be4966d0"
+      }
+    },
+    {
+      "name": "فوكس كبير",
+      "count": 40,
+      "price": 400,
+      "_id": {
+        "$oid": "658057e79cfa68d6be4966d1"
+      }
+    },
+    {
+      "name": "فوكس وسط",
+      "count": 40,
+      "price": 500,
+      "_id": {
+        "$oid": "658057e79cfa68d6be4966d2"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658058519cfa68d6be4966df"
+  },
+  "type": "debt",
+  "place": "shop",
+  "client": "حسن مصر",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-18T14:17:05.842Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "مصر كبير",
+      "count": 50,
+      "price": 600,
+      "_id": {
+        "$oid": "658058519cfa68d6be4966e0"
+      }
+    },
+    {
+      "name": "مصر صغير",
+      "count": 40,
+      "price": 700,
+      "_id": {
+        "$oid": "658058519cfa68d6be4966e1"
+      }
+    },
+    {
+      "name": "مصر وسط",
+      "count": 60,
+      "price": 500,
+      "_id": {
+        "$oid": "658058519cfa68d6be4966e2"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6580587e9cfa68d6be4966ee"
+  },
+  "type": "debt",
+  "place": "shop",
+  "client": "حماده شيل",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-18T14:17:05.842Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "شيل كبير",
+      "count": 50,
+      "price": 700,
+      "_id": {
+        "$oid": "6580587e9cfa68d6be4966ef"
+      }
+    },
+    {
+      "name": "شيل وسط",
+      "count": 60,
+      "price": 600,
+      "_id": {
+        "$oid": "6580587e9cfa68d6be4966f0"
+      }
+    },
+    {
+      "name": "شيل صغير",
+      "count": 40,
+      "price": 500,
+      "_id": {
+        "$oid": "6580587e9cfa68d6be4966f1"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658058a39cfa68d6be4966fd"
+  },
+  "type": "debt",
+  "place": "shop",
+  "client": "صابر ماكس",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-18T14:17:05.842Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "ماكس كبير",
+      "count": 50,
+      "price": 900,
+      "_id": {
+        "$oid": "658058a39cfa68d6be4966fe"
+      }
+    },
+    {
+      "name": "ماكس وسط",
+      "count": 80,
+      "price": 800,
+      "_id": {
+        "$oid": "658058a39cfa68d6be4966ff"
+      }
+    },
+    {
+      "name": "ماكس صغير",
+      "count": 20,
+      "price": 800,
+      "_id": {
+        "$oid": "658058a39cfa68d6be496700"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "658058c29cfa68d6be49670b"
+  },
+  "type": "debt",
+  "place": "shop",
+  "client": "ميدو موبيل",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-18T14:17:05.842Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "موبيل كبير",
+      "count": 50,
+      "price": 700,
+      "_id": {
+        "$oid": "658058c29cfa68d6be49670c"
+      }
+    },
+    {
+      "name": "موبيل وسط",
+      "count": 70,
+      "price": 600,
+      "_id": {
+        "$oid": "658058c29cfa68d6be49670d"
+      }
+    },
+    {
+      "name": "موبيل صغير",
+      "count": 40,
+      "price": 500,
+      "_id": {
+        "$oid": "658058c29cfa68d6be49670e"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65805c26ba363847a2d8b26a"
+  },
+  "type": "bill",
+  "place": "shop",
+  "client": "محمد السيد",
+  "phone": "0123456789",
+  "date": {
+    "$date": "2023-12-18T14:49:37.471Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 3150,
+    "discount": 50
+  },
+  "products": [
+    {
+      "name": "موبيل كبير",
+      "count": 2,
+      "price": 1000,
+      "buyPrice": 700,
+      "_id": {
+        "$oid": "65805c26ba363847a2d8b26b"
+      }
+    },
+    {
+      "name": "موبيل وسط",
+      "count": 1,
+      "price": 1200,
+      "buyPrice": 600,
+      "_id": {
+        "$oid": "65805c26ba363847a2d8b26c"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65805eceba363847a2d8b2a0"
+  },
+  "type": "debt",
+  "place": "shop",
+  "client": "حسن مصر",
+  "phone": "01093197782",
+  "date": {
+    "$date": "2023-12-18T14:49:37.471Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 5000,
+    "discount": 2000
+  },
+  "products": [
+    {
+      "name": "مصر كبير",
+      "count": 20,
+      "price": 600,
+      "_id": {
+        "$oid": "65805eceba363847a2d8b2a1"
+      }
+    }
+  ],
+  "__v": 0
+}]
