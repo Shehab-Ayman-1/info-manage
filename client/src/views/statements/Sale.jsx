@@ -12,7 +12,7 @@ const formState = {
    company: "",
    products: [],
    discount: "",
-   client: "",
+   client: "عميل غير معروف",
    clientPay: "",
    toStore: false,
 };

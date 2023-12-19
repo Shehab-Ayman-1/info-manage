@@ -41,7 +41,7 @@ export const SALE_PRODUCTS = async (req, res) => {
 		const bill = await Bills.findOne({ client });
 		await Bills.create({
 			client,
-			phone: bill.phone,
+			phone: bill?.phone || "----",
 			place: toStore ? "store" : "shop",
 			type: "bill",
 			pay: { completed: +clientPay + +discount >= totalProductsCost, value: +clientPay, discount },

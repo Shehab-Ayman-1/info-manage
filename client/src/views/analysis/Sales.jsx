@@ -17,27 +17,27 @@ export const AnalysisSales = () => {
             <Chart
                head="المبيعات خلال العام"
                icon="fa-cart-arrow-down"
-               description="يمكنك لمس الخط لرؤية سعر الشراء في ذلك الوقت"
+               description="يمكنك لمس الخط لرؤية العدد في ذلك الوقت"
                data={{
-                  categories: data?.map((item) => item.month),
+                  categories: data?.year.map((item) => item.month),
                   series: {
                      name: "العدد",
-                     data: data?.map((item) => Math.abs(item.sales)),
+                     data: data?.year.map((item) => Math.abs(item.sales)),
                   },
-                  type: "line",
                }}
             />
 
             <Chart
-               head="المبيعات خلال العام"
+               head="المبيعات خلال الشهر"
                icon="fa-cart-arrow-down"
-               description="يمكنك لمس الخط لرؤية سعر الشراء في ذلك الوقت"
+               description="يمكنك لمس الخط لرؤية العدد في ذلك الوقت"
                data={{
-                  categories: data?.map((item) => item.month),
+                  categories: data?.months.map((item) => item.date),
                   series: {
                      name: "العدد",
-                     data: data?.map((item) => Math.abs(item.sales)),
+                     data: data?.months.map((item) => Math.abs(item.price)),
                   },
+                  type: "line",
                }}
             />
          </div>

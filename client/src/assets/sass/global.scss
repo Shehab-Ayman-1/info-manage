@@ -227,7 +227,7 @@ i {
 }
 
 .bg-gradient {
-   @apply bg-gradient-to-bl from-blue-gray-200 to-white dark:from-black dark:via-darkGray dark:to-black;
+   @apply bg-gradient-to-bl from-white to-blue-gray-200 dark:from-black dark:via-darkGray dark:to-black;
 }
 
 .loading-animate {

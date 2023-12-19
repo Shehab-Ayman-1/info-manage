@@ -6,11 +6,11 @@ import { useAxios } from "@/hooks/useAxios";
 import { PageHead } from "@/components/public";
 
 export const LockerCash = () => {
-   const { data, loading, error, refetch } = useAxios();
+   const { data, refetch } = useAxios();
    const { user } = useSelector(({ users }) => users);
 
    useEffect(() => {
-      if (user?.role !== ADMIN || window.innerWidth <= 1250) return;
+      if (user?.role !== ADMIN || window.innerWidth <= 400) return;
 
       (async () => {
          await refetch("get", "/locker/get-total-cash");
@@ -23,7 +23,7 @@ export const LockerCash = () => {
       <PageHead
          variant="h4"
          text={`${data?.toLocaleString()} جنية` || "00,00 جنية"}
-         className="whitespace-nowrap pb-3 text-base text-primary md:text-xl"
+         className="mb-0 whitespace-nowrap pb-3 text-base text-primary sm:text-xl"
       />
    );
 };

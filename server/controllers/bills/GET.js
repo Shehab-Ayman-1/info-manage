@@ -158,8 +158,8 @@ export const GET_PRODUCT_MOVEMENT = async (req, res) => {
 			},
 			{
 				$sort: {
-					month: 1,
-					day: 1,
+					"data.month": 1,
+					"data.day": 1,
 				},
 			},
 		]);
@@ -179,7 +179,7 @@ export const GET_MONTHS_SALES = async (req, res) => {
 		const startDate = new Date(`${now.getFullYear()}-01-01`);
 		const endDate = new Date(`${now.getFullYear()}-12-31`);
 
-		const list = await Bills.aggregate([
+		const year = await Bills.aggregate([
 			{
 				$match: { type: "bill", date: { $gt: startDate, $lt: endDate } },
 			},
@@ -222,7 +222,42 @@ export const GET_MONTHS_SALES = async (req, res) => {
 			},
 		]);
 
-		res.status(200).json(list);
+		const startMonthDate = new Date(now.getFullYear(), now.getMonth());
+
+		const monthsList = await Bills.aggregate([
+			{
+				$unwind: "$products",
+			},
+			{
+				$match: { type: "bill", date: { $gte: startMonthDate } },
+			},
+			{
+				$group: {
+					_id: {
+						day: { $dayOfMonth: "$date" },
+					},
+					date: { $first: { month: { $month: "$date" }, day: { $dayOfMonth: "$date" } } },
+					price: { $sum: { $multiply: ["$products.count", "$products.price"] } },
+				},
+			},
+			{
+				$project: {
+					_id: 0,
+					date: "$date",
+					price: 1,
+				},
+			},
+			{
+				$sort: {
+					"date.month": 1,
+					"date.day": 1,
+				},
+			},
+		]);
+
+		const months = monthsList.map(({ date, price }) => ({ price, date: `${date.month}-${date.day}` }));
+
+		res.status(200).json({ year, months });
 	} catch (error) {
 		res.status(404).json(`GET_MONTHS_SALES: ${error.message}`);
 	}
