@@ -1,10 +1,11 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import { BillPage } from "@/components/bills";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
 export const ShowDebts = () => {
+   const [activePage, setActivePage] = useState(0);
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const {
       data: paymentData,
@@ -16,9 +17,9 @@ export const ShowDebts = () => {
 
    useEffect(() => {
       (async () => {
-         await refetch("get", "/bills/get-bills?type=debt");
+         await refetch("get", `/bills/get-bills?type=debt&activePage=${activePage}`);
       })();
-   }, []);
+   }, [activePage]);
 
    const handleSubmit = async (payment) => {
       return await pRefetch("put", "/bills/payment?type=debt", {
@@ -35,8 +36,11 @@ export const ShowDebts = () => {
 
          <BillPage
             head="عرض المديونيات"
-            data={data}
             type="debt"
+            data={data?.data}
+            rowsLength={data?.rowsLength}
+            activePage={activePage}
+            setActivePage={setActivePage}
             handleSubmit={handleSubmit}
             paymentData={paymentData}
             loading={pLoading}

@@ -11,22 +11,29 @@ const TABLE_HEAD = ["الشركة", "المنتج", "العدد", "السعر", 
 export const Show_Shop_Store = () => {
    const location = useLocation();
    const pathname = location.pathname.split("/")[2];
+
+   const [activePage, setActivePage] = useState(0);
    const [searchText, setSearchText] = useState("");
    const [searchResult, setSearchResult] = useState(null);
    const [isBuyPrice, setIsBuyPrice] = useState(pathname === "store");
+
    const { data, isSubmitted, loading, error, refetch } = useAxios();
-   const [total, setTotal] = useState({ all: 0, company: 0 });
 
    useEffect(() => {
       (async () => {
-         await refetch("get", `/products/get-table-list?price=${isBuyPrice ? "buy" : "sale"}&count=${pathname}`);
+         await refetch(
+            "get",
+            `/products/get-table-list?price=${
+               isBuyPrice ? "buy" : "sale"
+            }&count=${pathname}&activePage=${activePage}`,
+         );
       })();
-   }, [pathname, isBuyPrice]);
+   }, [pathname, isBuyPrice, activePage]);
 
    useEffect(() => {
-      if (!data?.length) return;
+      if (!data?.data.length) return;
 
-      const result = data?.map(({ company, products }) => {
+      const result = data?.data.map(({ company, products }) => {
          const companyMatch = company.includes(searchText.trim());
 
          const productsMatch = products.filter(({ name, barcode }) => {
@@ -40,16 +47,6 @@ export const Show_Shop_Store = () => {
 
       setSearchResult(() => result);
    }, [searchText]);
-
-   useEffect(() => {
-      if (!data?.length) return;
-
-      const all = (searchResult || data).map((company) =>
-         company.products.map((product) => product.total).reduce((p, c) => p + c, 0),
-      );
-
-      setTotal((prev) => ({ ...prev, all: all.reduce((prev, cur) => prev + cur, 0) }));
-   }, [data, searchResult]);
 
    const minmax = (count, min, max) => {
       if (count <= 0) return "text-blue-gray-500/50 dark:text-blue-gray-700";
@@ -77,17 +74,19 @@ export const Show_Shop_Store = () => {
 
          <Table
             headers={TABLE_HEAD}
-            rowsLength={searchResult?.length || data?.length}
             footerSpan={[2, 3]}
-            total={total.all}
+            total={data?.total}
+            activePage={activePage}
+            setActivePage={setActivePage}
+            rowsLength={searchResult?.length || data?.rowsLength}
          >
-            {(searchResult || data)?.map(({ company, products }, i) => {
-               return products?.map(({ name, count, price, total, min, max }, j) => (
+            {(searchResult || data?.data)?.map(({ company, products }, i) => {
+               return products?.map(({ name, count, total, price, min, max }, j) => (
                   <Row key={j} index={i} className="">
                      {!j ? (
                         <Col
                            rowSpan={Math.floor(products.length)}
-                           className="text-blue-gray-500 dark:text-blue-gray-200"
+                           className="text-dimWhite dark:text-blue-gray-200"
                         >
                            {company}
                         </Col>
@@ -95,9 +94,7 @@ export const Show_Shop_Store = () => {
                      <Col className={minmax(count, min, max)}>{name}</Col>
                      <Col className={minmax(count, min, max)}>{count}</Col>
                      <Col className={minmax(count, min, max)}>{price}</Col>
-                     <Col className={minmax(count, min, max)}>
-                        {data?.length ? total?.toLocaleString() : "00,00"}
-                     </Col>
+                     <Col className={minmax(count, min, max)}>{total.toLocaleString()}</Col>
                   </Row>
                ));
             })}

@@ -1,17 +1,25 @@
 import { Bills } from "../../models/index.js";
 
 const monthsByName = ["", "يناير", "فبراير", "مارس", "ابريل", "مايو", "يونيو", "يوليو", "اغسطس", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"];
+const LIMIT = 10;
 
 export const GET_BILLS = async (req, res) => {
 	try {
-		const { type } = req.query;
-		const bills = await Bills.find({ type }).select(["_id", "client", "products", "pay"]);
+		const { type, activePage } = req.query;
+		const rowsLength = await Bills.countDocuments({ type });
+
+		const bills = await Bills.find({ type })
+			.sort({ date: -1 })
+			.skip((+activePage ?? 0) * LIMIT)
+			.limit(LIMIT)
+			.select(["_id", "client", "products", "pay"]);
+
 		const clients = bills.map(({ _id, client, pay, products }) => {
 			const billCost = products.reduce((prev, cur) => prev + cur.count * cur.price, 0);
 			return { _id, client, billCost, pay };
 		});
 
-		res.status(200).json(clients);
+		res.status(200).json({ data: clients, rowsLength: Math.ceil(rowsLength / LIMIT) });
 	} catch (error) {
 		res.status(404).json(`GET_BILLS: ${error.message}`);
 	}

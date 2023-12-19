@@ -29,4 +29,18 @@ const schema = new Schema({
 	],
 });
 
+schema.query.findTotalPrices = async function (price, count) {
+	const products = (await this).reduce((prev, cur) => prev.concat(cur.products), []);
+	const total = products.reduce((prev, cur) => {
+		const totalCount = cur.count.reduce((p, c) => p + c[count], 0);
+		return prev + cur.price[price] * totalCount;
+	}, 0);
+	return total;
+};
+
+schema.query.findRowsLength = async function (maxLength = 0) {
+	const length = (await this.skip(maxLength)).reduce((prev, cur) => prev + cur.products.length, 0);
+	return length;
+};
+
 export const Products = model("products", schema);

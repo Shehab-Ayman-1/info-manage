@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import { Col, Row, Table } from "@/components/table";
 import { useAxios } from "@/hooks";
@@ -8,12 +8,13 @@ import { PageHead } from "@/components/public";
 const TABLE_HEAD = ["#", "السبب", "العملية", "المبلغ", "التاريخ"];
 export const ShowLockerProcesses = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
+   const [activePage, setActivePage] = useState(0);
 
    useEffect(() => {
       (async () => {
-         await refetch("get", "/locker/get-locker-details");
+         await refetch("get", `/locker/get-locker-details?activePage=${activePage}`);
       })();
-   }, []);
+   }, [activePage]);
 
    return (
       <Fragment>
@@ -23,9 +24,11 @@ export const ShowLockerProcesses = () => {
 
          <Table
             headers={TABLE_HEAD}
-            rowsLength={data?.data.length}
+            rowsLength={data?.rowsLength}
             footerSpan={[3, 3]}
             total={data?.total}
+            activePage={activePage}
+            setActivePage={setActivePage}
             footerTitle="كاش الخزنة"
          >
             {data?.data

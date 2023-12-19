@@ -1,11 +1,20 @@
 import { Locker } from "../../models/index.js";
 
+const LIMIT = 5;
+
 export const GET_LOCKER_DETAILS = async (req, res) => {
 	try {
-		const list = await Locker.find().sort({ date: -1 }).limit(-30);
-		const total = await Locker.find().findTotalPrices();
+		const { activePage } = req.query;
 
-		res.status(200).json({ data: list, total });
+		const total = await Locker.find().findTotalPrices();
+		const rowsLength = await Locker.find().findRowsLength();
+
+		const list = await Locker.find()
+			.sort({ date: -1 })
+			.skip((activePage ?? 0) * LIMIT)
+			.limit(LIMIT);
+
+		res.status(200).json({ data: list, total, rowsLength: Math.ceil(rowsLength / LIMIT) });
 	} catch (error) {
 		res.status(404).json(`GET_LOCKER_PRICES: ${error.message}`);
 	}

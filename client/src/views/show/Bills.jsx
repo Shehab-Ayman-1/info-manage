@@ -1,18 +1,20 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import { BillPage } from "@/components/bills";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
 export const ShowBills = () => {
-   const { data, loading, error, isSubmitted, refetch } = useAxios();
    const { data: pay, loading: pLoading, error: pError, isSubmitted: IsSubmitted, refetch: pRefetch } = useAxios();
+   const { data, loading, error, isSubmitted, refetch } = useAxios();
+
+   const [activePage, setActivePage] = useState(0);
 
    useEffect(() => {
       (async () => {
-         await refetch("get", "/bills/get-bills?type=bill");
+         await refetch("get", `/bills/get-bills?type=bill&activePage=${activePage}`);
       })();
-   }, []);
+   }, [activePage]);
 
    const handleSubmit = async (payment) => {
       return await pRefetch("put", "/bills/payment?type=bill", {
@@ -29,7 +31,10 @@ export const ShowBills = () => {
 
          <BillPage
             head="عرض الفواتير"
-            data={data}
+            data={data?.data}
+            rowsLength={data?.rowsLength}
+            activePage={activePage}
+            setActivePage={setActivePage}
             type="bill"
             handleSubmit={handleSubmit}
             paymentData={pay}

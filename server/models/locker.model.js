@@ -12,4 +12,9 @@ schema.query.findTotalPrices = async function () {
 	return total;
 };
 
+schema.query.findRowsLength = async function (skip = 0) {
+	const data = await this.sort({ date: -1 }).skip(skip);
+	return data.length;
+};
+
 export const Locker = model("locker", schema);

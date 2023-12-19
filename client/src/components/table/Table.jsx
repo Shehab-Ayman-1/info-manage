@@ -1,9 +1,30 @@
-import { Card } from "@material-tailwind/react";
+import { Button, Card, IconButton } from "@material-tailwind/react";
 import { Foot } from "./Foot";
 import { Head } from "./Head";
+import { Pagination } from "../public";
 
-export const Table = ({ headers, rowsLength, footerTitle, footerSpan, total, tableStyle, children }) => {
+export const Table = ({
+   headers,
+   rowsLength,
+   footerTitle,
+   footerSpan,
+   total,
+   tableStyle,
+   activePage,
+   setActivePage,
+   children,
+}) => {
    if (!rowsLength) return;
+
+   const next = () => {
+      if (activePage === rowsLength) return;
+      setActivePage(activePage + 1);
+   };
+
+   const prev = () => {
+      if (activePage === 0) return;
+      setActivePage(activePage - 1);
+   };
 
    return (
       <Card
@@ -16,6 +37,14 @@ export const Table = ({ headers, rowsLength, footerTitle, footerSpan, total, tab
 
             {total ? <Foot footerTitle={footerTitle} footerSpan={footerSpan || [2, 2]} total={total} /> : null}
          </table>
+
+         <Pagination
+            activePage={activePage}
+            setActivePage={setActivePage}
+            rowsLength={rowsLength}
+            next={next}
+            prev={prev}
+         />
       </Card>
    );
 };

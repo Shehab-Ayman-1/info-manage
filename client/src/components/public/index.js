@@ -6,3 +6,4 @@ export * from "./Tabs";
 export * from "./Searchbar";
 export * from "./Chart";
 export * from "./PageHead";
+export * from "./Pagination";

@@ -3,16 +3,29 @@ import { Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwi
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { Field, PageHead, Searchbar } from "@/components/public";
+import { Field, PageHead, Pagination, Searchbar } from "@/components/public";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
 
 const paymentState = { _id: "", client: "", newValue: "", pay: { completed: false, value: 0, discount: 0 } };
-export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading, isSubmitted, error }) => {
+export const BillPage = ({
+   head,
+   type,
+   data,
+   rowsLength,
+   activePage,
+   setActivePage,
+   handleSubmit,
+   paymentData,
+   isSubmitted,
+   loading,
+   error,
+}) => {
    const [searchText, setSearchText] = useState("");
    const [filterResult, setFilterResult] = useState(null);
    const [openDialog, setOpenDialog] = useState(false);
    const [payment, setPayment] = useState(paymentState);
+   const navigate = useNavigate();
 
    const {
       data: deleteData,
@@ -22,8 +35,6 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
       refetch: dRefetch,
    } = useAxios();
 
-   const navigate = useNavigate();
-
    useEffect(() => {
       if (!data) return;
       setFilterResult(() => data.filter((item) => item.client.includes(searchText)));
@@ -31,7 +42,6 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
 
    const handleOpenDialog = (bill) => {
       setOpenDialog((open) => !open);
-
       if (bill) setPayment(() => ({ newValue: "", ...bill }));
    };
 
@@ -73,18 +83,27 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
       setOpenDialog(false);
    };
 
+   const next = () => {
+      if (activePage === rowsLength) return;
+      setActivePage(activePage + 1);
+   };
+
+   const prev = () => {
+      if (activePage === 0) return;
+      setActivePage(activePage - 1);
+   };
+
    return (
       <Card className="bg-transparent shadow-none">
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={paymentData} />
          <Loading isSubmitted={dIsSubmitted} loading={dLoading} error={dError} message={deleteData} />
 
          <PageHead text={head} />
-
          <Searchbar setSearchText={setSearchText} />
 
          <div
             className={`rounded-lg py-2 shadow-sp dark:shadow-none ${
-               !filterResult?.length || !data?.length ? "hidden" : ""
+               !filterResult?.length || !rowsLength ? "hidden" : ""
             }`}
          >
             {(filterResult || data)
@@ -141,6 +160,14 @@ export const BillPage = ({ head, type, data, handleSubmit, paymentData, loading,
                   </div>
                ))}
          </div>
+
+         <Pagination
+            activePage={activePage}
+            setActivePage={setActivePage}
+            rowsLength={rowsLength}
+            next={next}
+            prev={prev}
+         />
 
          <Typography
             variant="h3"

@@ -1,5 +1,7 @@
 import { Products, Locker } from "../../models/index.js";
 
+const LIMIT = 10;
+
 // Pages
 export const GET_PROFILE = async (req, res) => {
 	try {
@@ -52,21 +54,23 @@ export const GET_BALANCES = async (req, res) => {
 
 export const GET_TABLES_LIST = async (req, res) => {
 	try {
-		const { price, count } = req.query; // process: { price: [buy - sale], count: [shop, store] }
+		const { price, count, activePage } = req.query; // process: { price: [buy - sale], count: [shop, store] }
 
 		let Count = count === "shop" ? "$products.count.shop" : count === "store" ? "$products.count.store" : "";
 		let Price = price === "buy" ? "$products.price.buy" : price === "sale" ? "$products.price.sale" : "";
 
 		const list = await Products.aggregate([
 			{ $unwind: { path: "$products", preserveNullAndEmptyArrays: true } },
+			{ $skip: (+activePage ?? 0) * LIMIT },
+			{ $limit: LIMIT },
 			{ $unwind: { path: "$products.count", preserveNullAndEmptyArrays: true } },
 			{
 				$group: {
 					_id: { company: "$company", name: "$products.name" },
-					price: { $addToSet: Price },
 					count: { $sum: Count },
-					min: { $addToSet: "$products.minmax.min" },
-					max: { $addToSet: "$products.minmax.max" },
+					price: { $first: Price },
+					min: { $first: "$products.minmax.min" },
+					max: { $first: "$products.minmax.max" },
 				},
 			},
 			{
@@ -78,7 +82,7 @@ export const GET_TABLES_LIST = async (req, res) => {
 					min: 1,
 					max: 1,
 					price: 1,
-					total: { $sum: { $multiply: [{ $arrayElemAt: ["$price", 0] }, "$count"] } },
+					total: { $sum: { $multiply: ["$price", "$count"] } },
 				},
 			},
 			{
@@ -111,7 +115,10 @@ export const GET_TABLES_LIST = async (req, res) => {
 			},
 		]);
 
-		res.status(200).json(list);
+		const total = await Products.find().findTotalPrices(price, count);
+		const rowsLength = await Products.find().findRowsLength();
+
+		res.status(200).json({ data: list, total, rowsLength: Math.ceil(rowsLength / LIMIT) });
 	} catch (error) {
 		res.status(404).json(`GET_TABLES_LISTS: ${error.message}`);
 	}
