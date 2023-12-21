@@ -23,7 +23,7 @@ export const AnalysisLessBuys = () => {
 
          <PageHead text="المنتجات الاقل مبيعاً" />
 
-         <Table headers={TABLE_HEAD} rowsLength={data?.length}>
+         <Table headers={TABLE_HEAD}>
             {data?.map(({ name, date }, i) => (
                <Row key={i} index={i}>
                   <Col>{i + 1}</Col>

@@ -21,4 +21,16 @@ const schema = new Schema({
 	],
 });
 
+schema.query.findProductsCount = async function (...types) {
+	const bills = await this;
+	const output = types.reduce((prev, cur) => ({ ...prev, [cur]: [] }), {});
+
+	const result = types.reduce((prev, type) => {
+		prev[type] = bills.reduce((prev, cur) => (cur.type === type ? (prev += cur.products.length) : prev), 0);
+		return prev;
+	}, output);
+
+	return result;
+};
+
 export const Bills = model("bills", schema);

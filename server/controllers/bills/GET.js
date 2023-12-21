@@ -6,20 +6,20 @@ const LIMIT = 10;
 export const GET_BILLS = async (req, res) => {
 	try {
 		const { type, activePage } = req.query;
-		const rowsLength = await Bills.countDocuments({ type });
+		const pagination = await Bills.countDocuments({ type, products: { $ne: [] } });
 
 		const bills = await Bills.find({ type, products: { $ne: [] } })
 			.sort({ date: -1 })
-			.skip((+activePage ?? 0) * LIMIT)
-			.limit(LIMIT)
-			.select(["_id", "client", "products", "pay"]);
+			.skip((+activePage ?? 0) * +LIMIT)
+			.select(["_id", "date", "client", "products", "pay"]);
 
-		const clients = bills.map(({ _id, client, pay, products }) => {
+		const clients = bills.slice(0, +LIMIT).map(({ _id, client, date, pay, products }) => {
 			const billCost = products.reduce((prev, cur) => prev + cur.count * cur.price, 0);
-			return { _id, client, billCost, pay };
+			const createdAt = new Date(date).toLocaleDateString("ar").slice(0, -5);
+			return { _id, client, date: createdAt, billCost, pay };
 		});
 
-		res.status(200).json({ data: clients, rowsLength: Math.ceil(rowsLength / LIMIT) });
+		res.status(200).json({ data: clients, pagination: Math.ceil(pagination / LIMIT) });
 	} catch (error) {
 		res.status(404).json(`GET_BILLS: ${error.message}`);
 	}
@@ -97,7 +97,10 @@ export const GET_TODAY_RESET = async (req, res) => {
 				$unwind: "$products",
 			},
 			{
-				$match: { date: { $gt: today } },
+				$match: { date: { $gt: today }, products: { $ne: [] } },
+			},
+			{
+				$sort: { "products.date": 1 },
 			},
 			{
 				$group: {
@@ -116,7 +119,6 @@ export const GET_TODAY_RESET = async (req, res) => {
 					_id: 0,
 					type: "$_id",
 					products: 1,
-					place: 1,
 				},
 			},
 		]);
@@ -124,7 +126,7 @@ export const GET_TODAY_RESET = async (req, res) => {
 		const bills = list.find(({ type }) => type === "bill")?.products;
 		const debts = list.find(({ type }) => type === "debt")?.products;
 
-		res.status(200).json({ buys: bills || [], sales: debts || [] });
+		res.status(200).json({ sales: bills || [], buys: debts || [] });
 	} catch (error) {
 		res.status(404).json(`GET_TODAY_RESET: ${error.message}`);
 	}

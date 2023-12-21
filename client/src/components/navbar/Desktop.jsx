@@ -11,7 +11,7 @@ export const Desktop = () => {
                <Menu allowHover key={i}>
                   <MenuHandler>
                      <Button
-                        className="flex-start group text-base hover:brightness-125 md:text-xl"
+                        className="flex-start group px-2 text-base hover:brightness-125 md:text-xl lg:px-5"
                         variant="text"
                         color="deep-purple"
                      >

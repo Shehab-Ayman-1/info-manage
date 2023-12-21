@@ -2,17 +2,18 @@ import { Products, Locker, Bills } from "../../models/index.js";
 
 export const SALE_PRODUCTS = async (req, res) => {
 	try {
-		const { category, company, client, discount, toStore, clientPay, products } = req.body;
+		const { client, discount, toStore, clientPay, products } = req.body;
 
 		// Get The Products Company
-		const comp = await Products.findOne({ category, company });
 		const totalProductsCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
 
 		// Check If The Products Are Defined
-		const checkCount = await products.map(async ({ name, count }) => {
-			const product = comp.products.find((product) => product.name === name);
+		const checkCount = await products.map(async ({ category, company, name, count }) => {
+			const comp = await Products.findOne({ category, company, "products.name": name });
+			const product = comp.products.find((product) => product?.name === name);
+
 			const productCount = product.count.reduce((prev, cur) => (toStore ? prev + cur.store : prev + cur.shop), 0);
-			return productCount < count ? `${name}: ${productCount}` : null;
+			return productCount < +count ? `${name}: ${productCount}` : null;
 		});
 
 		const warnIndexes = (await Promise.all(checkCount)).filter((item) => item);
@@ -20,10 +21,10 @@ export const SALE_PRODUCTS = async (req, res) => {
 			return res.status(200).json({ warn: `يتوفر فقط هذه الكمية في ${toStore ? "مخزن" : "محل"}: [${warnIndexes.join(" | ")}]` });
 
 		// Check If The Client Pay Is Greater Than Total Products Cost
-		if (+totalProductsCost < +clientPay + +discount) return res.status(200).json({ warn: "المبلغ المحصل اكبر مبلغ الفاتورة" });
+		if (+totalProductsCost < +clientPay + +discount) return res.status(200).json({ warn: "المبلغ المحصل اكبر من مبلغ الفاتورة" });
 
 		// Update Products
-		const updatePromise = await products.map(async ({ name, count, price }) => {
+		const updatePromise = await products.map(async ({ category, company, name, count, price }) => {
 			return await Products.updateOne(
 				{ category, company, "products.name": name },
 				{

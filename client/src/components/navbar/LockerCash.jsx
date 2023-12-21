@@ -10,7 +10,7 @@ export const LockerCash = () => {
    const { user } = useSelector(({ users }) => users);
 
    useEffect(() => {
-      if (user?.role !== ADMIN || window.innerWidth <= 400) return;
+      if (user?.role !== ADMIN || window.innerWidth <= 300) return;
 
       (async () => {
          await refetch("get", "/locker/get-total-cash");
@@ -23,7 +23,7 @@ export const LockerCash = () => {
       <PageHead
          variant="h4"
          text={`${data?.toLocaleString()} جنية` || "00,00 جنية"}
-         className="mb-0 whitespace-nowrap pb-3 text-base text-primary sm:text-xl"
+         className="mb-0 whitespace-nowrap pb-2 text-sm text-primary sm:text-xl"
       />
    );
 };

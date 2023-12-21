@@ -31,12 +31,7 @@ export const ShowBalances = () => {
       <Card className="rounded-none bg-transparent">
          <PageHead text="حسب سعر الشراء" />
 
-         <Table
-            headers={TABLE_HEAD}
-            rowsLength={Object.keys(buyData || {})?.length}
-            footerTitle="اجمالي الارصدة"
-            total={buyData?.total}
-         >
+         <Table headers={TABLE_HEAD} footerTitle="اجمالي الارصدة" total={buyData?.total}>
             <Row index={0}>
                <Col>{buyData?.locker.toLocaleString()}</Col>
                <Col>{buyData?.shop.toLocaleString()}</Col>
@@ -46,12 +41,7 @@ export const ShowBalances = () => {
 
          <PageHead text="حسب سعر البيع" className="mt-10" />
 
-         <Table
-            headers={TABLE_HEAD}
-            rowsLength={Object.keys(saleData || {})?.length}
-            footerTitle="اجمالي الارصدة"
-            total={saleData?.total}
-         >
+         <Table headers={TABLE_HEAD} footerTitle="اجمالي الارصدة" total={saleData?.total}>
             <Row index={0}>
                <Col>{saleData?.locker.toLocaleString()}</Col>
                <Col>{saleData?.shop.toLocaleString()}</Col>

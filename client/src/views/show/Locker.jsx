@@ -24,7 +24,7 @@ export const ShowLockerProcesses = () => {
 
          <Table
             headers={TABLE_HEAD}
-            rowsLength={data?.rowsLength}
+            pagination={data?.pagination}
             footerSpan={[3, 3]}
             total={data?.total}
             activePage={activePage}

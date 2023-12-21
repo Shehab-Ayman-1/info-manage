@@ -10,10 +10,9 @@ export const Home = () => {
          <Typography variant="h1" className="text-gradient pb-10 text-6xl md:text-8xl">
             المركز الدولي
          </Typography>
-         <Typography variant="paragraph" className="text-center text-2xl text-white/50">
+         <Typography variant="paragraph" className="text-center text-2xl text-black dark:text-white/50">
             للتجارة والتوزيع وقطع غيار السيارات والنقل
-         </Typography>
-         <Typography variant="paragraph" className="mt-3 text-center text-2xl text-white/50">
+            <br />
             وغسيل السيارات
          </Typography>
          <div className="flex-between mx-auto w-fit flex-wrap">
@@ -22,7 +21,7 @@ export const Home = () => {
                size="sm"
                variant="gradient"
                color="deep-purple"
-               className={`text-black ${buttonStyle}`}
+               className={`${buttonStyle}`}
                onClick={() => navigate("/show/shop")}
             >
                عرض منتجات المحل

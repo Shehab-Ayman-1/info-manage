@@ -32,7 +32,7 @@ export const ShowBills = () => {
          <BillPage
             head="عرض الفواتير"
             data={data?.data}
-            rowsLength={data?.rowsLength}
+            pagination={data?.pagination}
             activePage={activePage}
             setActivePage={setActivePage}
             type="bill"

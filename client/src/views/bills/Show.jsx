@@ -48,7 +48,6 @@ export const ShowBill = () => {
 
          <Table
             headers={TABLE_HEAD}
-            rowsLength={data?.products.length}
             tableStyle={loading || (isSubmitted && error) ? "hidden" : ""}
             footerTitle="سعر الفاتورة"
             footerSpan={[3, 3]}

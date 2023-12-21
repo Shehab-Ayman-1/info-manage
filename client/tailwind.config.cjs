@@ -42,6 +42,11 @@ module.exports = withMT({
             900: "var(--deep-purple-900)",
          },
       },
+      extend: {
+         backgroundImage: {
+            "home-img": "linear-gradient(45deg, var(--tw-gradient-stops)), url(/src/assets/images/car.jpeg)",
+         },
+      },
    },
    plugins: [],
 });

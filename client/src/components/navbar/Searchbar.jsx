@@ -9,7 +9,7 @@ import { Loading } from "@/layout/Loading";
 
 export const Searchbar = ({ openSearchbar, setOpenSearchbar }) => {
    const { searchList } = useSelector(({ products }) => products);
-   const { data, loading, error, isSubmitted, refetch } = useAxios();
+   const { data, loading, isSubmitted, refetch } = useAxios();
 
    const [open, setOpen] = useState(false);
    const [filterList, setFilterList] = useState(null);

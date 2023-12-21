@@ -37,7 +37,7 @@ export const AnalysisForYear = () => {
 
          <br />
 
-         <Table headers={TABLE_HEAD} rowsLength={data?.length} total={data?.total}>
+         <Table headers={TABLE_HEAD} total={data?.total}>
             {data?.map(({ name, buysCount, salesCount }, i) => (
                <Row index={i} key={i}>
                   <Col>{i + 1}</Col>

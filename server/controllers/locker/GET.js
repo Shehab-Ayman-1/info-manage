@@ -7,14 +7,13 @@ export const GET_LOCKER_DETAILS = async (req, res) => {
 		const { activePage } = req.query;
 
 		const total = await Locker.find().findTotalPrices();
-		const rowsLength = await Locker.find().findRowsLength();
+		const pagination = await Locker.find().findpagination();
 
 		const list = await Locker.find()
 			.sort({ date: -1 })
-			.skip((activePage ?? 0) * LIMIT)
-			.limit(LIMIT);
+			.skip((activePage ?? 0) * LIMIT);
 
-		res.status(200).json({ data: list, total, rowsLength: Math.ceil(rowsLength / LIMIT) });
+		res.status(200).json({ data: list.slice(0, +LIMIT), total, pagination: Math.ceil(pagination / LIMIT) });
 	} catch (error) {
 		res.status(404).json(`GET_LOCKER_PRICES: ${error.message}`);
 	}

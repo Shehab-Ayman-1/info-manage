@@ -8,7 +8,7 @@ export const Head = ({ headers }) => {
                <th key={head} className="bg-primary p-4">
                   <Typography
                      variant="h5"
-                     className="text-center text-base text-white print:text-dimWhite md:text-xl"
+                     className="whitespace-nowrap text-center text-base text-white print:text-dimWhite md:text-xl"
                   >
                      {head}
                   </Typography>

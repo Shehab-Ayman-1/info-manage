@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
-import { PageHead, Searchbar, Switch } from "@/components/public";
+import { PageHead, Switch } from "@/components/public";
 import { Table, Row, Col } from "@/components/table";
 
 const TABLE_HEAD = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];
@@ -13,8 +13,6 @@ export const Show_Shop_Store = () => {
    const pathname = location.pathname.split("/")[2];
 
    const [activePage, setActivePage] = useState(0);
-   const [searchText, setSearchText] = useState("");
-   const [searchResult, setSearchResult] = useState(null);
    const [isBuyPrice, setIsBuyPrice] = useState(pathname === "store");
 
    const { data, isSubmitted, loading, error, refetch } = useAxios();
@@ -30,24 +28,6 @@ export const Show_Shop_Store = () => {
       })();
    }, [pathname, isBuyPrice, activePage]);
 
-   useEffect(() => {
-      if (!data?.data.length) return;
-
-      const result = data?.data.map(({ company, products }) => {
-         const companyMatch = company.includes(searchText.trim());
-
-         const productsMatch = products.filter(({ name, barcode }) => {
-            const nameMatch = name?.includes(searchText.trim());
-            const barcodeMatch = barcode?.includes(searchText.trim());
-            return nameMatch || barcodeMatch;
-         });
-
-         return (companyMatch && { company, products }) || { company, products: productsMatch };
-      });
-
-      setSearchResult(() => result);
-   }, [searchText]);
-
    const minmax = (count, min, max) => {
       if (count <= 0) return "text-blue-gray-500/50 dark:text-blue-gray-700";
       else if (count > 0 && count <= min) return "text-red-500 dark:text-red-500";
@@ -58,8 +38,6 @@ export const Show_Shop_Store = () => {
    return (
       <Card className="rounded-none bg-transparent">
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
-
-         <Searchbar setSearchText={setSearchText} />
 
          <div className="flex-between mb-2 flex-col px-4 sm:flex-row">
             <PageHead text={`عرض بضائع ${pathname === "store" ? "المخزن" : "المحل"}`} />
@@ -78,9 +56,9 @@ export const Show_Shop_Store = () => {
             total={data?.total}
             activePage={activePage}
             setActivePage={setActivePage}
-            rowsLength={searchResult?.length || data?.rowsLength}
+            pagination={data?.pagination}
          >
-            {(searchResult || data?.data)?.map(({ company, products }, i) => {
+            {data?.data?.map(({ company, products }, i) => {
                return products?.map(({ name, count, total, price, min, max }, j) => (
                   <Row key={j} index={i} className="">
                      {!j ? (

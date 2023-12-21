@@ -63,7 +63,7 @@ export const AnalysisInsufficients = () => {
             />
          </div>
 
-         <Table headers={TABLE_HEAD} rowsLength={data?.length} footerSpan={[3, 3]} total={total}>
+         <Table headers={TABLE_HEAD} footerSpan={[3, 3]} total={total}>
             {data?.map(({ name, price, count }, i) => (
                <Row key={i} index={i}>
                   <Col>{i + 1}</Col>

@@ -6,7 +6,7 @@ import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { Button } from "@material-tailwind/react";
 
-const TABLE_HEAD = ["المنتج", "العدد", "السعر", "الاجمالي"];
+const TABLE_HEAD = ["#", "المنتج", "العدد", "السعر", "الاجمالي"];
 export const TodayBuysSales = () => {
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const [total, setTotal] = useState({ buys: 0, sales: 0 });
@@ -32,9 +32,10 @@ export const TodayBuysSales = () => {
          <PageHead text="لا يوجد مشتريات اليوم" className={!data?.buys.length ? "" : "hidden"} />
          <div className={!total.buys ? "hidden" : ""}>
             <PageHead text="مشتريات اليوم" />
-            <Table headers={TABLE_HEAD} rowsLength={data?.buys.length} total={total.buys}>
+            <Table headers={TABLE_HEAD} footerSpan={[3, 2]} total={total.buys}>
                {data?.buys.map(({ name, price, count }, i) => (
                   <Row key={i} index={i}>
+                     <Col>{i + 1}</Col>
                      <Col>{name}</Col>
                      <Col>{count}</Col>
                      <Col>{price}</Col>
@@ -47,9 +48,10 @@ export const TodayBuysSales = () => {
          <PageHead text="لا يوجد مبيعات اليوم" className={!data?.sales.length ? "" : "hidden"} />
          <div className={!total.sales ? "hidden" : ""}>
             <PageHead text="مبيعات اليوم" className="mt-10" />
-            <Table headers={TABLE_HEAD} rowsLength={data?.sales.length} total={total.sales}>
+            <Table headers={TABLE_HEAD} footerSpan={[3, 2]} total={total.sales}>
                {data?.sales.map(({ name, price, count }, i) => (
                   <Row key={i} index={i}>
+                     <Col>{i + 1}</Col>
                      <Col>{name}</Col>
                      <Col>{count}</Col>
                      <Col>{price}</Col>

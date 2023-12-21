@@ -53,7 +53,7 @@ export const Mobile = ({ openDrawer, handleDrawer }) => {
                                     >
                                        <div className="flex-start">
                                           <i className={`${icon} text-lg group-hover:text-primary`} />
-                                          <p className="">{name}</p>
+                                          <p className="pb-2">{name}</p>
                                        </div>
                                        <i className={`fa fa-lock ${disabled ? "" : "!hidden"}`} />
                                     </ListItem>

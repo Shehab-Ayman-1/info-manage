@@ -38,7 +38,7 @@ export const ShowDebts = () => {
             head="عرض المديونيات"
             type="debt"
             data={data?.data}
-            rowsLength={data?.rowsLength}
+            pagination={data?.pagination}
             activePage={activePage}
             setActivePage={setActivePage}
             handleSubmit={handleSubmit}

@@ -47,8 +47,8 @@ export const StatementForm = ({
       if (!Object.values(data).every((p) => p)) return alert("يجب ادخال جميل البيانات المطلوبه");
       setFormData((data) => ({ ...data, products: data.products.concat(product) }));
 
-      if (text.headerText === "كشف حساب") setProduct(() => ({ name: null, count: 0, price: 0, buyPrice: 0 }));
-      else setProduct(() => ({ name: null, count: 0, price: 0 }));
+      if (text.headerText === "كشف مندوب") setProduct(() => ({ name: null, count: 0, price: 0 }));
+      else setProduct(() => ({ ...product, name: null, count: 0, price: 0, buyPrice: 0 }));
    };
 
    const handleDeleteField = (index) => {
@@ -139,7 +139,7 @@ export const StatementForm = ({
             )}
          </div>
 
-         <Table headers={TABLE_HEAD} rowsLength={formData.products?.length} footerSpan={[3, 3]} total={total}>
+         <Table headers={TABLE_HEAD} footerSpan={[3, 3]} total={total}>
             {formData.products.map(({ name, count, price }, i) => (
                <Row key={i} index={i}>
                   <Col>

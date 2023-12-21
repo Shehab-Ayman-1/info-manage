@@ -40,7 +40,6 @@ export const ShowClients = () => {
 
          <Table
             headers={TABLE_HEAD}
-            rowsLength={bills?.length}
             footerSpan={[4, 4]}
             footerTitle="اجمالي المبالغ المتبقيه"
             total={total?.bills}
@@ -65,7 +64,6 @@ export const ShowClients = () => {
 
          <Table
             headers={TABLE_HEAD}
-            rowsLength={debts?.length}
             footerSpan={[4, 4]}
             footerTitle="اجمالي المبالغ المتبقيه"
             total={total?.debts}

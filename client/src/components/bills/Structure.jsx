@@ -3,7 +3,7 @@ import { Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwi
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { Field, PageHead, Pagination, Searchbar } from "@/components/public";
+import { Field, PageHead, Pagination } from "@/components/public";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
 
@@ -12,7 +12,7 @@ export const BillPage = ({
    head,
    type,
    data,
-   rowsLength,
+   pagination,
    activePage,
    setActivePage,
    handleSubmit,
@@ -21,7 +21,6 @@ export const BillPage = ({
    loading,
    error,
 }) => {
-   const [searchText, setSearchText] = useState("");
    const [filterResult, setFilterResult] = useState(null);
    const [openDialog, setOpenDialog] = useState(false);
    const [payment, setPayment] = useState(paymentState);
@@ -36,9 +35,8 @@ export const BillPage = ({
    } = useAxios();
 
    useEffect(() => {
-      if (!data) return;
-      setFilterResult(() => data.filter((item) => item.client.includes(searchText)));
-   }, [data, searchText]);
+      setFilterResult(data);
+   }, [data]);
 
    const handleOpenDialog = (bill) => {
       setOpenDialog((open) => !open);
@@ -83,74 +81,66 @@ export const BillPage = ({
       setOpenDialog(false);
    };
 
-   const next = () => {
-      if (activePage === rowsLength) return;
-      setActivePage(activePage + 1);
-   };
-
-   const prev = () => {
-      if (activePage === 0) return;
-      setActivePage(activePage - 1);
-   };
-
    return (
       <Card className="bg-transparent shadow-none">
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={paymentData} />
          <Loading isSubmitted={dIsSubmitted} loading={dLoading} error={dError} message={deleteData} />
 
          <PageHead text={head} />
-         <Searchbar setSearchText={setSearchText} />
+
+         {pagination > 1 && (
+            <Pagination activePage={activePage} setActivePage={setActivePage} pagination={pagination} />
+         )}
 
          <div
             className={`rounded-lg py-2 shadow-sp dark:shadow-none ${
-               !filterResult?.length || !rowsLength ? "hidden" : ""
+               !filterResult?.length && !pagination ? "hidden" : ""
             }`}
          >
-            {(filterResult || data)
-               ?.filter((item) => item.billCost)
-               .map(({ _id, client, billCost, pay }, i) => (
-                  <div className={`flex-between relative py-2 ${i % 2 ? "bg-dimPurple" : ""}`} key={i}>
-                     <div
-                        className={`border-sp absolute -z-10 w-full !border-primary-200 dark:!border-primary-900 ${
-                           pay?.completed ? "" : "hidden"
-                        }`}
-                     />
+            {(filterResult || data)?.map(({ _id, client, date, billCost, pay }, i) => (
+               <div className={`flex-between relative py-2 ${i % 2 ? "" : "bg-dimPurple"}`} key={i}>
+                  <div
+                     className={`border-sp absolute -z-10 w-full !border-primary-200 dark:!border-primary-900 ${
+                        pay?.completed ? "" : "hidden"
+                     }`}
+                  />
 
-                     <div className="flex-start">
-                        <div className="flex">
-                           <IconButton
-                              variant="text"
-                              color="red"
-                              className={`group h-7 w-7 md:h-10 md:w-10 ${dLoading ? "pointer-events-none" : ""}`}
-                              onClick={() => handleDelete(_id)}
-                           >
-                              <i className="fa fa-times text-base text-red-500 group-hover:text-red-900 md:text-xl" />
-                           </IconButton>
-                           <IconButton
-                              variant="text"
-                              color="orange"
-                              className="group h-7 w-7 md:h-10 md:w-10"
-                              onClick={() => navigate(`/bills/update-bill/${_id}`)}
-                           >
-                              <i className="fa fa-edit text-base text-orange-500 group-hover:text-orange-900 md:text-xl" />
-                           </IconButton>
-                           <IconButton
-                              variant="text"
-                              color="green"
-                              className="group h-7 w-7 md:h-10 md:w-10"
-                              onClick={() => handleOpenDialog({ _id, client, billCost, pay })}
-                           >
-                              <i className="fa fa-money-bill-wave text-base text-green-500 group-hover:text-green-900 md:text-xl" />
-                           </IconButton>
-                        </div>
-
-                        <Typography
-                           variant="h5"
-                           className="pb-3 text-base text-dimWhite dark:text-white md:text-xl"
+                  <div className="flex-start">
+                     <div className="flex">
+                        <IconButton
+                           variant="text"
+                           color="red"
+                           className={`group h-7 w-7 md:h-10 md:w-10 ${dLoading ? "pointer-events-none" : ""}`}
+                           onClick={() => handleDelete(_id)}
                         >
-                           {client}
-                        </Typography>
+                           <i className="fa fa-times text-base text-red-500 group-hover:text-red-900 md:text-xl" />
+                        </IconButton>
+                        <IconButton
+                           variant="text"
+                           color="orange"
+                           className="group h-7 w-7 md:h-10 md:w-10"
+                           onClick={() => navigate(`/bills/update-bill/${_id}`)}
+                        >
+                           <i className="fa fa-edit text-base text-orange-500 group-hover:text-orange-900 md:text-xl" />
+                        </IconButton>
+                        <IconButton
+                           variant="text"
+                           color="green"
+                           className="group h-7 w-7 md:h-10 md:w-10"
+                           onClick={() => handleOpenDialog({ _id, client, billCost, pay })}
+                        >
+                           <i className="fa fa-money-bill-wave text-base text-green-500 group-hover:text-green-900 md:text-xl" />
+                        </IconButton>
                      </div>
+
+                     <Typography variant="h5" className="pb-3 text-base text-dimWhite dark:text-white md:text-xl">
+                        {client}
+                     </Typography>
+                  </div>
+                  <div className="flex-start">
+                     <Typography variant="h5" className="pb-2 text-base text-dimWhite dark:text-white md:text-xl">
+                        {date}
+                     </Typography>
                      <IconButton variant="text" color="white">
                         <i
                            className="fa fa-eye text-base text-dimWhite dark:text-white md:text-xl"
@@ -158,16 +148,9 @@ export const BillPage = ({
                         />
                      </IconButton>
                   </div>
-               ))}
+               </div>
+            ))}
          </div>
-
-         <Pagination
-            activePage={activePage}
-            setActivePage={setActivePage}
-            rowsLength={rowsLength}
-            next={next}
-            prev={prev}
-         />
 
          <Typography
             variant="h3"

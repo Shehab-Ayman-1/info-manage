@@ -8,20 +8,25 @@ import { StatementForm } from "@/components/statements";
 import { useAxios } from "@/hooks/useAxios";
 
 const formState = {
-   category: "",
-   company: "",
-   products: [],
-   discount: "",
    client: "عميل غير معروف",
    clientPay: "",
+   discount: "",
    toStore: false,
+   products: [],
 };
 export const SaleStatement = () => {
    const [formData, setFormData] = useState(formState);
-   const [product, setProduct] = useState({ name: "", count: 0, price: 0, buyPrice: 0 });
+   const [product, setProduct] = useState({
+      category: "",
+      company: "",
+      name: "",
+      count: 0,
+      price: 0,
+      buyPrice: 0,
+   });
 
-   const { data, isSubmitted, loading, error, refetch } = useAxios();
    const { loading: ccLoading, isSubmitted: ccIsSubmitted, refetch: ccRefetch } = useAxios();
+   const { data, isSubmitted, loading, error, refetch } = useAxios();
    const { refetch: clRefetch } = useAxios();
 
    const { lists, categories, companies } = useSelector(({ products }) => products);
@@ -49,10 +54,10 @@ export const SaleStatement = () => {
    useEffect(() => {
       if (!lists?.length) return;
 
-      const category = lists?.find(({ category }) => category === formData.category);
+      const category = lists?.find(({ category }) => category === product.category);
       if (!category) return;
 
-      const company = category.companies.find(({ company }) => company === formData.company);
+      const company = category.companies.find(({ company }) => company === product.company);
       if (!company) return;
 
       const produc = company.products.find(({ name }) => name === product.name);
@@ -62,15 +67,16 @@ export const SaleStatement = () => {
    }, [product.name]);
 
    useEffect(() => {
-      dispatch(filterSelection({ category: formData.category, company: "" }));
-   }, [formData.category]);
+      dispatch(filterSelection({ category: product.category, company: "" }));
+   }, [product.category]);
 
    useEffect(() => {
-      dispatch(filterSelection({ category: formData.category, company: formData.company }));
-   }, [formData.company]);
+      dispatch(filterSelection({ category: product.category, company: product.company }));
+   }, [product.company]);
 
    const handleSelectChange = (name, value) => {
-      if (name === "name") return setProduct((data) => ({ ...data, [name]: value }));
+      if (name === "name" || name === "category" || name === "company")
+         return setProduct((data) => ({ ...data, [name]: value }));
       setFormData((data) => ({ ...data, [name]: value }));
    };
 
@@ -102,14 +108,14 @@ export const SaleStatement = () => {
          <Selectbox
             label="اختار اسم القسم"
             options={categories}
-            value={formData.category}
+            value={product.category}
             loading={!ccIsSubmitted && ccLoading}
             onChange={(value) => handleSelectChange("category", value)}
          />
          <Selectbox
             label="اختار اسم الشركة"
             options={companies}
-            value={formData.company}
+            value={product.company}
             loading={!ccIsSubmitted && ccLoading}
             onChange={(value) => handleSelectChange("company", value)}
          />
