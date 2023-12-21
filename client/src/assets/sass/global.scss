@@ -230,6 +230,10 @@ i {
    @apply bg-gradient-to-bl from-white to-blue-gray-200 dark:from-black dark:via-darkGray dark:to-black;
 }
 
+.text-gradient {
+   @apply bg-gradient-to-r from-primary-400 to-primary-900 bg-clip-text text-transparent;
+}
+
 .loading-animate {
    animation: loading 1.5s ease-in-out;
    @keyframes loading {

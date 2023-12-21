@@ -7,7 +7,7 @@ export const Home = () => {
    const buttonStyle = "mt-5 pb-5 text-xl hover:brightness-125";
    return (
       <section className="mt-10 flex h-full w-full flex-col items-center justify-center">
-         <Typography variant="h1" color="deep-purple" className="mb-10 text-6xl md:text-8xl">
+         <Typography variant="h1" className="text-gradient pb-10 text-6xl md:text-8xl">
             المركز الدولي
          </Typography>
          <Typography variant="paragraph" className="text-center text-2xl text-white/50">
@@ -22,7 +22,7 @@ export const Home = () => {
                size="sm"
                variant="gradient"
                color="deep-purple"
-               className={buttonStyle}
+               className={`text-black ${buttonStyle}`}
                onClick={() => navigate("/show/shop")}
             >
                عرض منتجات المحل

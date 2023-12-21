@@ -3,7 +3,7 @@ import { Typography } from "@material-tailwind/react";
 export const Foot = ({ total, footerTitle, footerSpan: [colSpan1, colSpan2] }) => {
    return (
       <tfoot>
-         <tr className="border-t-sp bg-primary">
+         <tr className="border-t-sp bg-primary-900">
             <th colSpan={colSpan1} className="p-2 md:p-4">
                <Typography
                   variant="h5"

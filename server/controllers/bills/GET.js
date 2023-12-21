@@ -8,7 +8,7 @@ export const GET_BILLS = async (req, res) => {
 		const { type, activePage } = req.query;
 		const rowsLength = await Bills.countDocuments({ type });
 
-		const bills = await Bills.find({ type })
+		const bills = await Bills.find({ type, products: { $ne: [] } })
 			.sort({ date: -1 })
 			.skip((+activePage ?? 0) * LIMIT)
 			.limit(LIMIT)

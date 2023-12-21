@@ -1,3 +1,5 @@
+import { Outlet } from "react";
+
 // Directs
 import { Home, Profile } from "@/views";
 
@@ -313,3 +315,18 @@ export const links = [
       ],
    },
 ];
+
+// Check If The User Role Is Allowed
+export const dynamicRoute = (path) => {
+   const routes = ["/profile", "/bills/update-bill", "/bills/show-bill"];
+   const word = routes.find((word) => path.startsWith(word));
+   return word || path;
+};
+
+export const getPathsOf = (role) => {
+   const allowed = links.map(({ path, paths }) => ({ path, paths: paths.filter((item) => item.role === role) }));
+   return allowed.reduce((prev, cur) => {
+      const paths = cur.paths.map((path) => `${cur.path ? `/${cur.path}` : ""}/${dynamicRoute(path.link)}`);
+      return prev.concat(paths);
+   }, []);
+};
