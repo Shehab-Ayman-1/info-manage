@@ -1,10 +1,10 @@
-import { TabPanel, TabsBody, Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwind/react";
+import { TabPanel, TabsBody } from "@material-tailwind/react";
 import { Button, Typography, IconButton } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { filterSelection, getLists, getSuppliers, setSuppliers } from "@/redux/slices/products";
-import { Field, Form, Selectbox, Tabs } from "@/components/public";
+import { Field, Form, MTDialog, Selectbox, Tabs } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
@@ -133,63 +133,6 @@ export const AddSupplier = () => {
             ))}
          </div>
 
-         <Dialog
-            open={openDialog}
-            size="md"
-            handler={handleOpenDialog}
-            className="max-h-[80vh] overflow-y-auto shadow-sp dark:bg-darkGray"
-         >
-            <DialogHeader className="flex-between">
-               <Typography variant="h2" color="deep-purple">
-                  اضافه منتج
-               </Typography>
-               <i className="fa fa-times text-2xl" onClick={handleOpenDialog} />
-            </DialogHeader>
-
-            <DialogBody>
-               <div className="mt-4">
-                  <Selectbox
-                     label="اختر اسم القسم..."
-                     options={categories}
-                     value={product.category}
-                     loading={!ccIsSubmitted && ccLoading}
-                     onChange={(value) => handleSelectChange("category", value)}
-                  />
-               </div>
-
-               <div className="mt-4">
-                  <Selectbox
-                     label="اختر اسم الشركة..."
-                     options={companies}
-                     value={product.company}
-                     loading={!ccIsSubmitted && ccLoading}
-                     onChange={(value) => handleSelectChange("company", value)}
-                  />
-               </div>
-
-               <div className="mt-4">
-                  <Selectbox
-                     label="اختر اسم المنتج..."
-                     value={product.name}
-                     loading={!ccIsSubmitted && ccLoading}
-                     onChange={(value) => handleSelectChange("name", value)}
-                     options={products?.map(({ name }) => name).filter((n) => n) || []}
-                  />
-               </div>
-            </DialogBody>
-
-            <DialogFooter>
-               <Button
-                  color="deep-purple"
-                  className="text-xl hover:brightness-125"
-                  fullWidth
-                  onClick={handleSubmitProduct}
-               >
-                  اضافه
-               </Button>
-            </DialogFooter>
-         </Dialog>
-
          <Button
             variant="text"
             className="group m-auto w-fit text-xl hover:brightness-125"
@@ -199,6 +142,42 @@ export const AddSupplier = () => {
             <i className="fa fa-plus ml-2 text-primary group-hover:font-bold" />
             <span>اضافه منتج</span>
          </Button>
+
+         <MTDialog
+            headerText="اضافه منتج"
+            buttonText="اضافه"
+            open={openDialog}
+            handler={handleOpenDialog}
+            onSubmit={handleSubmitProduct}
+         >
+            <Selectbox
+               label="اختر اسم القسم"
+               options={categories}
+               value={product.category}
+               loading={!ccIsSubmitted && ccLoading}
+               onChange={(value) => handleSelectChange("category", value)}
+            />
+
+            <br />
+
+            <Selectbox
+               label="اختر اسم الشركة"
+               options={companies}
+               value={product.company}
+               loading={!ccIsSubmitted && ccLoading}
+               onChange={(value) => handleSelectChange("company", value)}
+            />
+
+            <br />
+
+            <Selectbox
+               label="اختر اسم المنتج"
+               value={product.name}
+               loading={!ccIsSubmitted && ccLoading}
+               onChange={(value) => handleSelectChange("name", value)}
+               options={products?.map(({ name }) => name).filter((n) => n) || []}
+            />
+         </MTDialog>
       </Form>
    );
 };

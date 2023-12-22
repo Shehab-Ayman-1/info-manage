@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Bills } from "../../models/index.js";
 
 const monthsByName = ["", "يناير", "فبراير", "مارس", "ابريل", "مايو", "يونيو", "يوليو", "اغسطس", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"];
@@ -28,6 +29,7 @@ export const GET_BILLS = async (req, res) => {
 export const GET_BILL = async (req, res) => {
 	try {
 		const { id } = req.params;
+		if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ error: "حدث خطأ ، لم يتم العثور علي ID" });
 
 		const bill = await Bills.findById(id);
 		if (!bill) return res.status(400).json({ error: "حدث خطأ ولم يتم العثور علي الفاتورة" });

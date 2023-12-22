@@ -43,4 +43,11 @@ schema.query.findpagination = async function (maxLength = 0) {
 	return length;
 };
 
+schema.query.findDuplicatedProducts = async function (names = []) {
+	const companies = await this;
+	const products = companies.reduce((prev, cur) => prev.concat(cur.products), []);
+	const duplicated = products.map((item) => (names.includes(item.name) ? item.name : null)).filter((item) => item);
+	return duplicated;
+};
+
 export const Products = model("products", schema);

@@ -1,2 +1,2 @@
 export * from "./Show";
-export * from "./Update";
+export * from "./UpdateBill";

@@ -1,9 +1,9 @@
-import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, Typography } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { Field, Form, Switch } from "@/components/public";
+import { Field, Form, MTDialog, Switch } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { ADMIN } from "@/constants/users";
@@ -78,7 +78,7 @@ export const Profile = () => {
                   {user?.role === ADMIN ? (
                      <div className="flex-center mt-5 w-full !gap-6">
                         <i
-                           className="fa fa-times hover:text-red-9 00 block text-xl   text-red-500 sm:text-2xl lg:text-4xl"
+                           className="fa fa-times hover:text-red-9 00 block text-xl text-red-500 sm:text-2xl lg:text-4xl"
                            onClick={handleDelete}
                         />
                         <i
@@ -158,45 +158,28 @@ export const Profile = () => {
             </Fragment>
          )}
 
-         <Dialog
+         <MTDialog
+            headerText="تعديل سعر المنتج"
+            buttonText="تعديل"
             open={openDialog}
-            size="md"
+            loading={eLoading || (eIsSubmitted && !eError && !editData?.warn)}
             handler={handleOpenDialog}
-            className="max-h-[80vh] overflow-y-auto shadow-sp dark:bg-darkGray"
+            onSubmit={handleSubmit}
          >
-            <DialogHeader className="flex-between">
-               <Typography variant="h3" color="deep-purple">
-                  تعديل سعر المنتج
-               </Typography>
-               <i className="fa fa-times text-2xl" onClick={handleOpenDialog} />
-            </DialogHeader>
-
-            <DialogBody>
-               <Field
-                  label="سعر المنتج الجديد"
-                  containerStyle="mb-8"
-                  value={price.value}
-                  onChange={handleFieldChange}
-               />
-               <Switch
-                  label={price.process === "buy" ? "تعديل سعر الشراء" : "تعديل سعر البيع"}
-                  checked={price.process === "buy"}
-                  onChange={(e) => setPrice((data) => ({ ...data, process: e.target.checked ? "buy" : "sale" }))}
-               />
-            </DialogBody>
-
-            <DialogFooter>
-               <Button
-                  color="deep-purple"
-                  className="text-xl hover:brightness-125"
-                  disabled={eLoading || (eIsSubmitted && !eError && !editData?.warn)}
-                  fullWidth
-                  onClick={handleSubmit}
-               >
-                  تعديل
-               </Button>
-            </DialogFooter>
-         </Dialog>
+            <Field
+               label="سعر المنتج الجديد"
+               containerStyle="mb-8"
+               value={price.value}
+               onChange={handleFieldChange}
+            />
+            <Switch
+               label={price.process === "buy" ? "تعديل سعر الشراء" : "تعديل سعر البيع"}
+               checked={price.process === "buy"}
+               onChange={(event) =>
+                  setPrice((data) => ({ ...data, process: event.target.checked ? "buy" : "sale" }))
+               }
+            />
+         </MTDialog>
       </Form>
    );
 };

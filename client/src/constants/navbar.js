@@ -72,7 +72,13 @@ export const links = [
       path: "bills",
       paths: [
          {
-            link: "update-bill/:id",
+            link: "update-bill/:billId",
+            role: "admin",
+            // disabled: true,
+            Component: UpdateBill,
+         },
+         {
+            link: "update-bill/:debtId",
             role: "admin",
             // disabled: true,
             Component: UpdateBill,

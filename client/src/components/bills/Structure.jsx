@@ -1,9 +1,8 @@
-import { Button, Card, IconButton, Typography } from "@material-tailwind/react";
-import { Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwind/react";
+import { Card, IconButton, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { Field, PageHead, Pagination } from "@/components/public";
+import { Field, MTDialog, PageHead, Pagination } from "@/components/public";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
 
@@ -160,13 +159,15 @@ export const BillPage = ({
             لا يوجد نتائج بحث
          </Typography>
 
-         <Dialog
+         <MTDialog
+            buttonText="دفع"
+            headerText="دفع فاتورة"
             open={openDialog}
-            size="md"
+            loading={loading || +payment?.billCost - +payment?.pay.value - +payment?.pay.discount === 0}
             handler={handleOpenDialog}
-            className="bg-gradient max-h-[80vh] overflow-y-auto shadow-sp"
+            onSubmit={handlePayment}
          >
-            <DialogHeader className="block">
+            <div className="">
                <Typography variant="h3" className="flex-between text-xl text-dimWhite md:text-3xl">
                   <span>تكلفه الفاتورة:</span>
                   <span>{payment?.billCost}</span>
@@ -179,29 +180,15 @@ export const BillPage = ({
                   <span>المبلغ المتبقي:</span>
                   <span>{+payment?.billCost - +payment?.pay.value - +payment?.pay.discount}</span>
                </Typography>
-            </DialogHeader>
+            </div>
 
-            <DialogBody>
-               <Field
-                  type="number"
-                  label="المبلغ المرد دفعة"
-                  value={payment?.newValue}
-                  onChange={(event) => setPayment((payment) => ({ ...payment, newValue: event.target?.value }))}
-               />
-            </DialogBody>
-
-            <DialogFooter>
-               <Button
-                  color="deep-purple"
-                  className="text-base hover:brightness-125 md:text-xl"
-                  fullWidth
-                  disabled={loading}
-                  onClick={handlePayment}
-               >
-                  دفع
-               </Button>
-            </DialogFooter>
-         </Dialog>
+            <Field
+               type="number"
+               label="المبلغ المرد دفعة"
+               value={payment?.newValue}
+               onChange={(event) => setPayment((payment) => ({ ...payment, newValue: event.target?.value }))}
+            />
+         </MTDialog>
       </Card>
    );
 };
