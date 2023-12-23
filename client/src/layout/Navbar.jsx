@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { User, Logo, Desktop, Mobile, LockerCash } from "@/components/navbar";
 import { Searchbar } from "@/components/navbar";
+import { Button, IconButton } from "@material-tailwind/react";
 
 export const Navbar = () => {
    const [openDrawer, setOpenDrawer] = useState(false);
