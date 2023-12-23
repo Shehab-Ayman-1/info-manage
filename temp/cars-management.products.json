@@ -9,7 +9,32 @@
       "name": "شيل كبير",
       "barcode": "1",
       "suppliers": [
-        "حماده شيل"
+        "حودا شيل"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 800,
+        "sale": 0
+      },
+      "count": {
+        "store": 10,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
+        }
+      },
+      "_id": {
+        "$oid": "6586de6a3335555e345c49ec"
+      }
+    },
+    {
+      "name": "شيل وسط",
+      "barcode": "2",
+      "suppliers": [
+        "حودا شيل"
       ],
       "minmax": {
         "min": 5,
@@ -19,39 +44,22 @@
         "buy": 700,
         "sale": 0
       },
-      "_id": {
-        "$oid": "657f422063380b398e20f03c"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 80,
-          "shop": 0,
-          "transferPrice": 700,
-          "_id": {
-            "$oid": "657f49e763380b398e20f0b8"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 50,
-          "transferPrice": 700,
-          "_id": {
-            "$oid": "6580587e9cfa68d6be4966e7"
-          }
+      "count": {
+        "store": 15,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
         }
-      ]
+      },
+      "_id": {
+        "$oid": "6586de6a3335555e345c49ed"
+      }
     },
     {
-      "name": "شيل وسط",
-      "barcode": "2",
+      "name": "شيل صغير",
+      "barcode": "3",
       "suppliers": [
-        "حماده شيل"
+        "حودا شيل"
       ],
       "minmax": {
         "min": 5,
@@ -61,75 +69,16 @@
         "buy": 600,
         "sale": 0
       },
-      "_id": {
-        "$oid": "657f422063380b398e20f03d"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 80,
-          "shop": 0,
-          "transferPrice": 600,
-          "_id": {
-            "$oid": "657f49e763380b398e20f0ba"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 60,
-          "transferPrice": 600,
-          "_id": {
-            "$oid": "6580587e9cfa68d6be4966e9"
-          }
+      "count": {
+        "store": 20,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
         }
-      ]
-    },
-    {
-      "name": "شيل صغير",
-      "barcode": "3",
-      "suppliers": [
-        "حماده شيل"
-      ],
-      "minmax": {
-        "min": 5,
-        "max": 10
-      },
-      "price": {
-        "buy": 500,
-        "sale": 650
       },
       "_id": {
-        "$oid": "657f422063380b398e20f03e"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 50,
-          "shop": 0,
-          "transferPrice": 500,
-          "_id": {
-            "$oid": "657f49e763380b398e20f0b6"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 40,
-          "transferPrice": 500,
-          "_id": {
-            "$oid": "6580587e9cfa68d6be4966eb"
-          }
-        }
-      ]
+        "$oid": "6586de6a3335555e345c49ee"
+      }
     }
   ],
   "__v": 0,
@@ -154,58 +103,19 @@
         "max": 10
       },
       "price": {
-        "buy": 700,
-        "sale": 1000
+        "buy": 800,
+        "sale": 0
+      },
+      "count": {
+        "store": 10,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
+        }
       },
       "_id": {
-        "$oid": "657f425263380b398e20f041"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 80,
-          "shop": 0,
-          "transferPrice": 700,
-          "_id": {
-            "$oid": "657f46c263380b398e20f081"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-17T20:19:58.889Z"
-          },
-          "store": -5,
-          "shop": 0,
-          "transferPrice": 1000,
-          "_id": {
-            "$oid": "657f59d1963efc091cb5b1ec"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 50,
-          "transferPrice": 700,
-          "_id": {
-            "$oid": "658058c29cfa68d6be496704"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:49:37.467Z"
-          },
-          "store": 0,
-          "shop": -2,
-          "transferPrice": 1000,
-          "_id": {
-            "$oid": "65805c26ba363847a2d8b265"
-          }
-        }
-      ]
+        "$oid": "6586de903335555e345c49f5"
+      }
     },
     {
       "name": "موبيل وسط",
@@ -218,58 +128,19 @@
         "max": 10
       },
       "price": {
-        "buy": 600,
-        "sale": 1200
+        "buy": 700,
+        "sale": 0
+      },
+      "count": {
+        "store": 5,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
+        }
       },
       "_id": {
-        "$oid": "657f425263380b398e20f042"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 90,
-          "shop": 0,
-          "transferPrice": 600,
-          "_id": {
-            "$oid": "657f46c263380b398e20f083"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-17T20:19:58.889Z"
-          },
-          "store": -5,
-          "shop": 0,
-          "transferPrice": 1200,
-          "_id": {
-            "$oid": "657f59d1963efc091cb5b1ee"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 70,
-          "transferPrice": 600,
-          "_id": {
-            "$oid": "658058c29cfa68d6be496706"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:49:37.467Z"
-          },
-          "store": 0,
-          "shop": -1,
-          "transferPrice": 1200,
-          "_id": {
-            "$oid": "65805c26ba363847a2d8b267"
-          }
-        }
-      ]
+        "$oid": "6586de903335555e345c49f6"
+      }
     },
     {
       "name": "موبيل صغير",
@@ -282,47 +153,19 @@
         "max": 10
       },
       "price": {
-        "buy": 500,
-        "sale": 1400
+        "buy": 600,
+        "sale": 0
+      },
+      "count": {
+        "store": -45,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
+        }
       },
       "_id": {
-        "$oid": "657f425263380b398e20f043"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 100,
-          "shop": 0,
-          "transferPrice": 500,
-          "_id": {
-            "$oid": "657f46c263380b398e20f07f"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-17T20:19:58.889Z"
-          },
-          "store": -5,
-          "shop": 0,
-          "transferPrice": 1400,
-          "_id": {
-            "$oid": "657f59d1963efc091cb5b1f0"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 40,
-          "transferPrice": 500,
-          "_id": {
-            "$oid": "658058c29cfa68d6be496708"
-          }
-        }
-      ]
+        "$oid": "6586de903335555e345c49f7"
+      }
     }
   ],
   "__v": 0
@@ -339,8 +182,32 @@
       "name": "مصر كبير",
       "barcode": "7",
       "suppliers": [
-        "ابراهيم فوكس",
-        "حسن مصر"
+        "ابراهيم مصر"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 800,
+        "sale": 1000
+      },
+      "count": {
+        "store": 45,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
+        }
+      },
+      "_id": {
+        "$oid": "6586deb13335555e345c4a01"
+      }
+    },
+    {
+      "name": "مصر وسط",
+      "barcode": "8",
+      "suppliers": [
+        "ابراهيم مصر"
       ],
       "minmax": {
         "min": 5,
@@ -348,132 +215,43 @@
       },
       "price": {
         "buy": 600,
-        "sale": 0
+        "sale": 900
+      },
+      "count": {
+        "store": 37,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
+        }
       },
       "_id": {
-        "$oid": "657f428363380b398e20f046"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 50,
-          "shop": 0,
-          "transferPrice": 600,
-          "_id": {
-            "$oid": "657f490963380b398e20f0a8"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 50,
-          "transferPrice": 600,
-          "_id": {
-            "$oid": "658058519cfa68d6be4966d8"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:49:37.467Z"
-          },
-          "store": 0,
-          "shop": 20,
-          "transferPrice": 600,
-          "_id": {
-            "$oid": "65805eceba363847a2d8b29d"
-          }
-        }
-      ]
-    },
-    {
-      "name": "مصر وسط",
-      "barcode": "8",
-      "suppliers": [
-        "ابراهيم فوكس",
-        "حسن مصر"
-      ],
-      "minmax": {
-        "min": 5,
-        "max": 10
-      },
-      "price": {
-        "buy": 500,
-        "sale": 0
-      },
-      "_id": {
-        "$oid": "657f428363380b398e20f047"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 80,
-          "shop": 0,
-          "transferPrice": 500,
-          "_id": {
-            "$oid": "657f490963380b398e20f0aa"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 60,
-          "transferPrice": 500,
-          "_id": {
-            "$oid": "658058519cfa68d6be4966dc"
-          }
-        }
-      ]
+        "$oid": "6586deb13335555e345c4a02"
+      }
     },
     {
       "name": "مصر صغير",
       "barcode": "9",
       "suppliers": [
-        "ابراهيم فوكس",
-        "حسن مصر"
+        "ابراهيم مصر"
       ],
       "minmax": {
         "min": 5,
         "max": 10
       },
       "price": {
-        "buy": 700,
-        "sale": 0
+        "buy": 600,
+        "sale": 800
+      },
+      "count": {
+        "store": 24,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
+        }
       },
       "_id": {
-        "$oid": "657f428363380b398e20f048"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 80,
-          "shop": 0,
-          "transferPrice": 700,
-          "_id": {
-            "$oid": "657f490963380b398e20f0ac"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 40,
-          "transferPrice": 700,
-          "_id": {
-            "$oid": "658058519cfa68d6be4966da"
-          }
-        }
-      ]
+        "$oid": "6586deb13335555e345c4a03"
+      }
     }
   ],
   "__v": 0
@@ -487,140 +265,78 @@
   "products": [
     {
       "name": "ماكس كبير",
-      "barcode": "10",
+      "barcode": "13",
       "suppliers": [
-        "صابر ماكس"
+        "السيد ماكس"
       ],
       "minmax": {
         "min": 5,
         "max": 10
       },
       "price": {
-        "buy": 900,
+        "buy": 800,
         "sale": 0
       },
-      "_id": {
-        "$oid": "657f42fd63380b398e20f051"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 50,
-          "shop": 0,
-          "transferPrice": 700,
-          "_id": {
-            "$oid": "657f4a1263380b398e20f0c3"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 80,
-          "shop": 0,
-          "transferPrice": 900,
-          "_id": {
-            "$oid": "657f4a1263380b398e20f0c7"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 50,
-          "transferPrice": 900,
-          "_id": {
-            "$oid": "658058a39cfa68d6be4966f6"
-          }
+      "count": {
+        "store": 0,
+        "shop": 60,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
         }
-      ]
+      },
+      "_id": {
+        "$oid": "6586defe3335555e345c4a22"
+      }
     },
     {
       "name": "ماكس وسط",
-      "barcode": "11",
+      "barcode": "14",
       "suppliers": [
-        "صابر ماكس"
+        "السيد ماكس"
       ],
       "minmax": {
         "min": 5,
         "max": 10
       },
       "price": {
-        "buy": 800,
+        "buy": 700,
         "sale": 0
       },
-      "_id": {
-        "$oid": "657f42fd63380b398e20f052"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 80,
-          "shop": 0,
-          "transferPrice": 800,
-          "_id": {
-            "$oid": "657f4a1263380b398e20f0c5"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 80,
-          "transferPrice": 800,
-          "_id": {
-            "$oid": "658058a39cfa68d6be4966f8"
-          }
+      "count": {
+        "store": 0,
+        "shop": 50,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
         }
-      ]
+      },
+      "_id": {
+        "$oid": "6586defe3335555e345c4a23"
+      }
     },
     {
       "name": "ماكس صغير",
-      "barcode": "12",
+      "barcode": "15",
       "suppliers": [
-        "صابر ماكس"
+        "السيد ماكس"
       ],
       "minmax": {
         "min": 5,
         "max": 10
       },
       "price": {
-        "buy": 800,
+        "buy": 600,
         "sale": 0
       },
-      "_id": {
-        "$oid": "657f42fd63380b398e20f053"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 50,
-          "shop": 0,
-          "transferPrice": 800,
-          "_id": {
-            "$oid": "657f4abb63380b398e20f0e9"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 20,
-          "transferPrice": 800,
-          "_id": {
-            "$oid": "658058a39cfa68d6be4966fa"
-          }
+      "count": {
+        "store": 0,
+        "shop": 50,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
         }
-      ]
+      },
+      "_id": {
+        "$oid": "6586defe3335555e345c4a24"
+      }
     }
   ],
   "__v": 0,
@@ -636,93 +352,59 @@
   "products": [
     {
       "name": "فوكس كبير",
-      "barcode": "14",
+      "barcode": "10",
       "suppliers": [
-        "ابراهيم فوكس"
+        "مصطفي فوكس"
       ],
       "minmax": {
         "min": 5,
         "max": 10
       },
       "price": {
-        "buy": 400,
+        "buy": 800,
         "sale": 0
       },
-      "_id": {
-        "$oid": "657f432c63380b398e20f056"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 50,
-          "shop": 0,
-          "transferPrice": 400,
-          "_id": {
-            "$oid": "657f4aa063380b398e20f0da"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 40,
-          "transferPrice": 400,
-          "_id": {
-            "$oid": "658057e79cfa68d6be4966ca"
-          }
+      "count": {
+        "store": 25,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
         }
-      ]
+      },
+      "_id": {
+        "$oid": "6586dedf3335555e345c4a10"
+      }
     },
     {
       "name": "فوكس وسط",
-      "barcode": "15",
+      "barcode": "11",
       "suppliers": [
-        "ابراهيم فوكس"
+        "مصطفي فوكس"
       ],
       "minmax": {
         "min": 5,
         "max": 10
       },
       "price": {
-        "buy": 500,
+        "buy": 700,
         "sale": 0
       },
-      "_id": {
-        "$oid": "657f432c63380b398e20f057"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 80,
-          "shop": 0,
-          "transferPrice": 500,
-          "_id": {
-            "$oid": "657f4aa063380b398e20f0dc"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 40,
-          "transferPrice": 500,
-          "_id": {
-            "$oid": "658057e79cfa68d6be4966cc"
-          }
+      "count": {
+        "store": 20,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
         }
-      ]
+      },
+      "_id": {
+        "$oid": "6586dedf3335555e345c4a11"
+      }
     },
     {
       "name": "فوكس صغير",
-      "barcode": "16",
+      "barcode": "12",
       "suppliers": [
-        "ابراهيم فوكس"
+        "مصطفي فوكس"
       ],
       "minmax": {
         "min": 5,
@@ -732,33 +414,16 @@
         "buy": 600,
         "sale": 0
       },
-      "_id": {
-        "$oid": "657f432c63380b398e20f058"
-      },
-      "count": [
-        {
-          "date": {
-            "$date": "2023-12-17T18:35:38.500Z"
-          },
-          "store": 80,
-          "shop": 0,
-          "transferPrice": 600,
-          "_id": {
-            "$oid": "657f4aa063380b398e20f0de"
-          }
-        },
-        {
-          "date": {
-            "$date": "2023-12-18T14:17:05.838Z"
-          },
-          "store": 0,
-          "shop": 50,
-          "transferPrice": 600,
-          "_id": {
-            "$oid": "658057e79cfa68d6be4966c8"
-          }
+      "count": {
+        "store": 15,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-12-23T13:16:52.012Z"
         }
-      ]
+      },
+      "_id": {
+        "$oid": "6586dedf3335555e345c4a12"
+      }
     }
   ],
   "__v": 0

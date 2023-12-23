@@ -24,6 +24,7 @@ export const Navbar = () => {
          {/* Navbar Icons */}
          <div className="flex-start print:hidden">
             <LockerCash />
+            <i className="fa fa-retweet sm:text-xl" onClick={() => window.location.reload()} />
             <i className="fa fa-search sm:text-xl" onClick={handleSearchbar} />
             <i className="fa fa-bars sm:text-xl lg:!hidden" onClick={handleDrawer} />
             <User />
