@@ -1,6 +1,5 @@
 import { Button, Menu, MenuHandler, MenuList, MenuItem } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-
 import { links } from "@/constants/navbar";
 
 export const Desktop = () => {
@@ -11,13 +10,13 @@ export const Desktop = () => {
                <Menu allowHover key={i}>
                   <MenuHandler>
                      <Button
-                        className="flex-start group px-2 !text-base hover:brightness-125 md:!text-xl lg:px-5"
+                        className="flex-start group px-3 text-base hover:brightness-125"
                         variant="text"
                         size="sm"
                         color="deep-purple"
                      >
                         <span>{title}</span>
-                        <i className="fa fa-chevron-down mt-3 group-hover:text-primary" />
+                        <i className="fa fa-chevron-down text-sm group-hover:text-primary rtl:mt-3" />
                      </Button>
                   </MenuHandler>
 
@@ -32,7 +31,7 @@ export const Desktop = () => {
                               <MenuItem className="flex-between group">
                                  <div className="flex-start">
                                     <i className={`${icon} text-base group-hover:text-primary`} />
-                                    {name}
+                                    <span className="pb-3">{name}</span>
                                  </div>
                                  <i className={`fa fa-lock ${disabled ? "" : "!hidden"}`} />
                               </MenuItem>

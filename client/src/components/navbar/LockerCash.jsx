@@ -26,7 +26,7 @@ export const LockerCash = () => {
    return (
       <Typography
          variant="small"
-         className="mb-0 whitespace-nowrap pb-2 text-base font-bold text-primary ltr:text-2xl sm:text-xl"
+         className="mb-0 whitespace-nowrap pb-2 text-base font-bold text-primary sm:text-xl"
       >
          {Math.round(+data / 1000) || "00,00"}
          <span className="px-1">K</span>

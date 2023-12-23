@@ -16,7 +16,7 @@ export const Navbar = () => {
    };
 
    return (
-      <nav className="flex-between bg-gradient sticky left-0 top-0 z-[1000] w-full flex-row px-5 py-3 print:relative">
+      <nav className="flex-between bg-gradient sticky left-0 top-0 z-[1000] w-full px-3 py-3 print:relative">
          <Logo />
 
          {/* Desktop Menu */}
