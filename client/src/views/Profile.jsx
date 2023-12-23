@@ -2,6 +2,7 @@ import { Typography } from "@material-tailwind/react";
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { Field, Form, MTDialog, Switch } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
@@ -11,8 +12,11 @@ import { ADMIN } from "@/constants/users";
 export const Profile = () => {
    const { companyId, productId } = useParams();
    const { user } = useSelector(({ users }) => users);
+   const [text] = useTranslation();
+
    const [openDialog, setOpenDialog] = useState(false);
    const [price, setPrice] = useState({ process: "sale", value: "" });
+
    const { data, setData, loading, error, isSubmitted, refetch } = useAxios();
    const {
       data: editData,
@@ -62,7 +66,7 @@ export const Profile = () => {
    const valueTypograph = `bg-dimPurple rounded-lg text-base pr-4 p-2 dark:text-dimWhite md:text-2xl`;
 
    return (
-      <Form headerText="عرض منتج">
+      <Form headerText={text("profile-title")}>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} />
          <Loading isSubmitted={eIsSubmitted} loading={eLoading} error={eError} message={editData} />
          <Loading isSubmitted={dIsSubmitted} loading={dLoading} error={dError} message={deleteData} to="/" />
@@ -91,7 +95,7 @@ export const Profile = () => {
 
                <div className="">
                   <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
-                     الاسم
+                     {text("profile-name")}
                   </Typography>
                   <Typography variant="h6" className={valueTypograph}>
                      {data.name}
@@ -100,7 +104,7 @@ export const Profile = () => {
 
                <div className="">
                   <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
-                     الباركود
+                     {text("profile-barcode")}
                   </Typography>
                   <Typography variant="h6" className={valueTypograph}>
                      {data.barcode}
@@ -110,19 +114,19 @@ export const Profile = () => {
                <div className="flex-between">
                   <div className="w-full">
                      <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
-                        سعر الشراء
+                        {text("profile-purchase-price")}
                      </Typography>
                      <Typography variant="h6" className={valueTypograph}>
-                        {data.price.buy} جنية
+                        {data.price.buy} {text("pound")}
                      </Typography>
                   </div>
 
                   <div className="w-full">
                      <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
-                        سعر البيع
+                        {text("profile-sales-price")}
                      </Typography>
                      <Typography variant="h6" className={valueTypograph}>
-                        {data.price.sale} جنية
+                        {data.price.sale} {text("pound")}
                      </Typography>
                   </div>
                </div>
@@ -130,50 +134,52 @@ export const Profile = () => {
                <div className="flex-between">
                   <div className="w-full">
                      <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
-                        عدد المخزن
+                        {text("profile-store-count")}
                      </Typography>
                      <Typography variant="h6" className={valueTypograph}>
-                        {data.count.store} قطعة
+                        {data.count.store} {text("part")}
                      </Typography>
                   </div>
 
                   <div className="w-full">
                      <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
-                        عدد المحل
+                        {text("profile-shop-count")}
                      </Typography>
                      <Typography variant="h6" className={valueTypograph}>
-                        {data.count.shop} قطعة
+                        {data.count.shop} {text("part")}
                      </Typography>
                   </div>
                </div>
 
                <div className="">
                   <Typography variant="h4" color="deep-purple" className="text-xl md:text-2xl">
-                     الموردين
+                     {text("profile-suppliers")}
                   </Typography>
                   <Typography variant="h6" className={valueTypograph}>
-                     {data.suppliers.length ? data.suppliers.join(" | ") : "لا يوجد"}
+                     {data.suppliers.length ? data.suppliers.join(" | ") : "----"}
                   </Typography>
                </div>
             </Fragment>
          )}
 
          <MTDialog
-            headerText="تعديل سعر المنتج"
-            buttonText="تعديل"
+            headerText={text("profile-widget-title")}
+            buttonText={text("profile-widget-btn")}
             open={openDialog}
             loading={eLoading || (eIsSubmitted && !eError && !editData?.warn)}
             handler={handleOpenDialog}
             onSubmit={handleSubmit}
          >
             <Field
-               label="سعر المنتج الجديد"
+               label={text("profile-widget-label")}
                containerStyle="mb-8"
                value={price.value}
                onChange={handleFieldChange}
             />
             <Switch
-               label={price.process === "buy" ? "تعديل سعر الشراء" : "تعديل سعر البيع"}
+               label={
+                  price.process === "buy" ? text("profile-widget-switch-buy") : text("profile-widget-switch-sale")
+               }
                checked={price.process === "buy"}
                onChange={(event) =>
                   setPrice((data) => ({ ...data, process: event.target.checked ? "buy" : "sale" }))

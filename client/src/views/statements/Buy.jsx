@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { filterSelection, getSuppliers } from "@/redux/slices/products";
 import { StatementForm } from "@/components/statements";
@@ -8,6 +9,7 @@ import { useAxios } from "@/hooks/useAxios";
 
 const formState = { supplier: "", discount: "", adminPay: "", toStore: true, products: [] };
 export const BuyStatement = () => {
+   const [text] = useTranslation();
    const { refetch: sRefetch } = useAxios();
    const { data, isSubmitted, loading, error, refetch } = useAxios();
    const [formData, setFormData] = useState(formState);
@@ -52,7 +54,8 @@ export const BuyStatement = () => {
    return (
       <StatementForm
          onSubmit={handleSubmit}
-         text={{ headerText: "كشف مندوب", buttonText: "اتمام الشراء" }}
+         headerText={text("statement-buy-title")}
+         buttonText={text("statement-buy-btn")}
          data={data}
          loading={loading}
          error={error}
@@ -65,7 +68,7 @@ export const BuyStatement = () => {
          handleSelectChange={handleSelectChange}
       >
          <Selectbox
-            label="اختار اسم المندوب"
+            label={text("chooseSupplier")}
             options={suppliers}
             value={formData.supplier}
             loading={!isSubmitted && loading}

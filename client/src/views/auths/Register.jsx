@@ -1,16 +1,15 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { Field, Form, Selectbox } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
 const ROLES = ["admin", "user"];
-
 export const Register = () => {
+   const [text] = useTranslation();
    const [formData, setFormData] = useState({ name: "", email: "", password: "", phone: "", role: 0 });
    const { data, loading, error, isSubmitted, refetch } = useAxios();
-   const dispatch = useDispatch();
 
    const handleSelectChange = (name, value) => {
       setFormData((data) => ({ ...data, [name]: value }));
@@ -30,17 +29,16 @@ export const Register = () => {
    return (
       <Form
          onSubmit={handleSubmit}
-         buttonText="تسجيل"
-         headerText="تسجيل الدخول"
+         buttonText={text("register-btn")}
+         headerText={text("register-title")}
          loading={(isSubmitted && !error) || loading}
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
-
-         <Field label="الاسم" name="name" value={formData.name} onChange={handleFieldChange} />
+         <Field label={text("register-name")} name="name" value={formData.name} onChange={handleFieldChange} />
 
          <Field
             type="email"
-            label="البريد الالكتروني"
+            label={text("register-email")}
             name="email"
             value={formData.email}
             onChange={handleFieldChange}
@@ -48,14 +46,14 @@ export const Register = () => {
 
          <Field
             type="password"
-            label="ادخل كلمة السر"
+            label={text("register-password")}
             name="password"
             value={formData.password}
             onChange={handleFieldChange}
          />
 
          <Selectbox
-            label="نوع الايميل"
+            label={text("register-type")}
             name="role"
             options={ROLES}
             loading={!isSubmitted && loading}
@@ -65,7 +63,7 @@ export const Register = () => {
 
          <Field
             type="number"
-            label="رقم الهاتف"
+            label={text("register-phone")}
             name="phone"
             value={formData.phone}
             onChange={handleFieldChange}

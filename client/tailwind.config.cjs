@@ -13,6 +13,9 @@ module.exports = withMT({
          sans: ["STV", "cursive", "sans-serif"],
       },
       colors: {
+         dimWhite: "var(--dimWhite)",
+         darkGray: "var(--darkGray)",
+         dimPurple: "var(--dimPurple)",
          primary: {
             DEFAULT: "var(--deep-purple-500)",
             50: "var(--deep-purple-50)",
@@ -26,9 +29,6 @@ module.exports = withMT({
             800: "var(--deep-purple-800)",
             900: "var(--deep-purple-900)",
          },
-         dimWhite: "var(--dimWhite)",
-         darkGray: "var(--darkGray)",
-         dimPurple: "var(--dimPurple)",
          "deep-purple": {
             50: "var(--deep-purple-50)",
             100: "var(--deep-purple-100)",

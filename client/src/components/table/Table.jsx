@@ -1,8 +1,9 @@
 import { Card } from "@material-tailwind/react";
+import { Fragment } from "react";
+
+import { Pagination } from "../public";
 import { Foot } from "./Foot";
 import { Head } from "./Head";
-import { Pagination } from "../public";
-import { Fragment } from "react";
 
 export const Table = ({
    headers,

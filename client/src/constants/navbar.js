@@ -1,4 +1,4 @@
-import { Outlet } from "react";
+import i18next from "./i18next";
 
 // Directs
 import { Home, Profile } from "@/views";
@@ -31,6 +31,9 @@ import { ShowBill, UpdateBill } from "@/views/bills";
    - If [paths.name] Is Defined -> Create In Navbar Tab Menu
    - If [role] Is Defined       -> Just Allow Admin Users
 */
+
+i18next.changeLanguage(localStorage.getItem("lang"));
+const text = i18next.t;
 
 export const links = [
    // Public Not In Navbar
@@ -94,25 +97,25 @@ export const links = [
 
    // Show
    {
-      title: "العرض",
+      title: text("show-title"),
       path: "show",
       paths: [
          {
-            name: "عرض المحل",
+            name: text("show-shop"),
             link: "shop",
             role: "user",
             icon: "fas fa-store-alt",
             Component: Show_Shop_Store,
          },
          {
-            name: "عرض المخزن",
+            name: text("show-store"),
             link: "store",
             role: "user",
             icon: "fas fa-warehouse",
             Component: Show_Shop_Store,
          },
          {
-            name: "عرض معاملات الخزنة",
+            name: text("locker-transections"),
             link: "locker-processes",
             role: "admin",
             icon: "fas fa-door-closed",
@@ -120,7 +123,7 @@ export const links = [
             Component: ShowLockerProcesses,
          },
          {
-            name: "عرض العملاء والمندوبين",
+            name: text("client-suppliers"),
             link: "clients",
             role: "admin",
             icon: "fas fa-users-viewfinder",
@@ -128,7 +131,7 @@ export const links = [
             Component: ShowClients,
          },
          {
-            name: "عرض الفواتير",
+            name: text("show-bills"),
             link: "bills",
             role: "admin",
             icon: "fas fa-money-bill-wave",
@@ -136,7 +139,7 @@ export const links = [
             Component: ShowBills,
          },
          {
-            name: "عرض المديونيات",
+            name: text("show-debts"),
             link: "debts",
             role: "admin",
             icon: "fas fa-money-bill-wave",
@@ -148,32 +151,32 @@ export const links = [
 
    // Statements
    {
-      title: "الكشوفات",
+      title: text("statements-title"),
       path: "statements",
       paths: [
          {
-            name: "كشف حساب",
+            name: text("bill-statement"),
             link: "sale",
             role: "admin",
             icon: "fas fa-money-bill-wave",
             Component: SaleStatement,
          },
          {
-            name: "كشف مندوب",
+            name: text("supplier-statement"),
             link: "buy",
             role: "admin",
             icon: "fas fa-money-bill-trend-up",
             Component: BuyStatement,
          },
          {
-            name: "كشف تحويل",
+            name: text("transfer-statement"),
             link: "transfer",
             role: "admin",
             icon: "fas fa-money-bill-transfer",
             Component: TransferStatement,
          },
          {
-            name: "كشف العمال",
+            name: text("workers-statement"),
             link: "workers",
             role: "admin",
             icon: "fas fa-users",
@@ -185,39 +188,39 @@ export const links = [
 
    // Creates
    {
-      title: "جديد",
+      title: text("new-title"),
       path: "creates",
       paths: [
          {
-            name: "اضافه قسم",
+            name: text("add-category"),
             link: "category",
             role: "admin",
             icon: "fas fa-sitemap",
             Component: AddCategory,
          },
          {
-            name: "اضافه شركة",
+            name: text("add-company"),
             link: "company",
             role: "admin",
             icon: "fas fa-building-columns",
             Component: AddCompany,
          },
          {
-            name: "اضافه منتج",
+            name: text("add-product"),
             link: "products",
             role: "admin",
             icon: "fas fa-bicycle",
             Component: AddProducts,
          },
          {
-            name: "اضافه مندوب",
+            name: text("add-supplier"),
             link: "supplier",
             role: "admin",
             icon: "fas fa-user-tie",
             Component: AddSupplier,
          },
          {
-            name: "اضافة عميل",
+            name: text("add-client"),
             link: "client",
             role: "admin",
             icon: "fas fa-user-tie",
@@ -229,25 +232,25 @@ export const links = [
 
    // Balances
    {
-      title: "الماليات",
+      title: text("balances-title"),
       path: "balances",
       paths: [
          {
-            name: "الارصدة",
+            name: text("show-balances"),
             link: "",
             role: "admin",
             icon: "fas fa-scale-unbalanced",
             Component: ShowBalances,
          },
          {
-            name: "الخزنة",
+            name: text("add-locker"),
             link: "add-to-locker",
             role: "admin",
             icon: "fas fa-door-closed",
             Component: AddToLocker,
          },
          {
-            name: "مبيعات / مشتريات اليوم",
+            name: text("totay-reset"),
             link: "today-buys-sales",
             role: "admin",
             icon: "fas fa-hand-holding-usd",
@@ -259,11 +262,11 @@ export const links = [
 
    // Analysis
    {
-      title: "الاحصائيات",
+      title: text("analysis-title"),
       path: "analysis",
       paths: [
          {
-            name: "بيان حركة بيع المنتج",
+            name: text("product-movement"),
             link: "movement",
             role: "admin",
             icon: "fas fa-chart-column",
@@ -271,7 +274,7 @@ export const links = [
             Component: AnalysisProductMovement,
          },
          {
-            name: "احصائيات المبيعات",
+            name: text("analysis-sales"),
             link: "sales",
             role: "admin",
             icon: "fas fa-chart-column",
@@ -279,7 +282,7 @@ export const links = [
             Component: AnalysisSales,
          },
          {
-            name: "احصائيات الارباح",
+            name: text("analysis-profits"),
             link: "wins",
             role: "admin",
             icon: "fas fa-chart-line",
@@ -287,7 +290,7 @@ export const links = [
             Component: AnalysisWins,
          },
          {
-            name: "حصر نواقص المحل / المخزن",
+            name: text("analysis-insufficients"),
             link: "insufficients",
             role: "admin",
             icon: "fas fa-magnifying-glass-minus",
@@ -295,7 +298,7 @@ export const links = [
             Component: AnalysisInsufficients,
          },
          {
-            name: "المنتجات الاقل مبيعاً",
+            name: text("analysis-less-sales"),
             link: "less-buys",
             role: "admin",
             icon: "fas fa-chart-gantt",
@@ -303,7 +306,7 @@ export const links = [
             Component: AnalysisLessBuys,
          },
          {
-            name: "المنتجات الاكثر مبيعاً (في الشهر)",
+            name: text("analysis-best-sales-month"),
             link: "month",
             role: "admin",
             icon: "far fa-calendar-days",
@@ -311,7 +314,7 @@ export const links = [
             Component: AnalysisForMonth,
          },
          {
-            name: "المنتجات الاكثر مبيعاً (في السنه)",
+            name: text("analysis-best-sales-year"),
             link: "year",
             role: "admin",
             icon: "far fa-calendar-check",

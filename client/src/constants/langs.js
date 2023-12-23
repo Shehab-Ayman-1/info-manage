@@ -1,0 +1,752 @@
+const general = {
+   en: {
+      withdraw: "Withdraw",
+      deposit: "Deposit",
+      unknown: "Unknown",
+      loading: "Loading...",
+
+      chooseCategory: "Choose Category Name",
+      chooseCompany: "Choose Company Name",
+      chooseProduct: "Choose Product Name",
+      chooseClient: "Choose Client Name",
+      chooseSupplier: "Choose Supplier Name",
+
+      insertCategory: "Insert Category Name",
+      insertCompany: "Insert Company Name",
+      insertProduct: "Insert Product Name",
+      insertClient: "Insert Client Name",
+      insertSupplier: "Insert Supplier Name",
+
+      categoryWord: "Category",
+      companyWord: "Company",
+      productWord: "Product",
+      supplierWord: "Supplier",
+      clientWord: "Client",
+
+      place: "Place",
+      price: "Price",
+      count: "Count",
+      insert: "Insert",
+      pound: "Pound",
+      part: "Part",
+
+      locker: "Locker",
+      reason: "Reason",
+      cost: "Cost",
+      print: "Print Bill",
+      search: "Search...",
+
+      discount: "Discount",
+      recievedcost: "Recieved Cost",
+      paidcost: "paid Cost",
+
+      store: "Store",
+      shop: "Shop",
+   },
+   ar: {
+      withdraw: "سحب",
+      deposit: "ايداع",
+      unknown: "غير معروف",
+      loading: "يتم التحميل",
+
+      chooseCategory: "اختر اسم القسم",
+      chooseCompany: "اختر اسم الشركة",
+      chooseProduct: "اختر اسم المنتج",
+      chooseClient: "اختر اسم العميل",
+      chooseSupplier: "اختر اسم المندوب",
+
+      insertCategory: "ادخل اسم القسم",
+      insertCompany: "ادخل اسم الشركة",
+      insertProduct: "ادخل اسم المنتج",
+      insertClient: "ادخل اسم العميل",
+      insertSupplier: "ادخل اسم المندوب",
+
+      categoryWord: "قسم",
+      companyWord: "شركة",
+      productWord: "منتج",
+      supplierWord: "مندوب",
+      clientWord: "عميل",
+
+      place: "المكان",
+      price: "السعر",
+      count: "العدد",
+      insert: "اضافه",
+      pound: "جنية",
+      part: "قطعه",
+
+      locker: "الخزنة",
+      reason: "السبب",
+      cost: "التكلفه",
+      print: "طباعه الفاتورة",
+      search: "بحث...",
+
+      discount: "الخصم",
+      recievedcost: "المبلغ المحصل",
+      paidcost: "المبلغ المدفوع",
+
+      store: "المخزن",
+      shop: "المحل",
+   },
+};
+
+const table = {
+   en: {
+      "table-footer-title": "Total Products",
+      "pagination-prev": "prev",
+      "pagination-next": "next",
+   },
+   ar: {
+      "table-footer-title": "اجمالي البضائع",
+      "pagination-prev": "السابق",
+      "pagination-next": "التالي",
+   },
+};
+
+const navbar = {
+   logo: {
+      en: {
+         "navbar-logo": "Dawly Center",
+      },
+      ar: {
+         "navbar-logo": "المركز الدولي",
+      },
+   },
+   user: {
+      en: {
+         "user-lang": "Language",
+         "lang-arabic": "Arabic",
+         "lang-english": "English",
+         "sign-in": "Other Account",
+         "sign-out": "Sign Out",
+         "sign-up": "Create Account",
+      },
+      ar: {
+         "user-lang": "اللغه",
+         "lang-arabic": "عربي",
+         "lang-english": "انجليزي",
+         "sign-in": " تسجيل حساب اخر",
+         "sign-out": "تسجيل الخروج",
+         "sign-up": "انشاء حساب جديد",
+      },
+   },
+   links: {
+      en: {
+         // Show
+         "show-title": "Show",
+         "show-shop": "Shop Products",
+         "show-store": "Store Products",
+         "locker-transections": "Locker Transections",
+         "client-suppliers": "Clients & Suppliers",
+         "show-bills": "Show Bills",
+         "show-debts": "Show Debts",
+
+         // Statements
+         "statements-title": "Statement",
+         "bill-statement": "Bill Statement",
+         "supplier-statement": "Supplier Statement",
+         "transfer-statement": "Transfer Statement",
+         "workers-statement": "Workers Statement",
+
+         // Creates
+         "new-title": "New",
+         "add-category": "Add Category",
+         "add-company": "Add Company",
+         "add-product": "Add Product",
+         "add-supplier": "Add Supplier",
+         "add-client": "Add Client",
+
+         // Balances
+         "balances-title": "Finances",
+         "show-balances": "Show Balances",
+         "add-locker": "Withdrawal / deposit from Locker",
+         "totay-reset": "Today Purchases / Sales",
+
+         // Analysis
+         "analysis-title": "Statistics",
+         "product-movement": "Product Purchases / Sales Movement",
+         "analysis-sales": "Sales Statistics",
+         "analysis-profits": "Profits Statistics",
+         "analysis-insufficients": "Insufficients Of The Store / Shop",
+         "analysis-less-sales": "Least Selling Products",
+         "analysis-best-sales-month": "Best Selling Products In (Month)",
+         "analysis-best-sales-year": "Best Selling Products In (Year)",
+      },
+      ar: {
+         // Show
+         "show-title": "العرض",
+         "show-title": "العرض",
+         "show-shop": "منتجات المحل",
+         "show-store": "منتجات المخزن",
+         "locker-transections": "معاملات الخزنة",
+         "client-suppliers": "العملاء والمندوبين",
+         "show-bills": "عرض الفواتير",
+         "show-debts": "عرض المديونيات",
+
+         // Statements
+         "statements-title": "الكشوفات",
+         "bill-statement": "كشف حساب",
+         "supplier-statement": "حشف مندوب",
+         "transfer-statement": "كشف تحويل",
+         "workers-statement": "كشف العمال",
+
+         // Creates
+         "new-title": "جديد",
+         "add-category": "اضافه قسم",
+         "add-company": "اضافه شركة",
+         "add-product": "اضافه منتج",
+         "add-supplier": "اضافه مندوب",
+         "add-client": "اضافه عميل",
+
+         // Balances
+         "balances-title": "الماليات",
+         "show-balances": "عرض الارصده",
+         "add-locker": "سحب / ايداع من الخزنة",
+         "totay-reset": "مبيعات ومشتريات اليوم",
+
+         // Analysis
+         "analysis-title": "الاحصائيات",
+         "product-movement": "بيان حركة بيع / شراء المنتج",
+         "analysis-sales": "احصائيات المبيعات",
+         "analysis-profits": "احصائيات الارباح",
+         "analysis-insufficients": "عرض نواقص المحل / المخزن",
+         "analysis-less-sales": "الامنتجات الاقل مبيعاً",
+         "analysis-best-sales-month": "المنتجات الاكثر مبيعاً (في الشهر)",
+         "analysis-best-sales-year": "المنتجات الاكثر مبيعاً (في السنه)",
+      },
+   },
+};
+
+const configrator = {
+   en: {
+      "configrator-drawer-title": "Display Setting",
+      "configrator-subTitle": "You Can Choose Theme That You Would Prefer From Here",
+      "configrator-theme-title": "Choose Theme",
+      "configrator-mode-title": "Choose Mode",
+      "configrator-display-language": "Display Language",
+      "configrator-choose-language": "Choose Display Language",
+      "configrator-choose-language-ar": "Arabic",
+      "configrator-choose-language-en": "English",
+   },
+   ar: {
+      "configrator-drawer-title": "اعدادات العرض",
+      "configrator-subTitle": "يمكنك اختيار نوع الثيم الذي تفضله من هنا",
+      "configrator-theme-title": "اختر الثيم",
+      "configrator-mode-title": "اختر المود",
+      "configrator-display-language": "لغه العرض",
+      "configrator-choose-language": "اختر لغه العرض",
+      "configrator-choose-language-ar": "عربي",
+      "configrator-choose-language-en": "انجليزي",
+   },
+};
+
+const home = {
+   en: {
+      "home-title": "Dawly Center",
+      "home-subtitle1": "For Trade, Distribution, Auto Parts, Transportation,",
+      "home-subtitle2": "And Car Wash",
+      "home-shop-btn": "Shop Products",
+      "home-statement-btn": "Bill Statement",
+   },
+   ar: {
+      "home-title": "المركز الدولي",
+      "home-subtitle1": "للتجارة والتوزيع وقطع غيار السيارات والنقل",
+      "home-subtitle2": "وغسيل السيارات",
+      "home-shop-btn": "عرض منتجات المحل",
+      "home-statement-btn": "كشف حساب",
+   },
+};
+
+const accounts = {
+   login: {
+      en: {
+         "login-title": "Sign In",
+         "login-btn": "Login",
+         "login-email": "Email OR Phone Number:",
+         "login-password": "Password:",
+      },
+      ar: {
+         "login-title": "تسجيل الدخول",
+         "login-btn": "تسجيل",
+         "login-email": "الايميل او رقم الهاتف",
+         "login-password": "كلمة السر",
+      },
+   },
+   register: {
+      en: {
+         "register-title": "Sign Up",
+         "register-btn": "Register",
+         "register-name": "Name:",
+         "register-email": "Email:",
+         "register-password": "Password:",
+         "register-type": "Account Type:",
+         "register-phone": "Phone Number:",
+      },
+      ar: {
+         "register-title": "انشاء حساب",
+         "register-btn": "انشاء",
+         "register-name": "الاسم:",
+         "register-email": "الايميل:",
+         "register-password": "الباسوورد:",
+         "register-type": "نوع الايميل:",
+         "register-phone": "رقم الهاتف:",
+      },
+   },
+};
+
+const profile = {
+   en: {
+      "profile-title": "Product Profile",
+      "profile-name": "Name:",
+      "profile-barcode": "Barcode:",
+      "profile-purchase-price": "Purchase Price:",
+      "profile-sales-price": "Sales Price:",
+      "profile-store-count": "Store Count:",
+      "profile-shop-count": "Shop Count:",
+      "profile-suppliers": "Suppliers:",
+      "profile-widget-title": "Update Price",
+      "profile-widget-btn": "Update",
+      "profile-widget-label": "New Price",
+      "profile-widget-switch-buy": "Update Purchase Price",
+      "profile-widget-switch-sale": "Update Sale Price",
+   },
+   ar: {
+      "profile-title": "عرض منتج",
+      "profile-name": "الاسم:",
+      "profile-barcode": "الباركود:",
+      "profile-purchase-price": "سعر الشراء:",
+      "profile-sales-price": "سعر البيع:",
+      "profile-store-count": "عدد المخزن:",
+      "profile-shop-count": "عدد المحل:",
+      "profile-suppliers": "المندوبين:",
+      "profile-widget-title": "تعديل سعر المنتج",
+      "profile-widget-btn": "تعديل",
+      "profile-widget-label": "سعر المنتج الجديد",
+      "profile-widget-switch-buy": "تعديل سعر الشراء",
+      "profile-widget-switch-sale": "تعديل سعر البيع",
+   },
+};
+
+const show = {
+   shop_store: {
+      en: {
+         "shop-store-title-shop": "Shop Products",
+         "shop-store-title-store": "Store Products",
+         "shop-store-switch-buy": "Purchase Price",
+         "shop-store-switch-sale": "Salling Price",
+         "shop-store-total": "Total Products",
+      },
+      ar: {
+         "shop-store-title-shop": "عرض بضائع المحل",
+         "shop-store-title-store": "عرض بضائع المخزن",
+         "shop-store-switch-buy": "سعر الشراء",
+         "shop-store-switch-sale": "سعر البيع",
+         "shop-store-total": "اجمالي البضائع",
+      },
+   },
+   locker_transactions: {
+      en: {
+         "locker-transactions-title": "Locker Transactions",
+         "locker-transactions-table-footer": "Locker Cash",
+      },
+      ar: {
+         "locker-transactions-title": "عرض معاملات الخزنة",
+         "locker-transactions-table-footer": "كاش الخزنة",
+      },
+   },
+   clients: {
+      en: {
+         "clients-title-clients": "Show Client",
+         "clients-title-suppliers": "Show Suppliers",
+         "clients-table-footer": "Total Pending Price",
+         "clients-table-nobills": "No Bills Found",
+         "clients-table-nodebts": "No Debts Found",
+      },
+      ar: {
+         "clients-title-clients": "عرض العملاء",
+         "clients-title-suppliers": "عرض المندوبين",
+         "clients-table-footer": "اجمالي المبلغ المتبقي",
+         "clients-table-nobills": "لا يوجد فواتير",
+         "clients-table-nodebts": "لا يوجد مديونيات",
+      },
+   },
+   bills: {
+      en: {
+         "bills-title": "Show Bills",
+         "debts-title": "Show Debts",
+         "bills-widget-title": "Payment Bill",
+         "bills-widget-total-cost": "Bill Cost",
+         "bills-widget-pending-cost": "Pending Cost",
+         "bills-widget-discount": "Discount",
+         "bills-widget-input": "paid Cost",
+         "bills-widget-btn": "Pay",
+      },
+      ar: {
+         "bills-title": "عرض الفواتير",
+         "debts-title": "عرض المديونيات",
+         "bills-widget-title": "دفع فاتورة",
+         "bills-widget-total-cost": "تكلفه الفاتورة",
+         "bills-widget-pending-cost": "المبلغ المتبقي",
+         "bills-widget-discount": "الخصم",
+         "bills-widget-input": "المبلغ المراد سداده",
+         "bills-widget-btn": "دفع",
+      },
+   },
+};
+
+const statements = {
+   en: {
+      "statement-buy-title": "Supplier Statement",
+      "statement-transfer-title": "Transfer Product",
+      "statement-sale-title": "Bill Statement",
+      "statement-buy-btn": "Buy",
+      "statement-sale-btn": "Sale",
+      "statement-transfer-btn": "Transfer",
+   },
+   ar: {
+      "statement-buy-title": "كشف مندوب",
+      "statement-sale-title": "كشف حساب",
+      "statement-transfer-title": "تحويل منتج",
+      "statement-buy-btn": "شراء",
+      "statement-sale-btn": "بيع",
+      "statement-transfer-btn": "تحويل",
+   },
+};
+
+const creates = {
+   category: {
+      en: {
+         "creates-category-title": "Create Category",
+         "creates-btn": "Create",
+      },
+      ar: {
+         "creates-category-title": "انشاء قسم",
+         "creates-btn": "انشاء",
+      },
+   },
+   company: {
+      en: {
+         image: "Insert Company Image Link",
+         "creates-company-title": "Create Company",
+      },
+      ar: {
+         image: "ادخل رابط صورة الشركة",
+         "creates-company-title": "انشاء شركة",
+      },
+   },
+   product: {
+      en: {
+         "creates-product-title": "Create Product",
+         "creates-product-menu-btn": "Insert Product",
+         "creates-product-menu-name": "Product Name",
+         "creates-product-menu-barcode": "Barcode",
+         "creates-product-menu-min": "Minimum",
+         "creates-product-menu-max": "Maximum",
+      },
+      ar: {
+         "creates-product-title": "انشاء منتج",
+         "creates-product-menu-btn": "اضافه منتج",
+         "creates-product-menu-name": "اسم المنتج",
+         "creates-product-menu-barcode": "الباركود",
+         "creates-product-menu-min": "الحد الادني",
+         "creates-product-menu-max": "الحد المتوسط",
+      },
+   },
+   supplier: {
+      en: {
+         "creates-supplier-title": "Create Supplier",
+         "creates-supplier-phone": "Insert Phone Number",
+      },
+      ar: {
+         "creates-supplier-title": "اضافه مندوب",
+         "creates-supplier-phone": "ادخل رقم الهاتف",
+      },
+   },
+   client: {
+      en: {
+         "creates-client-title": "Create Client",
+         "creates-client-phone": "Insert Phone Number",
+      },
+      ar: {
+         "creates-client-title": "اضافه عميل",
+         "creates-client-phone": "ادخل رقم الهاتف",
+      },
+   },
+};
+
+const balances = {
+   balances: {
+      en: {
+         "balances-buy-title": "By Purchase Salary",
+         "balances-sale-title": "By Selling Salary",
+         "balances-table-footer": "Total Balances",
+      },
+      ar: {
+         "balances-buy-title": "حسب سعر الشراء",
+         "balances-sale-title": "حسب سعر البيع",
+         "balances-table-footer": "اجمالي الارصده",
+      },
+   },
+   locker: {
+      en: {
+         "locker-switch-withdraw": "Withdraw From Locker",
+         "locker-switch-deposit": "Deposit To Locker",
+      },
+      ar: {
+         "locker-switch-withdraw": "سحب من الخزنة",
+         "locker-switch-deposit": "ايداع الي الخزنة",
+      },
+   },
+   todayReset: {
+      en: {
+         "todayReset-title-buy": "Today's Purchases",
+         "todayReset-title-sale": "Today's Sales",
+         "todayReset-nobuys": "No Purchases Was Found Today",
+         "todayReset-nosales": "No Sales Was Found Today",
+      },
+      ar: {
+         "todayReset-title-buy": "مشتريات اليوم",
+         "todayReset-title-sale": "مبيعات اليوم",
+         "todayReset-nobuys": "لا يوجد مشتريات اليوم",
+         "todayReset-nosales": "لا يوجد مبيعات اليوم",
+      },
+   },
+};
+
+const analysis = {
+   productMovement: {
+      en: {
+         "productMovement-title": "Product Purchases / Sales Movement",
+         "productMovement-purchase-title": "Purchases Movement",
+         "productMovement-purchase-word": "Purchases",
+         "productMovement-sales-title": "Sales Movement",
+         "productMovement-sales-word": "Sales",
+         "productMovement-subTitle": "You Can Hover To See It's Count",
+      },
+      ar: {
+         "productMovement-title": "حركة شراء / بيع المنتج",
+         "productMovement-purchase-title": "حركة المشتريات",
+         "productMovement-purchase-word": "المشتريات",
+         "productMovement-sales-title": "حركة المبيعات",
+         "productMovement-sales-word": "المبيعات",
+         "productMovement-subTitle": "يمكن لمس الخط لرؤيه العدد الخاص به الحالي",
+      },
+   },
+   sales: {
+      en: {
+         "sales-title": "Sales Statistics",
+         "sales-of-year": "Sales Of Year",
+         "sales-of-month": "Sales Of Month",
+         "sales-subTitle": "You Can Hover To See It's Count",
+      },
+      ar: {
+         "sales-title": "احصائيات المبيعات",
+         "sales-of-year": "المبيعات خلال العام",
+         "sales-of-month": "المبيعات خلال الشهر",
+         "sales-subTitle": "يمكن لمس الخط لرؤيه العدد الخاص به الحالي",
+      },
+   },
+   profits: {
+      en: {
+         "profits-title": "Profits Statistics",
+         "profits-subTitle": "You Can Hover To See It's Count",
+         "profits-of-year": "Profits Of The Year",
+         "profits-word": "Profits",
+      },
+      ar: {
+         "profits-title": "احصائيات الارباح",
+         "profits-subTitle": "يمكن لمس الخط لرؤيه العدد الخاص به الحالي",
+         "profits-of-year": "الارباح خلال العام",
+         "profits-word": "الارباح",
+      },
+   },
+   insufficients: {
+      en: {
+         "insufficients-title": "Insufficients Products",
+         "insufficients-from-store": "Store",
+         "insufficients-from-shop": "Shop",
+         "insufficients-no-result": "There Are No Search Results",
+      },
+      ar: {
+         "insufficients-title": "عرض النواقص",
+         "insufficients-from-store": "نواقص المخزن",
+         "insufficients-from-shop": "نواقص المحل",
+         "insufficients-no-result": "لا يوجد نواقص",
+      },
+   },
+   leastSelling: {
+      en: {
+         "leastSelling-title": "Least Selling Products",
+         "leastSelling-no-result": "There Are No Search Results",
+      },
+      ar: {
+         "leastSelling-title": "المنتجات الاقل مبيعاً",
+         "leastSelling-no-result": "لا يوجد نتائج بحث",
+      },
+   },
+   bestSelling: {
+      en: {
+         "bestSelling-month-title": "The Most Popular Products Of The Month",
+         "bestSelling-year-title": "The Most Popular Products Of The Year",
+         "bestSelling-last-month": "Last Month",
+         "bestSelling-last-year": "Last Year",
+         "bestSelling-choose-year": "Choose Year",
+         "bestSelling-no-result": "There Are No Search Results",
+      },
+      ar: {
+         "bestSelling-month-title": "المنتجات الاكثر مبيعاً في الشهر",
+         "bestSelling-year-title": "المنتجات الاكثر مبيعاً في العام",
+         "bestSelling-year-title": "المنتجات الاكثر مبيعاً في الشهر",
+         "bestSelling-last-month": "اخر شهر",
+         "bestSelling-last-year": "اخر عام",
+         "bestSelling-choose-year": "اختر العام",
+         "bestSelling-no-result": "لا يوجد نتائج بحث",
+      },
+   },
+};
+
+const bills = {
+   show: {
+      en: {
+         "showBill-client": "Client: ",
+         "showBill-phone": "Phone: ",
+         "showBill-table-footer": "Total Bill Cost",
+         "showBill-pending-cost": "Remaining Cost",
+         "showBill-paid-cost": "Paid Cost",
+         "showBill-discount": "Discount",
+         "showBill-address": "Dawly Center for Auto Spare Parts",
+         "showBill-subAddress": "Al-Amriya - 365 street - in front of New hospital",
+      },
+      ar: {
+         "showBill-client": "العميل: ",
+         "showBill-phone": "رقم الهاتف: ",
+         "showBill-table-footer": "اجمالي سعر الفاتورة",
+         "showBill-pending-cost": "المبلغ المتبقي",
+         "showBill-paid-cost": "المبلغ المدفوع",
+         "showBill-discount": "الخصم",
+         "showBill-address": "المركز الدولي لقطع غيار السيارات",
+         "showBill-subAddress": "العمرية - شارع 365 - امام المستشفي الجديدة",
+      },
+   },
+   update: {
+      en: {
+         "updateBill-title": "Update Bill",
+         "updateBill-submit": "Update",
+         "updateBill-client": "Client:",
+         "updateBill-phone": "Phone Number:",
+         "updateBill-place": "Sold From:",
+         "updateBill-date": "Date:",
+         "updateBill-type": "Bill Type:",
+         "updateBill-type-completed": "Completed",
+         "updateBill-type-notCompleted": "Not Completed",
+         "updateBill-discount": "Discount",
+         "updateBill-add-btn": "Insert Product",
+         "updateBill-updateWidget-title": "Update Product",
+         "updateBill-newWidget-title": "Insert Product",
+         "updateBill-newWidget-buyPrice": "Purchase Price",
+         "updateBill-newWidget-salePrice": "Sale Price",
+         "updateBill-newWidget-btn": "Insert",
+      },
+      ar: {
+         "updateBill-title": "تعديل الفاتورة",
+         "updateBill-submit": "تعديل",
+         "updateBill-client": "العميل:",
+         "updateBill-phone": "رقم الهاتف:",
+         "updateBill-place": "مصدر الشراء:",
+         "updateBill-date": "التاريخ:",
+         "updateBill-type": "نوع الفاتورة",
+         "updateBill-type-completed": "منتهية",
+         "updateBill-type-notCompleted": "غير منتهية",
+         "updateBill-discount": "الخصم",
+         "updateBill-add-btn": "اضافه منتج جديد",
+         "updateBill-updateWidget-title": "تعديل المنتج",
+         "updateBill-newWidget-title": "اضافه منتج",
+         "updateBill-newWidget-buyPrice": "سعر الشراء",
+         "updateBill-newWidget-salePrice": "سعر البيع",
+         "updateBill-newWidget-btn": "اضافه",
+      },
+   },
+};
+
+export const EnglishTranslation = Object.assign(
+   general.en,
+   home.en,
+   profile.en,
+   statements.en,
+   configrator.en,
+
+   accounts.login.en,
+   accounts.register.en,
+
+   navbar.logo.en,
+   navbar.user.en,
+   navbar.links.en,
+
+   show.shop_store.en,
+   show.locker_transactions.en,
+   show.clients.en,
+   show.bills.en,
+
+   creates.category.en,
+   creates.company.en,
+   creates.product.en,
+   creates.supplier.en,
+   creates.client.en,
+
+   balances.balances.en,
+   balances.locker.en,
+   balances.todayReset.en,
+
+   analysis.productMovement.en,
+   analysis.sales.en,
+   analysis.profits.en,
+   analysis.insufficients.en,
+   analysis.leastSelling.en,
+   analysis.bestSelling.en,
+
+   bills.show.en,
+   bills.update.en,
+
+   table.en,
+);
+
+export const ArabicTranslation = Object.assign(
+   general.ar,
+   home.ar,
+   profile.ar,
+   statements.ar,
+   configrator.ar,
+
+   accounts.login.ar,
+   accounts.register.ar,
+
+   navbar.logo.ar,
+   navbar.user.ar,
+   navbar.links.ar,
+
+   show.shop_store.ar,
+   show.locker_transactions.ar,
+   show.clients.ar,
+   show.bills.ar,
+
+   creates.category.ar,
+   creates.company.ar,
+   creates.product.ar,
+   creates.supplier.ar,
+   creates.client.ar,
+
+   balances.balances.ar,
+   balances.locker.ar,
+   balances.todayReset.ar,
+
+   analysis.productMovement.ar,
+   analysis.sales.ar,
+   analysis.profits.ar,
+   analysis.insufficients.ar,
+   analysis.leastSelling.ar,
+   analysis.bestSelling.ar,
+
+   bills.show.ar,
+   bills.update.ar,
+
+   table.ar,
+);

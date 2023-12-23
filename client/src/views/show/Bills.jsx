@@ -3,8 +3,11 @@ import { Fragment, useEffect, useState } from "react";
 import { BillPage } from "@/components/bills";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
+import { useTranslation } from "react-i18next";
 
 export const ShowBills = () => {
+   const [text] = useTranslation();
+
    const { data: pay, loading: pLoading, error: pError, isSubmitted: IsSubmitted, refetch: pRefetch } = useAxios();
    const { data, loading, error, isSubmitted, refetch } = useAxios();
 
@@ -30,7 +33,7 @@ export const ShowBills = () => {
          <Loading loading={loading} isSubmitted={isSubmitted} error={error} data={data} />
 
          <BillPage
-            head="عرض الفواتير"
+            head={text("bills-title")}
             data={data?.data}
             pagination={data?.pagination}
             activePage={activePage}

@@ -1,8 +1,13 @@
+import { Selectbox } from "@/components/public";
 import { Button, Drawer, IconButton, Typography } from "@material-tailwind/react";
 import { useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const Configrator = () => {
+   const [text, i18next] = useTranslation();
+
    const [open, setOpen] = useState(false);
+   const [lang, setLang] = useState(localStorage.getItem("lang") || "ar");
 
    useLayoutEffect(() => {
       const mode = localStorage.getItem("mode") || "light";
@@ -12,11 +17,24 @@ export const Configrator = () => {
       document.querySelector("html").setAttribute("class", mode);
    }, []);
 
+   useLayoutEffect(() => {
+      i18next.changeLanguage(lang);
+      localStorage.setItem("lang", lang);
+      document.querySelector("html").setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+   }, [lang]);
+
    const openDrawer = () => {
       setOpen(true);
    };
+
    const closeDrawer = () => {
       setOpen(false);
+   };
+
+   const handleChangeLanguage = (value) => {
+      if (i18next.language === "en") setLang(() => (value === "English" ? "en" : "ar"));
+      if (i18next.language === "ar") setLang(() => (value === "انجليزي" ? "en" : "ar"));
+      window.location.reload();
    };
 
    const handleChangeMode = (mode) => {
@@ -53,70 +71,91 @@ export const Configrator = () => {
             color="deep-purple"
             variant="gradient"
             size="lg"
-            className="group !fixed bottom-5 right-5 rounded-full shadow-md hover:scale-110 dark:shadow-white print:hidden md:bottom-10 md:right-10"
+            className={`group !fixed bottom-5 ${
+               i18next.language === "en" ? "right-5 md:right-10" : "left-5 md:left-10"
+            } rounded-full shadow-md hover:scale-125 dark:shadow-white print:hidden md:bottom-10`}
             onClick={openDrawer}
          >
             <i className="fa fa-gear fa-spin text-2xl text-white group-hover:text-white" />
          </IconButton>
 
-         <Drawer open={open} className="bg-gradient p-5" placement="right" onClose={closeDrawer}>
-            <div className="mb-6 flex items-center justify-between">
-               <Typography variant="h5" className="text-dimWhite">
-                  اعدادات العرض
+         <Drawer
+            placement={i18next.language === "en" ? "left" : "right"}
+            open={open}
+            className="bg-gradient flex-between flex-col overflow-y-auto p-5"
+            onClose={closeDrawer}
+         >
+            <div className="flex items-center justify-between">
+               <Typography variant="h3" className="text-black dark:text-white">
+                  {text("configrator-drawer-title")}
                </Typography>
-               <IconButton variant="text" color="deep-purple" onClick={closeDrawer} className="group">
-                  <i className="fa fa-times text-2xl group-hover:text-primary" />
-               </IconButton>
             </div>
 
-            <div className="colors">
-               <Typography variant="h3" color="deep-purple" className="mb-8 text-3xl">
-                  اختر الثيم
+            <div className="colors mt-8">
+               <Typography variant="h3" color="deep-purple" className="text-2xl leading-normal">
+                  {text("configrator-theme-title")}
                </Typography>
-               <Typography className="mb-8 dark:text-blue-gray-500">
-                  يمكنك اختيار نوع العرض الذي تفضله من هنا
+               <Typography className="mb-2 text-base leading-normal text-dimWhite">
+                  {text("configrator-subTitle")}
                </Typography>
                <div className="flex-between flex-wrap">
                   {colors.map(({ theme, from, to, hover }, i) => (
-                     <IconButton
+                     <Button
                         key={i}
                         variant="text"
                         color="deep-purple"
                         onClick={() => handleChangeTheme(theme)}
-                        className={`group hover:scale-125 ${hover}`}
+                        className={`group p-3 hover:scale-125 ${hover}`}
                      >
                         <div
-                           className={`h-5 w-5 cursor-pointer rounded-full border border-solid border-black bg-gradient-to-br group-hover:scale-125 group-hover:brightness-125 ${from} ${to}`}
+                           className={`h-6 w-6 cursor-pointer rounded-full border border-solid border-black bg-gradient-to-br group-hover:scale-125 group-hover:brightness-125 ltr:h-7 ltr:w-7 ${from} ${to}`}
                         />
-                     </IconButton>
+                     </Button>
                   ))}
                </div>
             </div>
 
-            <div className="mode">
-               <Typography variant="h3" color="deep-purple" className="my-8 text-3xl">
-                  اختر المود
+            <div className="mode mt-8">
+               <Typography variant="h3" color="deep-purple" className="text-2xl leading-normal">
+                  {text("configrator-mode-title")}
                </Typography>
-               <Typography className="mb-8 dark:text-blue-gray-500">
-                  يمكنك اختيار نوع المود الذي تفضله من هنا
+               <Typography className="mb-2 text-base leading-normal text-dimWhite">
+                  {text("configrator-subTitle")}
                </Typography>
-               <div className="flex-between">
+               <div className="flex-between mt-8">
                   <Button
+                     size="lg"
                      variant="gradient"
+                     className="hover:brightness-125 ltr:text-base"
                      onClick={() => handleChangeMode("dark")}
-                     className="hover:brightness-125"
                   >
                      Dark Mode
                   </Button>
                   <Button
+                     size="lg"
                      variant="outlined"
                      color="deep-purple"
-                     className="border-solid hover:brightness-125"
+                     className="border-solid hover:brightness-125 ltr:text-base"
                      onClick={() => handleChangeMode("light")}
                   >
                      Light Mode
                   </Button>
                </div>
+            </div>
+
+            <div className="language mt-8">
+               <Typography variant="h3" color="deep-purple" className="text-2xl leading-normal">
+                  {text("configrator-display-language")}
+               </Typography>
+               <Typography className="mb-2 text-base leading-normal text-dimWhite">
+                  {text("configrator-subTitle")}
+               </Typography>
+               <Selectbox
+                  label={text("configrator-choose-language")}
+                  value={lang}
+                  options={[text("configrator-choose-language-ar"), text("configrator-choose-language-en")]}
+                  onChange={handleChangeLanguage}
+               />
             </div>
          </Drawer>
       </div>

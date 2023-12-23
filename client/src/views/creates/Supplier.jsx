@@ -2,6 +2,7 @@ import { TabPanel, TabsBody } from "@material-tailwind/react";
 import { Button, Typography, IconButton } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { filterSelection, getLists, getSuppliers, setSuppliers } from "@/redux/slices/products";
 import { Field, Form, MTDialog, Selectbox, Tabs } from "@/components/public";
@@ -9,6 +10,8 @@ import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
 export const AddSupplier = () => {
+   const [text, i18next] = useTranslation();
+
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const { loading: ccLoading, isSubmitted: ccIsSubmitted, refetch: ccRefetch } = useAxios();
 
@@ -81,35 +84,45 @@ export const AddSupplier = () => {
       dispatch(setSuppliers(formData));
    };
 
-   const tabsHeader = [
+   const tabsHeaderAr = [
       { name: "مندوب جديد", value: "new" },
       { name: "مندوب قديم", value: "old" },
+   ];
+
+   const tabsHeaderEn = [
+      { name: "New Supplier", value: "new" },
+      { name: "Old Supplier", value: "old" },
    ];
 
    return (
       <Form
          onSubmit={handleSubmitForm}
-         headerText="اضافه مندوب"
-         buttonText="انشاء"
+         headerText={text("creates-supplier-title")}
+         buttonText={text("creates-btn")}
          loading={(isSubmitted && !error) || loading}
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
-         <Tabs defaultValue="new" headers={tabsHeader}>
+         <Tabs defaultValue="new" headers={i18next.language === "en" ? tabsHeaderEn : tabsHeaderAr}>
             <TabsBody>
                <TabPanel value="new" className="min-h-[200px] overflow-y-auto">
                   <Field
-                     label="اسم المندوب"
+                     label={text("insertSupplier")}
                      name="supplier"
                      value={formData.supplier}
                      onChange={handleFieldChange}
                   />
-                  <Field label="رقم الهاتف" name="phone" value={formData.phone} onChange={handleFieldChange} />
+                  <Field
+                     label={text("creates-supplier-phone")}
+                     name="phone"
+                     value={formData.phone}
+                     onChange={handleFieldChange}
+                  />
                </TabPanel>
 
                <TabPanel value="old" className="min-h-[200px] overflow-y-auto">
                   <Selectbox
-                     label="اختر اسم المندوب"
+                     label={text("chooseSupplier")}
                      options={suppliers}
                      value={formData.supplier}
                      loading={!ccIsSubmitted && ccLoading}
@@ -140,18 +153,18 @@ export const AddSupplier = () => {
             onClick={handleOpenDialog}
          >
             <i className="fa fa-plus ml-2 text-primary group-hover:font-bold" />
-            <span>اضافه منتج</span>
+            <span>{text("creates-product-menu-btn")}</span>
          </Button>
 
          <MTDialog
-            headerText="اضافه منتج"
-            buttonText="اضافه"
+            headerText={text("creates-product-menu-btn")}
+            buttonText={text("insert")}
             open={openDialog}
             handler={handleOpenDialog}
             onSubmit={handleSubmitProduct}
          >
             <Selectbox
-               label="اختر اسم القسم"
+               label={text("chooseCategory")}
                options={categories}
                value={product.category}
                loading={!ccIsSubmitted && ccLoading}
@@ -161,7 +174,7 @@ export const AddSupplier = () => {
             <br />
 
             <Selectbox
-               label="اختر اسم الشركة"
+               label={text("chooseCompany")}
                options={companies}
                value={product.company}
                loading={!ccIsSubmitted && ccLoading}
@@ -171,7 +184,7 @@ export const AddSupplier = () => {
             <br />
 
             <Selectbox
-               label="اختر اسم المنتج"
+               label={text("chooseCategory")}
                value={product.name}
                loading={!ccIsSubmitted && ccLoading}
                onChange={(value) => handleSelectChange("name", value)}

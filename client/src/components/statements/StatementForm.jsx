@@ -1,15 +1,18 @@
 import { Button, IconButton } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { Field, Form, Selectbox } from "@/components/public";
 import { Table, Row, Col } from "@/components/table";
 import { Loading } from "@/layout/Loading";
 
-const TABLE_HEAD = ["", "#", "المنتج", "العدد", "السعر", "الاجمالي"];
+const TABLE_HEAD_AR = ["حذف", "#", "المنتج", "العدد", "السعر", "الاجمالي"];
+const TABLE_HEAD_EN = ["DEL", "#", "Product", "Count", "Price", "Total"];
 export const StatementForm = ({
    onSubmit,
-   text,
+   headerText,
+   buttonText,
    data,
    loading,
    error,
@@ -22,6 +25,7 @@ export const StatementForm = ({
    handleSelectChange,
    children,
 }) => {
+   const [text, i18next] = useTranslation();
    const { products } = useSelector(({ products }) => products);
    const [total, setTotal] = useState(0);
 
@@ -59,21 +63,21 @@ export const StatementForm = ({
    };
 
    return (
-      <Form onSubmit={onSubmit} headerText={text?.headerText} buttonText={text?.buttonText}>
+      <Form onSubmit={onSubmit} headerText={headerText} buttonText={buttonText}>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
          {children}
 
          <Selectbox
-            label="المكان"
-            value={formData.toStore ? "المخزن" : "المحل"}
-            options={["المخزن", "المحل"]}
-            onChange={(value) => setFormData((data) => ({ ...data, toStore: value === "المخزن" }))}
+            label={text("place")}
+            value={formData.toStore ? text("store") : text("shop")}
+            options={[text("store"), text("shop")]}
+            onChange={(value) => setFormData((data) => ({ ...data, toStore: value === text("store") }))}
          />
 
          <div className="w-full rounded-xl border border-solid px-2 md:px-4">
             <Selectbox
-               label="اختار اسم المنتج"
+               label={text("chooseProduct")}
                value={product.name}
                loading={!isSubmitted && loading}
                options={products?.map(({ name }) => name).filter((n) => n) || []}
@@ -83,7 +87,7 @@ export const StatementForm = ({
             <div className="flex-between flex-wrap sm:flex-nowrap">
                <Field
                   type="number"
-                  label="العدد"
+                  label={text("count")}
                   name="count"
                   value={product.count}
                   onChange={handleFieldChange}
@@ -91,7 +95,7 @@ export const StatementForm = ({
                />
                <Field
                   type="number"
-                  label="السعر"
+                  label={text("price")}
                   name="price"
                   value={product.price}
                   onChange={handleFieldChange}
@@ -104,8 +108,8 @@ export const StatementForm = ({
                className="mx-auto my-2 block py-2 text-base hover:brightness-125"
                onClick={handleAddField}
             >
-               <i className="fa fa-plus ml-2 text-base text-white hover:text-white" />
-               اضافه
+               {text("insert")}
+               <i className="fa fa-plus mx-2 text-base text-white hover:text-white" />
             </Button>
          </div>
 
@@ -115,7 +119,7 @@ export const StatementForm = ({
                min="0"
                name="discount"
                value={formData.discount}
-               label="الخصم"
+               label={text("discount")}
                onChange={handleFieldChange}
             />
             {isAdminPay ? (
@@ -124,7 +128,7 @@ export const StatementForm = ({
                   min="0"
                   name="adminPay"
                   value={formData.adminPay}
-                  label="المبلغ المدفوع"
+                  label={text("paidcost")}
                   onChange={handleFieldChange}
                />
             ) : (
@@ -133,13 +137,17 @@ export const StatementForm = ({
                   min="0"
                   name="clientPay"
                   value={formData.clientPay}
-                  label="المبلغ المحصل"
+                  label={text("recievedcost")}
                   onChange={handleFieldChange}
                />
             )}
          </div>
 
-         <Table headers={TABLE_HEAD} footerSpan={[3, 3]} total={total}>
+         <Table
+            headers={i18next.language === "en" ? TABLE_HEAD_EN : TABLE_HEAD_AR}
+            footerSpan={[3, 3]}
+            total={total}
+         >
             {formData.products.map(({ name, count, price }, i) => (
                <Row key={i} index={i}>
                   <Col>

@@ -5,18 +5,19 @@ import { links } from "@/constants/navbar";
 
 export const Desktop = () => {
    return (
-      <div className="hidden items-center justify-center print:!hidden lg:flex">
+      <div className="flex-center !hidden flex-wrap print:!hidden lg:!flex">
          {links.map(({ title, path, paths }, i) =>
             title ? (
                <Menu allowHover key={i}>
                   <MenuHandler>
                      <Button
-                        className="flex-start group px-2 text-base hover:brightness-125 md:text-xl lg:px-5"
+                        className="flex-start group px-2 !text-base hover:brightness-125 md:!text-xl lg:px-5"
                         variant="text"
+                        size="sm"
                         color="deep-purple"
                      >
-                        <p>{title}</p>
-                        <i className={`fa fa-chevron-down mt-3 group-hover:text-primary`} />
+                        <span>{title}</span>
+                        <i className="fa fa-chevron-down mt-3 group-hover:text-primary" />
                      </Button>
                   </MenuHandler>
 

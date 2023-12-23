@@ -1,6 +1,7 @@
 import { Button, IconButton, Typography } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { filterSelection, getLists, setProducts } from "@/redux/slices/products";
 import { Field, Form, MTDialog, Selectbox } from "@/components/public";
@@ -10,6 +11,8 @@ import { useAxios } from "@/hooks/useAxios";
 const formState = { category: "", company: "", products: [] };
 const productState = { name: "", minmax: { min: 5, max: 10 }, barcode: "" };
 export const AddProducts = () => {
+   const [text] = useTranslation();
+
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const { loading: ccLoading, isSubmitted: ccIsSubmitted, refetch: ccRefetch } = useAxios();
 
@@ -80,14 +83,14 @@ export const AddProducts = () => {
    return (
       <Form
          onSubmit={handleSubmitForm}
-         headerText="اضافه منتج"
-         buttonText="انشاء"
+         headerText={text("creates-product-title")}
+         buttonText={text("creates-btn")}
          loading={(isSubmitted && !error) || loading}
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
          <Selectbox
-            label="اختر اسم القسم..."
+            label={text("chooseCategory")}
             options={categories}
             loading={!ccIsSubmitted && ccLoading}
             value={formData.category}
@@ -95,7 +98,7 @@ export const AddProducts = () => {
          />
 
          <Selectbox
-            label="اختر اسم الشركة..."
+            label={text("chooseCompany")}
             options={companies}
             loading={!ccIsSubmitted && ccLoading}
             value={formData.company}
@@ -111,7 +114,7 @@ export const AddProducts = () => {
                         onClick={() => handleCancel(i)}
                      />
                   </IconButton>
-                  <span className="mr-3">{name}</span>
+                  <span className="mx-3">{name}</span>
                </Typography>
             ))}
          </div>
@@ -122,24 +125,34 @@ export const AddProducts = () => {
             color="deep-purple"
             onClick={handleOpenDialog}
          >
-            <i className="fa fa-plus ml-2 text-primary group-hover:font-bold" />
-            <span>اضافه منتج</span>
+            <i className="fa fa-plus mx-2 text-primary group-hover:font-bold" />
+            <span>{text("creates-product-menu-btn")}</span>
          </Button>
 
          <MTDialog
-            headerText="اضافه منتج"
-            buttonText="اضافه"
+            headerText={text("creates-product-menu-btn")}
+            buttonText={text("insert")}
             open={openDialog}
             handler={handleOpenDialog}
             onSubmit={handleSubmitProduct}
          >
-            <Field label="اسم المنتج" name="name" value={product.name} onChange={handleFieldChange} />
-            <Field label="الباركود" name="barcode" value={product.barcode} onChange={handleFieldChange} />
+            <Field
+               label={text("creates-product-menu-name")}
+               name="name"
+               value={product.name}
+               onChange={handleFieldChange}
+            />
+            <Field
+               label={text("creates-product-menu-barcode")}
+               name="barcode"
+               value={product.barcode}
+               onChange={handleFieldChange}
+            />
 
             <div className="flex-between flex-wrap overflow-hidden sm:flex-nowrap">
                <Field
                   type="number"
-                  label="الحد الادني"
+                  label={text("creates-product-menu-min")}
                   name="min"
                   min="0"
                   value={product.minmax?.min}
@@ -149,7 +162,7 @@ export const AddProducts = () => {
                <Field
                   type="number"
                   min="0"
-                  label="الحد المتوسط"
+                  label={text("creates-product-menu-max")}
                   name="max"
                   value={product.minmax?.max}
                   containerStyle="sm:!w-[50%]"

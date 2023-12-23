@@ -1,6 +1,7 @@
 import { Button, IconButton } from "@material-tailwind/react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Field, Form, MTDialog, Selectbox } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
@@ -9,7 +10,8 @@ import { Col, Row, Table } from "@/components/table";
 import { useDispatch, useSelector } from "react-redux";
 import { filterSelection, getLists } from "@/redux/slices/products";
 
-const TABLE_HEAD = ["التحكم", "المنتج", "العدد", "السعر", "الاجمالي"];
+const TABLE_HEAD_AR = ["التحكم", "المنتج", "العدد", "السعر", "الاجمالي"];
+const TABLE_HEAD_EN = ["Controll", "Product", "Count", "Price", "Total"];
 const formState = {
    client: "",
    toStore: false,
@@ -23,16 +25,18 @@ const formState = {
    deletedProducts: [],
 };
 export const UpdateBill = () => {
+   const [text, i18next] = useTranslation();
    const { billId } = useParams();
-   const { lists, categories, companies, products } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 
-   const [formData, setFormData] = useState(formState);
    const [product, setProduct] = useState({ _id: "", name: "", count: "", price: "" });
-   const [total, setTotal] = useState(0);
-   const [openDialog, setOpenDialog] = useState(false);
-   const [openAddDialog, setOpenAddDialog] = useState(false);
+   const [formData, setFormData] = useState(formState);
 
+   const [openAddDialog, setOpenAddDialog] = useState(false);
+   const [openDialog, setOpenDialog] = useState(false);
+   const [total, setTotal] = useState(0);
+
+   const { lists, categories, companies, products } = useSelector(({ products }) => products);
    const { data, loading, error, isSubmitted } = useAxios("get", `/bills/get-bill/${billId}`);
 
    const {
@@ -175,14 +179,14 @@ export const UpdateBill = () => {
       event.preventDefault();
       const { completed, date, phone, discount, ...form } = formData;
       const { data: update, isSubmitted, error } = await sendRefetch("put", `/bills/update-bill/${billId}`, form);
-      // if (isSubmitted && (error || update?.warn)) setTimeout(() => window.location.reload(), 2000);
+      if (isSubmitted && (error || update?.warn)) setTimeout(() => window.location.reload(), 4000);
    };
 
    return (
       <Form
          onSubmit={handleSubmit}
-         headerText="تعديل فاتورة"
-         buttonText="تاكيد"
+         headerText={text("updateBill-title")}
+         buttonText={text("updateBill-submit")}
          loading={(sendIsSubmitted && !sendError && !sendData?.warn) || sendLoading}
       >
          <Loading
@@ -195,31 +199,49 @@ export const UpdateBill = () => {
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
          <div className="flex-between flex-wrap sm:flex-nowrap">
-            <Field label="اسم العميل" value={formData?.client} disabled />
-            <Field label="رقم الهاتف" value={formData?.phone} disabled />
+            <Field label={text("updateBill-client")} value={formData?.client} disabled />
+            <Field label={text("updateBill-phone")} value={formData?.phone} disabled />
          </div>
 
          <div className="flex-between flex-wrap sm:flex-nowrap">
-            <Field label="مصدر الشراء" value={formData?.toStore === "store" ? "المخزن" : "المحل"} disabled />
-            <Field label="التاريخ" value={new Date(formData?.date || "").toLocaleDateString()} disabled />
+            <Field
+               label={text("updateBill-place")}
+               value={formData?.toStore === "store" ? text("store") : text("shop")}
+               disabled
+            />
+            <Field
+               label={text("updateBill-date")}
+               value={new Date(formData?.date || "").toLocaleDateString()}
+               disabled
+            />
          </div>
 
          <div className="flex-between flex-wrap sm:flex-nowrap">
-            <Field label="الفاتورة" value={formData?.completed ? "منتهية" : "غير منتهية"} disabled />
-            <Field label="الخصم" value={formData?.discount} disabled />
+            <Field
+               label={text("updateBill-type")}
+               value={
+                  formData?.completed ? text("updateBill-type-completed") : text("updateBill-type-notCompleted")
+               }
+               disabled
+            />
+            <Field label={text("updateBill-discount")} value={formData?.discount} disabled />
          </div>
 
          <Button
             variant="gradient"
             color="deep-purple"
-            className="mx-auto w-fit pb-5 text-xl hover:brightness-125"
+            className="mx-auto w-fit pb-5 text-xl hover:brightness-125 ltr:text-base"
             onClick={handleAddDialog}
          >
-            <i className="fa fa-plus ml-2 text-white hover:text-white" />
-            اضافه منتج جديد
+            <i className="fa fa-plus mx-2 text-white hover:text-white" />
+            {text("updateBill-add-btn")}
          </Button>
 
-         <Table headers={TABLE_HEAD} footerSpan={[3, 3]} total={total}>
+         <Table
+            headers={i18next.language === "en" ? TABLE_HEAD_EN : TABLE_HEAD_AR}
+            footerSpan={[3, 3]}
+            total={total}
+         >
             {formData.products.map(({ _id, name, count, price }, i) => (
                <Row key={i} index={i}>
                   <Col>
@@ -245,17 +267,17 @@ export const UpdateBill = () => {
 
          {/* Update Product */}
          <MTDialog
-            headerText="تعديل منتج"
-            buttonText="تعديل"
+            headerText={text("updateBill-updateWidget-title")}
+            buttonText={text("updateBill-submit")}
             open={openDialog}
             handler={handleDialog}
             onSubmit={handleEditProduct}
          >
-            <Field label="اسم المنتج" name="name" value={product.name} onChange={handleFieldChange} />
+            <Field label={text("insertProduct")} name="name" value={product.name} onChange={handleFieldChange} />
 
             <Field
                type="number"
-               label="العدد"
+               label={text("count")}
                name="count"
                min="0"
                value={product.count}
@@ -264,7 +286,7 @@ export const UpdateBill = () => {
 
             <Field
                type="number"
-               label="السعر"
+               label={text("price")}
                name="price"
                min="0"
                value={product.price}
@@ -274,14 +296,14 @@ export const UpdateBill = () => {
 
          {/* Add Product */}
          <MTDialog
-            headerText="اضافه منتج"
-            buttonText="اضافه"
+            headerText={text("updateBill-newWidget-title")}
+            buttonText={text("insert")}
             open={openAddDialog}
             handler={handleAddDialog}
             onSubmit={handleAddField}
          >
             <Selectbox
-               label="اختر اسم القسم"
+               label={text("chooseCategory")}
                options={categories}
                loading={!pIsSubmitted && pLoading}
                value={product?.category}
@@ -289,7 +311,7 @@ export const UpdateBill = () => {
             />
 
             <Selectbox
-               label="اختر اسم الشركة"
+               label={text("chooseCompany")}
                options={companies}
                loading={!pIsSubmitted && pLoading}
                value={product?.company}
@@ -297,7 +319,7 @@ export const UpdateBill = () => {
             />
 
             <Selectbox
-               label="اختر اسم المنتج"
+               label={text("chooseProduct")}
                options={products?.map((item) => item.name) || []}
                loading={!pIsSubmitted && pLoading}
                value={product?.name}
@@ -306,7 +328,7 @@ export const UpdateBill = () => {
 
             <Field
                type="number"
-               label="العدد"
+               label={text("count")}
                name="count"
                min="0"
                value={product.count}
@@ -315,7 +337,13 @@ export const UpdateBill = () => {
 
             <Field
                type="number"
-               label={formData?.type === "bill" ? "سعر البيع" : formData?.type === "debt" ? "سعر الشراء" : ""}
+               label={
+                  formData?.type === "bill"
+                     ? text("updateBill-newWidget-salePrice")
+                     : formData?.type === "debt"
+                       ? text("updateBill-newWidget-buyPrice")
+                       : ""
+               }
                name="price"
                min="0"
                value={product.price}

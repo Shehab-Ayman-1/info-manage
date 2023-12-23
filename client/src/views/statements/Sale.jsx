@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { getLists, filterSelection } from "@/redux/slices/products";
 import { getClients } from "@/redux/slices/bills";
@@ -15,6 +16,8 @@ const formState = {
    products: [],
 };
 export const SaleStatement = () => {
+   const [text] = useTranslation();
+
    const [formData, setFormData] = useState(formState);
    const [product, setProduct] = useState({
       category: "",
@@ -93,7 +96,8 @@ export const SaleStatement = () => {
    return (
       <StatementForm
          onSubmit={handleSubmit}
-         text={{ headerText: "كشف حساب", buttonText: "اتمام البيع" }}
+         headerText={text("statement-sale-title")}
+         buttonText={text("statement-sale-btn")}
          data={data}
          loading={loading}
          error={error}
@@ -106,21 +110,21 @@ export const SaleStatement = () => {
          handleSelectChange={handleSelectChange}
       >
          <Selectbox
-            label="اختار اسم القسم"
+            label={text("chooseCategory")}
             options={categories}
             value={product.category}
             loading={!ccIsSubmitted && ccLoading}
             onChange={(value) => handleSelectChange("category", value)}
          />
          <Selectbox
-            label="اختار اسم الشركة"
+            label={text("chooseCompany")}
             options={companies}
             value={product.company}
             loading={!ccIsSubmitted && ccLoading}
             onChange={(value) => handleSelectChange("company", value)}
          />
          <Selectbox
-            label="اختار اسم العميل"
+            label={text("chooseClient")}
             options={clients}
             value={formData.client}
             loading={!ccIsSubmitted && ccLoading}

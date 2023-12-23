@@ -1,10 +1,13 @@
 import { Avatar, Menu, MenuHandler, MenuItem, MenuList, Typography } from "@material-tailwind/react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { userLogo } from "@/assets";
 
 export const User = () => {
+   const [text] = useTranslation();
+
    const { user } = useSelector(({ users }) => users);
    const navigate = useNavigate();
 
@@ -49,7 +52,7 @@ export const User = () => {
             >
                <i className="fas fa-sign-in-alt text-xl group-hover:text-primary" />
                <Typography variant="paragraph" className="text-xl font-bold group-hover:text-primary">
-                  تسجيل حساب اخر
+                  {text("sign-in")}
                </Typography>
             </MenuItem>
 
@@ -59,7 +62,7 @@ export const User = () => {
             >
                <i className="fas fa-user-plus text-xl group-hover:text-primary" />
                <Typography variant="paragraph" className="text-xl font-bold group-hover:text-primary">
-                  انشاء حساب جديد
+                  {text("sign-up")}
                </Typography>
             </MenuItem>
 
@@ -68,7 +71,7 @@ export const User = () => {
             <MenuItem className="flex-start group gap-2 hover:!bg-dimPurple" onClick={handleSignout}>
                <i className="fas fa-sign-out-alt text-xl group-hover:text-primary" />
                <Typography variant="paragraph" className="text-xl font-bold group-hover:text-primary">
-                  تسجيل الخروج
+                  {text("sign-out")}
                </Typography>
             </MenuItem>
          </MenuList>

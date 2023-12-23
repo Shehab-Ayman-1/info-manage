@@ -1,14 +1,18 @@
 import { Button, Typography } from "@material-tailwind/react";
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { Col, Row, Table } from "@/components/table";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
-const TABLE_HEAD = ["#", "المنتج", "العدد", "السعر", "الاجمالي"];
+const TABLE_HEAD_AR = ["#", "المنتج", "العدد", "السعر", "الاجمالي"];
+const TABLE_HEAD_EN = ["#", "Product", "Count", "Price", "Total"];
 export const ShowBill = () => {
    const { id } = useParams();
+   const [text, i18next] = useTranslation();
+
    const { data, loading, error, isSubmitted } = useAxios("get", `/bills/get-bill/${id}`);
    const [total, setTotal] = useState(0);
 
@@ -28,28 +32,28 @@ export const ShowBill = () => {
             }`}
          >
             <Typography variant="h3" className="whitespace-nowrap text-xl text-dimWhite md:text-2xl">
-               العميل: {data?.client || "----"}
+               {text("showBill-client")}: {data?.client || "----"}
             </Typography>
             <Typography variant="h3" className="whitespace-nowrap text-xl text-dimWhite md:text-2xl">
-               رقم الهاتف: {data?.phone || "----"}
+               {text("showBill-phone")}: {data?.phone || "----"}
             </Typography>
          </div>
 
          <Button
             variant="gradient"
             color="deep-purple"
-            className={`mx-auto mb-5 w-fit text-base print:hidden md:text-xl ${
+            className={`mx-auto mb-5 w-fit pb-5 text-base hover:brightness-125 ltr:pb-3 print:hidden md:text-xl ${
                loading || (isSubmitted && error) ? "hidden" : ""
             } `}
             onClick={() => window.print()}
          >
-            طباعه الفاتورة
+            {text("print")}
          </Button>
 
          <Table
-            headers={TABLE_HEAD}
+            headers={i18next.language === "en" ? TABLE_HEAD_EN : TABLE_HEAD_AR}
             tableStyle={loading || (isSubmitted && error) ? "hidden" : ""}
-            footerTitle="سعر الفاتورة"
+            footerTitle={text("showBill-table-footer")}
             footerSpan={[3, 3]}
             total={total}
          >
@@ -70,22 +74,23 @@ export const ShowBill = () => {
             }`}
          >
             <Typography variant="h3" className="whitespace-nowrap text-xl text-dimWhite md:text-2xl">
-               الخصم: {data?.pay.discount || 0}
+               {text("showBill-discount")}: {data?.pay.discount || 0}
             </Typography>
             <Typography variant="h3" className="whitespace-nowrap text-xl text-dimWhite md:text-2xl">
-               المبلغ المدفوع: {data?.pay.value || 0}
+               {text("showBill-paid-cost")}: {data?.pay.value || 0}
             </Typography>
             <Typography variant="h3" className="whitespace-nowrap text-xl text-dimWhite md:text-2xl">
-               المبلغ المتبقي: {(total - +data?.pay.value - +data?.pay.discount).toLocaleString() || 0}
+               {text("showBill-pending-cost")}:{" "}
+               {(total - +data?.pay.value - +data?.pay.discount).toLocaleString() || 0}
             </Typography>
          </div>
 
          <div className={loading || (isSubmitted && error) ? "hidden" : "text-center"}>
             <Typography variant="h3" className="text-xl text-dimWhite md:text-2xl">
-               المركز الدولي لقطع غيار السيارات
+               {text("showBill-address")}
             </Typography>
             <Typography variant="small" className="text-dimWhite">
-               العمرية - شارع مش عارف ايه - امام مستشفي مش عارف ايه
+               {text("showBill-subAddress")}
             </Typography>
          </div>
       </Fragment>

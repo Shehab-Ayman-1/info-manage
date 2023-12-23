@@ -18,6 +18,9 @@ import { ThemeProvider } from "@material-tailwind/react";
 import "@/assets/sass/global.scss";
 import "@/assets/fonts/fontAwasome.css";
 
+// i18next
+import "@/constants/i18next";
+
 if (import.meta.env.MODE === "production") inject();
 if (import.meta.env.MODE === "production") disableReactDevTools();
 

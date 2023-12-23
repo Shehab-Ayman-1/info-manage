@@ -17,7 +17,7 @@ export const MTDialog = ({
          className="bg-gradient max-h-[80vh] overflow-y-auto shadow-sp"
       >
          <DialogHeader className="flex-between">
-            <Typography variant="h2" color="deep-purple">
+            <Typography variant="h3" color="deep-purple">
                {headerText}
             </Typography>
             <i className="fa fa-times text-2xl" onClick={handler} />
@@ -28,7 +28,7 @@ export const MTDialog = ({
          <DialogFooter>
             <Button
                color="deep-purple"
-               className="text-xl hover:brightness-125"
+               className="text-base hover:brightness-125 md:text-xl"
                disabled={loading}
                fullWidth
                onClick={onSubmit}

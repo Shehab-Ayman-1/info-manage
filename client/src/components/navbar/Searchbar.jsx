@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSearchList } from "@/redux/slices/products";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
+import { useTranslation } from "react-i18next";
 
 export const Searchbar = ({ openSearchbar, setOpenSearchbar }) => {
+   const [text] = useTranslation();
    const { searchList } = useSelector(({ products }) => products);
    const { data, loading, isSubmitted, refetch } = useAxios();
 
@@ -53,7 +55,7 @@ export const Searchbar = ({ openSearchbar, setOpenSearchbar }) => {
 
    return (
       <Card
-         className={`fixed left-1/2 top-36 w-full max-w-2xl -translate-x-1/2 bg-transparent shadow-none transition-[2s] ${
+         className={`fixed left-1/2 top-36 w-full max-w-2xl -translate-x-1/2 bg-transparent shadow-none ${
             openSearchbar ? "" : "hidden"
          }`}
       >
@@ -62,11 +64,11 @@ export const Searchbar = ({ openSearchbar, setOpenSearchbar }) => {
                open ? `rounded-b-none` : ``
             }`}
          >
-            <i className="fa fa-search block pr-3 text-xl md:text-2xl" />
+            <i className="fa fa-search block px-3 text-xl md:text-2xl" />
             <input
                type="search"
-               placeholder="البحث...."
-               className="w-full bg-transparent p-3 text-base sm:text-xl md:p-5 md:text-2xl"
+               placeholder={text("search")}
+               className="w-full bg-transparent py-3 text-base sm:text-xl md:py-5 md:text-2xl"
                onChange={handleChange}
             />
          </CardHeader>

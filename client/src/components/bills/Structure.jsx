@@ -1,6 +1,7 @@
 import { Card, IconButton, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Field, MTDialog, PageHead, Pagination } from "@/components/public";
 import { Loading } from "@/layout/Loading";
@@ -20,6 +21,7 @@ export const BillPage = ({
    loading,
    error,
 }) => {
+   const [text] = useTranslation();
    const [filterResult, setFilterResult] = useState(null);
    const [openDialog, setOpenDialog] = useState(false);
    const [payment, setPayment] = useState(paymentState);
@@ -160,8 +162,8 @@ export const BillPage = ({
          </Typography>
 
          <MTDialog
-            buttonText="دفع"
-            headerText="دفع فاتورة"
+            buttonText={text("bills-widget-btn")}
+            headerText={text("bills-widget-title")}
             open={openDialog}
             loading={loading || +payment?.billCost - +payment?.pay.value - +payment?.pay.discount === 0}
             handler={handleOpenDialog}
@@ -169,22 +171,22 @@ export const BillPage = ({
          >
             <div className="">
                <Typography variant="h3" className="flex-between text-xl text-dimWhite md:text-3xl">
-                  <span>تكلفه الفاتورة:</span>
+                  <span>{text("bills-widget-total-cost")}</span>
                   <span>{payment?.billCost}</span>
                </Typography>
                <Typography variant="h3" className="flex-between text-xl text-dimWhite md:text-3xl">
-                  <span>الخصم:</span>
+                  <span>{text("bills-widget-discount")}</span>
                   <span>{payment?.pay.discount}</span>
                </Typography>
                <Typography variant="h3" className="flex-between text-xl text-dimWhite md:text-3xl">
-                  <span>المبلغ المتبقي:</span>
+                  <span>{text("bills-widget-pending-cost")}</span>
                   <span>{+payment?.billCost - +payment?.pay.value - +payment?.pay.discount}</span>
                </Typography>
             </div>
 
             <Field
                type="number"
-               label="المبلغ المرد دفعة"
+               label={text("bills-widget-input")}
                value={payment?.newValue}
                onChange={(event) => setPayment((payment) => ({ ...payment, newValue: event.target?.value }))}
             />

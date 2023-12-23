@@ -1,6 +1,7 @@
 import { Typography } from "@material-tailwind/react";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { PageHead, Selectbox } from "@/components/public";
 import { getSuppliers } from "@/redux/slices/products";
@@ -8,8 +9,11 @@ import { Col, Row, Table } from "@/components/table";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
-const TABLE_HEAD = ["#", "المنتج", "السعر", "العدد الحالي", "العدد الناقص", "الاجمالي"];
+const TABLE_HEAD_AR = ["#", "المنتج", "السعر", "العدد الحالي", "العدد الناقص", "الاجمالي"];
+const TABLE_HEAD_EN = ["#", "Product", "Price", "Current Count", "Needed Count", "Total"];
 export const AnalysisInsufficients = () => {
+   const [text, i18next] = useTranslation();
+
    const { suppliers } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 
@@ -45,25 +49,29 @@ export const AnalysisInsufficients = () => {
       <Fragment>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <PageHead text="عرض النواقص" />
+         <PageHead text={text("insufficients-title")} />
 
          <div className="flex-between my-5 flex-col px-4 sm:flex-row">
             <Selectbox
-               label="اختار اسم المندوب"
+               label={text("supplier")}
                options={suppliers}
                value={supplier}
                loading={!sIsSubmitted && sLoading}
                onChange={(value) => setSupplier(value)}
             />
             <Selectbox
-               label="المكان"
-               options={["نواقص المحل", "نواقص المخزن"]}
-               value={isStore ? "نواقص المخزن" : "نواقص المحل"}
-               onChange={(value) => setIsStore(value === "نواقص المخزن")}
+               label={text("place")}
+               options={[text("insufficients-from-store"), text("insufficients-from-shop")]}
+               value={isStore ? text("insufficients-from-store") : text("insufficients-from-shop")}
+               onChange={(value) => setIsStore(value === text("insufficients-from-store"))}
             />
          </div>
 
-         <Table headers={TABLE_HEAD} footerSpan={[3, 3]} total={total}>
+         <Table
+            headers={i18next.language === "en" ? TABLE_HEAD_EN : TABLE_HEAD_AR}
+            footerSpan={[3, 3]}
+            total={total}
+         >
             {data?.map(({ name, price, count }, i) => (
                <Row key={i} index={i}>
                   <Col>{i + 1}</Col>
@@ -77,8 +85,8 @@ export const AnalysisInsufficients = () => {
          </Table>
 
          {data?.length === 0 && (
-            <Typography variant="h3" color="blue-gray" className="mt-5">
-               لا يوجد نواقص
+            <Typography variant="h3" color="gray" className="mt-5">
+               {text("insufficients-no-result")}
             </Typography>
          )}
       </Fragment>

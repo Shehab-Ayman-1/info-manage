@@ -1,5 +1,6 @@
 import { Option, Select } from "@material-tailwind/react";
 import { cloneElement } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Loading } from "@/layout/Loading";
 
@@ -14,11 +15,13 @@ export const Selectbox = ({
    options = [],
    ...rest
 }) => {
+   const [, i18next] = useTranslation();
    return (
       <Select
          label={label}
          variant="standard"
          color="deep-purple"
+         size='lg'
          className="select-box w-full text-base caret-primary dark:text-white/80 md:text-xl"
          required
          selected={(element) =>
@@ -55,7 +58,7 @@ export const Selectbox = ({
             </Option>
          ) : (
             <Option className="text-xl" value="">
-               لا يوجد نتائج بحث
+               {i18next.language === "en" ? "There Are No Search Results" : "لا يوجد نتائج بحث"}
             </Option>
          )}
       </Select>

@@ -3,8 +3,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { links } from "@/constants/navbar";
+import { useTranslation } from "react-i18next";
 
 export const Mobile = ({ openDrawer, handleDrawer }) => {
+   const [text, i18next] = useTranslation();
    const [openAccordion, setOpenAccordion] = useState(0);
 
    const handleAccordion = (value) => {
@@ -12,19 +14,23 @@ export const Mobile = ({ openDrawer, handleDrawer }) => {
    };
 
    const ChevronIcon = ({ id }) => {
-      return <i className={`fa fa-chevron-left text-primary ${id === openAccordion ? "-rotate-90" : ""}`} />;
+      return (
+         <i
+            className={`fa ${i18next.language === "en" ? "fa-chevron-right" : "fa-chevron-left"} text-primary ${
+               id === openAccordion ? "-rotate-90" : ""
+            }`}
+         />
+      );
    };
 
    return (
       <Drawer
          className="bg-gradient overflow-y-auto p-4 lg:hidden"
-         placement="left"
+         placement={i18next.language === "en" ? "left" : "right"}
          open={openDrawer}
          onClose={handleDrawer}
          overlayProps={{ className: "h-screen cursor-pointer" }}
       >
-         <i className="fa fa-times text-xl text-dimWhite" onClick={handleDrawer} />
-
          <List>
             {links.map(({ title, path, paths }, i) =>
                title ? (

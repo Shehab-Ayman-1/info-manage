@@ -1,6 +1,8 @@
 import { Button, IconButton } from "@material-tailwind/react";
+import { useTranslation } from "react-i18next";
 
 export const Pagination = ({ activePage, setActivePage, pagination }) => {
+   const [text, i18next] = useTranslation();
    const next = () => {
       if (activePage === pagination) return;
       setActivePage(activePage + 1);
@@ -15,12 +17,12 @@ export const Pagination = ({ activePage, setActivePage, pagination }) => {
       <div className="flex-center my-5 flex-wrap">
          <Button
             variant="text"
-            className="flex-center p-0 text-xl text-primary"
+            className="flex-center p-0 text-xl text-primary ltr:text-base"
             onClick={prev}
             disabled={activePage === 0}
          >
-            <i className="fa fa-arrow-right text-primary" />
-            <span className="hidden pb-3 md:inline">السابق</span>
+            <i className={`fa ${i18next.language === "en" ? "fa-arrow-left" : "fa-arrow-right"} text-primary`} />
+            <span className="hidden pb-3 ltr:pb-1 md:inline">{i18next.language === "en" ? "prev" : "السابق"}</span>
          </Button>
 
          <div className="flex-center flex-wrap gap-2">
@@ -41,12 +43,12 @@ export const Pagination = ({ activePage, setActivePage, pagination }) => {
 
          <Button
             variant="text"
-            className="flex-center p-0 text-xl text-primary"
+            className="flex-center p-0 text-xl text-primary ltr:text-base"
             onClick={next}
             disabled={activePage === pagination - 1}
          >
-            <span className="hidden pb-3 md:inline">التالي</span>
-            <i className="fa fa-arrow-left text-primary" />
+            <span className="hidden pb-3 ltr:pb-1 md:inline">{i18next.language === "en" ? "next" : "التالي"}</span>
+            <i className={`fa ${i18next.language === "en" ? "fa-arrow-right" : "fa-arrow-left"} text-primary`} />
          </Button>
       </div>
    );

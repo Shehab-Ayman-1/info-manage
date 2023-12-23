@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { getLists, setCompanies } from "@/redux/slices/products";
 import { Field, Form, Selectbox } from "@/components/public";
@@ -8,9 +9,12 @@ import { Loading } from "@/layout/Loading";
 import { carLogo } from "@/assets";
 
 export const AddCompany = () => {
+   const [text] = useTranslation();
    const [formData, setFormData] = useState({ img: "", category: "", company: "" });
+
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const { loading: lLoading, isSubmitted: lIsSubmitted, refetch: listsRefetch } = useAxios();
+
    const { lists, categories } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 
@@ -44,8 +48,8 @@ export const AddCompany = () => {
    return (
       <Form
          onSubmit={handleSubmit}
-         headerText="اضافه شركة"
-         buttonText="انشاء"
+         headerText={text("creates-company-title")}
+         buttonText={text("creates-btn")}
          loading={(isSubmitted && !error) || loading}
       >
          <Loading
@@ -62,18 +66,23 @@ export const AddCompany = () => {
                alt="product"
                className="m-auto mb-4 block h-28 w-28 rounded-full shadow-sp"
             />
-            <Field label="رابط صورة الشركة" name="img" value={formData.img} onChange={handleFieldChange} />
+            <Field label={text("image")} name="img" value={formData.img} onChange={handleFieldChange} />
          </div>
 
          <Selectbox
-            label="اختر اسم القسم..."
+            label={text("chooseCategory")}
             value={formData.category}
             options={categories}
             loading={!lIsSubmitted && lLoading}
             onChange={(value) => handleSelectChange("category", value)}
          />
 
-         <Field label="اسم الشركة" name="company" value={formData.company} onChange={handleFieldChange} />
+         <Field
+            label={text("insertCompany")}
+            name="company"
+            value={formData.company}
+            onChange={handleFieldChange}
+         />
       </Form>
    );
 };

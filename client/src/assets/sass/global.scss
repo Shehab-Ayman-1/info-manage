@@ -182,6 +182,9 @@ html {
    &[dir="rtl"] {
       font-family: "STV", sans-serif;
    }
+   &[dir="ltr"] {
+      font-size: 14px;
+   }
    * ::-webkit-scrollbar {
       width: 2px !important;
       height: 5px !important;
@@ -235,12 +238,10 @@ i {
 
 .select-box {
    span.left-0 {
-      left: initial;
-      right: 0;
+      @apply rtl:left-auto rtl:right-0;
    }
    div.right-2 {
-      left: 0;
-      right: initial;
+      @apply rtl:left-0 rtl:right-auto;
    }
 }
 

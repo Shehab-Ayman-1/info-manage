@@ -1,14 +1,17 @@
 import { Card } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { PageHead, Switch } from "@/components/public";
 import { Table, Row, Col } from "@/components/table";
 
-const TABLE_HEAD = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];
+const TABLE_HEAD_AR = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];
+const TABLE_HEAD_EN = ["Company", "Product", "Count", "Price", "Total"];
 export const Show_Shop_Store = () => {
+   const [text, i18next] = useTranslation();
    const location = useLocation();
    const pathname = location.pathname.split("/")[2];
 
@@ -40,10 +43,12 @@ export const Show_Shop_Store = () => {
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
          <div className="flex-between mb-2 flex-col px-4 sm:flex-row">
-            <PageHead text={`عرض بضائع ${pathname === "store" ? "المخزن" : "المحل"}`} />
+            <PageHead
+               text={pathname === "store" ? text("shop-store-title-store") : text("shop-store-title-shop")}
+            />
 
             <Switch
-               label={isBuyPrice ? "سعر الشراء" : "سعر البيع"}
+               label={isBuyPrice ? text("shop-store-switch-buy") : text("shop-store-switch-sale")}
                checked={isBuyPrice}
                disabled={loading}
                onChange={(event) => setIsBuyPrice(() => event.target.checked)}
@@ -51,7 +56,7 @@ export const Show_Shop_Store = () => {
          </div>
 
          <Table
-            headers={TABLE_HEAD}
+            headers={i18next.language === "en" ? TABLE_HEAD_EN : TABLE_HEAD_AR}
             footerSpan={[2, 3]}
             total={data?.total}
             activePage={activePage}

@@ -1,9 +1,11 @@
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { Spinner, Alert, Progress, Typography } from "@material-tailwind/react";
 
 export const Loading = ({ subLoading, hideSubLoadingText, isSubmitted, loading, error, message, to }) => {
+   const [text] = useTranslation();
    const [open, setOpen] = useState(true);
    const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ export const Loading = ({ subLoading, hideSubLoadingText, isSubmitted, loading, 
       return (
          <Fragment>
             <Progress className="loading-animate bg-primary" value={0} size="sm" />
-            <Spinner className="fixed left-[45%] top-1/2 z-[1002] h-24 w-24" color="deep-purple" />
+            <Spinner className="fixed left-[45%] top-1/2 z-[1002] h-16 w-16" color="deep-purple" />
          </Fragment>
       );
 
@@ -31,7 +33,7 @@ export const Loading = ({ subLoading, hideSubLoadingText, isSubmitted, loading, 
       return (
          <Fragment>
             <Typography variant="h5" color="deep-purple" className={`ml-4 ${hideSubLoadingText ? "hidden" : ""}`}>
-               يتم التحميل
+               {text("loading")}
             </Typography>
             <Spinner className="h-8 w-8" color="deep-purple" />
          </Fragment>

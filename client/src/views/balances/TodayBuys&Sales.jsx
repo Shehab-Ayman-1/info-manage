@@ -5,9 +5,13 @@ import { PageHead } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { Button } from "@material-tailwind/react";
+import { useTranslation } from "react-i18next";
 
-const TABLE_HEAD = ["#", "المنتج", "العدد", "السعر", "الاجمالي"];
+const TABLE_HEAD_AR = ["#", "المنتج", "العدد", "السعر", "الاجمالي"];
+const TABLE_HEAD_EN = ["#", "Product", "Count", "Price", "Total"];
 export const TodayBuysSales = () => {
+   const [text, i18next] = useTranslation();
+
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const [total, setTotal] = useState({ buys: 0, sales: 0 });
 
@@ -29,10 +33,14 @@ export const TodayBuysSales = () => {
       <Fragment>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <PageHead text="لا يوجد مشتريات اليوم" className={!data?.buys.length ? "" : "hidden"} />
+         <PageHead text={text("todayReset-nobuys")} className={!data?.buys.length ? "" : "hidden"} />
          <div className={!total.buys ? "hidden" : ""}>
-            <PageHead text="مشتريات اليوم" />
-            <Table headers={TABLE_HEAD} footerSpan={[3, 2]} total={total.buys}>
+            <PageHead text={text("todayReset-title-buy")} />
+            <Table
+               headers={i18next.language === "en" ? TABLE_HEAD_EN : TABLE_HEAD_AR}
+               footerSpan={[3, 2]}
+               total={total.buys}
+            >
                {data?.buys.map(({ name, price, count }, i) => (
                   <Row key={i} index={i}>
                      <Col>{i + 1}</Col>
@@ -45,10 +53,14 @@ export const TodayBuysSales = () => {
             </Table>
          </div>
 
-         <PageHead text="لا يوجد مبيعات اليوم" className={!data?.sales.length ? "" : "hidden"} />
+         <PageHead text={text("todayReset-nobuys")} className={!data?.sales.length ? "" : "hidden"} />
          <div className={!total.sales ? "hidden" : ""}>
-            <PageHead text="مبيعات اليوم" className="mt-10" />
-            <Table headers={TABLE_HEAD} footerSpan={[3, 2]} total={total.sales}>
+            <PageHead text={text("todayReset-title-sale")} className="mt-10" />
+            <Table
+               headers={i18next.language === "en" ? TABLE_HEAD_EN : TABLE_HEAD_AR}
+               footerSpan={[3, 2]}
+               total={total.sales}
+            >
                {data?.sales.map(({ name, price, count }, i) => (
                   <Row key={i} index={i}>
                      <Col>{i + 1}</Col>
@@ -69,7 +81,7 @@ export const TodayBuysSales = () => {
                !total.buys && !total.sales ? "hidden" : "print:hidden"
             }`}
          >
-            طباعه
+            {text("print")}
          </Button>
       </Fragment>
    );

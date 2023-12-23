@@ -3,9 +3,13 @@ import { Fragment, useEffect, useState } from "react";
 import { BillPage } from "@/components/bills";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
+import { useTranslation } from "react-i18next";
 
 export const ShowDebts = () => {
+   const [text] = useTranslation();
+
    const [activePage, setActivePage] = useState(0);
+
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const {
       data: paymentData,
@@ -35,7 +39,7 @@ export const ShowDebts = () => {
          <Loading loading={loading} isSubmitted={isSubmitted} error={error} data={data} />
 
          <BillPage
-            head="عرض المديونيات"
+            head={text("debts-title")}
             type="debt"
             data={data?.data}
             pagination={data?.pagination}

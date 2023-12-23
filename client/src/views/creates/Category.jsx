@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { setCategories } from "@/redux/slices/products";
 import { Field, Form } from "@/components/public";
@@ -8,6 +9,8 @@ import { Loading } from "@/layout/Loading";
 import { carLogo } from "@/assets";
 
 export const AddCategory = () => {
+   const [text] = useTranslation();
+
    const [formData, setFormData] = useState({ img: "", category: "", company: "" });
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const dispatch = useDispatch();
@@ -28,8 +31,8 @@ export const AddCategory = () => {
    return (
       <Form
          onSubmit={handleSubmit}
-         headerText="اضافه قسم"
-         buttonText="انشاء"
+         headerText={text("creates-category-title")}
+         buttonText={text("creates-btn")}
          loading={(isSubmitted && !error) || loading}
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/creates/company" />
@@ -40,11 +43,21 @@ export const AddCategory = () => {
                alt="product"
                className="m-auto mb-4 block h-28 w-28 rounded-full shadow-sp"
             />
-            <Field label="رابط صورة الشركة" name="img" value={formData.img} onChange={handleFieldChange} />
+            <Field label={text("image")} name="img" value={formData.img} onChange={handleFieldChange} />
          </div>
 
-         <Field label="اسم القسم" name="category" value={formData.category} onChange={handleFieldChange} />
-         <Field label="اسم الشركة" name="company" value={formData.company} onChange={handleFieldChange} />
+         <Field
+            label={text("insertCategory")}
+            name="category"
+            value={formData.category}
+            onChange={handleFieldChange}
+         />
+         <Field
+            label={text("insertCompany")}
+            name="company"
+            value={formData.company}
+            onChange={handleFieldChange}
+         />
       </Form>
    );
 };

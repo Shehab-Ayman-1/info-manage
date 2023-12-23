@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { Field, Form } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
@@ -8,8 +9,11 @@ import { Loading } from "@/layout/Loading";
 import { login } from "@/redux/slices/users";
 
 export const Login = () => {
+   const [text] = useTranslation();
+
    const [formData, setFormData] = useState({ email: "", password: "" });
    const { data, loading, error, isSubmitted, refetch } = useAxios();
+
    const dispatch = useDispatch();
    const navigate = useNavigate();
 
@@ -33,21 +37,17 @@ export const Login = () => {
    return (
       <Form
          onSubmit={handleSubmit}
-         buttonText="تسجيل"
-         headerText="تسجيل الدخول"
+         buttonText={text("login-btn")}
+         headerText={text("login-title")}
          loading={(isSubmitted && !error) || loading}
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
-         <Field
-            label="البريد الالكتروني او الهاتف"
-            name="email"
-            value={formData.email}
-            onChange={handleFieldChange}
-         />
+         <Field label={text("login-email")} name="email" value={formData.email} onChange={handleFieldChange} />
+
          <Field
             type="password"
-            label="ادخل كلمة السر"
+            label={text("login-password")}
             name="password"
             value={formData.password}
             onChange={handleFieldChange}
