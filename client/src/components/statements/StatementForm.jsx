@@ -31,7 +31,7 @@ export const StatementForm = ({
 
    useEffect(() => {
       const total = formData?.products
-         ?.map((row) => ({ price: row?.price, count: row?.count }))
+         ?.map((data) => ({ price: data?.price, count: data?.count }))
          ?.reduce((prev, cur) => prev + cur.price * cur.count, 0);
       setTotal(() => total || "00,00");
    }, [formData?.products]);

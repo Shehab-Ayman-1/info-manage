@@ -29,8 +29,6 @@ export const PAYMENT = async (req, res) => {
 	}
 };
 
-//npm install react-i18next i18next --save
-
 export const UPDATE_BILL = async (req, res) => {
 	try {
 		const { products, newProducts, updatedProducts, deletedProducts, toStore } = req.body;

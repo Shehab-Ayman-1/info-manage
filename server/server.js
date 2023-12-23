@@ -23,7 +23,9 @@ app.use("/api/users", users);
 app.use("/api/locker", locker);
 app.use("/api/products", products);
 app.use("/api/bills", bills);
-app.use("/*", (req, res) => res.status(500).json({ status: 500, method: req.method, url: req.url, error: "Wronge path." }));
+app.use("/*", (req, res) =>
+	res.status(500).json({ status: 500, method: req.method, url: req.url, error: "Wronge path." })
+);
 
 // MongoDB
 DBconnection();
