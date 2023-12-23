@@ -7,7 +7,7 @@ export const Configrator = () => {
    const [text, i18next] = useTranslation();
 
    const [open, setOpen] = useState(false);
-   const [lang, setLang] = useState(localStorage.getItem("lang") || "ar");
+   const [lang, setLang] = useState(localStorage.getItem("lang") || "en");
 
    useLayoutEffect(() => {
       const mode = localStorage.getItem("mode") || "light";

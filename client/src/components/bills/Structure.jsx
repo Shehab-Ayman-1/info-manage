@@ -155,7 +155,7 @@ export const BillPage = ({
 
          <Typography
             variant="h3"
-            color="blue-gray"
+            color="gray"
             className={!filterResult?.length || !data?.length ? "" : "hidden"}
          >
             لا يوجد نتائج بحث

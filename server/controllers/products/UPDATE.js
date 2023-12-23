@@ -12,31 +12,36 @@ export const SALE_PRODUCTS = async (req, res) => {
 			const comp = await Products.findOne({ category, company, "products.name": name });
 			const product = comp.products.find((product) => product?.name === name);
 
-			const productCount = product.count.reduce((prev, cur) => (toStore ? prev + cur.store : prev + cur.shop), 0);
+			const productCount = toStore ? product.count.store : product.count.shop;
 			return productCount < +count ? `${name}: ${productCount}` : null;
 		});
 
 		const warnIndexes = (await Promise.all(checkCount)).filter((item) => item);
 		if (warnIndexes.length)
-			return res.status(200).json({ warn: `يتوفر فقط هذه الكمية في ${toStore ? "مخزن" : "محل"}: [${warnIndexes.join(" | ")}]` });
+			return res
+				.status(200)
+				.json({ warn: `يتوفر فقط هذه الكمية في ${toStore ? "مخزن" : "محل"}: [${warnIndexes.join(" | ")}]` });
 
 		// Check If The Client Pay Is Greater Than Total Products Cost
-		if (+totalProductsCost < +clientPay + +discount) return res.status(200).json({ warn: "المبلغ المحصل اكبر من مبلغ الفاتورة" });
+		if (+totalProductsCost < +clientPay + +discount)
+			return res.status(200).json({ warn: "المبلغ المحصل اكبر من مبلغ الفاتورة" });
 
 		// Update Products
-		const updatePromise = await products.map(async ({ category, company, name, count, price }) => {
-			return await Products.updateOne(
+		const place = toStore ? "products.$.count.store" : "products.$.count.shop";
+		const promises = await products.map(async ({ category, company, name, count, price }) => {
+			const updated = await Products.updateOne(
 				{ category, company, "products.name": name },
 				{
 					$set: { "products.$.price.sale": price },
-					$push: { "products.$.count": { [toStore ? "store" : "shop"]: -count, transferPrice: price } },
+					$inc: { [place]: -count },
 				}
 			);
+			return !updated.modifiedCount ? name : null;
 		});
 
-		const updateResult = await Promise.all(updatePromise);
-		const isAllUpdated = updateResult.every((u) => u.modifiedCount);
-		if (!isAllUpdated) return res.status(200).json({ warn: "حدث خطأ ولم يتم تعديل كل المنتجات" });
+		const result = (await Promise.all(promises)).filter((item) => item);
+		if (result.length)
+			return res.status(200).json({ warn: `حدث خطأ ولم يتم تعديل هذه المنتجات [${result.join(" | ")}]` });
 
 		// Create New Bill With The Client Pay
 		const bill = await Bills.findOne({ client });
@@ -65,26 +70,27 @@ export const BUY_PRODUCTS = async (req, res) => {
 
 		// Check If The Products Cost In The Locker
 		const lockerCost = await Locker.find().findTotalPrices();
-		if (+lockerCost < +adminPay + +discount) return res.status(200).json({ warn: "لا يتوفر هذا المبلغ في الخزنة" });
+		console.log(lockerCost);
+		if (+lockerCost < +adminPay) return res.status(200).json({ warn: "لا يتوفر هذا المبلغ في الخزنة" });
 
 		// Check If The Client Pay Greater Than Total Products Cost
 		const totalProductsCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
-		if (+totalProductsCost < +adminPay + +discount) return res.status(200).json({ warn: "المبلغ المحصل اكبر مبلغ الفاتورة" });
+		if (+totalProductsCost < +adminPay + +discount)
+			return res.status(200).json({ warn: "المبلغ المحصل اكبر مبلغ الفاتورة" });
 
 		// Update Products
-		const updatePromise = await products.map(async ({ name, count, price }) => {
-			return await Products.updateOne(
+		const place = toStore ? "products.$.count.store" : "products.$.count.shop";
+		const promises = await products.map(async ({ name, count, price }) => {
+			const updated = await Products.updateOne(
 				{ products: { $elemMatch: { name, suppliers: supplier } } },
-				{
-					$set: { "products.$.price.buy": price },
-					$push: { "products.$.count": { [toStore ? "store" : "shop"]: count, transferPrice: price } },
-				}
+				{ $set: { "products.$.price.buy": price }, $inc: { [place]: +count } }
 			);
+			return !updated.modifiedCount ? name : null;
 		});
 
-		const updateResult = await Promise.all(updatePromise);
-		const isAllUpdated = updateResult.every((u) => u.modifiedCount);
-		if (!isAllUpdated) return res.status(200).json({ warn: "حدث خطأ ولم يتم تعديل كل المنتجات" });
+		const result = (await Promise.all(promises)).filter((item) => item);
+		if (result.length)
+			return res.status(200).json({ warn: `حدث خطأ ولم يتم شراء هذه المنتجات [${result.join(" | ")}]` });
 
 		// Create New Bill With The Admin Pay
 		const bill = await Bills.findOne({ client: supplier });
@@ -109,51 +115,32 @@ export const BUY_PRODUCTS = async (req, res) => {
 
 export const TRANSFER_PRODUCTS = async (req, res) => {
 	try {
-		const { process } = req.params;
+		const { category, company, name, supplier, count, toStore } = req.body;
 
-		if (process === "supplier") {
-			const { supplier, name, count, toStore } = req.body;
+		// Chatch The Product
+		const comp = await Products.findOne({
+			$or: [{ category, company }, { products: { $elemMatch: { name, suppliers: supplier } } }],
+		});
+		const prod = comp.products.find((prod) => prod.name === name);
 
-			const comp = await Products.findOne({ products: { $elemMatch: { name, suppliers: supplier } } });
-			const prod = comp.products.find((prod) => prod.name === name);
+		// Check If The Transfered Count Is Available
+		const totalCount = toStore ? prod?.count.shop : prod?.count.store;
+		if (!totalCount || totalCount < +count)
+			return res.status(200).json({ warn: `يتوفر فقط [${totalCount}] في ${toStore ? "المحل" : "المخزن"}` });
 
-			const totalCount = toStore ? prod?.count.reduce((prev, cur) => prev + cur.shop, 0) : prod?.count.reduce((prev, cur) => prev + cur.store, 0);
-			if (!totalCount || totalCount < +count) return res.status(200).json({ warn: `لا يتوفر هذا العدد في ${toStore ? "المحل" : "المخزن"}` });
+		// Update The Product
+		const updated = await Products.updateOne(
+			{ $or: [{ category, company }, { products: { $elemMatch: { name, suppliers: supplier } } }] },
+			{
+				$inc: {
+					"products.$.count.store": toStore ? count : -count,
+					"products.$.count.shop": toStore ? -count : count,
+				},
+			}
+		);
 
-			const updated = await Products.updateOne(
-				{ products: { $elemMatch: { name, suppliers: supplier } } },
-				{
-					$push: {
-						"products.$.count": toStore ? { store: count, shop: -count, transferPrice: 0 } : { store: -count, shop: count, transferPrice: 0 },
-					},
-				}
-			);
-
-			if (!updated.modifiedCount) return res.status(200).json({ warn: "حدث خطأ ولم يتم تحويل المنتج" });
-			return res.status(200).json({ success: "لقد تم تحويل المنتج بنجاح" });
-		}
-
-		if (process === "category") {
-			const { category, company, name, count, toStore } = req.body;
-
-			const comp = await Products.findOne({ category, company });
-			const prod = comp.products.find((prod) => prod.name === name);
-
-			const totalCount = toStore ? prod?.count.reduce((prev, cur) => prev + cur.shop, 0) : prod?.count.reduce((prev, cur) => prev + cur.store, 0);
-			if (!totalCount || totalCount < count) return res.status(200).json({ warn: `لا يتوفر هذا العدد في ${toStore ? "المحل" : "المخزن"}` });
-
-			const updated = await Products.updateOne(
-				{ category, company, products: { $elemMatch: { name } } },
-				{
-					$push: {
-						"products.$.count": toStore ? { store: count, shop: -count, transferPrice: 0 } : { store: -count, shop: count, transferPrice: 0 },
-					},
-				}
-			);
-
-			if (!updated.modifiedCount) return res.status(200).json({ warn: "حدث خطأ ولم يتم تحويل المنتج" });
-			return res.status(200).json({ success: "لقد تم تحويل المنتج بنجاح" });
-		}
+		if (!updated.modifiedCount) return res.status(200).json({ warn: "حدث خطأ ولم يتم تحويل المنتج" });
+		return res.status(200).json({ success: "لقد تم تحويل المنتج بنجاح" });
 
 		res.status(200).json({ warn: "حدث خطأ ولم يتم تحويل المنتج" });
 	} catch (error) {
@@ -168,20 +155,18 @@ export const EDIT_PRICE = async (req, res) => {
 		if (!process || !value) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبه" });
 
 		const updated = await Products.updateOne(
-			{
-				_id: companyId,
-				products: { $elemMatch: { _id: productId } },
-			},
-			{
-				$set: process === "buy" ? { "products.$.price.buy": value } : { "products.$.price.sale": value },
-			}
+			{ _id: companyId, products: { $elemMatch: { _id: productId } } },
+			{ $set: process === "buy" ? { "products.$.price.buy": value } : { "products.$.price.sale": value } }
 		);
 
 		if (!updated.modifiedCount && updated.matchedCount)
-			return res.status(200).json({ warn: `لم يتم تغير سعر المنتج لان هذا هو سعر ${process === "buy" ? "الشراء" : "البيع"} الحالي` });
-		if (!updated.modifiedCount && !updated.matchedCount) return res.status(400).json({ error: "حدث خطأ ولم يتم تعديل سعر المنتج" });
+			return res.status(200).json({
+				warn: `لم يتم تغير سعر المنتج لان هذا هو سعر ${process === "buy" ? "الشراء" : "البيع"} الحالي`,
+			});
+		if (!updated.modifiedCount && !updated.matchedCount)
+			return res.status(400).json({ error: "حدث خطأ ولم يتم تعديل سعر المنتج" });
 
-		res.status(200).json({ success: "لقد تم تعديل سعر المنتج بنجاح", updated });
+		res.status(200).json({ success: "لقد تم تعديل سعر المنتج بنجاح" });
 	} catch (error) {
 		res.status(404).json(`EDIT_PRICE: ${error.message}`);
 	}

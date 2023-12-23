@@ -72,18 +72,17 @@ export const TransferStatement = () => {
 
    const handleSubmit = async (event) => {
       event.preventDefault();
+
       if (supplierData.supplier) {
          const { toStore, ...data } = supplierData;
          if (!Object.values(data).every((p) => p)) return alert("يجب ادخال جميع البيانات المطلوبة");
-
-         await sRefetch("put", `/products/transfer-products/supplier`, supplierData);
+         await sRefetch("put", `/products/transfer-products`, supplierData);
       }
 
       if (categoryData.category) {
          const { toStore, ...data } = categoryData;
          if (!Object.values(data).every((p) => p)) return alert("يجب ادخال جميع البيانات المطلوبة");
-
-         await sRefetch("put", `/products/transfer-products/category`, categoryData);
+         await sRefetch("put", `/products/transfer-products`, categoryData);
       }
    };
 

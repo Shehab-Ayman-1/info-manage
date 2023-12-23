@@ -20,7 +20,9 @@ export const Form = ({
             <CardHeader
                variant="gradient"
                color="deep-purple"
-               className={`mx-auto -mt-12 mb-4 grid h-20 w-[80%] place-items-center sm:h-28 ${headerStyle || ""}`}
+               className={`flex-center mx-auto -mt-12 mb-4 h-20 w-[80%] bg-gradient-to-r from-primary-400 to-primary-900 sm:h-28 ${
+                  headerStyle || ""
+               }`}
             >
                <Typography variant="h3" className="text-2xl md:text-3xl">
                   {headerText}
@@ -36,7 +38,7 @@ export const Form = ({
                      variant="gradient"
                      disabled={loading}
                      color="deep-purple"
-                     className="text-xl hover:brightness-125 md:text-2xl"
+                     className="bg-gradient-to-r from-primary-400 to-primary-900 text-xl hover:brightness-125 md:text-2xl"
                      fullWidth
                   >
                      {buttonText}

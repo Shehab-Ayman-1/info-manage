@@ -5,34 +5,32 @@ export const DELETE_BILL = async (req, res) => {
 		const { id } = req.params;
 		const { type } = req.query;
 
+		// Find Bill
 		const bill = await Bills.findById(id);
-		if (!bill) return res.status(400).json({ error: "حدث خطأ ولم يتم العثور علي المنتج" });
-
-		// Return Bill Products To The Store And The Shop
-		const updatePromise = await bill.products.map(async ({ name, count }) => {
-			return await Products.updateOne(
-				{
-					"products.name": name,
-				},
-				{
-					$push: {
-						"products.$.count": { [bill.place]: type === "bill" ? count : type === "debt" ? -count : 0, transferPrice: 0 },
-					},
-				}
-			);
-		});
-
-		const updateResult = await Promise.all(updatePromise);
-		const isAllUpdated = updateResult.every((u) => u.modifiedCount);
-		if (!isAllUpdated) return res.status(200).json({ warn: "حدث خطأ ولم يتم اضافه كل المنتجات" });
-
-		// Delete Bill Cost From Locker
-		const totalProductsCost = bill.products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
-		if (totalProductsCost) await Locker.create({ name: `فاتورة ملغيه [${bill.client}]`, price: totalProductsCost });
+		if (!bill) return res.status(400).json({ error: "حدث خطأ ولم يتم العثور علي الفاتورة" });
 
 		// Delete Bill
-		const deleted = await Bills.deleteOne({ _id: id });
-		if (!deleted.deletedCount) return res.status(400).json({ error: "حدث خطأ ولم يتم حذف الفاتورة" });
+		const deleteBill = await Bills.deleteOne({ _id: id });
+		if (!deleteBill.deletedCount) return res.status(400).json({ error: "حدث خطأ ولم يتم حذف الفاتورة" });
+
+		// Update Products
+		const promises = await bill.products.map(async ({ name, count }) => {
+			const place = bill.place === "store" ? "products.$.count.store" : "products.$.count.shop";
+			const update = await Products.updateOne(
+				{ "products.name": name },
+				{ $inc: { [place]: type === "bill" ? count : type === "debt" ? -count : 0 } }
+			);
+			return !update.modifiedCount ? name : null;
+		});
+
+		const result = (await Promise.all(promises)).filter((item) => item);
+		const place = bill.place === "store" ? "مخزن" : "محل";
+		if (!result.length)
+			return res.json({ warn: `حدث خطأ ولم يتم اضافه هذه المنتجات الي ${place} [${result.join(" | ")}]` });
+
+		// Send Transaction To Locker
+		const productsCost = bill.products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
+		if (productsCost) await Locker.create({ name: `فاتورة ملغيه [${bill.client}]`, price: productsCost });
 
 		res.status(200).json({ success: "لقد تم حذف الفاتورة بنجاح" });
 	} catch (error) {

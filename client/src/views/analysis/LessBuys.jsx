@@ -17,7 +17,7 @@ export const AnalysisLessBuys = () => {
       if (data) return;
 
       (async () => {
-         await refetch("get", "/products/get-less-buys");
+         await refetch("get", "/products/get-least-sales");
       })();
    }, []);
 

@@ -1,8 +1,9 @@
 import express from "express";
+
 // GET
 import { GET_TABLES_LIST, GET_BALANCES, GET_PROFILE } from "../controllers/index.js";
 import { GET_PRODUCTS_LIST, GET_SUPPLIERS_LIST, GET_SEARCH_LIST } from "../controllers/index.js";
-import { GET_NEEDED_PRODUCTS, GET_LESS_BUYS } from "../controllers/index.js";
+import { GET_NEEDED_PRODUCTS, GET_LEAST_SALES } from "../controllers/index.js";
 import { GET_PRODUCTS_BY_DATE } from "../controllers/index.js";
 
 // CREATE
@@ -26,7 +27,7 @@ router.get("/get-profile/:companyId/:productId", GET_PROFILE);
 
 // GET [Analysis]
 router.get("/get-needed-products", GET_NEEDED_PRODUCTS);
-router.get("/get-less-buys", GET_LESS_BUYS);
+router.get("/get-least-sales", GET_LEAST_SALES);
 router.get("/get-products-by-date", GET_PRODUCTS_BY_DATE);
 
 // CREATE
@@ -38,8 +39,8 @@ router.post("/create-supplier", CREATE_SUPPLIER);
 // UPDATE
 router.put("/buy-products", BUY_PRODUCTS);
 router.put("/sale-products", SALE_PRODUCTS);
+router.put("/transfer-products", TRANSFER_PRODUCTS);
 router.put("/edit-price/:companyId/:productId", EDIT_PRICE);
-router.put("/transfer-products/:process", TRANSFER_PRODUCTS);
 
 // DELETE
 router.delete("/delete-product/:companyId/:productId", DELETE_PRODUCT);

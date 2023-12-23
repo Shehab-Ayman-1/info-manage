@@ -39,12 +39,13 @@ export const UPDATE_BILL = async (req, res) => {
 		if (checkData?.length) {
 			const promises = await checkData.map(async ({ name, count }) => {
 				const company = await Products.findOne({ "products.name": name });
-
 				const product = company.products.find((item) => item.name === name);
-				if (!product) return `حدث خطأ ، لم يتم العثور علي المنتج ${name}`;
 
-				const productCount = product.count.reduce((prev, cur) => prev + (toStore ? cur.store : cur.shop), 0);
-				if (+count < 0 && +productCount < Math.abs(+count)) return `[${name}: ${productCount}]`;
+				if (!product) return `حدث خطأ ، لم يتم العثور علي المنتج ${name}`;
+				const productCount = toStore ? product.count.store : product.count.shop;
+
+				if (+count < 0 && +productCount < Math.abs(+count)) return `[${name}: ${productCount}]`; // For UpdatedProducts
+				if (+count > 0 && +productCount < +count) return `[${name}: ${productCount}]`; // For NewProducts
 
 				return null;
 			});
@@ -56,26 +57,20 @@ export const UPDATE_BILL = async (req, res) => {
 					.json({ warn: `يتوفر فقط هذه الكمية في ${toStore ? "المخزن" : "المحل"} ${result.join(" | ")}` });
 		}
 
+		return res.status(200).json({ warn: "لقد تم تعديل الفاتورة بنجاح" });
+
 		// [2] Add
 		if (newProducts?.length) {
 			// Bill
-			const addBill = await Bills.updateOne(
-				{ _id: billId },
-				{
-					$push: {
-						products: newProducts.map(({ name, count, price }) => ({ name, count, price, buyPrice: 0 })),
-					},
-				}
-			);
+			const products = newProducts.map(({ name, count, price }) => ({ name, count, price, buyPrice: 0 }));
+			const addBill = await Bills.updateOne({ _id: billId }, { $push: { products } });
 			if (!addBill.modifiedCount)
 				return res.status(200).json({ warn: "حدث خطأ ولم يتم اضافه المنتجات الجديدة الي الفاتورة" });
 
 			// Products
 			const promises = await newProducts.map(async ({ name, count }) => {
-				const added = await Products.updateOne(
-					{ "products.name": name },
-					{ $push: { "products.$.count": { [toStore ? "store" : "shop"]: -count } } }
-				);
+				const place = toStore ? "products.$.count.store" : "products.$.count.shop";
+				const added = await Products.updateOne({ "products.name": name }, { $inc: { [place]: -count } });
 				return !added.modifiedCount ? name : null;
 			});
 
@@ -92,10 +87,8 @@ export const UPDATE_BILL = async (req, res) => {
 
 			// Products
 			const promises = await updatedProducts.map(async ({ name, count }) => {
-				const updated = await Products.updateOne(
-					{ "products.name": name },
-					{ $push: { "products.$.count": { [toStore ? "store" : "shop"]: count } } }
-				);
+				const place = toStore ? "products.$.count.store" : "products.$.count.shop";
+				const updated = await Products.updateOne({ "products.name": name }, { $inc: { [place]: count } });
 				return !updated.modifiedCount ? name : null;
 			});
 
@@ -107,17 +100,13 @@ export const UPDATE_BILL = async (req, res) => {
 		// [4] Delete
 		if (deletedProducts?.length) {
 			// Bill
-			await Bills.updateOne(
-				{ _id: billId },
-				{ $pull: { products: { $in: deletedProducts.map((item) => item._id) } } }
-			);
+			const ids = deletedProducts.map((item) => item._id);
+			await Bills.updateOne({ _id: billId }, { $pull: { products: { $in: ids } } });
 
 			// Products
 			const promises = await deletedProducts.map(async ({ name, count }) => {
-				const deleted = await Products.updateOne(
-					{ "products.name": name },
-					{ $push: { "products.$.count": { [toStore ? "store" : "shop"]: count } } }
-				);
+				const place = toStore ? "products.$.count.store" : "products.$.count.shop";
+				const deleted = await Products.updateOne({ "products.name": name }, { $inc: { [place]: count } });
 				return !deleted.modifiedCount ? name : null;
 			});
 
