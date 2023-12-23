@@ -130,7 +130,10 @@ export const TRANSFER_PRODUCTS = async (req, res) => {
 
 		// Update The Product
 		const updated = await Products.updateOne(
-			{ $or: [{ category, company }, { products: { $elemMatch: { name, suppliers: supplier } } }] },
+			{
+				$or: [{ category, company }, { "products.suppliers": supplier }],
+				"products.name": name,
+			},
 			{
 				$inc: {
 					"products.$.count.store": toStore ? count : -count,
@@ -140,9 +143,7 @@ export const TRANSFER_PRODUCTS = async (req, res) => {
 		);
 
 		if (!updated.modifiedCount) return res.status(200).json({ warn: "حدث خطأ ولم يتم تحويل المنتج" });
-		return res.status(200).json({ success: "لقد تم تحويل المنتج بنجاح" });
-
-		res.status(200).json({ warn: "حدث خطأ ولم يتم تحويل المنتج" });
+		res.status(200).json({ success: "لقد تم تحويل المنتج بنجاح" });
 	} catch (error) {
 		res.status(404).json(`TRANSFER_PRODUCTS: ${error.message}`);
 	}

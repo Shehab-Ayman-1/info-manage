@@ -7,8 +7,8 @@ import { Field, PageHead } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
-const TABLE_HEAD_AR = ["#", "الاسم", "عدد المشتريات", "عدد المبيعات"];
-const TABLE_HEAD_EN = ["#", "Name", "Purchases Count", "Sales Count"];
+const TABLE_HEAD_AR = ["#", "الاسم", "عدد المبيعات"];
+const TABLE_HEAD_EN = ["#", "Name", "Sales Count"];
 export const AnalysisForMonth = () => {
    const [text, i18next] = useTranslation();
 
@@ -40,11 +40,10 @@ export const AnalysisForMonth = () => {
          <br />
 
          <Table headers={i18next.language === "en" ? TABLE_HEAD_EN : TABLE_HEAD_AR} total={data?.total}>
-            {data?.map(({ name, buysCount, salesCount }, i) => (
+            {data?.map(({ name, salesCount }, i) => (
                <Row index={i} key={i}>
                   <Col>{i + 1}</Col>
                   <Col>{name}</Col>
-                  <Col>{buysCount}</Col>
                   <Col>{salesCount}</Col>
                </Row>
             ))}

@@ -401,6 +401,8 @@ const statements = {
       "statement-buy-btn": "Buy",
       "statement-sale-btn": "Sale",
       "statement-transfer-btn": "Transfer",
+      "statement-transfer-switch-store": "To Store",
+      "statement-transfer-switch-shop": "To Shop",
    },
    ar: {
       "statement-buy-title": "كشف مندوب",
@@ -409,6 +411,8 @@ const statements = {
       "statement-buy-btn": "شراء",
       "statement-sale-btn": "بيع",
       "statement-transfer-btn": "تحويل",
+      "statement-transfer-switch-store": "الي المخزن",
+      "statement-transfer-switch-shop": "الي المحل",
    },
 };
 

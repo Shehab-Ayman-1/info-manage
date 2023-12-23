@@ -25,7 +25,7 @@ export const DELETE_BILL = async (req, res) => {
 
 		const result = (await Promise.all(promises)).filter((item) => item);
 		const place = bill.place === "store" ? "مخزن" : "محل";
-		if (!result.length)
+		if (result.length)
 			return res.json({ warn: `حدث خطأ ولم يتم اضافه هذه المنتجات الي ${place} [${result.join(" | ")}]` });
 
 		// Send Transaction To Locker

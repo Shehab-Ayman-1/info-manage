@@ -13,7 +13,7 @@ export const Switch = ({ label = "", checked = true, onChange = () => {}, ...res
             className: "whitespace-nowrap ml-5",
          }}
          labelProps={{
-            className: "text-dimWhite text-lg md:text-xl -mt-2 lg:text-2xl",
+            className: "text-dimWhite text-lg md:text-xl rtl:-mt-2 lg:text-2xl",
          }}
          circleProps={{
             className: "ring-1 ring-primary",

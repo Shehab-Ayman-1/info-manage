@@ -284,7 +284,7 @@ export const GET_NEEDED_PRODUCTS = async (req, res) => {
 						$cond: [
 							{ $lt: [placeCount, "$products.minmax.max"] },
 							{
-								current: { $first: placeCount },
+								current: placeCount,
 								needed: { $subtract: ["$products.minmax.max", placeCount] },
 							},
 							null,

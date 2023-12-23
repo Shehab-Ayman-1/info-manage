@@ -7,8 +7,8 @@ import { Col, Row, Table } from "@/components/table";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
-const TABLE_HEAD_AR = ["#", "الاسم", "عدد المشتريات", "عدد المبيعات"];
-const TABLE_HEAD_EN = ["#", "Name", "Purchases Count", "Sales Count"];
+const TABLE_HEAD_AR = ["#", "الاسم", "عدد المبيعات"];
+const TABLE_HEAD_EN = ["#", "Name", "Sales Count"];
 const years = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38].map((y) => `20${y}`);
 export const AnalysisForYear = () => {
    const [text, i18next] = useTranslation();
@@ -41,11 +41,10 @@ export const AnalysisForYear = () => {
          <br />
 
          <Table headers={i18next.language === "en" ? TABLE_HEAD_EN : TABLE_HEAD_AR} total={data?.total}>
-            {data?.map(({ name, buysCount, salesCount }, i) => (
+            {data?.map(({ name, salesCount }, i) => (
                <Row index={i} key={i}>
                   <Col>{i + 1}</Col>
                   <Col>{name}</Col>
-                  <Col>{buysCount}</Col>
                   <Col>{salesCount}</Col>
                </Row>
             ))}

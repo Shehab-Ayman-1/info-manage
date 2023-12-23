@@ -137,7 +137,11 @@ export const TransferStatement = () => {
 
                <div className="mt-5">
                   <Switch
-                     label={supplierData.toStore ? text("store") : text("shop")}
+                     label={
+                        supplierData.toStore
+                           ? text("statement-transfer-switch-store")
+                           : text("statement-transfer-switch-shop")
+                     }
                      checked={supplierData.toStore}
                      required={false}
                      onChange={(event) => setSupplierData((data) => ({ ...data, toStore: event.target.checked }))}
