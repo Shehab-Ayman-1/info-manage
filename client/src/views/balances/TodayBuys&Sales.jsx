@@ -33,7 +33,7 @@ export const TodayBuysSales = () => {
       <Fragment>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
 
-         <PageHead text={text("todayReset-nobuys")} className={!data?.buys.length ? "" : "hidden"} />
+         <PageHead text={text("todayReset-nobuys")} color="gray" className={!data?.buys.length ? "" : "hidden"} />
          <div className={!total.buys ? "hidden" : ""}>
             <PageHead text={text("todayReset-title-buy")} />
             <Table
@@ -53,7 +53,11 @@ export const TodayBuysSales = () => {
             </Table>
          </div>
 
-         <PageHead text={text("todayReset-nobuys")} className={!data?.sales.length ? "" : "hidden"} />
+         <PageHead
+            text={text("todayReset-nosales")}
+            color="gray"
+            className={!data?.sales.length ? "" : "hidden"}
+         />
          <div className={!total.sales ? "hidden" : ""}>
             <PageHead text={text("todayReset-title-sale")} className="mt-10" />
             <Table
