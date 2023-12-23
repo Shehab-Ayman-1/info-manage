@@ -23,8 +23,8 @@ export const SaleStatement = () => {
       category: "",
       company: "",
       name: "",
-      count: 0,
-      price: 0,
+      count: "",
+      price: "",
       buyPrice: 0,
    });
 

@@ -105,7 +105,7 @@ export const StatementForm = ({
 
             <Button
                color="deep-purple"
-               className="mx-auto my-2 block py-2 text-base hover:brightness-125"
+               className="mx-auto my-4 block text-base hover:brightness-125"
                onClick={handleAddField}
             >
                {text("insert")}

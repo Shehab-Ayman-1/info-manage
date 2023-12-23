@@ -13,7 +13,7 @@ export const BuyStatement = () => {
    const { refetch: sRefetch } = useAxios();
    const { data, isSubmitted, loading, error, refetch } = useAxios();
    const [formData, setFormData] = useState(formState);
-   const [product, setProduct] = useState({ name: "", count: 0, price: 0 });
+   const [product, setProduct] = useState({ name: "", count: '', price: '' });
    const { suppliers, products } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 

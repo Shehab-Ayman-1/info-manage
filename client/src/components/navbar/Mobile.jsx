@@ -29,7 +29,7 @@ export const Mobile = ({ openDrawer, handleDrawer }) => {
          placement={i18next.language === "en" ? "left" : "right"}
          open={openDrawer}
          onClose={handleDrawer}
-         overlayProps={{ className: "h-screen cursor-pointer" }}
+         overlayProps={{ className: "h-screen !opacity-0" }}
       >
          <List>
             {links.map(({ title, path, paths }, i) =>

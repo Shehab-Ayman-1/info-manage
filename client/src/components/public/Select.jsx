@@ -21,7 +21,7 @@ export const Selectbox = ({
          label={label}
          variant="standard"
          color="deep-purple"
-         size='lg'
+         size="lg"
          className="select-box w-full text-base caret-primary dark:text-white/80 md:text-xl"
          required
          selected={(element) =>
@@ -35,12 +35,13 @@ export const Selectbox = ({
             className: `h-14 md:h-20 border-b-sp !border-deep-purple-300 ${containerStyle}`,
          }}
          labelProps={{
-            className: `text-lg peer-focus:text-lg peer-placeholder-shown:text-lg ${labelStyle}`,
+            className: `text-xl peer-focus:text-xl peer-placeholder-shown:text-xl ${labelStyle}`,
          }}
          menuProps={{
             className: `bg-gradient py-3 ${menuStyle}`,
          }}
          animate={{
+            initial: { y: 25 },
             mount: { y: 0 },
             unmount: { y: 25 },
          }}
