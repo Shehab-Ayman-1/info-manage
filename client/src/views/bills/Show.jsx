@@ -74,14 +74,14 @@ export const ShowBill = () => {
             }`}
          >
             <Typography variant="h3" className="whitespace-nowrap text-xl text-dimWhite md:text-2xl">
-               {text("showBill-discount")}: {data?.pay.discount || 0}
+               {text("showBill-discount")}: {data?.pay.discount?.toLocaleString() || 0}
             </Typography>
             <Typography variant="h3" className="whitespace-nowrap text-xl text-dimWhite md:text-2xl">
-               {text("showBill-paid-cost")}: {data?.pay.value || 0}
+               {text("showBill-paid-cost")}: {data?.pay.value?.toLocaleString() || 0}
             </Typography>
             <Typography variant="h3" className="whitespace-nowrap text-xl text-dimWhite md:text-2xl">
                {text("showBill-pending-cost")}:{" "}
-               {(total - +data?.pay.value - +data?.pay.discount).toLocaleString() || 0}
+               {(total - +data?.pay.value - +data?.pay.discount)?.toLocaleString() || 0}
             </Typography>
          </div>
 

@@ -5,7 +5,7 @@ import { Field, Form, Selectbox } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
-const ROLES = ["admin", "user"];
+const ROLES = ["Admin", "User"];
 export const Register = () => {
    const [text] = useTranslation();
    const [formData, setFormData] = useState({ name: "", email: "", password: "", phone: "", role: 0 });

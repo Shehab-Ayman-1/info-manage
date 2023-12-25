@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { User, Logo, Desktop, Mobile, LockerCash } from "@/components/navbar";
 import { Searchbar } from "@/components/navbar";
-import { Button, IconButton } from "@material-tailwind/react";
 
 export const Navbar = () => {
    const [openDrawer, setOpenDrawer] = useState(false);
@@ -25,7 +24,6 @@ export const Navbar = () => {
          {/* Navbar Icons */}
          <div className="flex-start print:hidden">
             <LockerCash />
-            <i className="fa fa-retweet sm:text-xl" onClick={() => window.location.reload()} />
             <i className="fa fa-search sm:text-xl" onClick={handleSearchbar} />
             <i className="fa fa-bars sm:text-xl lg:!hidden" onClick={handleDrawer} />
             <User />
