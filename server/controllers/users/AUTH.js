@@ -25,7 +25,8 @@ export const LOGIN = async (req, res) => {
 export const REGISTER = async (req, res) => {
 	try {
 		const { name, email, password, phone, role } = req.body;
-		if (!name || !email || !password || !phone || !role) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبه" });
+		if (!name || !email || !password || !phone || !role)
+			return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبه" });
 
 		// [1] Check If The User Is Already Logged In
 		const exist = await Users.exists({ $or: [{ email }, { phone }] });
@@ -35,7 +36,12 @@ export const REGISTER = async (req, res) => {
 		const hash = bcrypt.hashSync(password, 10);
 
 		// [3] Create User Password
-		const user = await Users.create({ ...req.body, phone, role: role === "admin" ? ADMIN : USER, password: hash });
+		const user = await Users.create({
+			...req.body,
+			phone,
+			role: role === "Admin" ? ADMIN : USER,
+			password: hash,
+		});
 
 		// [4] Send Response
 		res.status(200).json({ success: "لقد تم انشاء الايميل بنجاح", user });

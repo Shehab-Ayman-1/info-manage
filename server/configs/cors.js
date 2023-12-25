@@ -1,4 +1,9 @@
-const localHosts = ["http://localhost:5000", "http://localhost:5173", "http://localhost:5174"];
+const localHosts = [
+	"http://localhost:*",
+	"http://localhost:5000",
+	"http://localhost:5173",
+	"http://localhost:5174",
+];
 const vercel = ["https://cars-management-client.vercel.app"];
 const netlify = ["https://cars-management-client.netlify.app"];
 
