@@ -139,15 +139,13 @@ export const TransferStatement = () => {
                   onChange={handleFieldChange}
                />
 
-               <div className="mt-5">
-                  <Selectbox
-                     label={text("statement-transfer-switch-label")}
-                     options={[text("statement-transfer-switch-store"), text("statement-transfer-switch-shop")]}
-                     value={supplierData.toStore ? "To Store" : "To Shop"}
-                     loading={!isSubmitted && loading}
-                     onChange={(value) => handleSelectChange("toStore", value === "To Store")}
-                  />
-               </div>
+               <Selectbox
+                  label={text("statement-transfer-switch-label")}
+                  options={[text("statement-transfer-switch-store"), text("statement-transfer-switch-shop")]}
+                  value={supplierData.toStore ? "To Store" : "To Shop"}
+                  loading={!isSubmitted && loading}
+                  onChange={(value) => handleSelectChange("toStore", value === "To Store")}
+               />
             </TabPanel>
 
             <TabPanel value="category" className="min-h-[350px] overflow-y-auto">
@@ -187,14 +185,19 @@ export const TransferStatement = () => {
                   onChange={(event) => handleFieldChange(event, "category")}
                />
 
-               <div className="mt-5">
-                  <Switch
-                     label={categoryData.toStore ? text("store") : text("shop")}
-                     checked={categoryData.toStore}
-                     required={false}
-                     onChange={(event) => setCategoryData((data) => ({ ...data, toStore: event.target.checked }))}
-                  />
-               </div>
+               <Selectbox
+                  label={text("statement-transfer-switch-label")}
+                  options={[text("statement-transfer-switch-store"), text("statement-transfer-switch-shop")]}
+                  value={
+                     supplierData.toStore
+                        ? text("statement-transfer-switch-store")
+                        : text("statement-transfer-switch-shop")
+                  }
+                  loading={!isSubmitted && loading}
+                  onChange={(value) =>
+                     handleSelectChange("toStore", value === text("statement-transfer-switch-store"))
+                  }
+               />
             </TabPanel>
          </Tabs>
       </Form>

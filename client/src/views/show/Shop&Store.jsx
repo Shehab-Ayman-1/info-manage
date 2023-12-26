@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
-import { PageHead, Switch } from "@/components/public";
+import { PageHead, Selectbox, Switch } from "@/components/public";
 import { Table, Row, Col } from "@/components/table";
 
 const TABLE_HEAD_AR = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];
@@ -47,12 +47,15 @@ export const Show_Shop_Store = () => {
                text={pathname === "store" ? text("shop-store-title-store") : text("shop-store-title-shop")}
             />
 
-            <Switch
-               label={isBuyPrice ? text("shop-store-switch-buy") : text("shop-store-switch-sale")}
-               checked={isBuyPrice}
-               disabled={loading}
-               onChange={(event) => setIsBuyPrice(() => event.target.checked)}
-            />
+            <div className="">
+               <Selectbox
+                  label={isBuyPrice ? text("shop-store-switch-buy") : text("shop-store-switch-sale")}
+                  options={[text("shop-store-switch-buy"), text("shop-store-switch-sale")]}
+                  value={isBuyPrice ? text("shop-store-switch-buy") : text("shop-store-switch-sale")}
+                  loading={!isSubmitted && loading}
+                  onChange={(value) => setIsBuyPrice(() => value === text("shop-store-switch-buy"))}
+               />
+            </div>
          </div>
 
          <Table
