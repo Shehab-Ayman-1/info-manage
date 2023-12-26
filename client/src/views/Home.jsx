@@ -1,22 +1,24 @@
 import { Button, Typography } from "@material-tailwind/react";
-import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
+const buttonStyle = "mt-5 pb-5 text-xl hover:brightness-125";
 export const Home = () => {
    const [text] = useTranslation();
    const navigate = useNavigate();
 
-   const buttonStyle = "mt-5 pb-5 text-xl hover:brightness-125";
    return (
       <section className="mt-10 flex h-full w-full flex-col items-center justify-center">
-         <Typography variant="h1" className="text-gradient pb-10 text-6xl md:text-8xl">
+         <Typography variant="h1" className="text-gradient pb-10 text-5xl sm:text-6xl md:text-8xl">
             {text("home-title")}
          </Typography>
-         <Typography variant="paragraph" className="text-center text-2xl text-black dark:text-white/50">
+
+         <Typography variant="paragraph" className="text-center text-xl text-black dark:text-white/50">
             {text("home-subtitle1")}
             <br />
             {text("home-subtitle2")}
          </Typography>
+
          <div className="flex-center flex-wrap">
             <Button
                to="/show/store"

@@ -1,11 +1,11 @@
 import { Fragment, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Col, Row, Table } from "@/components/table";
 import { PageHead } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { Button } from "@material-tailwind/react";
-import { useTranslation } from "react-i18next";
 
 const TABLE_HEAD_AR = ["#", "المنتج", "العدد", "السعر", "الاجمالي"];
 const TABLE_HEAD_EN = ["#", "Product", "Count", "Price", "Total"];
@@ -38,7 +38,7 @@ export const TodayBuysSales = () => {
             <PageHead text={text("todayReset-title-buy")} />
             <Table
                headers={i18next.language === "en" ? TABLE_HEAD_EN : TABLE_HEAD_AR}
-               footerSpan={[3, 2]}
+               footerSpan={[2, 3]}
                total={total.buys}
             >
                {data?.buys.map(({ name, price, count }, i) => (
@@ -62,7 +62,7 @@ export const TodayBuysSales = () => {
             <PageHead text={text("todayReset-title-sale")} className="mt-10" />
             <Table
                headers={i18next.language === "en" ? TABLE_HEAD_EN : TABLE_HEAD_AR}
-               footerSpan={[3, 2]}
+               footerSpan={[2, 3]}
                total={total.sales}
             >
                {data?.sales.map(({ name, price, count }, i) => (

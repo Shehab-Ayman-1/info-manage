@@ -158,8 +158,8 @@ const navbar = {
          // Balances
          "balances-title": "Finances",
          "show-balances": "Show Balances",
-         "add-locker": "Withdrawal / deposit from Locker",
-         "totay-reset": "Today Purchases / Sales",
+         "add-locker": "Locker Withdrawal / deposit",
+         "totay-reset": "Purchases / Sales Reset",
 
          // Analysis
          "analysis-title": "Statistics",

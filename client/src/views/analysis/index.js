@@ -5,3 +5,4 @@ export * from "./Year";
 export * from "./ProductMovement";
 export * from "./Insufficients";
 export * from "./LessBuys";
+export * from "./TodayBuys&Sales";

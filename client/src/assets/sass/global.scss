@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Merienda:wght@300;400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -165,7 +165,6 @@ html {
    width: 100vw;
    min-height: 100vh;
    overflow-x: hidden;
-   font-family: "Poppins", sans-serif;
    &.dark {
       @apply from-black via-darkGray to-black;
       ::-webkit-scrollbar-track {
@@ -186,11 +185,11 @@ html {
       font-size: 14px;
    }
    * ::-webkit-scrollbar {
-      width: 2px !important;
-      height: 5px !important;
+      width: 3px !important;
+      height: 3px !important;
    }
    ::-webkit-scrollbar {
-      width: 10px;
+      width: 5px;
    }
    ::-webkit-scrollbar-thumb {
       @apply rounded-xl bg-primary;

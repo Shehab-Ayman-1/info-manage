@@ -7,20 +7,17 @@ import { Home, Profile } from "@/views";
 import { Login, Register } from "@/views/auths";
 
 // Show
-import { Show_Shop_Store, ShowClients } from "@/views/show";
+import { Show_Shop_Store, ShowClients, ShowBalances } from "@/views/show";
 import { ShowLockerProcesses, ShowBills, ShowDebts } from "@/views/show";
 
 // Creates
 import { AddCategory, AddCompany, AddProducts, AddSupplier, AddClient } from "@/views/creates";
 
 // Statements
-import { BuyStatement, SaleStatement, TransferStatement, WorkersStatement } from "@/views/statements";
-
-// Balances
-import { ShowBalances, AddToLocker, TodayBuysSales } from "@/views/balances";
+import { BuyStatement, SaleStatement, TransferStatement, AddToLocker, WorkersStatement } from "@/views/statements";
 
 // Analysis
-import { AnalysisProductMovement, AnalysisForMonth, AnalysisForYear } from "@/views/analysis";
+import { AnalysisProductMovement, AnalysisForMonth, AnalysisForYear, TodayBuysSales } from "@/views/analysis";
 import { AnalysisSales, AnalysisWins, AnalysisInsufficients, AnalysisLessBuys } from "@/views/analysis";
 
 // Bills
@@ -131,6 +128,13 @@ export const links = [
             Component: ShowClients,
          },
          {
+            name: text("show-balances"),
+            link: "",
+            role: "admin",
+            icon: "fas fa-scale-unbalanced",
+            Component: ShowBalances,
+         },
+         {
             name: text("show-bills"),
             link: "bills",
             role: "admin",
@@ -174,6 +178,13 @@ export const links = [
             role: "admin",
             icon: "fas fa-money-bill-transfer",
             Component: TransferStatement,
+         },
+         {
+            name: text("add-locker"),
+            link: "add-to-locker",
+            role: "admin",
+            icon: "fas fa-door-closed",
+            Component: AddToLocker,
          },
          {
             name: text("workers-statement"),
@@ -230,25 +241,11 @@ export const links = [
       ],
    },
 
-   // Balances
+   // Analysis
    {
-      title: text("balances-title"),
-      path: "balances",
+      title: text("analysis-title"),
+      path: "analysis",
       paths: [
-         {
-            name: text("show-balances"),
-            link: "",
-            role: "admin",
-            icon: "fas fa-scale-unbalanced",
-            Component: ShowBalances,
-         },
-         {
-            name: text("add-locker"),
-            link: "add-to-locker",
-            role: "admin",
-            icon: "fas fa-door-closed",
-            Component: AddToLocker,
-         },
          {
             name: text("totay-reset"),
             link: "today-buys-sales",
@@ -257,14 +254,6 @@ export const links = [
             // disabled: true,
             Component: TodayBuysSales,
          },
-      ],
-   },
-
-   // Analysis
-   {
-      title: text("analysis-title"),
-      path: "analysis",
-      paths: [
          {
             name: text("product-movement"),
             link: "movement",
@@ -299,7 +288,7 @@ export const links = [
          },
          {
             name: text("analysis-less-sales"),
-            link: "less-buys",
+            link: "less-sales",
             role: "admin",
             icon: "fas fa-chart-gantt",
             // disabled: true,

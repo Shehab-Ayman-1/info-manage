@@ -50,9 +50,9 @@ export const Show_Shop_Store = () => {
             <div className="">
                <Selectbox
                   label={isBuyPrice ? text("shop-store-switch-buy") : text("shop-store-switch-sale")}
-                  options={[text("shop-store-switch-buy"), text("shop-store-switch-sale")]}
                   value={isBuyPrice ? text("shop-store-switch-buy") : text("shop-store-switch-sale")}
                   loading={!isSubmitted && loading}
+                  options={[text("shop-store-switch-buy"), text("shop-store-switch-sale")]}
                   onChange={(value) => setIsBuyPrice(() => value === text("shop-store-switch-buy"))}
                />
             </div>

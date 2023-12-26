@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 export const Pagination = ({ activePage, setActivePage, pagination }) => {
    const [text, i18next] = useTranslation();
+
    const next = () => {
       if (activePage === pagination) return;
       setActivePage(activePage + 1);
@@ -25,8 +26,8 @@ export const Pagination = ({ activePage, setActivePage, pagination }) => {
             <span className="hidden pb-3 ltr:pb-1 md:inline">{i18next.language === "en" ? "prev" : "السابق"}</span>
          </Button>
 
-         <div className="flex-center flex-wrap gap-2">
-            {Array(pagination)
+         <div className="flex-center flex-wrap">
+            {Array(pagination > 10 ? 10 : pagination)
                .fill(1)
                .map((_, index) => (
                   <IconButton
@@ -39,6 +40,14 @@ export const Pagination = ({ activePage, setActivePage, pagination }) => {
                      <span className="-mt-2 block">{index + 1}</span>
                   </IconButton>
                ))}
+
+            <IconButton
+               variant="text"
+               color="deep-purple"
+               className={`h-8 w-8 text-xl font-bold ${pagination > 10 ? "" : "hidden"}`}
+            >
+               <span className="-mt-2 block whitespace-nowrap">- - - -</span>
+            </IconButton>
          </div>
 
          <Button
