@@ -96,11 +96,15 @@ export const TransferStatement = () => {
       { name: "Category", value: "category", reset: () => setSupplierData(supplierData) },
    ];
 
+   console.log(supplierData.toStore);
+
    return (
       <Form
          onSubmit={handleSubmit}
          headerText={text("statement-transfer-title")}
-         buttonText={text("statement-transfer-btn")}
+         buttonText={`${text("statement-transfer-btn")} ${text(
+            supplierData.toStore ? "statement-transfer-switch-store" : "statement-transfer-switch-shop",
+         )}`}
          loading={(sIsSubmitted && !sError && !sendData?.warn) || sLoading}
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
@@ -136,15 +140,12 @@ export const TransferStatement = () => {
                />
 
                <div className="mt-5">
-                  <Switch
-                     label={
-                        supplierData.toStore
-                           ? text("statement-transfer-switch-store")
-                           : text("statement-transfer-switch-shop")
-                     }
-                     checked={supplierData.toStore}
-                     required={false}
-                     onChange={(event) => setSupplierData((data) => ({ ...data, toStore: event.target.checked }))}
+                  <Selectbox
+                     label={text("statement-transfer-switch-label")}
+                     options={[text("statement-transfer-switch-store"), text("statement-transfer-switch-shop")]}
+                     value={supplierData.toStore ? "To Store" : "To Shop"}
+                     loading={!isSubmitted && loading}
+                     onChange={(value) => handleSelectChange("toStore", value === "To Store")}
                   />
                </div>
             </TabPanel>

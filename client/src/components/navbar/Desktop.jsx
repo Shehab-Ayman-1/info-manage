@@ -2,6 +2,13 @@ import { Button, Menu, MenuHandler, MenuList, MenuItem } from "@material-tailwin
 import { Link } from "react-router-dom";
 import { links } from "@/constants/navbar";
 
+const colors = [
+   "dark:text-red-200 text-red-500",
+   "dark:text-orange-200 text-orange-700",
+   "dark:text-purple-200 text-purple-500",
+   "dark:text-lime-200 text-green-500",
+   "dark:text-teal-200 text-teal-500",
+];
 export const Desktop = () => {
    return (
       <div className="flex-center !hidden flex-wrap print:!hidden lg:!flex">
@@ -31,7 +38,7 @@ export const Desktop = () => {
                               <MenuItem className="flex-between group">
                                  <div className="flex-start">
                                     <i className={`${icon} text-base group-hover:text-primary`} />
-                                    <span className="pb-3">{name}</span>
+                                    <span className={`pb-3`}>{name}</span>
                                  </div>
                                  <i className={`fa fa-lock ${disabled ? "" : "!hidden"}`} />
                               </MenuItem>
