@@ -73,7 +73,7 @@ export const Configrator = () => {
             size="lg"
             className={`group !fixed bottom-5 ${
                i18next.language === "en" ? "right-5 md:right-10" : "left-5 md:left-10"
-            } rounded-full shadow-md hover:scale-125 dark:shadow-white print:hidden md:bottom-10`}
+            } rounded-full shadow-md hover:scale-125 print:hidden md:bottom-10`}
             onClick={openDrawer}
          >
             <i className="fa fa-gear fa-spin text-2xl text-white group-hover:text-white" />
@@ -85,10 +85,24 @@ export const Configrator = () => {
             className="bg-gradient flex-between flex-col overflow-y-auto p-5"
             onClose={closeDrawer}
          >
-            <div className="flex items-center justify-between">
+            <div className="head">
                <Typography variant="h3" className="text-black dark:text-white">
                   {text("configrator-drawer-title")}
                </Typography>
+            </div>
+
+            <div className="properties mt-8 w-full">
+               <Typography variant="h3" color="deep-purple" className="text-2xl leading-normal">
+                  {text("configrator-properties-title")}
+               </Typography>
+               <div className="">
+                  <Typography className="mb-2 text-base leading-normal text-dimWhite">
+                     Width: {screen.availWidth} px
+                  </Typography>
+                  <Typography className="mb-2 text-base leading-normal text-dimWhite">
+                     Height: {screen.availHeight} px
+                  </Typography>
+               </div>
             </div>
 
             <div className="colors mt-8">
@@ -105,7 +119,7 @@ export const Configrator = () => {
                         variant="text"
                         color="deep-purple"
                         onClick={() => handleChangeTheme(theme)}
-                        className={`group p-3 hover:scale-125 ${hover}`}
+                        className={`group px-3 hover:scale-125 ${hover}`}
                      >
                         <div
                            className={`h-6 w-6 cursor-pointer rounded-full border border-solid border-black bg-gradient-to-br group-hover:scale-125 group-hover:brightness-125 ltr:h-7 ltr:w-7 ${from} ${to}`}
@@ -122,7 +136,7 @@ export const Configrator = () => {
                <Typography className="mb-2 text-base leading-normal text-dimWhite">
                   {text("configrator-subTitle")}
                </Typography>
-               <div className="flex-between mt-8">
+               <div className="flex-between">
                   <Button
                      size="lg"
                      variant="gradient"

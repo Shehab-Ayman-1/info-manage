@@ -17,7 +17,7 @@ export const Pagination = ({ activePage, setActivePage, pagination }) => {
       <div className="flex-center my-5 flex-wrap">
          <Button
             variant="text"
-            className="flex-center p-0 text-xl text-primary ltr:text-base"
+            className="flex-center p-0 text-xl text-primary hover:bg-blue-gray-400/20 hover:brightness-125 ltr:text-base"
             onClick={prev}
             disabled={activePage === 0}
          >
@@ -32,7 +32,7 @@ export const Pagination = ({ activePage, setActivePage, pagination }) => {
                   <IconButton
                      variant={activePage === index ? "gradient" : "text"}
                      color="deep-purple"
-                     className="h-8 w-8 text-xl font-bold hover:brightness-125"
+                     className="h-8 w-8 text-xl font-bold hover:bg-blue-gray-400/20 hover:brightness-125"
                      key={index}
                      onClick={() => setActivePage(index)}
                   >
@@ -43,7 +43,7 @@ export const Pagination = ({ activePage, setActivePage, pagination }) => {
 
          <Button
             variant="text"
-            className="flex-center p-0 text-xl text-primary ltr:text-base"
+            className="flex-center p-0 text-xl text-primary hover:bg-blue-gray-400/20 hover:brightness-125 ltr:text-base"
             onClick={next}
             disabled={activePage === pagination - 1}
          >

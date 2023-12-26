@@ -219,6 +219,7 @@ const navbar = {
 const configrator = {
    en: {
       "configrator-drawer-title": "Display Setting",
+      "configrator-properties-title": "Screen Properties",
       "configrator-subTitle": "You Can Choose Theme That You Would Prefer From Here",
       "configrator-theme-title": "Choose Theme",
       "configrator-mode-title": "Choose Mode",
@@ -229,6 +230,7 @@ const configrator = {
    },
    ar: {
       "configrator-drawer-title": "اعدادات العرض",
+      "configrator-properties-title": "خصائص الشاشه",
       "configrator-subTitle": "يمكنك اختيار نوع الثيم الذي تفضله من هنا",
       "configrator-theme-title": "اختر الثيم",
       "configrator-mode-title": "اختر المود",

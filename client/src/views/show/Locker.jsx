@@ -34,17 +34,15 @@ export const ShowLockerProcesses = () => {
             setActivePage={setActivePage}
             footerTitle={text("locker-transactions-table-footer")}
          >
-            {data?.data
-               .sort((a, b) => b.date.localeCompare(a.date))
-               .map(({ name, price, date }, i) => (
-                  <Row key={i} index={i}>
-                     <Col>{i + 1}</Col>
-                     <Col>{name}</Col>
-                     <Col>{price < 0 ? text("withdraw") : price > 0 ? text("deposit") : text("unknown")}</Col>
-                     <Col>{Math.abs(price)}</Col>
-                     <Col>{new Date(date).toLocaleDateString()}</Col>
-                  </Row>
-               ))}
+            {data?.data.map(({ name, price, date }, i) => (
+               <Row key={i} index={i}>
+                  <Col>{i + 1}</Col>
+                  <Col>{name}</Col>
+                  <Col>{price < 0 ? text("withdraw") : price > 0 ? text("deposit") : text("unknown")}</Col>
+                  <Col>{Math.abs(price)}</Col>
+                  <Col>{new Date(date).toLocaleDateString()}</Col>
+               </Row>
+            ))}
          </Table>
       </Fragment>
    );
