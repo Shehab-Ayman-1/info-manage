@@ -7,7 +7,13 @@ import { Field, MTDialog, PageHead, Pagination } from "@/components/public";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
 
-const paymentState = { _id: "", client: "", newValue: "", pay: { completed: false, value: 0, discount: 0 } };
+const paymentState = {
+   _id: "",
+   client: "",
+   billCost: "",
+   newValue: "",
+   pay: { completed: false, value: 0, discount: 0 },
+};
 export const BillPage = ({
    head,
    type,
@@ -82,6 +88,8 @@ export const BillPage = ({
       setOpenDialog(false);
    };
 
+   console.log(payment);
+
    return (
       <Card className="bg-transparent shadow-none">
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={paymentData} />
@@ -153,11 +161,7 @@ export const BillPage = ({
             ))}
          </div>
 
-         <Typography
-            variant="h3"
-            color="gray"
-            className={!filterResult?.length || !data?.length ? "" : "hidden"}
-         >
+         <Typography variant="h3" color="gray" className={!filterResult?.length || !data?.length ? "" : "hidden"}>
             لا يوجد نتائج بحث
          </Typography>
 
@@ -165,7 +169,7 @@ export const BillPage = ({
             buttonText={text("bills-widget-btn")}
             headerText={text("bills-widget-title")}
             open={openDialog}
-            loading={loading || +payment?.billCost - +payment?.pay.value - +payment?.pay.discount === 0}
+            loading={loading || true}
             handler={handleOpenDialog}
             onSubmit={handlePayment}
          >

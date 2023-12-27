@@ -20,7 +20,7 @@ export const MTDialog = ({
             <Typography variant="h3" color="deep-purple">
                {headerText}
             </Typography>
-            <i className="fa fa-times text-2xl" onClick={handler} />
+            <i className="fa fa-times text-2xl" onClick={() => handler()} />
          </DialogHeader>
 
          <DialogBody>{children}</DialogBody>
