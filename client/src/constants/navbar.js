@@ -129,7 +129,7 @@ export const links = [
          },
          {
             name: text("show-balances"),
-            link: "",
+            link: "balances",
             role: "admin",
             icon: "fas fa-scale-unbalanced",
             Component: ShowBalances,

@@ -2,7 +2,7 @@ import { Button, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const buttonStyle = "mt-5 pb-5 text-xl hover:brightness-125";
+const buttonStyle = "mt-5 rtl:pb-5 text-xl hover:brightness-125";
 export const Home = () => {
    const [text] = useTranslation();
    const navigate = useNavigate();
