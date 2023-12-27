@@ -68,7 +68,7 @@ export const Searchbar = ({ openSearchbar, setOpenSearchbar }) => {
             <input
                type="search"
                placeholder={text("search")}
-               className="w-full bg-transparent py-3 text-base sm:text-xl md:py-5 md:text-2xl"
+               className="w-full bg-transparent py-3 text-base placeholder:text-dimWhite dark:placeholder:text-white sm:text-xl md:py-5 md:text-2xl"
                onChange={handleChange}
             />
          </CardHeader>

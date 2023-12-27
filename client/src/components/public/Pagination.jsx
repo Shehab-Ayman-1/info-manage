@@ -37,7 +37,7 @@ export const Pagination = ({ activePage, setActivePage, pagination }) => {
                      key={index}
                      onClick={() => setActivePage(index)}
                   >
-                     <span className="-mt-2 block">{index + 1}</span>
+                     <span className="block md:-mt-2">{index + 1}</span>
                   </IconButton>
                ))}
 

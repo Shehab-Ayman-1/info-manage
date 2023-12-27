@@ -204,8 +204,7 @@ html {
 }
 
 i {
-   @apply cursor-pointer text-dimWhite;
-   font-size: 1.2rem;
+   @apply cursor-pointer text-xl text-dimWhite;
    &:hover {
       @apply scale-110 text-primary;
    }

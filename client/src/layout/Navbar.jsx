@@ -24,8 +24,8 @@ export const Navbar = () => {
          {/* Navbar Icons */}
          <div className="flex-start print:hidden">
             <LockerCash />
-            <i className="fa fa-search sm:text-xl" onClick={handleSearchbar} />
-            <i className="fa fa-bars sm:text-xl lg:!hidden" onClick={handleDrawer} />
+            <i className="fa fa-search" onClick={handleSearchbar} />
+            <i className="fa fa-bars lg:!hidden" onClick={handleDrawer} />
             <User />
          </div>
 
