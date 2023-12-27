@@ -308,6 +308,7 @@ const profile = {
       "profile-widget-title": "Update Price",
       "profile-widget-btn": "Update",
       "profile-widget-label": "New Price",
+      "profile-widget-switch-label": "Choose Process",
       "profile-widget-switch-buy": "Update Purchase Price",
       "profile-widget-switch-sale": "Update Sale Price",
    },
@@ -323,6 +324,7 @@ const profile = {
       "profile-widget-title": "تعديل سعر المنتج",
       "profile-widget-btn": "تعديل",
       "profile-widget-label": "سعر المنتج الجديد",
+      "profile-widget-switch-label": "اختر العملية",
       "profile-widget-switch-buy": "تعديل سعر الشراء",
       "profile-widget-switch-sale": "تعديل سعر البيع",
    },
@@ -496,10 +498,12 @@ const balances = {
    },
    locker: {
       en: {
+         "locker-switch-label": "Choose Process",
          "locker-switch-withdraw": "Withdraw From Locker",
          "locker-switch-deposit": "Deposit To Locker",
       },
       ar: {
+         "locker-switch-locker": "اختر العملية",
          "locker-switch-withdraw": "سحب من الخزنة",
          "locker-switch-deposit": "ايداع الي الخزنة",
       },

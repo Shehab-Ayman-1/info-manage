@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Field, Form, Switch } from "@/components/public";
+import { Field, Form, Selectbox, Switch } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
@@ -41,14 +41,15 @@ export const AddToLocker = () => {
             onChange={(event) => setPrice((p) => ({ ...p, value: +event.target.value }))}
          />
 
-         <div className="mt-5">
-            <Switch
-               label={price.isAppend ? text("locker-switch-deposit") : text("locker-switch-withdraw")}
-               checked={price.isAppend}
-               required={false}
-               onChange={(event) => setPrice((data) => ({ ...data, isAppend: event.target.checked }))}
-            />
-         </div>
+         <Selectbox
+            label={text("locker-switch-label")}
+            options={[text("locker-switch-deposit"), text("locker-switch-withdraw")]}
+            value={price.isAppend ? text("locker-switch-deposit") : text("locker-switch-withdraw")}
+            loading={!isSubmitted && loading}
+            onChange={(value) =>
+               setPrice((data) => ({ ...data, isAppend: value === text("locker-switch-deposit") }))
+            }
+         />
       </Form>
    );
 };

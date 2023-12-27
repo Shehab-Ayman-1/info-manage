@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { Field, Form, MTDialog, Switch } from "@/components/public";
+import { Field, Form, MTDialog, Selectbox, Switch } from "@/components/public";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { ADMIN } from "@/constants/users";
@@ -176,13 +176,17 @@ export const Profile = () => {
                value={price.value}
                onChange={handleFieldChange}
             />
-            <Switch
-               label={
-                  price.process === "buy" ? text("profile-widget-switch-buy") : text("profile-widget-switch-sale")
-               }
-               checked={price.process === "buy"}
-               onChange={(event) =>
-                  setPrice((data) => ({ ...data, process: event.target.checked ? "buy" : "sale" }))
+
+            <Selectbox
+               label={text("profile-widget-switch-label")}
+               options={[text("profile-widget-switch-buy"), text("profile-widget-switch-sale")]}
+               value={price.process ? text("profile-widget-switch-buy") : text("profile-widget-switch-sale")}
+               loading={!isSubmitted && loading}
+               onChange={(value) =>
+                  setPrice((data) => ({
+                     ...data,
+                     process: value === text("profile-widget-switch-buy") ? "buy" : "sale",
+                  }))
                }
             />
          </MTDialog>

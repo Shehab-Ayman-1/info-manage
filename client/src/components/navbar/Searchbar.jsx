@@ -54,61 +54,64 @@ export const Searchbar = ({ openSearchbar, setOpenSearchbar }) => {
    };
 
    return (
-      <Card
-         className={`fixed left-1/2 top-36 w-full max-w-2xl -translate-x-1/2 bg-transparent shadow-none ${
-            openSearchbar ? "" : "hidden"
-         }`}
-      >
-         <CardHeader
-            className={`flex-between bg-gradient rounded-3xl text-dimWhite shadow-sp ${
-               open ? `rounded-b-none` : ``
+      <Fragment>
+         <div className="fixed left-0 top-0 -z-10 h-screen w-full" onClick={() => setOpenSearchbar(false)} />
+         <Card
+            className={`fixed left-1/2 top-36 w-full max-w-2xl -translate-x-1/2 bg-transparent shadow-none ${
+               openSearchbar ? "" : "hidden"
             }`}
          >
-            <i className="fa fa-search block px-3 text-xl md:text-2xl" />
-            <input
-               type="search"
-               placeholder={text("search")}
-               className="w-full bg-transparent py-3 text-base placeholder:text-dimWhite dark:placeholder:text-white sm:text-xl md:py-5 md:text-2xl"
-               onChange={handleChange}
-            />
-         </CardHeader>
+            <CardHeader
+               className={`flex-between bg-gradient rounded-3xl text-dimWhite shadow-sp ${
+                  open ? `rounded-b-none` : ``
+               }`}
+            >
+               <i className="fa fa-search block px-3 text-xl md:text-2xl" />
+               <input
+                  type="search"
+                  placeholder={text("search")}
+                  className="w-full bg-transparent py-3 text-base placeholder:text-dimWhite dark:placeholder:text-white sm:text-xl md:py-5 md:text-2xl"
+                  onChange={handleChange}
+               />
+            </CardHeader>
 
-         <CardBody
-            className={`mx-auto max-h-[50vh] w-[90%] overflow-y-auto rounded-lg p-0 shadow-sp sm:w-[95%] ${
-               open ? "bg-gradient dark:text-white" : ""
-            }`}
-         >
-            <Collapse open={open}>
-               <List>
-                  {(filterList || searchList).length ? (
-                     (filterList || searchList)?.map(({ name, companyId, productId }, i) => (
-                        <ListItem
-                           key={i}
-                           className="text-xl font-bold hover:bg-dimPurple hover:dark:text-white"
-                           onClick={() => handleItem(companyId, productId)}
-                        >
-                           {name.split(searchText).map((part, i) => (
-                              <Fragment key={i}>
-                                 {i ? (
-                                    <span className={searchText === " " ? "pr-1" : "text-primary"}>
-                                       {searchText.trim()}
-                                    </span>
-                                 ) : null}
-                                 {part}
-                              </Fragment>
-                           ))}
+            <CardBody
+               className={`mx-auto max-h-[50vh] w-[90%] overflow-y-auto rounded-lg p-0 shadow-sp sm:w-[95%] ${
+                  open ? "bg-gradient dark:text-white" : ""
+               }`}
+            >
+               <Collapse open={open}>
+                  <List>
+                     {(filterList || searchList).length ? (
+                        (filterList || searchList)?.map(({ name, companyId, productId }, i) => (
+                           <ListItem
+                              key={i}
+                              className="text-xl font-bold hover:bg-dimPurple hover:dark:text-white"
+                              onClick={() => handleItem(companyId, productId)}
+                           >
+                              {name.split(searchText).map((part, i) => (
+                                 <Fragment key={i}>
+                                    {i ? (
+                                       <span className={searchText === " " ? "pr-1" : "text-primary"}>
+                                          {searchText.trim()}
+                                       </span>
+                                    ) : null}
+                                    {part}
+                                 </Fragment>
+                              ))}
+                           </ListItem>
+                        ))
+                     ) : !isSubmitted && loading ? (
+                        <ListItem>
+                           <Loading subLoading />
                         </ListItem>
-                     ))
-                  ) : !isSubmitted && loading ? (
-                     <ListItem>
-                        <Loading subLoading />
-                     </ListItem>
-                  ) : (
-                     <ListItem>لا يوجد نتائج بحث</ListItem>
-                  )}
-               </List>
-            </Collapse>
-         </CardBody>
-      </Card>
+                     ) : (
+                        <ListItem>لا يوجد نتائج بحث</ListItem>
+                     )}
+                  </List>
+               </Collapse>
+            </CardBody>
+         </Card>
+      </Fragment>
    );
 };
