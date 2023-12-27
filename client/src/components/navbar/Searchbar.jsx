@@ -55,7 +55,10 @@ export const Searchbar = ({ openSearchbar, setOpenSearchbar }) => {
 
    return (
       <Fragment>
-         <div className="fixed left-0 top-0 -z-10 h-screen w-full" onClick={() => setOpenSearchbar(false)} />
+         <div
+            className={`fixed left-0 top-0 -z-10 h-screen w-full ${openSearchbar ? "" : "hidden"}`}
+            onClick={() => setOpenSearchbar(false)}
+         />
          <Card
             className={`fixed left-1/2 top-36 w-full max-w-2xl -translate-x-1/2 bg-transparent shadow-none ${
                openSearchbar ? "" : "hidden"
