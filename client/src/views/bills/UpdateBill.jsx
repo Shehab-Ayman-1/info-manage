@@ -8,7 +8,7 @@ import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { Col, Row, Table } from "@/components/table";
 import { useDispatch, useSelector } from "react-redux";
-import { filterSelection, getLists } from "@/redux/slices/products";
+import { filterSelection, getLists } from "@/redux/products";
 
 const TABLE_HEAD_AR = ["التحكم", "المنتج", "العدد", "السعر", "الاجمالي"];
 const TABLE_HEAD_EN = ["Controll", "Product", "Count", "Price", "Total"];

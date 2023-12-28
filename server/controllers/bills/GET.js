@@ -1,7 +1,21 @@
 import mongoose from "mongoose";
 import { Bills } from "../../models/index.js";
 
-const monthsByName = ["", "يناير", "فبراير", "مارس", "ابريل", "مايو", "يونيو", "يوليو", "اغسطس", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"];
+const monthsByName = [
+	"",
+	"يناير",
+	"فبراير",
+	"مارس",
+	"ابريل",
+	"مايو",
+	"يونيو",
+	"يوليو",
+	"اغسطس",
+	"سبتمبر",
+	"اكتوبر",
+	"نوفمبر",
+	"ديسمبر",
+];
 const LIMIT = 10;
 
 export const GET_BILLS = async (req, res) => {
@@ -29,7 +43,8 @@ export const GET_BILLS = async (req, res) => {
 export const GET_BILL = async (req, res) => {
 	try {
 		const { id } = req.params;
-		if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ error: "حدث خطأ ، لم يتم العثور علي ID" });
+		if (!mongoose.Types.ObjectId.isValid(id))
+			return res.status(400).json({ error: "حدث خطأ ، لم يتم العثور علي ID" });
 
 		const bill = await Bills.findById(id);
 		if (!bill) return res.status(400).json({ error: "حدث خطأ ولم يتم العثور علي الفاتورة" });
@@ -53,35 +68,56 @@ export const GET_CLIENTS_NAMES = async (req, res) => {
 export const GET_CLIENTS_LIST = async (req, res) => {
 	try {
 		const { type } = req.query;
+
 		const list = await Bills.aggregate([
+			{ $unwind: "$products" },
+			{ $match: { type } },
 			{
-				$unwind: "$products",
+				$group: {
+					_id: { _id: "$_id", client: "$client" },
+					phone: { $first: "$phone" },
+					discount: { $sum: "$pay.discount" },
+					billsCost: { $sum: { $multiply: ["$products.count", "$products.price"] } },
+					paidCost: { $first: { $add: ["$pay.value", "$pay.discount"] } },
+					paid: { $first: { $add: ["$pay.value", "$pay.discount"] } },
+				},
 			},
 			{
-				$match: { type },
+				$project: {
+					_id: 0,
+					client: "$_id.client",
+					phone: 1,
+					discount: 1,
+					paidCost: 1,
+					billsCost: 1,
+				},
 			},
 			{
 				$group: {
 					_id: "$client",
-					billsCost: { $push: { $sum: { $multiply: ["$products.count", "$products.price"] } } },
-					phone: { $addToSet: "$phone" },
-					discount: { $addToSet: { $sum: "$pay.discount" } },
-					payValue: { $addToSet: "$pay.value" },
+					phone: { $first: "$phone" },
+					discount: { $sum: "$discount" },
+					billsCost: { $sum: "$billsCost" },
+					paidCost: { $sum: "$paidCost" },
 				},
 			},
 			{
 				$project: {
 					_id: 0,
 					client: "$_id",
-					billsCost: { $sum: "$billsCost" },
-					neededCost: {
-						$subtract: [{ $sum: "$billsCost" }, { $sum: [{ $sum: "$payValue" }, { $sum: "$discount" }] }],
+					phone: 1,
+					discount: 1,
+					billsCost: 1,
+					pendingCost: {
+						$subtract: ["$billsCost", "$paidCost"],
 					},
-					discount: { $sum: "$discount" },
-					phone: { $first: "$phone" },
 				},
 			},
+			{
+				$sort: { client: 1 },
+			},
 		]);
+
 		res.status(200).json(list);
 	} catch (error) {
 		res.status(404).json(`GET_CLIENTS_LIST: ${error.message}`);
@@ -176,8 +212,14 @@ export const GET_PRODUCT_MOVEMENT = async (req, res) => {
 			},
 		]);
 
-		const buys = list.find(({ type }) => type === "debt")?.data.map((item) => ({ date: `${item.month}-${item.day}`, series: item.series })) || [];
-		const sales = list.find(({ type }) => type === "bill")?.data.map((item) => ({ date: `${item.month}-${item.day}`, series: item.series })) || [];
+		const buys =
+			list
+				.find(({ type }) => type === "debt")
+				?.data.map((item) => ({ date: `${item.month}-${item.day}`, series: item.series })) || [];
+		const sales =
+			list
+				.find(({ type }) => type === "bill")
+				?.data.map((item) => ({ date: `${item.month}-${item.day}`, series: item.series })) || [];
 
 		res.status(200).json({ buys, sales });
 	} catch (error) {
@@ -340,3 +382,62 @@ export const GET_MONTHS_WINS = async (req, res) => {
 		res.status(404).json(`GET_MONTHS_WINS: ${error.message}`);
 	}
 };
+/* 
+const list = await Bills.aggregate([
+	{ $unwind: "$products" },
+	{ $match: { type } },
+	{
+		$group: {
+			_id: "$client",
+			phone: { $first: "$phone" },
+			discount: { $sum: "$pay.discount" },
+			billsCost: { $sum: { $multiply: ["$products.count", "$products.price"] } },
+			paidCost: { $sum: { $add: ["$pay.value", "$pay.discount"] } },
+		},
+	},
+	{
+		$project: {
+			_id: 0,
+			client: "$_id",
+			phone: 1,
+			discount: 1,
+			paidCost: 1,
+			billsCost: 1,
+			pendingCost: {
+				$subtract: ["$billsCost", "$paidCost"],
+			},
+		},
+	},
+]);
+	[
+		{
+			...,
+			client: "Shehab",
+			products: [
+				{
+					name: "A",
+					count: 1,
+					price: 1100
+				},
+				{
+					name: "B",
+					count: 2,
+					price: 1200
+				},
+			]
+		},
+		{
+			...,
+			client: "Hesham",
+			products: [
+				{
+					name: "C",
+					count: 3,
+					price: 1300
+				},
+			]
+		},
+	]
+	The Current BillsCost Output Is [3500, 3500, 3900] // Mistack Because Shehab Total Bill Cost Return Twice Because We Have 2 Products In The Products[]
+	The Required Output Is [3500, 3900]
+*/

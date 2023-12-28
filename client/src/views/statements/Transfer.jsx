@@ -3,7 +3,7 @@ import { TabPanel } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Field, Form, Selectbox, Switch, Tabs } from "@/components/ui";
-import { filterSelection, getLists, getSuppliers } from "@/redux/slices/products";
+import { filterSelection, getLists, getSuppliers } from "@/redux/products";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { useTranslation } from "react-i18next";

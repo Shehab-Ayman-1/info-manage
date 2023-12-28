@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getSearchList } from "@/redux/slices/products";
+import { getSearchList } from "@/redux/products";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { useTranslation } from "react-i18next";

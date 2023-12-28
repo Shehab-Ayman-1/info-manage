@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { filterSelection, getLists, setProducts } from "@/redux/slices/products";
+import { filterSelection, getLists, setProducts } from "@/redux/products";
 import { Field, Form, MTDialog, Selectbox } from "@/components/ui";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";

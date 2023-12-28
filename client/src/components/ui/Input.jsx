@@ -15,6 +15,7 @@ export const Field = ({
          type={type}
          variant={variant}
          size="lg"
+         min="0"
          color="deep-purple"
          autoComplete="off"
          className={`font-serif !text-xl caret-primary disabled:bg-transparent dark:text-white/80 md:!text-xl ${

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { setClients } from "@/redux/slices/bills";
+import { setClients } from "@/redux/bills";
 import { Field, Form } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";

@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Field, Form } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
-import { login } from "@/redux/slices/users";
+import { login } from "@/redux/users";
 
 export const Login = () => {
    const [text] = useTranslation();

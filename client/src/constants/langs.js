@@ -364,6 +364,10 @@ const show = {
          "clients-table-footer": "Total Pending Price",
          "clients-table-nobills": "No Bills Found",
          "clients-table-nodebts": "No Debts Found",
+         "clients-level-fresher": "fresher",
+         "clients-level-bronze": "bronze",
+         "clients-level-silver": "silver",
+         "clients-level-gold": "gold",
       },
       ar: {
          "clients-title-clients": "عرض العملاء",
@@ -371,6 +375,10 @@ const show = {
          "clients-table-footer": "اجمالي المبلغ المتبقي",
          "clients-table-nobills": "لا يوجد فواتير",
          "clients-table-nodebts": "لا يوجد مديونيات",
+         "clients-level-fresher": "جديد",
+         "clients-level-bronze": "برونز",
+         "clients-level-silver": "فضي",
+         "clients-level-gold": "ذهبي",
       },
    },
    bills: {

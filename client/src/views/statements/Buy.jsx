@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { filterSelection, getSuppliers } from "@/redux/slices/products";
+import { filterSelection, getSuppliers } from "@/redux/products";
 import { StatementForm } from "@/components/statements";
 import { Selectbox } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";

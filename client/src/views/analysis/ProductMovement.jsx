@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { filterSelection, getLists } from "@/redux/slices/products";
+import { filterSelection, getLists } from "@/redux/products";
 import { Chart, PageHead } from "@/components/ui";
 import { Selectbox } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import { PageHead, Selectbox } from "@/components/ui";
-import { getSuppliers } from "@/redux/slices/products";
+import { getSuppliers } from "@/redux/products";
 import { Col, Row, Table } from "@/components/table";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";

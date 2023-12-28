@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { getLists, filterSelection } from "@/redux/slices/products";
-import { getClients } from "@/redux/slices/bills";
+import { getLists, filterSelection } from "@/redux/products";
+import { getClients } from "@/redux/bills";
 import { Selectbox } from "@/components/ui";
 import { StatementForm } from "@/components/statements";
 import { useAxios } from "@/hooks/useAxios";
