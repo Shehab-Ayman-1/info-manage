@@ -1,8 +1,71 @@
 import { Products, Locker, Bills } from "../../models/index.js";
 
+const messages = {
+	sale: {
+		en: {
+			msg1: "Only this quantity is available in",
+			msg2: "The amount collected is greater than the invoice amount",
+			msg3: "An error occurred and these products were not modified",
+			msg4: "Your Selling Has Been Confirmed Successfully",
+		},
+		ar: {
+			msg1: "يتوفر فقط هذه الكمية في",
+			msg2: "المبلغ المحصل اكبر من مبلغ الفاتورة",
+			msg3: "لم يتم تعديل هذه المنتجات",
+			msg4: "لقد تمت عملية البيع بنجاح",
+		},
+	},
+	buy: {
+		en: {
+			msg1: "This Amount Is Not Available In The Locker",
+			msg2: "The Amount Collected Is Greater Than The Invoice Amount",
+			msg3: "These Products Have Not Been Purchased",
+			msg4: "Your Purchase Has Been Confirmed Successfully",
+		},
+		ar: {
+			msg1: "لا يتوفر هذا المبلغ في الخزنة",
+			msg2: "المبلغ المحصل اكبر مبلغ الفاتورة",
+			msg3: "لم يتم شراء هذه المنتجات",
+			msg4: "لقد تم تاكيد عملية الشراء بنجاح",
+		},
+	},
+	transfer: {
+		en: {
+			msg1: (count, toStore) => `Just [${count}] Are The Available Amount In The ${toStore ? "Shop" : "Store"}`,
+			msg2: "An error occurred and the product was not converted",
+			msg3: "The product has been converted successfully",
+		},
+		ar: {
+			msg1: (count, toStore) => `يتوفر فقط [${count}] في ${toStore ? "المحل" : "المخزن"}`,
+			msg2: "حدث خطأ ولم يتم تحويل المنتج",
+			msg3: "لقد تم تحويل المنتج بنجاح",
+		},
+	},
+	place: {
+		en: {
+			store: "Store",
+			shop: "Shop",
+		},
+		ar: {
+			store: "المخزن",
+			shop: "المحل",
+		},
+	},
+	statements: {
+		en: {
+			sale: "Bill Statement",
+			buy: "Supplier Statement",
+		},
+		ar: {
+			sale: "كشف حساب",
+			buy: "كشف مندوب",
+		},
+	},
+};
+
 export const SALE_PRODUCTS = async (req, res) => {
 	try {
-		const { client, discount, toStore, clientPay, products } = req.body;
+		const { client, discount, toStore, clientPay, products, lang } = req.body;
 
 		// Get The Products Company
 		const totalProductsCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
@@ -18,13 +81,15 @@ export const SALE_PRODUCTS = async (req, res) => {
 
 		const warnIndexes = (await Promise.all(checkCount)).filter((item) => item);
 		if (warnIndexes.length)
-			return res
-				.status(200)
-				.json({ warn: `يتوفر فقط هذه الكمية في ${toStore ? "مخزن" : "محل"}: [${warnIndexes.join(" | ")}]` });
+			return res.status(200).json({
+				warn: `${messages.sale[lang]?.msg1} ${
+					toStore ? messages.place[lang]?.store : messages.place[lang]?.shop
+				}: [${warnIndexes.join(" | ")}]`,
+			});
 
 		// Check If The Client Pay Is Greater Than Total Products Cost
 		if (+totalProductsCost < +clientPay + +discount)
-			return res.status(200).json({ warn: "المبلغ المحصل اكبر من مبلغ الفاتورة" });
+			return res.status(200).json({ warn: messages.sale[lang]?.msg2 });
 
 		// Update Products
 		const place = toStore ? "products.$.count.store" : "products.$.count.shop";
@@ -41,7 +106,7 @@ export const SALE_PRODUCTS = async (req, res) => {
 
 		const result = (await Promise.all(promises)).filter((item) => item);
 		if (result.length)
-			return res.status(200).json({ warn: `حدث خطأ ولم يتم تعديل هذه المنتجات [${result.join(" | ")}]` });
+			return res.status(200).json({ warn: `${messages.sale[lang]?.msg3} [${result.join(" | ")}]` });
 
 		// Create New Bill With The Client Pay
 		const bill = await Bills.findOne({ client });
@@ -55,10 +120,11 @@ export const SALE_PRODUCTS = async (req, res) => {
 		});
 
 		// Append Client Pay To The Locker
-		if (+clientPay) await Locker.create({ name: `كشف حساب [${client}]`, price: +clientPay });
+		if (+clientPay)
+			await Locker.create({ name: `${messages.statements[lang]?.sale} [${client}]`, price: +clientPay });
 
 		// Send Response
-		res.status(200).json({ success: "لقد تم تاكيد كشف الحساب بنجاح" });
+		res.status(200).json({ success: messages.sale[lang]?.msg4 });
 	} catch (error) {
 		res.status(404).json(`SALE_PRODUCTS: ${error.message}`);
 	}
@@ -66,17 +132,16 @@ export const SALE_PRODUCTS = async (req, res) => {
 
 export const BUY_PRODUCTS = async (req, res) => {
 	try {
-		const { supplier, discount, adminPay, toStore, products } = req.body;
+		const { supplier, discount, adminPay, toStore, products, lang } = req.body;
 
 		// Check If The Products Cost In The Locker
 		const lockerCost = await Locker.find().findTotalPrices();
-		console.log(lockerCost);
-		if (+lockerCost < +adminPay) return res.status(200).json({ warn: "لا يتوفر هذا المبلغ في الخزنة" });
+		if (+lockerCost < +adminPay) return res.status(200).json({ warn: messages.buy[lang]?.msg1 });
 
 		// Check If The Client Pay Greater Than Total Products Cost
 		const totalProductsCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
 		if (+totalProductsCost < +adminPay + +discount)
-			return res.status(200).json({ warn: "المبلغ المحصل اكبر مبلغ الفاتورة" });
+			return res.status(200).json({ warn: messages.buy[lang]?.msg2 });
 
 		// Update Products
 		const place = toStore ? "products.$.count.store" : "products.$.count.shop";
@@ -90,7 +155,7 @@ export const BUY_PRODUCTS = async (req, res) => {
 
 		const result = (await Promise.all(promises)).filter((item) => item);
 		if (result.length)
-			return res.status(200).json({ warn: `حدث خطأ ولم يتم شراء هذه المنتجات [${result.join(" | ")}]` });
+			return res.status(200).json({ warn: `${messages.buy[lang]?.msg3} [${result.join(" | ")}]` });
 
 		// Create New Bill With The Admin Pay
 		const bill = await Bills.findOne({ client: supplier });
@@ -104,10 +169,11 @@ export const BUY_PRODUCTS = async (req, res) => {
 		});
 
 		// Append Client Pay To The Locker
-		if (+adminPay) await Locker.create({ name: `كشف مندوب [${supplier}]`, price: -adminPay });
+		if (+adminPay)
+			await Locker.create({ name: `${messages.statements[lang]?.buy} [${supplier}]`, price: -adminPay });
 
 		// Send Response
-		res.status(200).json({ success: "لقد تم تاكيد كشف المندوب بنجاح" });
+		res.status(200).json({ success: messages.buy[lang]?.msg4 });
 	} catch (error) {
 		res.status(404).json(`BUY_PRODUCTS: ${error.message}`);
 	}
@@ -115,7 +181,7 @@ export const BUY_PRODUCTS = async (req, res) => {
 
 export const TRANSFER_PRODUCTS = async (req, res) => {
 	try {
-		const { category, company, name, supplier, count, toStore } = req.body;
+		const { category, company, name, supplier, count, toStore, lang } = req.body;
 
 		// Chatch The Product
 		const comp = await Products.findOne({
@@ -126,14 +192,11 @@ export const TRANSFER_PRODUCTS = async (req, res) => {
 		// Check If The Transfered Count Is Available
 		const totalCount = toStore ? prod?.count.shop : prod?.count.store;
 		if (!totalCount || totalCount < +count)
-			return res.status(200).json({ warn: `يتوفر فقط [${totalCount}] في ${toStore ? "المحل" : "المخزن"}` });
+			return res.status(200).json({ warn: messages.transfer[lang]?.msg1(totalCount, toStore) });
 
 		// Update The Product
 		const updated = await Products.updateOne(
-			{
-				$or: [{ category, company }, { "products.suppliers": supplier }],
-				"products.name": name,
-			},
+			{ "products.name": name, $or: [{ category, company }, { "products.suppliers": supplier }] },
 			{
 				$inc: {
 					"products.$.count.store": toStore ? count : -count,
@@ -142,8 +205,8 @@ export const TRANSFER_PRODUCTS = async (req, res) => {
 			}
 		);
 
-		if (!updated.modifiedCount) return res.status(200).json({ warn: "حدث خطأ ولم يتم تحويل المنتج" });
-		res.status(200).json({ success: "لقد تم تحويل المنتج بنجاح" });
+		if (!updated.modifiedCount) return res.status(400).json({ error: messages.transfer[lang]?.msg2 });
+		res.status(200).json({ success: messages.transfer[lang]?.msg3 });
 	} catch (error) {
 		res.status(404).json(`TRANSFER_PRODUCTS: ${error.message}`);
 	}

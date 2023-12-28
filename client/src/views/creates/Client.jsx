@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { setClients } from "@/redux/slices/bills";
-import { Field, Form } from "@/components/public";
+import { Field, Form } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { useTranslation } from "react-i18next";

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Col, Row, Table } from "@/components/table";
 import { useAxios } from "@/hooks";
 import { Loading } from "@/layout/Loading";
-import { PageHead } from "@/components/public";
+import { PageHead } from "@/components/ui";
 
 const TABLE_HEAD_AR = ["#", "السبب", "العملية", "المبلغ", "التاريخ"];
 const TABLE_HEAD_EN = ["#", "Reason", "Process", "Cost", "Date"];

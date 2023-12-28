@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { Field, Form, Selectbox } from "@/components/public";
+import { Field, Form, Selectbox } from "@/components/ui";
 import { Table, Row, Col } from "@/components/table";
 import { Loading } from "@/layout/Loading";
 

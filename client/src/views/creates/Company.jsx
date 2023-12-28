@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import { getLists, setCompanies } from "@/redux/slices/products";
-import { Field, Form, Selectbox } from "@/components/public";
+import { Field, Form, Selectbox } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { carLogo } from "@/assets";

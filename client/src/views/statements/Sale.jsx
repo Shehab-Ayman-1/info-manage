@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { getLists, filterSelection } from "@/redux/slices/products";
 import { getClients } from "@/redux/slices/bills";
-import { Selectbox } from "@/components/public";
+import { Selectbox } from "@/components/ui";
 import { StatementForm } from "@/components/statements";
 import { useAxios } from "@/hooks/useAxios";
 
@@ -16,7 +16,7 @@ const formState = {
    products: [],
 };
 export const SaleStatement = () => {
-   const [text] = useTranslation();
+   const [text, i18next] = useTranslation();
 
    const [formData, setFormData] = useState(formState);
    const [product, setProduct] = useState({
@@ -90,7 +90,7 @@ export const SaleStatement = () => {
       if (!Object.values(data).every((u) => u)) return alert("يجب ادخال جميع البيانات المطلوبة");
 
       if (!formData.products.length) return alert("يجب ادخال منتج واحد علي الاقل في الفاتورة");
-      await refetch("put", "/products/sale-products", formData);
+      await refetch("put", "/products/sale-products", { ...formData, lang: i18next.language });
    };
 
    return (

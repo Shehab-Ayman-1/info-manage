@@ -2,7 +2,7 @@ import { Card } from "@material-tailwind/react";
 import { useTranslation } from "react-i18next";
 
 import { Table, Row, Col } from "@/components/table";
-import { PageHead } from "@/components/public";
+import { PageHead } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 

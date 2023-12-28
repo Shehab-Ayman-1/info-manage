@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { TabPanel } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Field, Form, Selectbox, Switch, Tabs } from "@/components/public";
+import { Field, Form, Selectbox, Switch, Tabs } from "@/components/ui";
 import { filterSelection, getLists, getSuppliers } from "@/redux/slices/products";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
@@ -76,13 +76,13 @@ export const TransferStatement = () => {
       if (supplierData.supplier) {
          const { toStore, ...data } = supplierData;
          if (!Object.values(data).every((p) => p)) return alert("يجب ادخال جميع البيانات المطلوبة");
-         await sRefetch("put", `/products/transfer-products`, supplierData);
+         await sRefetch("put", `/products/transfer-products`, { ...supplierData, lang: i18next.language });
       }
 
       if (categoryData.category) {
          const { toStore, ...data } = categoryData;
          if (!Object.values(data).every((p) => p)) return alert("يجب ادخال جميع البيانات المطلوبة");
-         await sRefetch("put", `/products/transfer-products`, categoryData);
+         await sRefetch("put", `/products/transfer-products`, { ...categoryData, lang: i18next.language });
       }
    };
 
@@ -95,8 +95,6 @@ export const TransferStatement = () => {
       { name: "Supplier", value: "supplier", reset: () => setCategoryData(categoryState) },
       { name: "Category", value: "category", reset: () => setSupplierData(supplierData) },
    ];
-
-   console.log(supplierData.toStore);
 
    return (
       <Form

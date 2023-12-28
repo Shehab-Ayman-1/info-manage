@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
-import { PageHead, Selectbox, Switch } from "@/components/public";
+import { PageHead, Selectbox, Switch } from "@/components/ui";
 import { Table, Row, Col } from "@/components/table";
 
 const TABLE_HEAD_AR = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];

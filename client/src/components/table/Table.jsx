@@ -1,7 +1,7 @@
 import { Card } from "@material-tailwind/react";
 import { Fragment } from "react";
 
-import { Pagination } from "../public";
+import { Pagination } from "../ui";
 import { Foot } from "./Foot";
 import { Head } from "./Head";
 

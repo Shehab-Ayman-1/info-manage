@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { Field, Form } from "@/components/public";
+import { Field, Form } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { login } from "@/redux/slices/users";

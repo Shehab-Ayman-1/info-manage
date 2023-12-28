@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Field, MTDialog, PageHead, Pagination } from "@/components/public";
+import { Field, MTDialog, PageHead, Pagination } from "@/components/ui";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
 
@@ -88,8 +88,6 @@ export const BillPage = ({
       setOpenDialog(false);
    };
 
-   console.log(payment);
-
    return (
       <Card className="bg-transparent shadow-none">
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={paymentData} />
@@ -162,7 +160,7 @@ export const BillPage = ({
          </div>
 
          <Typography variant="h3" color="gray" className={!filterResult?.length || !data?.length ? "" : "hidden"}>
-            لا يوجد نتائج بحث
+            {text("bills-noresult")}
          </Typography>
 
          <MTDialog

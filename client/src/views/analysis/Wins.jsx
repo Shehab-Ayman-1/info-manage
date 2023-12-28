@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Chart, PageHead } from "@/components/public";
+import { Chart, PageHead } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 

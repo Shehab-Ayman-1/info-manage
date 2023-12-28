@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-
 import { routes } from "@/constants/routes";
+import axios from "axios";
 
 let router;
 if (import.meta.env.MODE === "production") router = axios.create(routes.remote);
@@ -51,6 +50,5 @@ export const useAxios = (method, url, body, options) => {
    }, [method, url, body, options]);
 
    const refetch = async (method, url, body, options) => await fetcher(method, url, body, options);
-
    return { data, loading, error, isSubmitted, status, refetch, setData };
 };

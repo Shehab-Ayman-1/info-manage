@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Col, Row, Table } from "@/components/table";
-import { PageHead } from "@/components/public";
+import { PageHead } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { Button } from "@material-tailwind/react";

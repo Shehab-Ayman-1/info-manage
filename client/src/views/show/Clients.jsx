@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Col, Row, Table } from "@/components/table";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
-import { PageHead } from "@/components/public";
+import { PageHead } from "@/components/ui";
 
 const TABLE_HEAD_AR = ["#", "العميل", "رقم الهاتف", "الخصومات", "تكلفه الفواتير", "المبلغ المتبقي"];
 const TABLE_HEAD_EN = ["#", "Client", "Phone", "Discounts", "Bills Cost", "Pending Cost"];
@@ -30,6 +30,12 @@ export const ShowClients = () => {
       if (debts) setTotal((total) => ({ ...total, debts: debts.reduce((prev, cur) => prev + cur.neededCost, 0) }));
    }, [bills, debts]);
 
+   const layersColors = (cost) => {
+      if (cost > 10000 && cost < 20000) return "text-brown-500";
+      if (cost > 20000 && cost < 30000) return "text-orange-500";
+      if (cost > 30000) return "text-brown-500";
+   };
+
    return (
       <Fragment>
          <Loading isSubmitted={bIsSubmitted} loading={bLoading} error={bError} message={bills} />
@@ -48,7 +54,7 @@ export const ShowClients = () => {
             total={total?.bills}
          >
             {bills?.map(({ client, phone, discount, billsCost, neededCost }, i) => (
-               <Row key={i} index={i}>
+               <Row key={i} index={i} className={layersColors(billsCost)}>
                   <Col>{i + 1}</Col>
                   <Col>{client}</Col>
                   <Col>{phone || "----"}</Col>

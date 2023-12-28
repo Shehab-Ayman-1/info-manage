@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Field, Form, MTDialog, Selectbox } from "@/components/public";
+import { Field, Form, MTDialog, Selectbox } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { Col, Row, Table } from "@/components/table";

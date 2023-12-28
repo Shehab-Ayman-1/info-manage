@@ -2,7 +2,7 @@ import { Typography } from "@material-tailwind/react";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { PageHead, Selectbox } from "@/components/public";
+import { PageHead, Selectbox } from "@/components/ui";
 import { Col, Row, Table } from "@/components/table";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";

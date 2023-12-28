@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import { filterSelection, getLists } from "@/redux/slices/products";
-import { Chart, PageHead } from "@/components/public";
-import { Selectbox } from "@/components/public";
+import { Chart, PageHead } from "@/components/ui";
+import { Selectbox } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 

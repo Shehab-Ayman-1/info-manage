@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { Field, Form, MTDialog, Selectbox, Switch } from "@/components/public";
+import { Field, Form, MTDialog, Selectbox, Switch } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 import { ADMIN } from "@/constants/users";

@@ -132,6 +132,7 @@ export const links = [
             link: "balances",
             role: "admin",
             icon: "fas fa-scale-unbalanced",
+            // disabled: true,
             Component: ShowBalances,
          },
          {

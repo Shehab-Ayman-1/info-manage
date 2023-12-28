@@ -4,16 +4,16 @@ import { useTranslation } from "react-i18next";
 
 import { filterSelection, getSuppliers } from "@/redux/slices/products";
 import { StatementForm } from "@/components/statements";
-import { Selectbox } from "@/components/public";
+import { Selectbox } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 
 const formState = { supplier: "", discount: "", adminPay: "", toStore: true, products: [] };
 export const BuyStatement = () => {
-   const [text] = useTranslation();
+   const [text, i18next] = useTranslation();
    const { refetch: sRefetch } = useAxios();
    const { data, isSubmitted, loading, error, refetch } = useAxios();
    const [formData, setFormData] = useState(formState);
-   const [product, setProduct] = useState({ name: "", count: '', price: '' });
+   const [product, setProduct] = useState({ name: "", count: "", price: "" });
    const { suppliers, products } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 
@@ -48,7 +48,7 @@ export const BuyStatement = () => {
    const handleSubmit = async (event) => {
       event.preventDefault();
       if (!formData.products.length) return alert("يجب ادخال منتج واحد علي الاقل في الفاتورة");
-      await refetch("put", "/products/buy-products", formData);
+      await refetch("put", "/products/buy-products", { ...formData, lang: i18next.language });
    };
 
    return (

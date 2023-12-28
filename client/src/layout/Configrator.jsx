@@ -1,13 +1,14 @@
-import { Selectbox } from "@/components/public";
 import { Button, Drawer, IconButton, Typography } from "@material-tailwind/react";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { Selectbox } from "@/components/ui";
+
 export const Configrator = () => {
    const [text, i18next] = useTranslation();
 
-   const [open, setOpen] = useState(false);
    const [lang, setLang] = useState(localStorage.getItem("lang") || "en");
+   const [open, setOpen] = useState(false);
 
    useLayoutEffect(() => {
       const mode = localStorage.getItem("mode") || "light";

@@ -375,6 +375,7 @@ const show = {
    },
    bills: {
       en: {
+         "bills-noresult": "There Are No Search Result",
          "bills-title": "Show Bills",
          "debts-title": "Show Debts",
          "bills-widget-title": "Payment Bill",
@@ -385,6 +386,7 @@ const show = {
          "bills-widget-btn": "Pay",
       },
       ar: {
+         "bills-noresult": "لا يوجد نتائج بحث",
          "bills-title": "عرض الفواتير",
          "debts-title": "عرض المديونيات",
          "bills-widget-title": "دفع فاتورة",

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { filterSelection, getLists, setProducts } from "@/redux/slices/products";
-import { Field, Form, MTDialog, Selectbox } from "@/components/public";
+import { Field, Form, MTDialog, Selectbox } from "@/components/ui";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
 

@@ -3,7 +3,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { PageHead, Selectbox } from "@/components/public";
+import { PageHead, Selectbox } from "@/components/ui";
 import { getSuppliers } from "@/redux/slices/products";
 import { Col, Row, Table } from "@/components/table";
 import { useAxios } from "@/hooks/useAxios";
