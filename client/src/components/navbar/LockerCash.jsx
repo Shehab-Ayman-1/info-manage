@@ -24,8 +24,8 @@ export const LockerCash = () => {
          variant="small"
          className="mb-0 whitespace-nowrap pb-1 text-base font-bold text-primary sm:text-xl"
       >
-         {Math.round(+data / 1000) || "00,00"}
-         <span className="px-1">K</span>
+         {(+data / 1000).toFixed(3)}
+         <span className="px-1 text-base">K</span>
       </Typography>
    );
 };

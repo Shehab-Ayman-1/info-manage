@@ -241,7 +241,6 @@ export const GET_SUPPLIERS_LIST = async (req, res) => {
 						$push: {
 							name: "$products.name",
 							buyPrice: "$products.price.buy",
-							salePrice: "$products.price.sale",
 						},
 					},
 				},

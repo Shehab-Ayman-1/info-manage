@@ -2,7 +2,7 @@ import { Button, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const buttonStyle = "mt-5 rtl:pb-5 text-xl hover:brightness-125";
+const buttonStyle = "mt-5 rtl:pb-6 text-xl hover:brightness-125";
 export const Home = () => {
    const [text] = useTranslation();
    const navigate = useNavigate();
@@ -22,7 +22,7 @@ export const Home = () => {
          <div className="flex-center flex-wrap">
             <Button
                to="/show/store"
-               size="sm"
+               size="lg"
                variant="gradient"
                color="deep-purple"
                className={`${buttonStyle}`}
@@ -32,7 +32,7 @@ export const Home = () => {
             </Button>
             <Button
                to="/show/store"
-               size="sm"
+               size="lg"
                variant="outlined"
                color="deep-purple"
                className={`border-sp ${buttonStyle}`}

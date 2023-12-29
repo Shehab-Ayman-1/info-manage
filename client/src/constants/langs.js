@@ -105,10 +105,10 @@ const table = {
 const navbar = {
    logo: {
       en: {
-         "navbar-logo": "Dawly Center",
+         "navbar-logo": "Info Manage",
       },
       ar: {
-         "navbar-logo": "المركز الدولي",
+         "navbar-logo": "منظومتي",
       },
    },
    user: {
@@ -243,16 +243,16 @@ const configrator = {
 
 const home = {
    en: {
-      "home-title": "Dawly Center",
-      "home-subtitle1": "For Trade, Distribution, Auto Parts, Transportation,",
-      "home-subtitle2": "And Car Wash",
+      "home-title": "Info Manage",
+      "home-subtitle1": "A flexible and powerful platform for managing any data",
+      "home-subtitle2": "shops, stores and monitor statistics with ease and efficiency",
       "home-shop-btn": "Shop Products",
       "home-statement-btn": "Bill Statement",
    },
    ar: {
-      "home-title": "المركز الدولي",
-      "home-subtitle1": "للتجارة والتوزيع وقطع غيار السيارات والنقل",
-      "home-subtitle2": "وغسيل السيارات",
+      "home-title": "منظومتي",
+      "home-subtitle1": "منصة مرنة وقوية لإدارة أي بيانات",
+      "home-subtitle2": "للمحلات والمخازن ورصد الاحصائيات بكل سهولة وكفاءة",
       "home-shop-btn": "عرض منتجات المحل",
       "home-statement-btn": "كشف حساب",
    },
@@ -635,8 +635,8 @@ const bills = {
          "showBill-pending-cost": "Remaining Cost",
          "showBill-paid-cost": "Paid Cost",
          "showBill-discount": "Discount",
-         "showBill-address": "Dawly Center for Auto Spare Parts",
-         "showBill-subAddress": "Al-Amriya - 365 street - in front of New hospital",
+         "showBill-address": "Info Manage for distribution trade",
+         "showBill-subAddress": "City - Town - Street - More Details",
       },
       ar: {
          "showBill-client": "العميل: ",
@@ -645,8 +645,8 @@ const bills = {
          "showBill-pending-cost": "المبلغ المتبقي",
          "showBill-paid-cost": "المبلغ المدفوع",
          "showBill-discount": "الخصم",
-         "showBill-address": "المركز الدولي لقطع غيار السيارات",
-         "showBill-subAddress": "العمرية - شارع 365 - امام المستشفي الجديدة",
+         "showBill-address": "منظومتي للتجارة والتوزيع",
+         "showBill-subAddress": "المدينه - المنطقة - الشارع - تفاصيل اخري",
       },
    },
    update: {
@@ -660,9 +660,10 @@ const bills = {
          "updateBill-type": "Bill Type:",
          "updateBill-type-completed": "Completed",
          "updateBill-type-notCompleted": "Not Completed",
-         "updateBill-discount": "Discount",
+         "updateBill-price": "Paid - Discount:",
          "updateBill-add-btn": "Insert Product",
          "updateBill-updateWidget-title": "Update Product",
+         "updateBill-newWidget-desc": "(+) Nums For Increament, And (-) Nums For Decreament",
          "updateBill-newWidget-title": "Insert Product",
          "updateBill-newWidget-buyPrice": "Purchase Price",
          "updateBill-newWidget-salePrice": "Sale Price",
@@ -678,9 +679,10 @@ const bills = {
          "updateBill-type": "نوع الفاتورة",
          "updateBill-type-completed": "منتهية",
          "updateBill-type-notCompleted": "غير منتهية",
-         "updateBill-discount": "الخصم",
+         "updateBill-price": "المدفوع - الخصم:",
          "updateBill-add-btn": "اضافه منتج جديد",
          "updateBill-updateWidget-title": "تعديل المنتج",
+         "updateBill-newWidget-desc": "الارقام (+) للاضافه و(-) للارقام السالبه",
          "updateBill-newWidget-title": "اضافه منتج",
          "updateBill-newWidget-buyPrice": "سعر الشراء",
          "updateBill-newWidget-salePrice": "سعر البيع",

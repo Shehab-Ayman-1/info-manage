@@ -167,7 +167,7 @@ export const BillPage = ({
             buttonText={text("bills-widget-btn")}
             headerText={text("bills-widget-title")}
             open={openDialog}
-            loading={loading || true}
+            loading={loading || (isSubmitted && (error || data?.warn))}
             handler={handleOpenDialog}
             onSubmit={handlePayment}
          >

@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 export const ShowBills = () => {
    const [text] = useTranslation();
 
-   const { data: pay, loading: pLoading, error: pError, isSubmitted: IsSubmitted, refetch: pRefetch } = useAxios();
+   const { data: pay, loading: pLoading, error: pError, isSubmitted: pIsSubmit, refetch: pRefetch } = useAxios();
    const { data, loading, error, isSubmitted, refetch } = useAxios();
 
    const [activePage, setActivePage] = useState(0);
@@ -42,7 +42,7 @@ export const ShowBills = () => {
             handleSubmit={handleSubmit}
             paymentData={pay}
             loading={pLoading}
-            isSubmitted={IsSubmitted}
+            isSubmitted={pIsSubmit}
             error={pError}
          />
       </Fragment>

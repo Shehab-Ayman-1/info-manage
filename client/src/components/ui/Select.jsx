@@ -22,20 +22,20 @@ export const Selectbox = ({
          variant="standard"
          color="deep-purple"
          size="lg"
-         className="select-box w-full text-base caret-primary dark:text-white/80 md:text-xl"
          required
          selected={(element) =>
             element &&
             cloneElement(value ? element : <p>{label}</p>, {
                disabled: true,
-               className: "flex items-center opacity-100 gap-2 pointer-events-none",
+               className: "flex-start opacity-100 pointer-events-none",
             })
          }
+         className="select-box w-full text-base caret-primary dark:text-white/80 md:text-xl"
          containerProps={{
-            className: `h-14 md:h-20 border-b-sp !border-deep-purple-300 ${containerStyle}`,
+            className: `h-14 md:h-20 border-b-sp mt-4 !border-deep-purple-300 ${containerStyle}`,
          }}
          labelProps={{
-            className: `text-xl peer-focus:text-xl peer-placeholder-shown:text-xl ${labelStyle}`,
+            className: `text-xl peer-focus:text-xl -top-4 md:-top-1.5 peer-placeholder-shown:text-xl ${labelStyle}`,
          }}
          menuProps={{
             className: `bg-gradient py-3 ${menuStyle}`,
@@ -59,7 +59,7 @@ export const Selectbox = ({
             </Option>
          ) : (
             <Option className="text-xl" value="">
-               {i18next.language === "en" ? "There Are No Search Results" : "لا يوجد نتائج بحث"}
+               {i18next.language === "en" ? "No Search Result Was Found 🤷‍♂️" : "لا يوجد نتائج بحث"}
             </Option>
          )}
       </Select>

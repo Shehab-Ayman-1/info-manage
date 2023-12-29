@@ -1,6 +1,11 @@
 import express from "express";
 import { GET_CLIENTS_NAMES, GET_CLIENTS_LIST, GET_BILLS, GET_BILL } from "../controllers/bills/GET.js";
-import { GET_PRODUCT_MOVEMENT, GET_MONTHS_SALES, GET_MONTHS_WINS, GET_TODAY_RESET } from "../controllers/bills/GET.js";
+import {
+	GET_PRODUCT_MOVEMENT,
+	GET_MONTHS_SALES,
+	GET_MONTHS_WINS,
+	GET_TODAY_RESET,
+} from "../controllers/bills/GET.js";
 import { CREATE_CLIENT } from "../controllers/bills/CREATE.js";
 import { PAYMENT, UPDATE_BILL } from "../controllers/bills/UPDATE.js";
 import { DELETE_BILL } from "../controllers/bills/DELETE.js";

@@ -33,8 +33,8 @@ export const Show_Shop_Store = () => {
 
    const minmax = (count, min, max) => {
       if (count <= 0) return "text-blue-gray-500/50 dark:text-blue-gray-700";
-      else if (count > 0 && count <= min) return "text-red-500 dark:text-red-500";
-      else if (count > min && count <= max) return "text-orange-500 dark:text-orange-500";
+      else if (count > 0 && count < min) return "text-red-500 dark:text-red-500";
+      else if (count > min && count < max) return "text-orange-500 dark:text-orange-500";
       else return "text-blue-gray-500 dark:text-blue-gray-200";
    };
 
