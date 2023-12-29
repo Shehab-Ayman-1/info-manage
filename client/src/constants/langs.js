@@ -40,6 +40,10 @@ const general = {
       recievedcost: "Recieved Cost",
       paidcost: "paid Cost",
 
+      paymentMethod: "Payment Method",
+      visa: "Visa",
+      cash: "Cash",
+
       store: "Store",
       shop: "Shop",
    },
@@ -83,6 +87,10 @@ const general = {
       discount: "الخصم",
       recievedcost: "المبلغ المحصل",
       paidcost: "المبلغ المدفوع",
+
+      paymentMethod: "طريقة الدفع",
+      visa: "فيزا",
+      cash: "كاش",
 
       store: "المخزن",
       shop: "المحل",

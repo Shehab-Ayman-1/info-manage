@@ -12,21 +12,16 @@ const formState = {
    client: "عميل غير معروف",
    clientPay: "",
    discount: "",
+   paymentMethod: "", // visa, cash
    toStore: false,
    products: [],
 };
+const productState = { category: "", company: "", name: "", count: "", price: "", buyPrice: 0 };
 export const SaleStatement = () => {
    const [text, i18next] = useTranslation();
 
    const [formData, setFormData] = useState(formState);
-   const [product, setProduct] = useState({
-      category: "",
-      company: "",
-      name: "",
-      count: "",
-      price: "",
-      buyPrice: 0,
-   });
+   const [product, setProduct] = useState(productState);
 
    const { loading: ccLoading, isSubmitted: ccIsSubmitted, refetch: ccRefetch } = useAxios();
    const { data, isSubmitted, loading, error, refetch } = useAxios();

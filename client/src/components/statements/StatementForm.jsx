@@ -62,11 +62,20 @@ export const StatementForm = ({
       });
    };
 
+   console.log(formData.paymentMethod);
+
    return (
       <Form onSubmit={onSubmit} headerText={headerText} buttonText={buttonText}>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
          {children}
+
+         <Selectbox
+            label={text("paymentMethod")}
+            value={formData.paymentMethod ? text("visa") : text("cash")}
+            options={[text("visa"), text("cash")]}
+            onChange={(value) => setFormData((data) => ({ ...data, paymentMethod: value }))}
+         />
 
          <Selectbox
             label={text("place")}

@@ -65,7 +65,7 @@ const messages = {
 
 export const SALE_PRODUCTS = async (req, res) => {
 	try {
-		const { client, discount, toStore, clientPay, products, lang } = req.body;
+		const { client, discount, paymentMethod, toStore, clientPay, products, lang } = req.body;
 
 		// Get The Products Company
 		const totalProductsCost = products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
@@ -120,7 +120,7 @@ export const SALE_PRODUCTS = async (req, res) => {
 		});
 
 		// Append Client Pay To The Locker
-		if (+clientPay)
+		if (+clientPay && paymentMethod.toLowerCase() === "cash")
 			await Locker.create({ name: `${messages.statements[lang]?.sale} [${client}]`, price: +clientPay });
 
 		// Send Response

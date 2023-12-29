@@ -7,13 +7,23 @@ import { StatementForm } from "@/components/statements";
 import { Selectbox } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 
-const formState = { supplier: "", discount: "", adminPay: "", toStore: true, products: [] };
+const formState = {
+   supplier: "",
+   discount: "",
+   paymentMethod: "", // visa, cash
+   adminPay: "",
+   toStore: true,
+   products: [],
+};
 export const BuyStatement = () => {
    const [text, i18next] = useTranslation();
+
    const { refetch: sRefetch } = useAxios();
    const { data, isSubmitted, loading, error, refetch } = useAxios();
+
    const [formData, setFormData] = useState(formState);
    const [product, setProduct] = useState({ name: "", count: "", price: "" });
+
    const { suppliers, products } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 
