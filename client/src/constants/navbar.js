@@ -7,7 +7,7 @@ import { Home, Profile } from "@/views";
 import { Login, Register } from "@/views/auths";
 
 // Show
-import { Show_Shop_Store, ShowClients, ShowBalances } from "@/views/show";
+import { ShowClients, ShowBalances, ShowStore, ShowShop } from "@/views/show";
 import { ShowLockerProcesses, ShowBills, ShowDebts } from "@/views/show";
 
 // Creates
@@ -102,14 +102,14 @@ export const links = [
             link: "shop",
             role: "user",
             icon: "fas fa-store-alt",
-            Component: Show_Shop_Store,
+            Component: ShowShop,
          },
          {
             name: text("show-store"),
             link: "store",
             role: "user",
             icon: "fas fa-warehouse",
-            Component: Show_Shop_Store,
+            Component: ShowStore,
          },
          {
             name: text("locker-transections"),

@@ -8,14 +8,7 @@ import { Form, Selectbox } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
-const formState = {
-   supplier: "",
-   discount: "",
-   paymentMethod: "", // visa, cash
-   adminPay: "",
-   toStore: true,
-   products: [],
-};
+const formState = { supplier: "", discount: "", paymentMethod: "", adminPay: "", toStore: true, products: [] };
 export const BuyStatement = () => {
    const [text, i18next] = useTranslation();
 
@@ -50,11 +43,6 @@ export const BuyStatement = () => {
       dispatch(filterSelection({ process: "suppliers", supplier: formData.supplier }));
    }, [formData.supplier]);
 
-   const handleSelectChange = (name, value) => {
-      if (name === "supplier") return setFormData(() => ({ ...formState, supplier: value }));
-      setProduct((data) => ({ ...data, [name]: value }));
-   };
-
    const handleSubmit = async (event) => {
       event.preventDefault();
       if (!formData.products.length) return alert("يجب ادخال منتج واحد علي الاقل في الفاتورة");
@@ -75,13 +63,11 @@ export const BuyStatement = () => {
             options={suppliers}
             value={formData.supplier}
             loading={!isSubmitted && loading}
-            onChange={(value) => handleSelectChange("supplier", value)}
+            onChange={(value) => setFormData(() => ({ ...formState, supplier: value }))}
          />
 
          <Info isAdminPay={true} formData={formData} setFormData={setFormData} />
-
          <InsertProduct product={product} setProduct={setProduct} setFormData={setFormData} />
-
          <TableProducts formData={formData} setFormData={setFormData} />
       </Form>
    );

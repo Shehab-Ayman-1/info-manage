@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 
 const schema = new Schema({
-	name: { type: String, default: "" },
+	name: { type: String, default: "", trim: true },
 	price: { type: Number, default: 0 },
 	method: { type: String, default: "cash" },
 	date: { type: Date, default: new Date() },

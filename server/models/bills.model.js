@@ -13,7 +13,7 @@ const schema = new Schema({
 	},
 	products: [
 		{
-			name: String,
+			name: { type: String, trim: true },
 			count: Number,
 			price: Number,
 			buyPrice: Number, // To Calculate The Profits In The Bills

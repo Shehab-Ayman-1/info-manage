@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { TabPanel } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Field, Form, Selectbox, Switch, Tabs } from "@/components/ui";
+import { Field, Form, Selectbox, Tabs } from "@/components/ui";
 import { filterSelection, getLists, getSuppliers } from "@/redux/products";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";

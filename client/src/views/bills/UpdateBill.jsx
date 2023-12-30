@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { InsertProduct, UpdateProduct, TableProducts, BillInfo } from "@/components/bills";
+import { InsertProduct, UpdateProduct, TableProducts, BillInfo } from "@/components/show/bills";
 import { Form } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
