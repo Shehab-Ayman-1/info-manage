@@ -34,11 +34,18 @@ export const Register = () => {
          loading={(isSubmitted && !error) || loading}
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
-         <Field label={text("register-name")} name="name" value={formData.name} onChange={handleFieldChange} />
+         <Field
+            label={text("register-name")}
+            inputStyle="normal-case"
+            name="name"
+            value={formData.name}
+            onChange={handleFieldChange}
+         />
 
          <Field
             type="email"
             label={text("register-email")}
+            inputStyle="normal-case"
             name="email"
             value={formData.email}
             onChange={handleFieldChange}
@@ -47,6 +54,7 @@ export const Register = () => {
          <Field
             type="password"
             label={text("register-password")}
+            inputStyle="normal-case"
             name="password"
             value={formData.password}
             onChange={handleFieldChange}

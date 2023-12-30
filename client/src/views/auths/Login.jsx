@@ -43,11 +43,18 @@ export const Login = () => {
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
-         <Field label={text("login-email")} name="email" value={formData.email} onChange={handleFieldChange} />
+         <Field
+            label={text("login-email")}
+            inputStyle="normal-case"
+            name="email"
+            value={formData.email}
+            onChange={handleFieldChange}
+         />
 
          <Field
             type="password"
             label={text("login-password")}
+            inputStyle="normal-case"
             name="password"
             value={formData.password}
             onChange={handleFieldChange}
