@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 // Routes
-app.use("/*", (req, res, next) => setTimeout(next, 1000));
+// app.use("/*", (req, res, next) => setTimeout(next, 1000));
 app.use("/api/users", users);
 app.use("/api/locker", locker);
 app.use("/api/products", products);

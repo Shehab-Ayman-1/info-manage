@@ -2,7 +2,7 @@ import { Button } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { Field, Selectbox } from "../ui";
+import { Field, Selectbox } from "@/components/ui";
 
 export const InsertProduct = ({ product, setProduct, setFormData }) => {
    const [text] = useTranslation();

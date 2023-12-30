@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Col, Row, Table } from "../../table";
+import { Col, Row, Table } from "@/components/table";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 

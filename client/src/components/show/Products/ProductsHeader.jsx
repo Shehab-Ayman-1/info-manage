@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { PageHead, Selectbox } from "../../ui";
+import { PageHead, Selectbox } from "@/components/ui";
 
 export const ProductsHeader = ({ page, price, setPrice }) => {
    const [text, i18next] = useTranslation();

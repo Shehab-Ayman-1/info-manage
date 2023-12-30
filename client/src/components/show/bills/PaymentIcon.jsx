@@ -2,7 +2,7 @@ import { IconButton, Typography } from "@material-tailwind/react";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Field, MTDialog } from "../ui";
+import { Field, MTDialog } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 

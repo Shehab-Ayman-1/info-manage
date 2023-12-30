@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Field, Selectbox } from "../ui";
+import { Field, Selectbox } from "@/components/ui";
 
 export const Info = ({ isAdminPay, formData, setFormData }) => {
    const [text] = useTranslation();

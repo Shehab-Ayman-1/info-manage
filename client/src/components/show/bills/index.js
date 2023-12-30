@@ -1,4 +1,3 @@
-export * from "./Structure";
 export * from "./DeleteIcon";
 export * from "./UpdateIcon";
 export * from "./PaymentIcon";

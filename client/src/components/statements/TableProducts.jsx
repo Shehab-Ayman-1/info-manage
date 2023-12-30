@@ -2,7 +2,7 @@ import { IconButton } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Col, Row, Table } from "../table";
+import { Col, Row, Table } from "@/components/table";
 
 const TABLE_HEAD_AR = ["حذف", "#", "المنتج", "العدد", "السعر", "الاجمالي"];
 const TABLE_HEAD_EN = ["DEL", "#", "Product", "Count", "Price", "Total"];

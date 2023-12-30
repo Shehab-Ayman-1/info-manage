@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Field, MTDialog, Selectbox } from "../ui";
+import { Field, MTDialog, Selectbox } from "@/components/ui"
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
