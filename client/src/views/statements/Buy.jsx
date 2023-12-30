@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
+import { Info, InsertProduct, TableProducts } from "@/components/statements";
 import { filterSelection, getSuppliers } from "@/redux/products";
-import { StatementForm } from "@/components/statements";
-import { Selectbox } from "@/components/ui";
+import { Form, Selectbox } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
+import { Loading } from "@/layout/Loading";
 
 const formState = {
    supplier: "",
@@ -29,7 +30,6 @@ export const BuyStatement = () => {
 
    useEffect(() => {
       if (suppliers.length) return;
-
       (async () => {
          const { data, isSubmitted, error } = await sRefetch("get", "/products/get-suppliers-list");
          if (isSubmitted && error) return;
@@ -62,21 +62,14 @@ export const BuyStatement = () => {
    };
 
    return (
-      <StatementForm
+      <Form
          onSubmit={handleSubmit}
          headerText={text("statement-buy-title")}
          buttonText={text("statement-buy-btn")}
-         data={data}
-         loading={loading}
-         error={error}
-         isSubmitted={isSubmitted}
-         formData={formData}
-         setFormData={setFormData}
-         product={product}
-         setProduct={setProduct}
-         isAdminPay={true}
-         handleSelectChange={handleSelectChange}
+         loading={loading || (isSubmitted && !error && !data?.warn)}
       >
+         <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
+
          <Selectbox
             label={text("chooseSupplier")}
             options={suppliers}
@@ -84,6 +77,12 @@ export const BuyStatement = () => {
             loading={!isSubmitted && loading}
             onChange={(value) => handleSelectChange("supplier", value)}
          />
-      </StatementForm>
+
+         <Info isAdminPay={true} formData={formData} setFormData={setFormData} />
+
+         <InsertProduct product={product} setProduct={setProduct} setFormData={setFormData} />
+
+         <TableProducts formData={formData} setFormData={setFormData} />
+      </Form>
    );
 };

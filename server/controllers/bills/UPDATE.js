@@ -21,6 +21,7 @@ export const PAYMENT = async (req, res) => {
 			await Locker.create({
 				name: `دفعه ماليه علي فاتورة [${client}]`,
 				price: type === "bill" ? value : type === "debt" ? -value : "----",
+				method: "cash"
 			});
 
 		res.status(200).json({ success: "لقد تمت عملية الدفع بنجاح" });

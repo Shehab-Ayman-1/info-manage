@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import { getLists, filterSelection } from "@/redux/products";
 import { getClients } from "@/redux/bills";
-import { Selectbox } from "@/components/ui";
-import { StatementForm } from "@/components/statements";
+import { Form, Selectbox } from "@/components/ui";
+import { Info, InsertProduct, StatementForm, TableProducts } from "@/components/statements";
 import { useAxios } from "@/hooks/useAxios";
+import { Loading } from "@/layout/Loading";
 
 const formState = {
    client: "عميل غير معروف",
@@ -23,30 +24,30 @@ export const SaleStatement = () => {
    const [formData, setFormData] = useState(formState);
    const [product, setProduct] = useState(productState);
 
-   const { loading: ccLoading, isSubmitted: ccIsSubmitted, refetch: ccRefetch } = useAxios();
+   const { loading: lLoading, isSubmitted: lIsSubmitted, refetch: lRefetch } = useAxios();
    const { data, isSubmitted, loading, error, refetch } = useAxios();
-   const { refetch: clRefetch } = useAxios();
+   const { refetch: cRefetch } = useAxios();
 
    const { lists, categories, companies } = useSelector(({ products }) => products);
    const { clients } = useSelector(({ bills }) => bills);
    const dispatch = useDispatch();
 
    useEffect(() => {
-      if (lists.length) return;
+      if (!lists.length) {
+         (async () => {
+            const { data, isSubmitted, error } = await lRefetch("get", "/products/get-products-list");
+            if (isSubmitted && error) return;
+            dispatch(getLists(data));
+         })();
+      }
 
-      (async () => {
-         const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-products-list");
-         if (isSubmitted && error) return;
-         dispatch(getLists(data));
-      })();
-
-      if (clients.length) return;
-
-      (async () => {
-         const { data, isSubmitted, error } = await clRefetch("get", "/bills/get-clients");
-         if (isSubmitted && error) return;
-         dispatch(getClients(data));
-      })();
+      if (!clients.length) {
+         (async () => {
+            const { data, isSubmitted, error } = await cRefetch("get", "/bills/get-clients");
+            if (isSubmitted && error) return;
+            dispatch(getClients(data));
+         })();
+      }
    }, []);
 
    useEffect(() => {
@@ -73,8 +74,7 @@ export const SaleStatement = () => {
    }, [product.company]);
 
    const handleSelectChange = (name, value) => {
-      if (name === "name" || name === "category" || name === "company")
-         return setProduct((data) => ({ ...data, [name]: value }));
+      if (name === "category" || name === "company") return setProduct((data) => ({ ...data, [name]: value }));
       setFormData((data) => ({ ...data, [name]: value }));
    };
 
@@ -89,42 +89,44 @@ export const SaleStatement = () => {
    };
 
    return (
-      <StatementForm
+      <Form
          onSubmit={handleSubmit}
          headerText={text("statement-sale-title")}
          buttonText={text("statement-sale-btn")}
-         data={data}
-         loading={loading}
-         error={error}
-         isSubmitted={isSubmitted}
-         formData={formData}
-         setFormData={setFormData}
-         product={product}
-         setProduct={setProduct}
-         isAdminPay={false}
-         handleSelectChange={handleSelectChange}
+         loading={loading || (isSubmitted && !error && !data?.warn)}
       >
-         <Selectbox
-            label={text("chooseCategory")}
-            options={categories}
-            value={product.category}
-            loading={!ccIsSubmitted && ccLoading}
-            onChange={(value) => handleSelectChange("category", value)}
-         />
-         <Selectbox
-            label={text("chooseCompany")}
-            options={companies}
-            value={product.company}
-            loading={!ccIsSubmitted && ccLoading}
-            onChange={(value) => handleSelectChange("company", value)}
-         />
+         <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
+
          <Selectbox
             label={text("chooseClient")}
             options={clients}
             value={formData.client}
-            loading={!ccIsSubmitted && ccLoading}
+            loading={!lIsSubmitted && lLoading}
             onChange={(value) => handleSelectChange("client", value)}
          />
-      </StatementForm>
+
+         <Info isAdminPay={false} formData={formData} setFormData={setFormData} />
+
+         <div className="flex-between flex-wrap md:flex-nowrap">
+            <Selectbox
+               label={text("chooseCategory")}
+               options={categories}
+               value={product.category}
+               loading={!lIsSubmitted && lLoading}
+               onChange={(value) => handleSelectChange("category", value)}
+            />
+            <Selectbox
+               label={text("chooseCompany")}
+               options={companies}
+               value={product.company}
+               loading={!lIsSubmitted && lLoading}
+               onChange={(value) => handleSelectChange("company", value)}
+            />
+         </div>
+
+         <InsertProduct product={product} setProduct={setProduct} setFormData={setFormData} />
+
+         <TableProducts formData={formData} setFormData={setFormData} />
+      </Form>
    );
 };

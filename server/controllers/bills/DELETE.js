@@ -30,7 +30,7 @@ export const DELETE_BILL = async (req, res) => {
 
 		// Send Transaction To Locker
 		const productsCost = bill.products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
-		if (productsCost) await Locker.create({ name: `فاتورة ملغيه [${bill.client}]`, price: productsCost });
+		if (productsCost) await Locker.create({ name: `فاتورة ملغيه [${bill.client}]`, price: productsCost, method: "----" });
 
 		res.status(200).json({ success: "لقد تم حذف الفاتورة بنجاح" });
 	} catch (error) {

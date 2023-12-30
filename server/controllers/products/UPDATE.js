@@ -120,8 +120,12 @@ export const SALE_PRODUCTS = async (req, res) => {
 		});
 
 		// Append Client Pay To The Locker
-		if (+clientPay && paymentMethod.toLowerCase() === "cash")
-			await Locker.create({ name: `${messages.statements[lang]?.sale} [${client}]`, price: +clientPay });
+		if (+clientPay)
+			await Locker.create({
+				name: `${messages.statements[lang]?.sale} [${client}]`,
+				price: +clientPay,
+				method: paymentMethod.toLowerCase(),
+			});
 
 		// Send Response
 		res.status(200).json({ success: messages.sale[lang]?.msg4 });
@@ -132,7 +136,7 @@ export const SALE_PRODUCTS = async (req, res) => {
 
 export const BUY_PRODUCTS = async (req, res) => {
 	try {
-		const { supplier, discount, adminPay, toStore, products, lang } = req.body;
+		const { supplier, discount, paymentMethod, adminPay, toStore, products, lang } = req.body;
 
 		// Check If The Products Cost In The Locker
 		const lockerCost = await Locker.find().findTotalPrices();
@@ -170,7 +174,11 @@ export const BUY_PRODUCTS = async (req, res) => {
 
 		// Append Client Pay To The Locker
 		if (+adminPay)
-			await Locker.create({ name: `${messages.statements[lang]?.buy} [${supplier}]`, price: -adminPay });
+			await Locker.create({
+				name: `${messages.statements[lang]?.buy} [${supplier}]`,
+				price: -adminPay,
+				method: paymentMethod.toLowerCase(),
+			});
 
 		// Send Response
 		res.status(200).json({ success: messages.buy[lang]?.msg4 });

@@ -109,7 +109,7 @@ export const GET_TABLES_LIST = async (req, res) => {
 		]);
 
 		const total = await Products.find().findTotalPrices(price, count);
-		const pagination = await Products.find().findpagination();
+		const pagination = await Products.find().findPagination();
 
 		res.status(200).json({ data: list, total, pagination: Math.ceil(pagination / LIMIT) });
 	} catch (error) {

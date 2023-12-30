@@ -7,7 +7,7 @@ export const GET_LOCKER_DETAILS = async (req, res) => {
 		const { activePage } = req.query;
 
 		const total = await Locker.find().findTotalPrices();
-		const pagination = await Locker.find().findpagination();
+		const pagination = await Locker.find().findPagination();
 
 		const list = await Locker.find()
 			.sort({ date: -1 })

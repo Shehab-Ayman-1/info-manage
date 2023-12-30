@@ -6,8 +6,8 @@ import { useAxios } from "@/hooks";
 import { Loading } from "@/layout/Loading";
 import { PageHead } from "@/components/ui";
 
-const TABLE_HEAD_AR = ["#", "السبب", "العملية", "المبلغ", "التاريخ"];
-const TABLE_HEAD_EN = ["#", "Reason", "Process", "Cost", "Date"];
+const TABLE_HEAD_AR = ["#", "السبب", "العملية", "المبلغ", "الدفع", "التاريخ"];
+const TABLE_HEAD_EN = ["#", "Reason", "Process", "Cost", "Payment", "Date"];
 export const ShowLockerProcesses = () => {
    const [text, i18next] = useTranslation();
    const { data, loading, error, isSubmitted, refetch } = useAxios();
@@ -34,12 +34,13 @@ export const ShowLockerProcesses = () => {
             setActivePage={setActivePage}
             footerTitle={text("locker-transactions-table-footer")}
          >
-            {data?.data.map(({ name, price, date }, i) => (
+            {data?.data.map(({ name, price, method, date }, i) => (
                <Row key={i} index={i}>
                   <Col>{i + 1}</Col>
                   <Col>{name}</Col>
                   <Col>{price < 0 ? text("withdraw") : price > 0 ? text("deposit") : text("unknown")}</Col>
                   <Col>{Math.abs(price)}</Col>
+                  <Col>{method}</Col>
                   <Col>{new Date(date).toLocaleDateString()}</Col>
                </Row>
             ))}

@@ -10,19 +10,24 @@ import { Loading } from "@/layout/Loading";
 const TABLE_HEAD_AR = ["حذف", "#", "المنتج", "العدد", "السعر", "الاجمالي"];
 const TABLE_HEAD_EN = ["DEL", "#", "Product", "Count", "Price", "Total"];
 export const StatementForm = ({
-   onSubmit,
    headerText,
    buttonText,
+
+   onSubmit,
+   handleSelectChange,
+   isAdminPay,
+
    data,
    loading,
    error,
    isSubmitted,
+
    formData,
    setFormData,
+
    product,
    setProduct,
-   isAdminPay,
-   handleSelectChange,
+
    children,
 }) => {
    const [text, i18next] = useTranslation();
@@ -62,27 +67,11 @@ export const StatementForm = ({
       });
    };
 
-   console.log(formData.paymentMethod);
-
    return (
       <Form onSubmit={onSubmit} headerText={headerText} buttonText={buttonText}>
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
          {children}
-
-         <Selectbox
-            label={text("paymentMethod")}
-            value={formData.paymentMethod ? text("visa") : text("cash")}
-            options={[text("visa"), text("cash")]}
-            onChange={(value) => setFormData((data) => ({ ...data, paymentMethod: value }))}
-         />
-
-         <Selectbox
-            label={text("place")}
-            value={formData.toStore ? text("store") : text("shop")}
-            options={[text("store"), text("shop")]}
-            onChange={(value) => setFormData((data) => ({ ...data, toStore: value === text("store") }))}
-         />
 
          <div className="w-full rounded-xl border border-solid px-2 md:px-4">
             <Selectbox
@@ -151,27 +140,6 @@ export const StatementForm = ({
                />
             )}
          </div>
-
-         <Table
-            headers={i18next.language === "en" ? TABLE_HEAD_EN : TABLE_HEAD_AR}
-            footerSpan={[3, 3]}
-            total={total}
-         >
-            {formData.products.map(({ name, count, price }, i) => (
-               <Row key={i} index={i}>
-                  <Col>
-                     <IconButton variant="text" color="red" onClick={() => handleDeleteField(i)}>
-                        <i className="fa fa-times text-xl text-red-500 hover:text-red-900" />
-                     </IconButton>
-                  </Col>
-                  <Col>{i + 1}</Col>
-                  <Col>{name}</Col>
-                  <Col>{count}</Col>
-                  <Col>{price}</Col>
-                  <Col>{+price * +count}</Col>
-               </Row>
-            ))}
-         </Table>
       </Form>
    );
 };

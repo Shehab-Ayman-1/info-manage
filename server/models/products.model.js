@@ -47,7 +47,7 @@ schema.query.findTotalPrices = async function (price, count) {
 	return total;
 };
 
-schema.query.findpagination = async function (skip = 0) {
+schema.query.findPagination = async function (skip = 0) {
 	const length = (await this.skip(skip)).reduce((prev, cur) => prev + cur.products.length, 0);
 	return length;
 };
