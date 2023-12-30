@@ -1,7 +1,6 @@
 export * from "./Form";
 export * from "./Field";
 export * from "./Select";
-export * from "./Switch";
 export * from "./Tabs";
 export * from "./Chart";
 export * from "./PageHead";
