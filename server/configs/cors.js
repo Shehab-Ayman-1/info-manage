@@ -1,8 +1,8 @@
 const whiteList = [
 	"http://localhost:5173",
 	"http://localhost:8000",
-	"https://cars-management-client.vercel.app",
-	"https://cars-management-client.netlify.app",
+	"https://info-manage-client.vercel.app",
+	"https://info-manage-client.netlify.app",
 ];
 
 export const corsOrigins = {
