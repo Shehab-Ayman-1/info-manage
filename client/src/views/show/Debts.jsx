@@ -44,13 +44,13 @@ export const ShowDebts = () => {
                         billInfo={{ _id, client, billCost, pay }}
                      />
                   </div>
-                  <Typography variant="h5" className="pb-3 text-base text-dimWhite dark:text-white md:text-xl">
+                  <Typography variant="h5" className="pb-3 text-base text-dimWhite dark:text-gray-400 md:text-xl">
                      {client}
                   </Typography>
                </div>
 
                <div className="flex-start">
-                  <Typography variant="h5" className="pb-2 text-base text-dimWhite dark:text-white md:text-xl">
+                  <Typography variant="h5" className="pb-2 text-base text-dimWhite dark:text-gray-400 md:text-xl">
                      {date}
                   </Typography>
                   <IconButton variant="text" color="white">

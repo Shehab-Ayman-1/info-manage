@@ -21,6 +21,7 @@ export const ShowBills = () => {
 
    if (!data) return <Loading loading={loading} isSubmitted={isSubmitted} error={error} data={data} />;
    const isCompleted = (pay) => (pay?.completed ? "!border-primary-200 dark:!border-primary-900" : "hidden");
+
    return (
       <Fragment>
          <PageHead text={text("bills-title")} />
@@ -44,13 +45,13 @@ export const ShowBills = () => {
                         billInfo={{ _id, client, billCost, pay }}
                      />
                   </div>
-                  <Typography variant="h5" className="pb-3 text-base text-dimWhite dark:text-white md:text-xl">
+                  <Typography variant="h5" className="pb-3 text-base text-dimWhite dark:text-gray-400 md:text-xl">
                      {client}
                   </Typography>
                </div>
 
                <div className="flex-start">
-                  <Typography variant="h5" className="pb-2 text-base text-dimWhite dark:text-white md:text-xl">
+                  <Typography variant="h5" className="pb-2 text-base text-dimWhite dark:text-gray-400 md:text-xl">
                      {date}
                   </Typography>
                   <IconButton variant="text" color="white">

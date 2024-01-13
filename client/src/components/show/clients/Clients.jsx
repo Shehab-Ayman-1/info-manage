@@ -59,15 +59,15 @@ export const Clients = () => {
                   <Col>{i + 1}</Col>
                   <Col>{client}</Col>
                   <Col>{phone || "----"}</Col>
-                  <Col>
+                  <Col className="!text-red-500">
                      {levels(billsCost).level === text("clients-level-gold") && discount < GOLD.discount ? (
-                        <span className="text-red-500">-{GOLD.discount - +discount}</span>
+                        -(GOLD.discount - +discount)
                      ) : levels(billsCost).level === text("clients-level-silver") && discount < SILVER.discount ? (
-                        <span className="text-red-500">-{SILVER.discount - +discount}</span>
+                        -(SILVER.discount - +discount)
                      ) : levels(billsCost).level === text("clients-level-bronze") && discount < BRONZE.discount ? (
-                        <span className="text-red-500">-{BRONZE.discount - +discount}</span>
+                        -(BRONZE.discount - +discount)
                      ) : (
-                        discount
+                        <span className="text-dimWhite dark:text-blue-gray-200">{discount}</span>
                      )}
                   </Col>
                   <Col>{billsCost}</Col>

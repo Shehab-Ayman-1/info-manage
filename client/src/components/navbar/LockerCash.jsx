@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { ADMIN } from "@/constants/users";
@@ -6,26 +6,28 @@ import { useAxios } from "@/hooks/useAxios";
 import { Typography } from "@material-tailwind/react";
 
 export const LockerCash = () => {
-   const { data, refetch } = useAxios();
    const { user } = useSelector(({ users }) => users);
+   const [price, setPrice] = useState("");
+   const { refetch } = useAxios();
 
    useEffect(() => {
       if (user?.role !== ADMIN || window.innerWidth <= 300) return;
 
       (async () => {
-         await refetch("get", "/locker/get-total-cash");
+         const { data, error, isSubmitted } = await refetch("get", "/locker/get-total-cash");
+         if (isSubmitted && error) return;
+         setPrice(data.toLocaleString());
       })();
    }, []);
 
-   if (user?.role !== ADMIN || !data) return;
+   if (user?.role !== ADMIN || !price) return;
 
    return (
       <Typography
          variant="small"
          className="mb-0 whitespace-nowrap pb-1 text-base font-bold text-primary sm:text-xl"
       >
-         {(+data / 1000).toFixed(3)}
-         <span className="px-1 text-base">K</span>
+         {price} LE
       </Typography>
    );
 };

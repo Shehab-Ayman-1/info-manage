@@ -1,149 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Merienda:wght@300;400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-   :root {
-      --dimWhite: theme(colors.blue-gray.500);
-      --darkGray: rgb(24 34 46 / 1);
-   }
-   :root[data-theme="red"] {
-      --dimPurple: rgb(245 64 51 / 0.15);
-      --primary: theme(colors.red.500);
-      --deep-purple-50: theme(colors.red.50);
-      --deep-purple-100: theme(colors.red.100);
-      --deep-purple-200: theme(colors.red.200);
-      --deep-purple-300: theme(colors.red.300);
-      --deep-purple-400: theme(colors.red.400);
-      --deep-purple-500: theme(colors.red.500);
-      --deep-purple-600: theme(colors.red.600);
-      --deep-purple-700: theme(colors.red.700);
-      --deep-purple-800: theme(colors.red.800);
-      --deep-purple-900: theme(colors.red.900);
-      .logo {
-         filter: hue-rotate(160deg);
-      }
-   }
-   :root[data-theme="blue"] {
-      --dimPurple: rgb(32 148 243 / 0.15);
-      --primary: theme(colors.blue.500);
-      --deep-purple-50: theme(colors.blue.50);
-      --deep-purple-100: theme(colors.blue.100);
-      --deep-purple-200: theme(colors.blue.200);
-      --deep-purple-300: theme(colors.blue.300);
-      --deep-purple-400: theme(colors.blue.400);
-      --deep-purple-500: theme(colors.blue.500);
-      --deep-purple-600: theme(colors.blue.600);
-      --deep-purple-700: theme(colors.blue.700);
-      --deep-purple-800: theme(colors.blue.800);
-      --deep-purple-900: theme(colors.blue.900);
-   }
-   :root[data-theme="teal"] {
-      --dimPurple: rgb(0 148 133 / 0.15);
-      --primary: theme(colors.teal.500);
-      --deep-purple-50: theme(colors.teal.50);
-      --deep-purple-100: theme(colors.teal.100);
-      --deep-purple-200: theme(colors.teal.200);
-      --deep-purple-300: theme(colors.teal.300);
-      --deep-purple-400: theme(colors.teal.400);
-      --deep-purple-500: theme(colors.teal.500);
-      --deep-purple-600: theme(colors.teal.600);
-      --deep-purple-700: theme(colors.teal.700);
-      --deep-purple-800: theme(colors.teal.800);
-      --deep-purple-900: theme(colors.teal.900);
-      .logo {
-         filter: hue-rotate(330deg);
-      }
-   }
-   :root[data-theme="pink"] {
-      --dimPurple: rgb(233 32 99 / 0.15);
-      --primary: theme(colors.pink.500);
-      --deep-purple-50: theme(colors.pink.50);
-      --deep-purple-100: theme(colors.pink.100);
-      --deep-purple-200: theme(colors.pink.200);
-      --deep-purple-300: theme(colors.pink.300);
-      --deep-purple-400: theme(colors.pink.400);
-      --deep-purple-500: theme(colors.pink.500);
-      --deep-purple-600: theme(colors.pink.600);
-      --deep-purple-700: theme(colors.pink.700);
-      --deep-purple-800: theme(colors.pink.800);
-      --deep-purple-900: theme(colors.pink.900);
-      .logo {
-         filter: hue-rotate(145deg);
-      }
-   }
-   :root[data-theme="indigo"] {
-      --dimPurple: rgb(64 81 181 / 0.15);
-      --primary: theme(colors.indigo.500);
-      --deep-purple-50: theme(colors.indigo.50);
-      --deep-purple-100: theme(colors.indigo.100);
-      --deep-purple-200: theme(colors.indigo.200);
-      --deep-purple-300: theme(colors.indigo.300);
-      --deep-purple-400: theme(colors.indigo.400);
-      --deep-purple-500: theme(colors.indigo.500);
-      --deep-purple-600: theme(colors.indigo.600);
-      --deep-purple-700: theme(colors.indigo.700);
-      --deep-purple-800: theme(colors.indigo.800);
-      --deep-purple-900: theme(colors.indigo.900);
-      .logo {
-         filter: hue-rotate(35deg) brightness(0.7);
-      }
-   }
-   :root[data-theme="orange"] {
-      --dimPurple: rgb(255 153 0 / 0.15);
-      --primary: theme(colors.orange.500);
-      --deep-purple-50: theme(colors.orange.50);
-      --deep-purple-100: theme(colors.orange.100);
-      --deep-purple-200: theme(colors.orange.200);
-      --deep-purple-300: theme(colors.orange.300);
-      --deep-purple-400: theme(colors.orange.400);
-      --deep-purple-500: theme(colors.orange.500);
-      --deep-purple-600: theme(colors.orange.600);
-      --deep-purple-700: theme(colors.orange.700);
-      --deep-purple-800: theme(colors.orange.800);
-      --deep-purple-900: theme(colors.orange.900);
-      .logo {
-         filter: hue-rotate(180deg);
-      }
-   }
-   :root[data-theme="deep-orange"] {
-      --dimPurple: rgb(255 87 36 / 0.15);
-      --primary: theme(colors.deep-orange.500);
-      --deep-purple-50: theme(colors.deep-orange.50);
-      --deep-purple-100: theme(colors.deep-orange.100);
-      --deep-purple-200: theme(colors.deep-orange.200);
-      --deep-purple-300: theme(colors.deep-orange.300);
-      --deep-purple-400: theme(colors.deep-orange.400);
-      --deep-purple-500: theme(colors.deep-orange.500);
-      --deep-purple-600: theme(colors.deep-orange.600);
-      --deep-purple-700: theme(colors.deep-orange.700);
-      --deep-purple-800: theme(colors.deep-orange.800);
-      --deep-purple-900: theme(colors.deep-orange.900);
-      .logo {
-         filter: hue-rotate(180deg);
-      }
-   }
-   :root[data-theme="deep-purple"] {
-      --dimPurple: rgb(103 58 182 / 0.15);
-      --primary: #673ab7;
-      --deep-purple-50: #ede7f6;
-      --deep-purple-100: #d1c4e9;
-      --deep-purple-200: #b39ddb;
-      --deep-purple-300: #9575cd;
-      --deep-purple-400: #7e57c2;
-      --deep-purple-500: #673ab7;
-      --deep-purple-600: #5e35b1;
-      --deep-purple-700: #512da8;
-      --deep-purple-800: #4527a0;
-      --deep-purple-900: #311b92;
-      .logo {
-         filter: hue-rotate(50deg);
-      }
-   }
-}
-
 @font-face {
    font-family: "STV";
    src: url("@/assets/fonts/stv.ttf") format("truetype");
@@ -172,25 +28,18 @@ html {
          @apply bg-black;
       }
       [type="month"]::-webkit-calendar-picker-indicator {
-         cursor: pointer;
-         filter: invert(1);
-         &:hover {
-            opacity: 0.8;
-         }
+         @apply cursor-pointer invert hover:opacity-80;
       }
    }
-   &[dir="rtl"] {
-      font-family: "STV", sans-serif;
-   }
    &[dir="ltr"] {
-      font-size: 14px;
+      @apply text-[14px];
    }
    * ::-webkit-scrollbar {
       width: 3px !important;
       height: 3px !important;
    }
    ::-webkit-scrollbar {
-      width: 5px;
+      width: 5px !important;
    }
    ::-webkit-scrollbar-thumb {
       @apply rounded-xl bg-primary;
@@ -207,75 +56,6 @@ html {
 i {
    @apply cursor-pointer text-xl text-dimWhite;
    &:hover {
-      @apply scale-110 text-primary;
+      @apply scale-125 text-primary;
    }
-}
-
-.home-bg {
-   @apply bg-home-img from-white/10 to-blue-gray-200/10 bg-auto bg-fixed bg-center opacity-40 dark:from-darkGray dark:to-black/30 dark:opacity-20;
-}
-
-.bg-gradient {
-   @apply bg-gradient-to-bl from-white to-blue-gray-200 dark:from-black dark:via-darkGray dark:to-black;
-}
-
-.text-gradient {
-   @apply bg-gradient-to-r from-primary-400 to-primary-900 bg-clip-text text-transparent;
-}
-
-.loading-animate {
-   animation: loading 1.5s ease-in-out;
-   @keyframes loading {
-      0% {
-         width: 0;
-      }
-      100% {
-         width: 100%;
-      }
-   }
-}
-
-.select-box {
-   span.left-0 {
-      @apply rtl:left-auto rtl:right-0;
-   }
-   div.right-2 {
-      @apply rtl:left-0 rtl:right-auto;
-   }
-}
-
-.flex-between {
-   @apply flex items-center justify-between gap-4;
-}
-
-.flex-around {
-   @apply flex items-center justify-around gap-4;
-}
-
-.flex-center {
-   @apply flex items-center justify-center gap-4;
-}
-
-.flex-start {
-   @apply flex items-center gap-4;
-}
-
-.flex-end {
-   @apply flex items-center justify-end gap-4 text-primary;
-}
-
-.border-sp {
-   @apply border border-solid border-deep-purple-500;
-}
-
-.dark\:border-sp {
-   @apply dark:border dark:border-solid dark:border-deep-purple-500;
-}
-
-.border-t-sp {
-   @apply border-0 border-t border-solid border-deep-purple-500;
-}
-
-.border-b-sp {
-   @apply border-0 border-b border-solid border-deep-purple-500;
 }

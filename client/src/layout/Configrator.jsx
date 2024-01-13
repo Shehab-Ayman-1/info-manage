@@ -4,6 +4,22 @@ import { useTranslation } from "react-i18next";
 
 import { Selectbox } from "@/components/ui";
 
+const colors = [
+   { theme: "red", from: "from-red-400", to: "to-red-900", hover: "hover:bg-red-900/50" },
+   { theme: "pink", from: "from-pink-400", to: "to-pink-900", hover: "hover:bg-pink-900/50" },
+   { theme: "orange", from: "from-orange-400", to: "to-orange-900", hover: "hover:bg-orange-900/50" },
+   {
+      theme: "deep-orange",
+      from: "from-deep-orange-400",
+      to: "to-deep-orange-900",
+      hover: "hover:bg-deep-orange-900/50",
+   },
+   { theme: "indigo", from: "from-indigo-400", to: "to-indigo-900", hover: "hover:bg-indigo-900/50" },
+   { theme: "blue", from: "from-blue-400", to: "to-blue-900", hover: "hover:bg-blue-900/50" },
+   { theme: "deep-purple", from: "from-purple-400", to: "to-purple-900", hover: "hover:bg-purple-900/50" },
+   { theme: "teal", from: "from-teal-400", to: "to-teal-900", hover: "hover:bg-teal-900/50" },
+];
+
 export const Configrator = () => {
    const [text, i18next] = useTranslation();
 
@@ -11,17 +27,17 @@ export const Configrator = () => {
    const [open, setOpen] = useState(false);
 
    useLayoutEffect(() => {
-      const mode = localStorage.getItem("mode") || "light";
       const theme = localStorage.getItem("theme") || "deep-purple";
-
       document.querySelector("html").setAttribute("data-theme", theme);
+
+      const mode = localStorage.getItem("mode") || "light";
       document.querySelector("html").setAttribute("class", mode);
    }, []);
 
    useLayoutEffect(() => {
       i18next.changeLanguage(lang);
       localStorage.setItem("lang", lang);
-      document.querySelector("html").setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+      document.querySelector("html").setAttribute("dir", lang === "en" ? "ltr" : "rtl");
    }, [lang]);
 
    const openDrawer = () => {
@@ -50,31 +66,15 @@ export const Configrator = () => {
       setOpen(false);
    };
 
-   const colors = [
-      { theme: "red", from: "from-red-400", to: "to-red-900", hover: "hover:bg-red-900/50" },
-      { theme: "pink", from: "from-pink-400", to: "to-pink-900", hover: "hover:bg-pink-900/50" },
-      { theme: "orange", from: "from-orange-400", to: "to-orange-900", hover: "hover:bg-orange-900/50" },
-      {
-         theme: "deep-orange",
-         from: "from-deep-orange-400",
-         to: "to-deep-orange-900",
-         hover: "hover:bg-deep-orange-900/50",
-      },
-      { theme: "indigo", from: "from-indigo-400", to: "to-indigo-900", hover: "hover:bg-indigo-900/50" },
-      { theme: "blue", from: "from-blue-400", to: "to-blue-900", hover: "hover:bg-blue-900/50" },
-      { theme: "deep-purple", from: "from-purple-400", to: "to-purple-900", hover: "hover:bg-purple-900/50" },
-      { theme: "teal", from: "from-teal-400", to: "to-teal-900", hover: "hover:bg-teal-900/50" },
-   ];
-
    return (
       <div className="fixed z-[1003]">
          <IconButton
             color="deep-purple"
             variant="gradient"
             size="lg"
-            className={`group !fixed bottom-5 ${
+            className={`group !fixed bottom-10 ${
                i18next.language === "en" ? "right-5 md:right-10" : "left-5 md:left-10"
-            } rounded-full shadow-md hover:scale-125 print:hidden md:bottom-10`}
+            } rounded-full shadow-md hover:scale-125 print:hidden md:bottom-14`}
             onClick={openDrawer}
          >
             <i className="fa fa-gear fa-spin text-2xl text-white group-hover:text-white" />

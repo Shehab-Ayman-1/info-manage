@@ -20,10 +20,10 @@ export const ProductsTable = ({ price, count }) => {
    }, [price, activePage]);
 
    const minmax = (count, min, max) => {
-      if (count <= 0) return "text-blue-gray-500/50 dark:text-blue-gray-700";
-      else if (count > 0 && count < min) return "text-red-500 dark:text-red-500";
-      else if (count > min && count < max) return "text-orange-500 dark:text-orange-500";
-      else return "text-blue-gray-500 dark:text-blue-gray-200";
+      if (count <= 0) return "!text-blue-gray-500/50 dark:!text-blue-gray-700";
+      else if (count > 0 && count <= min) return "!text-red-500 dark:!text-red-500";
+      else if (count > min && count <= max) return "!text-orange-500 dark:!text-orange-500";
+      else return "!text-blue-gray-500 dark:!text-blue-gray-200";
    };
 
    return (
@@ -42,10 +42,7 @@ export const ProductsTable = ({ price, count }) => {
                return products?.map(({ name, count, price, total, min, max }, j) => (
                   <Row key={j} index={i}>
                      {!j && (
-                        <Col
-                           rowSpan={Math.floor(products.length)}
-                           className="text-dimWhite dark:text-blue-gray-200"
-                        >
+                        <Col className={minmax(3, 1, 2)} rowSpan={Math.floor(products.length)}>
                            {company}
                         </Col>
                      )}

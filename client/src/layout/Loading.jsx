@@ -24,7 +24,7 @@ export const Loading = ({ subLoading, hideSubLoadingText, isSubmitted, loading, 
    if (!isSubmitted && loading && !subLoading)
       return (
          <Fragment>
-            <Progress className="loading-animate fixed left-0 top-0 z-[1000] bg-primary" value={0} size="sm" />
+            <Progress className="animate-progress fixed left-0 top-0 z-[1000] bg-primary" value={0} size="sm" />
             <Spinner className="fixed left-[45%] top-1/2 z-[1002] h-16 w-16" color="deep-purple" />
          </Fragment>
       );

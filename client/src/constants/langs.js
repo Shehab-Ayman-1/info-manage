@@ -46,6 +46,8 @@ const general = {
 
       store: "Store",
       shop: "Shop",
+
+      footerCreator: "Created With ❤️ By Shehab Ayman",
    },
    ar: {
       withdraw: "سحب",
@@ -94,6 +96,7 @@ const general = {
 
       store: "المخزن",
       shop: "المحل",
+      footerCreator: "تم انشاءة مع ❤️ بواسطة شهاب ايمن",
    },
 };
 
