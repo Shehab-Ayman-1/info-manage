@@ -8,8 +8,15 @@ export const Home = () => {
    const navigate = useNavigate();
 
    return (
-      <section className="flex-between flex-col text-center md:flex-row md:text-start">
-         <div className="mt-10 h-full w-full">
+      <section className="md:text-start">
+         <div className="h-full w-full pt-5">
+            <img
+               src={Favicon}
+               alt="logo"
+               className="mx-auto block max-h-[30vh] w-full object-contain sm:max-h-[45vh]"
+            />
+         </div>
+         <div className="flex-center mt-5 h-full w-full flex-col">
             <Typography
                variant="h1"
                className="text-gradient pb-10 text-5xl font-extrabold sm:text-6xl md:text-8xl"
@@ -17,7 +24,7 @@ export const Home = () => {
                {text("home-title")}
             </Typography>
 
-            <Typography variant="paragraph" className="text-xl text-black dark:text-white/50">
+            <Typography variant="paragraph" className="text-center text-xl text-black dark:text-white/50">
                {text("home-subtitle1")}
                <br />
                {text("home-subtitle2")}
@@ -45,10 +52,6 @@ export const Home = () => {
                   {text("home-statement-btn")}
                </Button>
             </div>
-         </div>
-
-         <div className="hidden h-full w-full pt-10 md:block">
-            <img src={Favicon} alt="logo" className="mx-auto block w-full max-w-[460px] object-contain" />
          </div>
       </section>
    );
