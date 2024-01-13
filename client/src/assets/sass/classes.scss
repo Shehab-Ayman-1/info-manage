@@ -1,6 +1,6 @@
 /* Public */
 .home-bg {
-   @apply bg-home-img from-white/10 to-blue-gray-200/10 bg-cover bg-fixed bg-center bg-no-repeat opacity-40 dark:from-darkGray dark:to-black/30 dark:opacity-20;
+   @apply from-white/10 to-blue-gray-200/10 bg-auto bg-fixed bg-center bg-no-repeat opacity-40 dark:from-darkGray dark:to-black/30 dark:opacity-20;
 }
 
 .bg-gradient {

@@ -44,7 +44,7 @@ module.exports = withMT({
       },
       extend: {
          backgroundImage: {
-            "home-img": "linear-gradient(45deg, var(--tw-gradient-stops)), url(/src/assets/images/car.jpeg)",
+            "home-img": "linear-gradient(45deg, var(--tw-gradient-stops)), url(/src/assets/images/favicon.png)",
          },
       },
    },
