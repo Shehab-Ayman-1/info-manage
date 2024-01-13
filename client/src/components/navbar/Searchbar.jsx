@@ -2,20 +2,22 @@ import { Card, CardBody, CardHeader, Collapse, List, ListItem } from "@material-
 import { useNavigate } from "react-router-dom";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { getSearchList } from "@/redux/products";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
-import { useTranslation } from "react-i18next";
 
-export const Searchbar = ({ openSearchbar, setOpenSearchbar }) => {
+export const Searchbar = () => {
    const [text] = useTranslation();
    const { searchList } = useSelector(({ products }) => products);
    const { data, loading, isSubmitted, refetch } = useAxios();
 
+   const [openSearchbar, setOpenSearchbar] = useState(false);
    const [open, setOpen] = useState(false);
-   const [filterList, setFilterList] = useState(null);
+
    const [searchText, setSearchText] = useState("");
+   const [filterList, setFilterList] = useState(null);
    const [startSearch, setStartSearch] = useState(false);
 
    const navigate = useNavigate();
@@ -46,19 +48,26 @@ export const Searchbar = ({ openSearchbar, setOpenSearchbar }) => {
       event.target.value ? setOpen(true) : setOpen(false);
    };
 
-   const handleItem = (companyId, productId) => {
-      navigate(`/profile/${companyId}/${productId}`);
-      setOpen(false);
+   const handleClose = () => {
       setOpenSearchbar(false);
       setSearchText("");
+      setOpen(false);
+   };
+
+   const handleItem = (companyId, productId) => {
+      navigate(`/profile/${companyId}/${productId}`);
+      handleClose();
    };
 
    return (
       <Fragment>
+         <i className="fa fa-search" onClick={() => setOpenSearchbar(true)} />
+
          <div
             className={`fixed left-0 top-0 -z-10 h-screen w-full ${openSearchbar ? "" : "hidden"}`}
-            onClick={() => setOpenSearchbar(false)}
+            onClick={handleClose}
          />
+
          <Card
             className={`fixed left-1/2 top-36 w-full max-w-2xl -translate-x-1/2 bg-transparent shadow-none ${
                openSearchbar ? "" : "hidden"
@@ -89,7 +98,7 @@ export const Searchbar = ({ openSearchbar, setOpenSearchbar }) => {
                         (filterList || searchList)?.map(({ name, companyId, productId }, i) => (
                            <ListItem
                               key={i}
-                              className="text-xl font-bold hover:bg-dimPurple hover:dark:text-white"
+                              className="!justify-start !gap-0 text-xl font-bold hover:bg-dimPurple hover:dark:text-white"
                               onClick={() => handleItem(companyId, productId)}
                            >
                               {name.split(searchText).map((part, i) => (

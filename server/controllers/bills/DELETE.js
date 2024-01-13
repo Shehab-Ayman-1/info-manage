@@ -42,9 +42,13 @@ export const DELETE_BILL = async (req, res) => {
 			return res.json({ warn: `حدث خطأ ولم يتم اضافه هذه المنتجات الي ${place} [${result.join(" | ")}]` });
 
 		// Send Transaction To Locker
-		const productsCost = bill.products.reduce((prev, cur) => prev + cur.price * cur.count, 0);
-		if (productsCost)
-			await Locker.create({ name: `فاتورة ملغيه [${bill.client}]`, price: productsCost, method: "----" });
+		const paidCost = bill.pay.value;
+		if (paidCost)
+			await Locker.create({
+				name: `فاتورة ملغيه [${bill.client}]`,
+				price: type === "bill" ? -paidCost : paidCost,
+				method: "cash",
+			});
 
 		res.status(200).json({ success: "لقد تم حذف الفاتورة بنجاح" });
 	} catch (error) {
