@@ -112,7 +112,7 @@ export const links = [
             Component: ShowStore,
          },
          {
-            name: text("transections"),
+            name: text("show-transections"),
             link: "transections",
             role: "admin",
             icon: "fas fa-door-closed",
@@ -181,7 +181,7 @@ export const links = [
             Component: TransferStatement,
          },
          {
-            name: text("add-locker"),
+            name: text("locker-transactions"),
             link: "add-to-locker",
             role: "admin",
             icon: "fas fa-door-closed",

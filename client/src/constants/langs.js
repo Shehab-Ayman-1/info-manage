@@ -146,7 +146,8 @@ const navbar = {
          "show-title": "Show",
          "show-shop": "Shop Products",
          "show-store": "Store Products",
-         transections: "Transections",
+         "show-balances": "Show Balances",
+         "show-transections": "Transections",
          "client-suppliers": "Clients & Suppliers",
          "show-bills": "Show Bills",
          "show-debts": "Show Debts",
@@ -157,6 +158,7 @@ const navbar = {
          "supplier-statement": "Supplier Statement",
          "transfer-statement": "Transfer Statement",
          "workers-statement": "Workers Statement",
+         "locker-transactions": "Locker Withdrawal / deposit",
 
          // Creates
          "new-title": "New",
@@ -166,21 +168,16 @@ const navbar = {
          "add-supplier": "Add Supplier",
          "add-client": "Add Client",
 
-         // Balances
-         "balances-title": "Finances",
-         "show-balances": "Show Balances",
-         "add-locker": "Locker Withdrawal / deposit",
-         "totay-reset": "Purchases / Sales Reset",
-
          // Analysis
          "analysis-title": "Statistics",
-         "product-movement": "Product Purchases / Sales Movement",
+         "totay-reset": "Today Purchases / Sales",
+         "product-movement": "Product Movement",
          "analysis-sales": "Sales Statistics",
          "analysis-profits": "Profits Statistics",
-         "analysis-insufficients": "Insufficients Of The Store / Shop",
-         "analysis-less-sales": "Least Selling Products",
-         "analysis-best-sales-month": "Best Selling Products In (Month)",
-         "analysis-best-sales-year": "Best Selling Products In (Year)",
+         "analysis-insufficients": "Insufficients Products",
+         "analysis-less-sales": "Least Selling",
+         "analysis-best-sales-month": "Best Selling Of The (Month)",
+         "analysis-best-sales-year": "Best Selling Of The (Year)",
       },
       ar: {
          // Show
@@ -188,7 +185,9 @@ const navbar = {
          "show-title": "العرض",
          "show-shop": "منتجات المحل",
          "show-store": "منتجات المخزن",
-         transections: "المعاملات",
+         "balances-title": "الماليات",
+         "show-balances": "عرض الارصده",
+         "show-transections": "المعاملات",
          "client-suppliers": "العملاء والمندوبين",
          "show-bills": "عرض الفواتير",
          "show-debts": "عرض المديونيات",
@@ -199,8 +198,9 @@ const navbar = {
          "supplier-statement": "حشف مندوب",
          "transfer-statement": "كشف تحويل",
          "workers-statement": "كشف العمال",
+         "locker-transactions": "سحب / ايداع من الخزنة",
 
-         // Creates
+         // New
          "new-title": "جديد",
          "add-category": "اضافه قسم",
          "add-company": "اضافه شركة",
@@ -208,21 +208,16 @@ const navbar = {
          "add-supplier": "اضافه مندوب",
          "add-client": "اضافه عميل",
 
-         // Balances
-         "balances-title": "الماليات",
-         "show-balances": "عرض الارصده",
-         "add-locker": "سحب / ايداع من الخزنة",
-         "totay-reset": "مبيعات ومشتريات اليوم",
-
          // Analysis
          "analysis-title": "الاحصائيات",
-         "product-movement": "بيان حركة بيع / شراء المنتج",
+         "totay-reset": "مبيعات ومشتريات اليوم",
+         "product-movement": "بيان حركة المنتج",
          "analysis-sales": "احصائيات المبيعات",
          "analysis-profits": "احصائيات الارباح",
-         "analysis-insufficients": "عرض نواقص المحل / المخزن",
+         "analysis-insufficients": "عرض النواقص",
          "analysis-less-sales": "الامنتجات الاقل مبيعاً",
-         "analysis-best-sales-month": "المنتجات الاكثر مبيعاً (في الشهر)",
-         "analysis-best-sales-year": "المنتجات الاكثر مبيعاً (في السنه)",
+         "analysis-best-sales-month": "المنتجات الاكثر مبيعاً في (الشهر)",
+         "analysis-best-sales-year": "المنتجات الاكثر مبيعاً في (السنه)",
       },
    },
 };
