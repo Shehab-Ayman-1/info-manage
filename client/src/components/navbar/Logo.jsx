@@ -12,7 +12,7 @@ export const Logo = () => {
 
          <Typography
             variant="h1"
-            className="text-gradient -mt-2 pb-2 text-xl ltr:mt-0 sm:-mt-1 md:-mt-2 md:pb-3 md:text-4xl lg:text-4xl"
+            className="text-gradient -mt-2 pb-2 text-xl font-extrabold ltr:mt-0 sm:-mt-1 md:-mt-2 md:pb-3 md:text-4xl lg:text-4xl"
          >
             {text("navbar-logo")}
          </Typography>

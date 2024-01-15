@@ -13,7 +13,7 @@ export const Home = () => {
             <img
                src={Favicon}
                alt="logo"
-               className="mx-auto block max-h-[30vh] w-full object-contain sm:max-h-[45vh]"
+               className="mx-auto block max-h-[30vh] w-full object-contain rtl:max-h-[40vh] ltr:sm:max-h-[45vh]"
             />
          </div>
          <div className="flex-center mt-5 h-full w-full flex-col">
@@ -24,7 +24,7 @@ export const Home = () => {
                {text("home-title")}
             </Typography>
 
-            <Typography variant="paragraph" className="text-center text-xl text-black dark:text-white/50">
+            <Typography variant="paragraph" className="text-center text-xl text-dimWhite">
                {text("home-subtitle1")}
                <br />
                {text("home-subtitle2")}

@@ -7,9 +7,8 @@ export const Footer = () => {
    const placement = i18next.language === "en" ? "left" : "right";
 
    return (
-      <footer className="flex-between bg-gradient w-full flex-col p-4 text-xl md:flex-row">
-         <Typography variant="h5" color="deep-purple" className="flex-start">
-            <img src={Favicon} alt="logo" className="h-8 w-8" />
+      <footer className="flex-between w-full flex-col p-4 text-xl md:flex-row">
+         <Typography variant="h5" className="flex-start text-dimWhite">
             {text("footerCreator")}
          </Typography>
 

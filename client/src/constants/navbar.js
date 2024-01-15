@@ -112,8 +112,8 @@ export const links = [
             Component: ShowStore,
          },
          {
-            name: text("locker-transections"),
-            link: "locker-processes",
+            name: text("transections"),
+            link: "transections",
             role: "admin",
             icon: "fas fa-door-closed",
             // disabled: true,
