@@ -182,7 +182,6 @@ const navbar = {
       ar: {
          // Show
          "show-title": "العرض",
-         "show-title": "العرض",
          "show-shop": "منتجات المحل",
          "show-store": "منتجات المخزن",
          "balances-title": "الماليات",
@@ -195,7 +194,7 @@ const navbar = {
          // Statements
          "statements-title": "الكشوفات",
          "bill-statement": "كشف حساب",
-         "supplier-statement": "حشف مندوب",
+         "supplier-statement": "كشف مندوب",
          "transfer-statement": "كشف تحويل",
          "workers-statement": "كشف العمال",
          "locker-transactions": "سحب / ايداع من الخزنة",
