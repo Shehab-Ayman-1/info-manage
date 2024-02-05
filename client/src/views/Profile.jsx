@@ -60,12 +60,12 @@ export const Profile = () => {
 
          <div className="flex-between">
             <ProfileInfo
-               title={text("profile-shop-count")}
+               title={text("profile-store-count")}
                name={`${data.count.store} ${text("part")}`}
                fullWidth
             />
             <ProfileInfo
-               title={text("profile-store-count")}
+               title={text("profile-shop-count")}
                name={`${data.count.shop} ${text("part")}`}
                fullWidth
             />
