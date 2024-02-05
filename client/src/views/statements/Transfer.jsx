@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
 import { TabPanel } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { Field, Form, Selectbox, Tabs } from "@/components/ui";
 import { filterSelection, getLists, getSuppliers } from "@/redux/products";
+import { Field, Form, Selectbox, Tabs } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
-import { useTranslation } from "react-i18next";
 
 const supplierState = { supplier: "", name: "", count: 0, toStore: false };
 const categoryState = { category: "", company: "", name: "", count: 0, toStore: false };
@@ -100,9 +100,9 @@ export const TransferStatement = () => {
       <Form
          onSubmit={handleSubmit}
          headerText={text("statement-transfer-title")}
-         buttonText={`${text("statement-transfer-btn")} ${text(
-            supplierData.toStore ? "statement-transfer-switch-store" : "statement-transfer-switch-shop",
-         )}`}
+         buttonText={`${text("statement-transfer-btn")} ${
+            supplierData.toStore ? text("toStore") : text("toShop")
+         }`}
          loading={(sIsSubmitted && !sError && !sendData?.warn) || sLoading}
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} />
@@ -139,10 +139,10 @@ export const TransferStatement = () => {
 
                <Selectbox
                   label={text("statement-transfer-switch-label")}
-                  options={[text("statement-transfer-switch-store"), text("statement-transfer-switch-shop")]}
+                  options={[text("toStore"), text("toShop")]}
                   value={supplierData.toStore ? "To Store" : "To Shop"}
                   loading={!isSubmitted && loading}
-                  onChange={(value) => handleSelectChange("toStore", value === "To Store")}
+                  onChange={(value) => handleSelectChange("toStore", value === text("toStore"))}
                />
             </TabPanel>
 
@@ -185,16 +185,10 @@ export const TransferStatement = () => {
 
                <Selectbox
                   label={text("statement-transfer-switch-label")}
-                  options={[text("statement-transfer-switch-store"), text("statement-transfer-switch-shop")]}
-                  value={
-                     supplierData.toStore
-                        ? text("statement-transfer-switch-store")
-                        : text("statement-transfer-switch-shop")
-                  }
+                  options={[text("toStore"), text("toShop")]}
+                  value={supplierData.toStore ? text("toStore") : text("toShop")}
                   loading={!isSubmitted && loading}
-                  onChange={(value) =>
-                     handleSelectChange("toStore", value === text("statement-transfer-switch-store"))
-                  }
+                  onChange={(value) => handleSelectChange("toStore", value === text("toStore"))}
                />
             </TabPanel>
          </Tabs>

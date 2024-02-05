@@ -27,13 +27,8 @@ export const useAxios = (method, url, body, options) => {
       try {
          let response;
 
-         if (method === "get")
-            response = await router.get(url, { signal: abortController.current?.signal, ...options });
-         else
-            response = await router[method](url, body, {
-               AbortSignal: abortController.current?.signal,
-               ...options,
-            });
+         if (method === "get") response = await router.get(url, options);
+         else response = await router[method](url, body, options);
 
          setData(() => response?.data);
          setStatus(() => response?.status);

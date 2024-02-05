@@ -1,4 +1,4 @@
-import { User, Logo, Sidebar, LockerCash, Searchbar, Notifies } from "@/components/navbar";
+import { User, Logo, Sidebar, Searchbar, Notifies } from "@/components/navbar";
 
 export const Navbar = () => {
    return (
@@ -7,7 +7,6 @@ export const Navbar = () => {
 
          {/* Navbar Icons */}
          <div className="flex-start print:hidden">
-            <LockerCash />
             <Notifies />
             <Searchbar />
             <User />

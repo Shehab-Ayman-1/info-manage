@@ -115,6 +115,7 @@ export const AddSupplier = () => {
                   <Field
                      label={text("creates-supplier-phone")}
                      name="phone"
+                     required={false}
                      value={formData.phone}
                      onChange={handleFieldChange}
                   />

@@ -40,21 +40,26 @@ export const CREATE_COMPANY = async (req, res) => {
 export const CREATE_PRODUCTS = async (req, res) => {
 	try {
 		const { category, company, products } = req.body;
-		if (!category || !company || !products.length) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبه" });
+		if (!category || !company || !products.length)
+			return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبه" });
 
 		// Get Company Products Names
 		const Company = await Products.findOne({ category, company });
 		if (!Company) return res.status(400).json({ error: "لم يتم العثور علي القسم او الشركة" });
 		const names = Company?.products.map(({ name }) => name) || [];
 
-		// Check The Duplecated Products
+		// Check The Duplicated Products
 		const uniqueProducts = products.filter((product) => !names.includes(product.name));
 		if (!uniqueProducts.length) return res.status(400).json({ error: "هذه المنتجات موجوده بالفعل" });
 
 		// Check The Duplicated Products
-		const uniqueAllProducts = await Products.find().findDuplicatedProducts(uniqueProducts.map((item) => item.name));
+		const uniqueAllProducts = await Products.find().findDuplicatedProducts(
+			uniqueProducts.map((item) => item.name)
+		);
 		if (uniqueAllProducts.length)
-			return res.status(400).json({ error: `هذه المنتجات موجوده في احدي الشركات الاخري [${uniqueAllProducts.join(" | ")}]` });
+			return res
+				.status(400)
+				.json({ error: `هذه المنتجات موجوده في احدي الشركات الاخري [${uniqueAllProducts.join(" | ")}]` });
 
 		// Just Create The Unique Products
 		const created = await Products.updateOne({ category, company }, { $push: { products: uniqueProducts } });
@@ -70,7 +75,8 @@ export const CREATE_PRODUCTS = async (req, res) => {
 export const CREATE_SUPPLIER = async (req, res) => {
 	try {
 		const { supplier, phone, products } = req.body;
-		if (!supplier || !products.length) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبه" });
+		if (!supplier || !products.length)
+			return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبه" });
 
 		await products.forEach(async ({ category, company, name }) => {
 			return await Products.updateOne(

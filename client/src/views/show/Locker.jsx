@@ -28,11 +28,8 @@ export const ShowLockerProcesses = () => {
          <Table
             headers={i18next.language === "en" ? TABLE_HEAD_EN : TABLE_HEAD_AR}
             pagination={data?.pagination}
-            footerSpan={[3, 3]}
-            total={data?.total}
             activePage={activePage}
             setActivePage={setActivePage}
-            footerTitle={text("locker-transactions-table-footer")}
          >
             {data?.data.map(({ name, price, method, date }, i) => (
                <Row key={i} index={i}>

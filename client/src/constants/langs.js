@@ -45,7 +45,9 @@ const general = {
       cash: "Cash",
 
       store: "Store",
+      toStore: "To Store",
       shop: "Shop",
+      toShop: "To Shop",
 
       footerCreator: "Created With ❤️ By Shehab Ayman",
    },
@@ -95,8 +97,11 @@ const general = {
       cash: "كاش",
 
       store: "المخزن",
+      toStore: "الي المخزن",
       shop: "المحل",
-      footerCreator: "تم انشاءة مع ❤️ بواسطة شهاب ايمن",
+      toShop: "الي المحل",
+
+      footerCreator: "تم تطويل المنظومة مع ❤️ بواسطة شهاب ايمن",
    },
 };
 
@@ -161,7 +166,7 @@ const navbar = {
          "locker-transactions": "Locker Withdrawal / deposit",
 
          // Creates
-         "new-title": "New",
+         "new-title": "Create",
          "add-category": "Add Category",
          "add-company": "Add Company",
          "add-product": "Add Product",
@@ -200,7 +205,7 @@ const navbar = {
          "locker-transactions": "سحب / ايداع من الخزنة",
 
          // New
-         "new-title": "جديد",
+         "new-title": "انشاء",
          "add-category": "اضافه قسم",
          "add-company": "اضافه شركة",
          "add-product": "اضافه منتج",
@@ -466,6 +471,10 @@ const creates = {
          "creates-product-menu-barcode": "Barcode",
          "creates-product-menu-min": "Minimum",
          "creates-product-menu-max": "Maximum",
+         "creates-product-menu-count-store": "Count In Store",
+         "creates-product-menu-count-shop": "Count In Shop",
+         "creates-product-menu-price-buy": "Purchase Price",
+         "creates-product-menu-price-sale": "Selling Price",
       },
       ar: {
          "creates-product-title": "انشاء منتج",
@@ -474,6 +483,10 @@ const creates = {
          "creates-product-menu-barcode": "الباركود",
          "creates-product-menu-min": "الحد الادني",
          "creates-product-menu-max": "الحد المتوسط",
+         "creates-product-menu-count-store": "العدد في المخزن",
+         "creates-product-menu-count-shop": "العدد في المحل",
+         "creates-product-menu-price-buy": "سعر الشراء",
+         "creates-product-menu-price-sale": "سعر البيع",
       },
    },
    supplier: {
@@ -501,14 +514,10 @@ const creates = {
 const balances = {
    balances: {
       en: {
-         "balances-buy-title": "By Purchase Salary",
-         "balances-sale-title": "By Selling Salary",
-         "balances-table-footer": "Total Balances",
+         "show-total-cash": "Show Total Cash",
       },
       ar: {
-         "balances-buy-title": "حسب سعر الشراء",
-         "balances-sale-title": "حسب سعر البيع",
-         "balances-table-footer": "اجمالي الارصده",
+         "show-total-cash": "عرض اجمالي الخزنة",
       },
    },
    locker: {

@@ -133,6 +133,9 @@ export const GET_SEARCH_LIST = async (req, res) => {
 					name: {
 						$addToSet: "$products.name",
 					},
+					company: {
+						$addToSet: "$company",
+					},
 					barcode: {
 						$addToSet: "$products.barcode",
 					},
@@ -144,6 +147,7 @@ export const GET_SEARCH_LIST = async (req, res) => {
 					companyId: "$_id.companyId",
 					productId: "$_id.productId",
 					name: { $arrayElemAt: ["$name", 0] },
+					company: { $arrayElemAt: ["$company", 0] },
 					barcode: { $arrayElemAt: ["$barcode", 0] },
 				},
 			},

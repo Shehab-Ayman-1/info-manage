@@ -3,13 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { filterSelection, getLists, setProducts } from "@/redux/products";
+import { filterSelection, getLists, getSuppliers, setProducts } from "@/redux/products";
 import { Field, Form, MTDialog, Selectbox } from "@/components/ui";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
 
 const formState = { category: "", company: "", products: [] };
-const productState = { name: "", minmax: { min: 5, max: 10 }, barcode: "" };
+const productState = {
+   name: "",
+   barcode: "",
+   minmax: { min: 5, max: 10 },
+   count: { store: 0, shop: 0 },
+   price: { buy: 0, sale: 0 },
+   suppliers: [],
+};
 export const AddProducts = () => {
    const [text] = useTranslation();
 
@@ -20,18 +27,26 @@ export const AddProducts = () => {
    const [formData, setFormData] = useState(formState);
    const [openDialog, setOpenDialog] = useState(false);
 
-   const { lists, categories, companies } = useSelector(({ products }) => products);
+   const { lists, categories, companies, suppliers } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
 
    useEffect(() => {
-      if (lists.length) return;
+      if (!suppliers.length) {
+         (async () => {
+            const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-suppliers-list");
+            if (isSubmitted && error) return;
+            dispatch(getSuppliers(data));
+         })();
+      }
 
-      (async () => {
-         const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-products-list");
-         if (isSubmitted && error) return;
-         dispatch(getLists(data));
-      })();
-   }, []);
+      if (!lists.length) {
+         (async () => {
+            const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-products-list");
+            if (isSubmitted && error) return;
+            dispatch(getLists(data));
+         })();
+      }
+   }, [data]);
 
    useEffect(() => {
       dispatch(filterSelection({ category: formData.category, company: "" }));
@@ -46,22 +61,22 @@ export const AddProducts = () => {
    };
 
    const handleFieldChange = (event) => {
-      if (event.target.name === "min" || event.target.name === "max") {
+      if (event.target.id === "minmax" || event.target.id === "count" || event.target.id === "price") {
          return setProduct((data) => {
-            const minmax = { ...data?.minmax, [event.target.name]: event.target.value };
-            return { ...data, minmax };
+            const change = { ...data?.[event.target.id], [event.target.name]: +event.target.value };
+            return { ...data, [event.target.id]: change };
          });
       }
       setProduct((data) => ({ ...data, [event.target.name]: event.target.value }));
    };
 
    const handleSubmitProduct = () => {
-      const { name, minmax } = product;
-      if (!name || !minmax) return alert("يجب ادخال جميع البيانات المطلوبه");
+      const { name, minmax, count, price } = product;
+      if (!name || !minmax || !count || !price) return alert("يجب ادخال جميع البيانات المطلوبه");
 
       setFormData((data) => ({ ...data, products: data.products.concat(product) }));
-      setOpenDialog(() => false);
-      setProduct(() => productState);
+      setOpenDialog(false);
+      setProduct(productState);
    };
 
    const handleCancel = (index) => {
@@ -105,6 +120,14 @@ export const AddProducts = () => {
             onChange={(value) => handleSelectChange("company", value)}
          />
 
+         <Selectbox
+            label={text("chooseSupplier")}
+            options={suppliers}
+            value={product.suppliers[0]}
+            loading={!ccIsSubmitted && ccLoading}
+            onChange={(value) => setProduct((product) => ({ ...product, suppliers: [value] }))}
+         />
+
          <div className="products">
             {formData.products.map(({ name }, i) => (
                <Typography variant="lead" className="text-dimWhite" key={i}>
@@ -136,23 +159,26 @@ export const AddProducts = () => {
             handler={handleOpenDialog}
             onSubmit={handleSubmitProduct}
          >
-            <Field
-               label={text("creates-product-menu-name")}
-               name="name"
-               value={product.name}
-               onChange={handleFieldChange}
-            />
-            <Field
-               label={text("creates-product-menu-barcode")}
-               name="barcode"
-               value={product.barcode}
-               onChange={handleFieldChange}
-            />
+            <div className="flex flex-col">
+               <Field
+                  label={text("creates-product-menu-name")}
+                  name="name"
+                  value={product.name}
+                  onChange={handleFieldChange}
+               />
+               <Field
+                  label={text("creates-product-menu-barcode")}
+                  name="barcode"
+                  value={product.barcode}
+                  onChange={handleFieldChange}
+               />
+            </div>
 
-            <div className="flex-between flex-wrap overflow-hidden sm:flex-nowrap">
+            <div className="flex-between flex-col overflow-hidden sm:flex-row">
                <Field
                   type="number"
                   label={text("creates-product-menu-min")}
+                  id="minmax"
                   name="min"
                   min="0"
                   value={product.minmax?.min}
@@ -161,10 +187,57 @@ export const AddProducts = () => {
                />
                <Field
                   type="number"
-                  min="0"
                   label={text("creates-product-menu-max")}
+                  id="minmax"
                   name="max"
+                  min="0"
                   value={product.minmax?.max}
+                  containerStyle="sm:!w-[50%]"
+                  onChange={handleFieldChange}
+               />
+            </div>
+
+            <div className="flex-between flex-col overflow-hidden sm:flex-row">
+               <Field
+                  type="number"
+                  label={text("creates-product-menu-count-store")}
+                  id="count"
+                  name="store"
+                  min="0"
+                  value={product.count?.store}
+                  containerStyle="sm:!w-[50%]"
+                  onChange={handleFieldChange}
+               />
+               <Field
+                  type="number"
+                  label={text("creates-product-menu-count-shop")}
+                  id="count"
+                  name="shop"
+                  min="0"
+                  value={product.count?.shop}
+                  containerStyle="sm:!w-[50%]"
+                  onChange={handleFieldChange}
+               />
+            </div>
+
+            <div className="flex-between flex-col overflow-hidden sm:flex-row">
+               <Field
+                  type="number"
+                  label={text("creates-product-menu-price-buy")}
+                  id="price"
+                  name="buy"
+                  min="0"
+                  value={product.price?.buy}
+                  containerStyle="sm:!w-[50%]"
+                  onChange={handleFieldChange}
+               />
+               <Field
+                  type="number"
+                  label={text("creates-product-menu-price-sale")}
+                  id="price"
+                  name="sale"
+                  min="0"
+                  value={product.price?.sale}
                   containerStyle="sm:!w-[50%]"
                   onChange={handleFieldChange}
                />

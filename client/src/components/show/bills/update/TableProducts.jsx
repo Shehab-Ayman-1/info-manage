@@ -9,7 +9,6 @@ const TABLE_HEAD_EN = ["Controll", "Product", "Count", "Price", "Total"];
 export const TableProducts = ({ formData, setFormData, handler }) => {
    const [, i18next] = useTranslation();
    const [total, setTotal] = useState("00,00");
-   console.log(formData);
 
    useEffect(() => {
       const total = formData.products.reduce((prev, cur) => prev + cur.price * cur.count, 0);

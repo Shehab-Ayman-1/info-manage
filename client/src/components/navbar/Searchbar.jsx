@@ -35,7 +35,10 @@ export const Searchbar = () => {
    useEffect(() => {
       if (!data?.length) return;
       const result = data.map((product) => {
-         const matched = product.name.includes(searchText.trim()) || product.barcode.includes(searchText.trim());
+         const matched =
+            product.name.includes(searchText.trim()) ||
+            product.company.includes(searchText.trim()) ||
+            product.barcode.includes(searchText.trim());
          return matched ? product : null;
       });
 
@@ -45,7 +48,7 @@ export const Searchbar = () => {
    const handleChange = (event) => {
       setSearchText(() => event.target.value);
       setStartSearch(true);
-      event.target.value ? setOpen(true) : setOpen(false);
+      setOpen(!!event.target.value);
    };
 
    const handleClose = () => {
@@ -95,22 +98,23 @@ export const Searchbar = () => {
                <Collapse open={open}>
                   <List>
                      {(filterList || searchList).length ? (
-                        (filterList || searchList)?.map(({ name, companyId, productId }, i) => (
+                        (filterList || searchList)?.map(({ name, company, companyId, productId }, i) => (
                            <ListItem
                               key={i}
-                              className="!justify-start !gap-0 text-xl font-bold hover:bg-dimPurple hover:dark:text-white"
+                              className="!justify-between !gap-0 text-xl font-bold hover:bg-dimPurple hover:dark:text-white"
                               onClick={() => handleItem(companyId, productId)}
                            >
                               {name.split(searchText).map((part, i) => (
-                                 <Fragment key={i}>
+                                 <p key={i} className="w-fit whitespace-nowrap">
                                     {i ? (
                                        <span className={searchText === " " ? "pr-1" : "text-primary"}>
                                           {searchText.trim()}
                                        </span>
                                     ) : null}
                                     {part}
-                                 </Fragment>
+                                 </p>
                               ))}
+                              <p className="flex-end w-full !text-dimWhite">{company || " "}</p>
                            </ListItem>
                         ))
                      ) : !isSubmitted && loading ? (
