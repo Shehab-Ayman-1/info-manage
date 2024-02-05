@@ -347,6 +347,8 @@ const show = {
          "shop-store-title-store": "Store Products",
          "shop-store-switch-buy": "Purchase Price",
          "shop-store-switch-sale": "Salling Price",
+         "shop-store-switch-category": "Category",
+         "shop-store-switch-category-value": "All Categories",
          "shop-store-total": "Total Products",
       },
       ar: {
@@ -354,6 +356,8 @@ const show = {
          "shop-store-title-store": "عرض بضائع المخزن",
          "shop-store-switch-buy": "سعر الشراء",
          "shop-store-switch-sale": "سعر البيع",
+         "shop-store-switch-category": "القسم",
+         "shop-store-switch-category-value": "كل الاقسام",
          "shop-store-total": "اجمالي البضائع",
       },
    },

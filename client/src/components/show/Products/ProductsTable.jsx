@@ -7,17 +7,18 @@ import { Loading } from "@/layout/Loading";
 
 const TABLE_HEAD_AR = ["الشركة", "المنتج", "العدد", "السعر", "الاجمالي"];
 const TABLE_HEAD_EN = ["Company", "Product", "Count", "Price", "Total"];
-export const ProductsTable = ({ price, count }) => {
+export const ProductsTable = ({ category, price, count }) => {
    const [text, i18next] = useTranslation();
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const [activePage, setActivePage] = useState(0);
 
    useEffect(() => {
       (async () => {
-         const query = `price=${price}&count=${count}&activePage=${activePage}`;
+         const myCategory = category === text("shop-store-switch-category-value") ? "" : category;
+         const query = `category=${myCategory}&price=${price}&count=${count}&activePage=${activePage}`;
          await refetch("get", `/products/get-table-list?${query}`);
       })();
-   }, [price, activePage]);
+   }, [price, category, activePage]);
 
    const minmax = (count, min, max) => {
       if (count <= 0) return "!text-blue-gray-500/50 dark:!text-blue-gray-700";

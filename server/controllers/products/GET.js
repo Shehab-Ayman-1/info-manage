@@ -53,16 +53,30 @@ export const GET_BALANCES = async (req, res) => {
 
 export const GET_TABLES_LIST = async (req, res) => {
 	try {
-		const { price, count, activePage } = req.query; // process: { price: [buy - sale], count: [shop, store] }
+		const { category, price, count, activePage } = req.query;
 
 		let Count = count === "shop" ? "$products.count.shop" : count === "store" ? "$products.count.store" : "";
 		let Price = price === "buy" ? "$products.price.buy" : price === "sale" ? "$products.price.sale" : "";
 
+		// If category = '' then match all the products, else match the category name
 		const list = await Products.aggregate([
-			{ $unwind: { path: "$products", preserveNullAndEmptyArrays: true } },
-			{ $sort: { company: 1, "products.name": 1 } },
-			{ $skip: (+activePage ?? 0) * LIMIT },
-			{ $limit: LIMIT },
+			{
+				$match: {
+					category: category === "" ? { $exists: true } : category,
+				},
+			},
+			{
+				$unwind: { path: "$products", preserveNullAndEmptyArrays: true },
+			},
+			{
+				$sort: { company: 1, "products.name": 1 },
+			},
+			{
+				$skip: (+activePage ?? 0) * LIMIT,
+			},
+			{
+				$limit: LIMIT,
+			},
 			{
 				$group: {
 					_id: { company: "$company", name: "$products.name" },
