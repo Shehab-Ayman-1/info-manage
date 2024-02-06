@@ -25,8 +25,12 @@ export const Info = ({ isAdminPay, formData, setFormData }) => {
 
             <Selectbox
                label={text("statement-payment-way")}
-               value={formData.paymentWay ? text("byProject") : text("byMilestone")}
-               options={[text("byProject"), text("byMilestone")]}
+               value={
+                  formData.paymentWay
+                     ? text("statement-payment-way-project")
+                     : text("statement-payment-way-milestone")
+               }
+               options={[text("statement-payment-way-project"), text("statement-payment-way-milestone")]}
                onChange={(value) => setFormData((data) => ({ ...data, paymentWay: value }))}
             />
          </div>
