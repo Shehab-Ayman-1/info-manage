@@ -1,7 +1,7 @@
 import express from "express";
 
 // GET
-import { GET_TABLES_LIST, GET_BALANCES, GET_PROFILE } from "../controllers/index.js";
+import { GET_TABLES_LIST, GET_PROFILE } from "../controllers/index.js";
 import { GET_PRODUCTS_LIST, GET_SUPPLIERS_LIST, GET_SEARCH_LIST } from "../controllers/index.js";
 import { GET_NEEDED_PRODUCTS, GET_LEAST_SALES } from "../controllers/index.js";
 import { GET_PRODUCTS_BY_DATE } from "../controllers/index.js";
@@ -22,7 +22,6 @@ router.get("/get-products-list", GET_PRODUCTS_LIST);
 router.get("/get-suppliers-list", GET_SUPPLIERS_LIST);
 router.get("/get-table-list", GET_TABLES_LIST);
 router.get("/get-search-list", GET_SEARCH_LIST);
-router.get("/get-balances", GET_BALANCES);
 router.get("/get-profile/:companyId/:productId", GET_PROFILE);
 
 // GET [Analysis]

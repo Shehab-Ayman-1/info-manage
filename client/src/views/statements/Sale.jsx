@@ -110,33 +110,24 @@ export const SaleStatement = () => {
          <Info isAdminPay={false} formData={formData} setFormData={setFormData} />
 
          <div className="flex-between flex-wrap md:flex-nowrap">
-            <FieldWithRedirectLink path="/creates/category" redirectTo="/statements/sale">
-               <Selectbox
-                  label={text("chooseCategory")}
-                  options={categories}
-                  value={product.category}
-                  loading={!lIsSubmitted && lLoading}
-                  onChange={(value) => handleSelectChange("category", value)}
-               />
-            </FieldWithRedirectLink>
+            <Selectbox
+               label={text("chooseCategory")}
+               options={categories}
+               value={product.category}
+               loading={!lIsSubmitted && lLoading}
+               onChange={(value) => handleSelectChange("category", value)}
+            />
 
-            <FieldWithRedirectLink path="/creates/company" redirectTo="/statements/sale">
-               <Selectbox
-                  label={text("chooseCompany")}
-                  options={companies}
-                  value={product.company}
-                  loading={!lIsSubmitted && lLoading}
-                  onChange={(value) => handleSelectChange("company", value)}
-               />
-            </FieldWithRedirectLink>
+            <Selectbox
+               label={text("chooseCompany")}
+               options={companies}
+               value={product.company}
+               loading={!lIsSubmitted && lLoading}
+               onChange={(value) => handleSelectChange("company", value)}
+            />
          </div>
 
-         <InsertProduct
-            redirectTo="/statements/sale"
-            product={product}
-            setProduct={setProduct}
-            setFormData={setFormData}
-         />
+         <InsertProduct product={product} setProduct={setProduct} setFormData={setFormData} />
 
          <TableProducts formData={formData} setFormData={setFormData} />
       </Form>

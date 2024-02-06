@@ -17,23 +17,6 @@ export const CREATE_CATEGORY = async (req, res) => {
 	}
 };
 
-export const _CREATE_CATEGORY = async (req, res) => {
-	try {
-		const { img, category, company } = req.body;
-		if (!category || !company) return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبة" });
-
-		// Check If The Category Is Exist
-		const exists = await Products.exists({ category });
-		if (exists) return res.status(400).json({ error: "هذا القسم موجود بالفعل" });
-
-		// Create The Category
-		await Products.create({ img, category, company });
-		res.status(200).json({ success: "لقد تم انشاء القسم بنجاح" });
-	} catch (error) {
-		res.status(404).json(`CREATE_CATEGORY: ${error.message}`);
-	}
-};
-
 export const CREATE_COMPANY = async (req, res) => {
 	try {
 		const { img, category, company } = req.body;

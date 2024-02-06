@@ -83,7 +83,12 @@ export const BuyStatement = () => {
 
          <Info isAdminPay={true} formData={formData} setFormData={setFormData} />
 
-         <InsertProduct product={product} setProduct={setProduct} setFormData={setFormData} />
+         <InsertProduct
+            redirectTo="/statements/buy"
+            product={product}
+            setProduct={setProduct}
+            setFormData={setFormData}
+         />
 
          <TableProducts formData={formData} setFormData={setFormData} />
       </Form>

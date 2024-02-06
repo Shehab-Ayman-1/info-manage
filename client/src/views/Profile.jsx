@@ -39,7 +39,9 @@ export const Profile = () => {
          </div>
 
          <ProfileInfo title={text("profile-name")} name={data.name} />
+
          <ProfileInfo title={text("profile-barcode")} name={data.barcode} />
+
          <ProfileInfo
             title={text("profile-suppliers")}
             name={data.suppliers.length ? data.suppliers.join(" | ") : "----"}

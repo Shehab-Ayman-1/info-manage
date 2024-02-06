@@ -1,7 +1,8 @@
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 
-import { Field, MTDialog, Selectbox } from "@/components/ui"
+import { Field, MTDialog, Selectbox } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
@@ -11,6 +12,7 @@ export const UpdateProfile = ({ setData }) => {
 
    const [price, setPrice] = useState({ process: "sale", value: "" });
    const [openDialog, setOpenDialog] = useState(false);
+   const { companyId, productId } = useParams();
 
    const handleOpenDialog = () => {
       setOpenDialog((open) => !open);
@@ -39,6 +41,8 @@ export const UpdateProfile = ({ setData }) => {
          >
             <Field
                label={text("profile-widget-label")}
+               type="number"
+               min="0"
                containerStyle="mb-8"
                value={price.value}
                onChange={(event) => setPrice((data) => ({ ...data, value: event.target.value }))}

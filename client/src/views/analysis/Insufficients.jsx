@@ -53,7 +53,7 @@ export const AnalysisInsufficients = () => {
 
          <div className="flex-between my-5 flex-col px-4 sm:flex-row">
             <Selectbox
-               label={text("supplier")}
+               label={text("chooseSupplier")}
                options={suppliers}
                value={supplier}
                loading={!sIsSubmitted && sLoading}

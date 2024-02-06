@@ -23,34 +23,6 @@ export const GET_PROFILE = async (req, res) => {
 	}
 };
 
-export const GET_BALANCES = async (req, res) => {
-	try {
-		const { price } = req.query;
-		const companies = await Products.find().select("products");
-
-		// companies
-		const calcTotalPrice = (price, count) => {
-			return companies.reduce((prev, cur) => {
-				// products
-				const product = cur.products.reduce((prev, cur) => {
-					// total
-					return prev + cur.price[price] * cur.count[count];
-				}, 0);
-				return prev + product;
-			}, 0);
-		};
-
-		const locker = await Locker.find().findTotalPrices();
-		const shop = calcTotalPrice(price, "shop");
-		const store = calcTotalPrice(price, "store");
-		const total = locker + shop + store;
-
-		res.status(200).json({ locker, shop, store, total });
-	} catch (error) {
-		res.status(404).json(`GET_BALANCES: ${error.message}`);
-	}
-};
-
 export const GET_TABLES_LIST = async (req, res) => {
 	try {
 		const { category, price, count, activePage } = req.query;
@@ -63,6 +35,8 @@ export const GET_TABLES_LIST = async (req, res) => {
 			{
 				$match: {
 					category: category === "" ? { $exists: true } : category,
+					company: { $exists: true },
+					"products.name": { $exists: true },
 				},
 			},
 			{
@@ -194,6 +168,13 @@ export const GET_PRODUCTS_LIST = async (req, res) => {
 				},
 			},
 			{
+				$match: {
+					category: { $exists: true },
+					company: { $exists: true },
+					"products.name": { $exists: true },
+				},
+			},
+			{
 				$group: {
 					_id: {
 						category: "$category",
@@ -297,8 +278,12 @@ export const GET_NEEDED_PRODUCTS = async (req, res) => {
 		const placeCount = store === "true" ? "$products.count.store" : "$products.count.shop";
 
 		const list = await Products.aggregate([
-			{ $unwind: "$products" },
-			{ $match: { "products.suppliers": supplier } },
+			{
+				$unwind: "$products",
+			},
+			{
+				$match: { "products.suppliers": supplier },
+			},
 			{
 				$project: {
 					_id: 0,
@@ -335,8 +320,12 @@ export const GET_LEAST_SALES = async (req, res) => {
 		const thisMonth = new Date(now.getFullYear(), now.getMonth());
 
 		const list = await Products.aggregate([
-			{ $unwind: "$products" },
-			{ $match: { "products.count.updatedAt": { $lte: thisMonth } } },
+			{
+				$unwind: "$products",
+			},
+			{
+				$match: { "products.count.updatedAt": { $lte: thisMonth } },
+			},
 			{
 				$project: {
 					_id: 0,
@@ -367,8 +356,12 @@ export const GET_PRODUCTS_BY_DATE = async (req, res) => {
 		}
 
 		const list = await Bills.aggregate([
-			{ $unwind: "$products" },
-			{ $match: { type: "bill", date: { $gt: startDate, $lt: endDate } } },
+			{
+				$unwind: "$products",
+			},
+			{
+				$match: { type: "bill", date: { $gt: startDate, $lt: endDate } },
+			},
 			{
 				$group: {
 					_id: "$products.name",

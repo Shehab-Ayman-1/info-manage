@@ -101,7 +101,7 @@ const general = {
       shop: "المحل",
       toShop: "الي المحل",
 
-      footerCreator: "تم تطويل المنظومة مع ❤️ بواسطة شهاب ايمن",
+      footerCreator: "تم تطوير المنظومة مع ❤️ بواسطة شهاب ايمن",
    },
 };
 
@@ -154,8 +154,8 @@ const navbar = {
          "show-balances": "Show Balances",
          "show-transections": "Transections",
          "client-suppliers": "Clients & Suppliers",
-         "show-bills": "Show Bills",
-         "show-debts": "Show Debts",
+         "show-bills": "Show Client Bills",
+         "show-debts": "Show Supplier Bills",
 
          // Statements
          "statements-title": "Statement",
@@ -189,18 +189,17 @@ const navbar = {
          "show-title": "العرض",
          "show-shop": "منتجات المحل",
          "show-store": "منتجات المخزن",
-         "balances-title": "الماليات",
-         "show-balances": "عرض الارصده",
+         "show-balances": "عرض كاش الخزنة",
          "show-transections": "المعاملات",
          "client-suppliers": "العملاء والمندوبين",
-         "show-bills": "عرض الفواتير",
-         "show-debts": "عرض المديونيات",
+         "show-bills": "عرض فواتير العملاء",
+         "show-debts": "عرض فواتير المندوبين",
 
          // Statements
          "statements-title": "الكشوفات",
          "bill-statement": "كشف حساب",
-         "supplier-statement": "كشف مندوب",
-         "transfer-statement": "كشف تحويل",
+         "supplier-statement": "كشف حساب مندوب",
+         "transfer-statement": "تحويل منتجات",
          "workers-statement": "كشف العمال",
          "locker-transactions": "سحب / ايداع من الخزنة",
 
@@ -444,7 +443,7 @@ const statements = {
       "statement-sale-btn": "بيع",
       "statement-payment-way": "الدفع",
       "statement-payment-way-project": "المبلغ كامل",
-      "statement-payment-way-milestone": "دفع اجل",
+      "statement-payment-way-milestone": "دفع أجل",
       "statement-transfer-btn": "تحويل",
       "statement-transfer-switch-label": "اختر المكان",
       "statement-transfer-switch-store": "الي المخزن",

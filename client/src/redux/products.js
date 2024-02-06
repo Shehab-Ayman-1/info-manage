@@ -94,10 +94,11 @@ export const productsSlice = createSlice({
 
          if (companyIndex === -1) return state;
          const products = payload.products
-            .map(({ name }) => ({ name, price: 0 }))
+            .map(({ name, price }) => ({ name, salePrice: price.sale, buyPrice: price.buy }))
             .sort((a, b) => a.name.localeCompare(b.name));
 
          state.lists[categoryIndex]?.companies[companyIndex].products.push(...products);
+         console.log(state.products);
          return state;
       },
    },

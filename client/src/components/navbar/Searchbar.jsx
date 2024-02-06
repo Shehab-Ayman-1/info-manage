@@ -32,7 +32,6 @@ export const Searchbar = () => {
       })();
    }, [startSearch, searchList]);
 
-   console.log(searchList);
 
    useEffect(() => {
       if (!data?.length) return;
