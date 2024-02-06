@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { Info, InsertProduct, TableProducts } from "@/components/statements";
+import { FieldWithRedirectLink, Info, InsertProduct, TableProducts } from "@/components/statements";
 import { filterSelection, getSuppliers } from "@/redux/products";
 import { Form, Selectbox } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
@@ -58,16 +58,20 @@ export const BuyStatement = () => {
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
-         <Selectbox
-            label={text("chooseSupplier")}
-            options={suppliers}
-            value={formData.supplier}
-            loading={!isSubmitted && loading}
-            onChange={(value) => setFormData(() => ({ ...formState, supplier: value }))}
-         />
+         <FieldWithRedirectLink path="/creates/supplier" redirectTo="/statements/buy">
+            <Selectbox
+               label={text("chooseSupplier")}
+               options={suppliers}
+               value={formData.supplier}
+               loading={!isSubmitted && loading}
+               onChange={(value) => setFormData(() => ({ ...formState, supplier: value }))}
+            />
+         </FieldWithRedirectLink>
 
          <Info isAdminPay={true} formData={formData} setFormData={setFormData} />
+
          <InsertProduct product={product} setProduct={setProduct} setFormData={setFormData} />
+
          <TableProducts formData={formData} setFormData={setFormData} />
       </Form>
    );

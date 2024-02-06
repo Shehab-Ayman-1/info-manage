@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import { Field, Selectbox } from "@/components/ui";
+import { FieldWithRedirectLink } from ".";
 
-export const InsertProduct = ({ product, setProduct, setFormData }) => {
+export const InsertProduct = ({ redirectTo, product, setProduct, setFormData }) => {
    const [text] = useTranslation();
    const { products } = useSelector(({ products }) => products);
 
@@ -28,12 +29,14 @@ export const InsertProduct = ({ product, setProduct, setFormData }) => {
 
    return (
       <div className="mb-5 w-full rounded-xl border border-solid px-2 md:px-4">
-         <Selectbox
-            label={text("chooseProduct")}
-            value={product.name}
-            options={products?.map(({ name }) => name).filter((n) => n) || []}
-            onChange={(value) => setProduct((data) => ({ ...data, name: value }))}
-         />
+         <FieldWithRedirectLink path="/creates/products" redirectTo={redirectTo}>
+            <Selectbox
+               label={text("chooseProduct")}
+               value={product.name}
+               options={products?.map(({ name }) => name).filter((name) => name) || []}
+               onChange={(value) => setProduct((data) => ({ ...data, name: value }))}
+            />
+         </FieldWithRedirectLink>
 
          <div className="flex-between flex-wrap sm:flex-nowrap">
             <Field

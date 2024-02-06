@@ -1,7 +1,8 @@
 import { TabPanel, TabsBody } from "@material-tailwind/react";
 import { Button, Typography, IconButton } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { filterSelection, getLists, getSuppliers, setSuppliers } from "@/redux/products";
@@ -21,6 +22,7 @@ export const AddSupplier = () => {
 
    const { categories, companies, products, suppliers } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
+   const { state } = useLocation();
 
    useEffect(() => {
       if (!suppliers.length) {
@@ -101,7 +103,13 @@ export const AddSupplier = () => {
          buttonText={text("creates-btn")}
          loading={(isSubmitted && !error) || loading}
       >
-         <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
+         <Loading
+            isSubmitted={isSubmitted}
+            loading={loading}
+            error={error}
+            message={data}
+            to={state?.redirectTo || "/"}
+         />
 
          <Tabs defaultValue="new" headers={i18next.language === "en" ? tabsHeaderEn : tabsHeaderAr}>
             <TabsBody>
@@ -185,7 +193,7 @@ export const AddSupplier = () => {
             <br />
 
             <Selectbox
-               label={text("chooseCategory")}
+               label={text("chooseProduct")}
                value={product.name}
                loading={!ccIsSubmitted && ccLoading}
                onChange={(value) => handleSelectChange("name", value)}

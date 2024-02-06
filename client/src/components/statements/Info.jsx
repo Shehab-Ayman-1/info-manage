@@ -8,6 +8,13 @@ export const Info = ({ isAdminPay, formData, setFormData }) => {
 
    return (
       <Fragment>
+         <Selectbox
+            label={text("place")}
+            value={formData.toStore ? text("store") : text("shop")}
+            options={[text("store"), text("shop")]}
+            onChange={(value) => setFormData((data) => ({ ...data, toStore: value === text("store") }))}
+         />
+
          <div className="flex-between flex-wrap md:flex-nowrap">
             <Selectbox
                label={text("paymentMethod")}
@@ -17,10 +24,10 @@ export const Info = ({ isAdminPay, formData, setFormData }) => {
             />
 
             <Selectbox
-               label={text("place")}
-               value={formData.toStore ? text("store") : text("shop")}
-               options={[text("store"), text("shop")]}
-               onChange={(value) => setFormData((data) => ({ ...data, toStore: value === text("store") }))}
+               label={text("statement-payment-way")}
+               value={formData.paymentWay ? text("byProject") : text("byMilestone")}
+               options={[text("byProject"), text("byMilestone")]}
+               onChange={(value) => setFormData((data) => ({ ...data, paymentWay: value }))}
             />
          </div>
 

@@ -1,12 +1,14 @@
 import { Button, IconButton, Typography } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { filterSelection, getLists, getSuppliers, setProducts } from "@/redux/products";
 import { Field, Form, MTDialog, Selectbox } from "@/components/ui";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
+import { FieldWithRedirectLink } from "@/components/statements";
 
 const formState = { category: "", company: "", products: [] };
 const productState = {
@@ -29,6 +31,7 @@ export const AddProducts = () => {
 
    const { lists, categories, companies, suppliers } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
+   const { state } = useLocation();
 
    useEffect(() => {
       if (!suppliers.length) {
@@ -102,7 +105,13 @@ export const AddProducts = () => {
          buttonText={text("creates-btn")}
          loading={(isSubmitted && !error) || loading}
       >
-         <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
+         <Loading
+            isSubmitted={isSubmitted}
+            loading={loading}
+            error={error}
+            message={data}
+            to={state?.redirectTo || "/"}
+         />
 
          <Selectbox
             label={text("chooseCategory")}
@@ -120,13 +129,15 @@ export const AddProducts = () => {
             onChange={(value) => handleSelectChange("company", value)}
          />
 
-         <Selectbox
-            label={text("chooseSupplier")}
-            options={suppliers}
-            value={product.suppliers[0]}
-            loading={!ccIsSubmitted && ccLoading}
-            onChange={(value) => setProduct((product) => ({ ...product, suppliers: [value] }))}
-         />
+         <FieldWithRedirectLink path="/creates/supplier" redirectTo="/creates/products">
+            <Selectbox
+               label={text("chooseSupplier")}
+               options={suppliers}
+               value={product.suppliers[0]}
+               loading={!ccIsSubmitted && ccLoading}
+               onChange={(value) => setProduct((product) => ({ ...product, suppliers: [value] }))}
+            />
+         </FieldWithRedirectLink>
 
          <div className="products">
             {formData.products.map(({ name }, i) => (

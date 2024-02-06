@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { setCategories } from "@/redux/products";
@@ -14,6 +15,7 @@ export const AddCategory = () => {
    const [formData, setFormData] = useState({ img: "", category: "", company: "" });
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const dispatch = useDispatch();
+   const { state } = useLocation();
 
    const handleFieldChange = (event) => {
       setFormData((data) => ({ ...data, [event.target.name]: event.target.value }));
@@ -35,7 +37,13 @@ export const AddCategory = () => {
          buttonText={text("creates-btn")}
          loading={(isSubmitted && !error) || loading}
       >
-         <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/creates/company" />
+         <Loading
+            isSubmitted={isSubmitted}
+            loading={loading}
+            error={error}
+            message={data}
+            to={state?.redirectTo || "/creates/company"}
+         />
 
          <div className="w-full">
             <img

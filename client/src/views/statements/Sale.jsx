@@ -1,11 +1,11 @@
-import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 
+import { FieldWithRedirectLink, Info, InsertProduct, TableProducts } from "@/components/statements";
 import { getLists, filterSelection } from "@/redux/products";
-import { getClients } from "@/redux/bills";
 import { Form, Selectbox } from "@/components/ui";
-import { Info, InsertProduct, StatementForm, TableProducts } from "@/components/statements";
+import { getClients } from "@/redux/bills";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
@@ -97,34 +97,46 @@ export const SaleStatement = () => {
       >
          <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
 
-         <Selectbox
-            label={text("chooseClient")}
-            options={clients}
-            value={formData.client}
-            loading={!lIsSubmitted && lLoading}
-            onChange={(value) => handleSelectChange("client", value)}
-         />
+         <FieldWithRedirectLink path="/creates/client" redirectTo="/statements/sale">
+            <Selectbox
+               label={text("chooseClient")}
+               options={clients}
+               value={formData.client}
+               loading={!lIsSubmitted && lLoading}
+               onChange={(value) => handleSelectChange("client", value)}
+            />
+         </FieldWithRedirectLink>
 
          <Info isAdminPay={false} formData={formData} setFormData={setFormData} />
 
          <div className="flex-between flex-wrap md:flex-nowrap">
-            <Selectbox
-               label={text("chooseCategory")}
-               options={categories}
-               value={product.category}
-               loading={!lIsSubmitted && lLoading}
-               onChange={(value) => handleSelectChange("category", value)}
-            />
-            <Selectbox
-               label={text("chooseCompany")}
-               options={companies}
-               value={product.company}
-               loading={!lIsSubmitted && lLoading}
-               onChange={(value) => handleSelectChange("company", value)}
-            />
+            <FieldWithRedirectLink path="/creates/category" redirectTo="/statements/sale">
+               <Selectbox
+                  label={text("chooseCategory")}
+                  options={categories}
+                  value={product.category}
+                  loading={!lIsSubmitted && lLoading}
+                  onChange={(value) => handleSelectChange("category", value)}
+               />
+            </FieldWithRedirectLink>
+
+            <FieldWithRedirectLink path="/creates/company" redirectTo="/statements/sale">
+               <Selectbox
+                  label={text("chooseCompany")}
+                  options={companies}
+                  value={product.company}
+                  loading={!lIsSubmitted && lLoading}
+                  onChange={(value) => handleSelectChange("company", value)}
+               />
+            </FieldWithRedirectLink>
          </div>
 
-         <InsertProduct product={product} setProduct={setProduct} setFormData={setFormData} />
+         <InsertProduct
+            redirectTo="/statements/sale"
+            product={product}
+            setProduct={setProduct}
+            setFormData={setFormData}
+         />
 
          <TableProducts formData={formData} setFormData={setFormData} />
       </Form>

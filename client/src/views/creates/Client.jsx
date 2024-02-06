@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -12,6 +13,7 @@ export const AddClient = () => {
 
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const [formData, setFormData] = useState({ client: "", phone: "" });
+   const { state } = useLocation();
    const dispatch = useDispatch();
 
    const handleFieldChange = (event) => {
@@ -23,6 +25,7 @@ export const AddClient = () => {
       await refetch("post", "/bills/create-client", formData);
       dispatch(setClients(formData.client));
    };
+
    return (
       <Form
          onSubmit={handleSubmit}
@@ -30,7 +33,13 @@ export const AddClient = () => {
          buttonText={text("creates-btn")}
          loading={(isSubmitted && !error) || loading}
       >
-         <Loading isSubmitted={isSubmitted} loading={loading} error={error} message={data} to="/" />
+         <Loading
+            isSubmitted={isSubmitted}
+            loading={loading}
+            error={error}
+            message={data}
+            to={state?.redirectTo || "/"}
+         />
          <Field label={text("insertClient")} name="client" value={formData.client} onChange={handleFieldChange} />
          <Field
             label={text("creates-client-phone")}

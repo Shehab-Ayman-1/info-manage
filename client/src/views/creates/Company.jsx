@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { getLists, setCompanies } from "@/redux/products";
@@ -17,6 +18,7 @@ export const AddCompany = () => {
 
    const { lists, categories } = useSelector(({ products }) => products);
    const dispatch = useDispatch();
+   const { state } = useLocation();
 
    useEffect(() => {
       if (lists.length) return;
@@ -57,7 +59,7 @@ export const AddCompany = () => {
             loading={loading}
             error={error}
             message={data}
-            to="/creates/products"
+            to={state?.redirectTo || "/creates/products"}
          />
 
          <div className="w-full">
