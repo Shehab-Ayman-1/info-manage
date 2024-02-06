@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FieldWithRedirectLink, Info, InsertProduct, TableProducts } from "@/components/statements";
 import { filterSelection, getSuppliers } from "@/redux/products";
@@ -8,7 +8,15 @@ import { Form, Selectbox } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
-const formState = { supplier: "", discount: "", paymentMethod: "", adminPay: "", toStore: true, products: [] };
+const formState = {
+   supplier: "",
+   discount: "",
+   paymentMethod: "", // visa - cash
+   paymentWay: "", // by milestones - pay all
+   adminPay: "",
+   toStore: true,
+   products: [],
+};
 export const BuyStatement = () => {
    const [text, i18next] = useTranslation();
 
@@ -45,7 +53,12 @@ export const BuyStatement = () => {
 
    const handleSubmit = async (event) => {
       event.preventDefault();
-      if (!formData.products.length) return alert("يجب ادخال منتج واحد علي الاقل في الفاتورة");
+      const { supplier, discount, paymentMethod, paymentWay, adminPay, products } = formData;
+
+      if (!products.length || !supplier || !discount || !paymentMethod || !paymentWay || !adminPay) {
+         return alert("يجب ادخال منتج واحد علي الاقل في الفاتورة");
+      }
+
       await refetch("put", "/products/buy-products", { ...formData, lang: i18next.language });
    };
 

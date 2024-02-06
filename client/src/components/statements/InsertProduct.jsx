@@ -15,15 +15,24 @@ export const InsertProduct = ({ redirectTo, product, setProduct, setFormData }) 
       setFormData((form) => {
          const data = { ...form }; // We Make Copy Of Data Because It Make Problem With The TableProducts While Fetching
          const prodIndex = data.products.findIndex((item) => item.name === product.name);
-         if (prodIndex === -1) data.products.push(product);
-         else {
+         if (prodIndex === -1) {
+            data.products.push(product);
+         } else {
             data.products[prodIndex].count = +data.products[prodIndex].count + +product.count;
             data.products[prodIndex].price = +product.price;
          }
+
+         // Update The Total Amount Of The Products In Payment Amount Field
+         if (data.paymentWay === text("statement-payment-way-project")) {
+            const totalCost = data.products.reduce((prev, cur) => prev + cur.count * cur.price, 0);
+            if (data?.adminPay !== undefined) data.adminPay = totalCost;
+            if (data?.clientPay !== undefined) data.clientPay = totalCost;
+         }
+
          return data;
       });
 
-      if (text.headerText === "كشف مندوب") setProduct(() => ({ name: null, count: 0, price: 0 }));
+      if (text.headerText === text("statement-buy-title")) setProduct(() => ({ name: null, count: 0, price: 0 }));
       else setProduct(() => ({ ...product, name: null, count: 0, price: 0, buyPrice: 0 }));
    };
 
