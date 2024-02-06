@@ -131,7 +131,7 @@ export const AddProducts = () => {
 
          <FieldWithRedirectLink path="/creates/supplier" redirectTo="/creates/products">
             <Selectbox
-               label={text("chooseSupplier")}
+               label={text("creates-product-choose-supplier-optional")}
                options={suppliers}
                value={product.suppliers[0]}
                loading={!ccIsSubmitted && ccLoading}
