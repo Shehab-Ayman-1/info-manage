@@ -142,6 +142,13 @@ export const GET_SEARCH_LIST = async (req, res) => {
 				},
 			},
 			{
+				$match: {
+					category: { $exists: true },
+					company: { $exists: true },
+					"products.name": { $exists: true },
+				},
+			},
+			{
 				$group: {
 					_id: { companyId: "$_id", productId: "$products._id" },
 					name: {

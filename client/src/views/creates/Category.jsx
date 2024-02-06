@@ -12,7 +12,7 @@ import { carLogo } from "@/assets";
 export const AddCategory = () => {
    const [text] = useTranslation();
 
-   const [formData, setFormData] = useState({ img: "", category: "", company: "" });
+   const [formData, setFormData] = useState({ category: "" });
    const { data, loading, error, isSubmitted, refetch } = useAxios();
    const dispatch = useDispatch();
    const { state } = useLocation();
@@ -45,14 +45,14 @@ export const AddCategory = () => {
             to={state?.redirectTo || "/creates/company"}
          />
 
-         <div className="w-full">
+         {/* <div className="w-full">
             <img
                src={formData.img || carLogo}
                alt="product"
                className="m-auto mb-4 block h-28 w-28 rounded-full shadow-sp"
             />
             <Field label={text("image")} name="img" value={formData.img} onChange={handleFieldChange} />
-         </div>
+         </div> */}
 
          <Field
             label={text("insertCategory")}
@@ -60,12 +60,12 @@ export const AddCategory = () => {
             value={formData.category}
             onChange={handleFieldChange}
          />
-         <Field
+         {/* <Field
             label={text("insertCompany")}
             name="company"
             value={formData.company}
             onChange={handleFieldChange}
-         />
+         /> */}
       </Form>
    );
 };

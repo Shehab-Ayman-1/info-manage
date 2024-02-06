@@ -32,6 +32,8 @@ export const Searchbar = () => {
       })();
    }, [startSearch, searchList]);
 
+   console.log(searchList);
+
    useEffect(() => {
       if (!data?.length) return;
       const result = data.map((product) => {
@@ -104,7 +106,7 @@ export const Searchbar = () => {
                               className="!justify-between !gap-0 text-xl font-bold hover:bg-dimPurple hover:dark:text-white"
                               onClick={() => handleItem(companyId, productId)}
                            >
-                              {name.split(searchText).map((part, i) => (
+                              {name?.split(searchText).map((part, i) => (
                                  <p key={i} className="w-fit whitespace-nowrap">
                                     {i ? (
                                        <span className={searchText === " " ? "pr-1" : "text-primary"}>
