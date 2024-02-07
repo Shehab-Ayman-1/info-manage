@@ -22,10 +22,10 @@ export const ProductsHeader = ({ page, category, setCategory, price, setPrice })
    }, []);
 
    return (
-      <div className="flex-between mb-2 flex-col px-4 sm:flex-row">
+      <div className="flex-between mb-2 flex-col px-4 md:flex-row">
          <PageHead text={page === "store" ? text("shop-store-title-store") : text("shop-store-title-shop")} />
 
-         <div className="flex gap-4">
+         <div className="flex-start flex-col sm:flex-row">
             <Selectbox
                label={price === "buy" ? text("shop-store-switch-buy") : text("shop-store-switch-sale")}
                value={price === "buy" ? text("shop-store-switch-buy") : text("shop-store-switch-sale")}

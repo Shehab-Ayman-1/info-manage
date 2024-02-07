@@ -5,7 +5,7 @@ export const PageHead = ({ variant, color, className, text = "" }) => {
       <Typography
          variant={variant || "h3"}
          color={color || "deep-purple"}
-         className={`mb-4 text-center ${className || ""}`}
+         className={`mb-4 whitespace-nowrap text-center ${className || ""}`}
       >
          {text}
       </Typography>
