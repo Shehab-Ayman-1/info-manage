@@ -161,7 +161,7 @@ const navbar = {
          "statements-title": "Statement",
          "bill-statement": "Bill Statement",
          "supplier-statement": "Supplier Statement",
-         "transfer-statement": "Transfer Statement",
+         "transfer-statement": "Transfer Products",
          "workers-statement": "Workers Statement",
          "locker-transactions": "Locker Withdrawal / deposit",
 
