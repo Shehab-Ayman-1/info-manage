@@ -187,7 +187,7 @@ const navbar = {
       ar: {
          // Show
          "show-title": "العرض",
-         "show-shop": "منتجات المحل",
+         "show-shop": "منتجات المتجر",
          "show-store": "منتجات المخزن",
          "show-balances": "عرض كاش الخزنة",
          "show-transections": "المعاملات",

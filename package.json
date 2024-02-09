@@ -4,5 +4,8 @@
 		"server": "cd server && npm run dev",
 		"deploy": "git ad && git co && git pm",
 		"dev": "npm run dev"
+	},
+	"dependencies": {
+		"use-scan-detection": "^0.2.3"
 	}
 }
