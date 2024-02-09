@@ -1,10 +1,10 @@
 /* Public */
 .home-bg {
-   @apply from-white/10 to-blue-gray-200/10 bg-auto bg-fixed bg-center bg-no-repeat opacity-40 dark:from-darkGray dark:to-black/30 dark:opacity-20;
+   @apply dark:from-dimBlack from-white/10 to-blue-gray-200/10 bg-auto bg-fixed bg-center bg-no-repeat opacity-40 dark:to-black/30 dark:opacity-20;
 }
 
 .bg-gradient {
-   @apply bg-gradient-to-bl from-white to-blue-gray-200 dark:from-black dark:via-darkGray dark:to-black;
+   @apply dark:via-dimBlack bg-gradient-to-bl from-white to-blue-gray-200 dark:from-black dark:to-black;
 }
 
 .text-gradient {

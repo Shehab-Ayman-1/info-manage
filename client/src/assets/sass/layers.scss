@@ -1,7 +1,21 @@
 @layer base {
    :root {
       --dimWhite: theme(colors.blue-gray.500);
-      --darkGray: rgb(24 34 46 / 1);
+      --dimBlack: rgb(24 34 46 / 1);
+   }
+   :root[data-theme="silver"] {
+      --dimPurple: rgb(1 1 1 / 0.15);
+      --primary: theme(colors.blue-gray.500);
+      --deep-purple-50: theme(colors.blue-gray.50);
+      --deep-purple-100: theme(colors.blue-gray.100);
+      --deep-purple-200: theme(colors.blue-gray.200);
+      --deep-purple-300: theme(colors.blue-gray.300);
+      --deep-purple-400: theme(colors.blue-gray.400);
+      --deep-purple-500: theme(colors.blue-gray.500);
+      --deep-purple-600: theme(colors.blue-gray.600);
+      --deep-purple-700: theme(colors.blue-gray.700);
+      --deep-purple-800: theme(colors.blue-gray.800);
+      --deep-purple-900: theme(colors.blue-gray.900);
    }
    :root[data-theme="red"] {
       --dimPurple: rgb(245 64 51 / 0.15);
@@ -30,6 +44,20 @@
       --deep-purple-700: theme(colors.blue.700);
       --deep-purple-800: theme(colors.blue.800);
       --deep-purple-900: theme(colors.blue.900);
+   }
+   :root[data-theme="cyan"] {
+      --dimPurple: rgb(0 189 214 / 0.15);
+      --primary: theme(colors.cyan.500);
+      --deep-purple-50: theme(colors.cyan.50);
+      --deep-purple-100: theme(colors.cyan.100);
+      --deep-purple-200: theme(colors.cyan.200);
+      --deep-purple-300: theme(colors.cyan.300);
+      --deep-purple-400: theme(colors.cyan.400);
+      --deep-purple-500: theme(colors.cyan.500);
+      --deep-purple-600: theme(colors.cyan.600);
+      --deep-purple-700: theme(colors.cyan.700);
+      --deep-purple-800: theme(colors.cyan.800);
+      --deep-purple-900: theme(colors.cyan.900);
    }
    :root[data-theme="teal"] {
       --dimPurple: rgb(0 148 133 / 0.15);

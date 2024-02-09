@@ -42,7 +42,7 @@ export const Notifies = () => {
                               {method === "visa" || method === "cash" ? text(method) : text("unknown")}
                            </span>
                         </Typography>
-                        <Typography className="flex items-center gap-1 text-sm font-medium text-darkGray dark:text-gray-500">
+                        <Typography className="text-dimBlack flex items-center gap-1 text-sm font-medium dark:text-gray-500">
                            <i className="fa fa-clock mr-1 text-base hover:text-dimWhite" />
                            {time}
                         </Typography>

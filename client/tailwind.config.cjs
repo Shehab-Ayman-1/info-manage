@@ -14,7 +14,7 @@ module.exports = withMT({
       },
       colors: {
          dimWhite: "var(--dimWhite)",
-         darkGray: "var(--darkGray)",
+         dimBlack: "var(--dimBlack)",
          dimPurple: "var(--dimPurple)",
          primary: {
             DEFAULT: "var(--deep-purple-500)",

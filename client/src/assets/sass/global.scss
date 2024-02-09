@@ -23,7 +23,7 @@ html {
    min-height: 100vh;
    overflow-x: hidden;
    &.dark {
-      @apply from-black via-darkGray to-black;
+      @apply via-dimBlack from-black to-black;
       ::-webkit-scrollbar-track {
          @apply bg-black;
       }
