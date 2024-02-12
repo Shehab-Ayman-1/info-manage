@@ -5,6 +5,7 @@ import cors from "cors";
 import cookies from "cookie-parser";
 import { DBconnection, corsOrigins } from "./configs/index.js";
 import { users, locker, products, bills } from "./routes/index.js";
+import axios from "axios";
 
 // Configs
 dotenv.config();
@@ -20,6 +21,8 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 // Routes
 
 // app.use("/*", (req, res, next) => setTimeout(next, 1000));
+const MINUTES = 1000 * 60 * 1;
+setInterval(() => axios.get("https://info-manage-client.vercel.app", MINUTES));
 app.use("/api/users", users);
 app.use("/api/locker", locker);
 app.use("/api/products", products);
