@@ -1,7 +1,7 @@
 import Success from "@/assets/audio/success.mp3";
 import Fail from "@/assets/audio/fail.mp3";
 
-export const AudioNotifications = () => {
+export const Audio = () => {
    return (
       <div className="absolute -bottom-10 -left-10">
          <audio src={Success} className="audio-alert-success" />

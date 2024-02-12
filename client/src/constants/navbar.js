@@ -29,7 +29,7 @@ import { ShowBill, UpdateBill } from "@/views/bills";
    - If [role] Is Defined       -> Just Allow Admin Users
 */
 
-i18next.changeLanguage(localStorage.getItem("lang"));
+i18next.changeLanguage(localStorage.getItem("language"));
 const text = i18next.t;
 
 export const links = [
