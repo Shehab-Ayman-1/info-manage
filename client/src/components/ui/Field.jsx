@@ -18,7 +18,7 @@ export const Field = ({
          min="0"
          color="deep-purple"
          autoComplete="off"
-         className={`font-serif !text-xl caret-primary placeholder:text-dimWhite disabled:bg-transparent dark:text-white/80 md:!text-xl ${
+         className={`font-serif !text-xl caret-primary placeholder:text-dimWhite disabled:cursor-not-allowed disabled:bg-gray-500 dark:text-white/80 dark:disabled:bg-gray-900 md:!text-xl ${
             inputStyle || ""
          }`}
          containerProps={{

@@ -3,6 +3,7 @@ import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Selectbox } from "@/components/ui";
+import { AudioNotifications } from "./AudioNotifications";
 
 const colors = [
    { theme: "silver", from: "from-gray-400", to: "to-gray-900", hover: "hover:bg-gray-900/50" },
@@ -75,7 +76,7 @@ export const Configrator = () => {
             variant="gradient"
             size="lg"
             className={`group !fixed bottom-10 ${
-               i18next.language === "en" ? "right-5 md:right-10" : "left-5 md:left-10"
+               i18next.language === "en" ? "left-5 md:left-10" : "right-5 md:right-10"
             } rounded-full shadow-md hover:scale-125 print:hidden md:bottom-14`}
             onClick={openDrawer}
          >
@@ -175,6 +176,8 @@ export const Configrator = () => {
                />
             </div>
          </Drawer>
+
+         <AudioNotifications />
       </div>
    );
 };

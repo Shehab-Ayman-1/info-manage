@@ -185,6 +185,7 @@ export const AddProducts = () => {
                />
                <Field
                   label={text("creates-product-menu-barcode")}
+                  type="number"
                   name="barcode"
                   value={product.barcode}
                   onChange={handleFieldChange}
@@ -221,6 +222,7 @@ export const AddProducts = () => {
                   id="count"
                   name="store"
                   min="0"
+                  disabled
                   value={product.count?.store}
                   containerStyle="sm:!w-[50%]"
                   onChange={handleFieldChange}
@@ -231,6 +233,7 @@ export const AddProducts = () => {
                   id="count"
                   name="shop"
                   min="0"
+                  disabled
                   value={product.count?.shop}
                   containerStyle="sm:!w-[50%]"
                   onChange={handleFieldChange}
