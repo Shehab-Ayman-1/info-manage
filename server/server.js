@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 // app.use("/*", (req, res, next) => setTimeout(next, 1000));
 const MINUTES = 1000 * 60 * 1;
-setInterval(() => axios.get("https://info-manage-client.vercel.app", MINUTES));
+setInterval(() => axios.get("https://info-manage-client.vercel.app"), MINUTES);
 app.use("/api/users", users);
 app.use("/api/locker", locker);
 app.use("/api/products", products);
