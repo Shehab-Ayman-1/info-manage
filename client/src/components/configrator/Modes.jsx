@@ -11,7 +11,7 @@ export const Modes = ({ onClose }) => {
    };
 
    return (
-      <div className="mode mt-8">
+      <div className="">
          <Typography variant="h3" color="deep-purple" className="text-2xl leading-normal">
             {text("configrator-mode-title")}
          </Typography>

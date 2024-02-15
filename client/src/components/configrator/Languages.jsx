@@ -21,16 +21,15 @@ export const Languages = () => {
    };
 
    return (
-      <div className="language mt-8">
+      <div className="">
          <Typography variant="h3" color="deep-purple" className="text-2xl leading-normal">
             {text("configrator-display-language")}
          </Typography>
-         <Typography className="mb-2 text-base leading-normal text-dimWhite">
-            {text("configrator-subTitle")}
-         </Typography>
+         <Typography className="text-base leading-normal text-dimWhite">{text("configrator-subTitle")}</Typography>
          <Selectbox
             label={text("configrator-choose-language")}
             value={language}
+            containerStyle="mt-0"
             options={[text("configrator-choose-language-ar"), text("configrator-choose-language-en")]}
             onChange={onChange}
          />

@@ -5,7 +5,7 @@ export const Screen = () => {
    const [text, i18next] = useTranslation();
 
    return (
-      <div className="properties mt-8 w-full">
+      <div className="w-full">
          <Typography variant="h3" color="deep-purple" className="text-2xl leading-normal">
             {text("configrator-properties-title")}
          </Typography>

@@ -23,13 +23,25 @@ export const Configrator = () => {
          <Drawer
             placement={i18next.language === "en" ? "left" : "right"}
             open={open}
-            className="bg-gradient flex-between flex-col overflow-y-auto p-5"
+            className="bg-gradient flex flex-col justify-between overflow-y-auto p-5"
             onClose={onClose}
          >
             <Header />
+
+            <hr className="mx-auto my-2 w-1/2 bg-dimWhite p-[1px]" />
+
             <Screen />
+
+            <hr className="mx-auto my-2 w-1/2 bg-dimWhite p-[1px]" />
+
             <Colors onClose={onClose} />
+
+            <hr className="mx-auto my-2 w-1/2 bg-dimWhite p-[1px]" />
+
             <Modes onClose={onClose} />
+
+            <hr className="mx-auto my-2 w-1/2 bg-dimWhite p-[1px]" />
+
             <Languages />
          </Drawer>
 
