@@ -30,6 +30,10 @@ export const BuyStatement = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
+      setFormData((formData) => ({ ...formData, products: [] }));
+   }, []);
+
+   useEffect(() => {
       if (suppliers.length) return;
       (async () => {
          const { data, isSubmitted, error } = await sRefetch("get", "/products/get-suppliers-list");

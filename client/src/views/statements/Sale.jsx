@@ -33,6 +33,10 @@ export const SaleStatement = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
+      setFormData((formData) => ({ ...formData, products: [] }));
+   }, []);
+
+   useEffect(() => {
       if (!lists.length) {
          (async () => {
             const { data, isSubmitted, error } = await lRefetch("get", "/products/get-products-list");
