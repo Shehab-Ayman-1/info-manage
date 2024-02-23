@@ -22,13 +22,6 @@ export const InsertProduct = ({ redirectTo, product, setProduct, setFormData }) 
             data.products[prodIndex].price = +product.price;
          }
 
-         // Update The Total Amount Of The Products In Payment Amount Field
-         if (data.paymentWay === text("statement-payment-way-project")) {
-            const totalCost = data.products.reduce((prev, cur) => prev + cur.count * cur.price, 0);
-            if (data?.adminPay !== undefined) data.adminPay = totalCost;
-            if (data?.clientPay !== undefined) data.clientPay = totalCost;
-         }
-
          return data;
       });
 

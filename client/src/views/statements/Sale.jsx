@@ -14,8 +14,8 @@ export const SaleStatement = () => {
    const [text, i18next] = useTranslation();
    const formState = {
       client: text("statement-unknown-client"),
-      clientPay: "",
-      discount: "",
+      clientPay: '0',
+      discount: '0',
       paymentMethod: text("cash"), // visa, cash
       paymentWay: text("statement-payment-way-project"),
       toStore: false,
@@ -56,6 +56,17 @@ export const SaleStatement = () => {
    }, []);
 
    useEffect(() => {
+      if (formData.paymentWay !== text("statement-payment-way-project"))
+         return setFormData((form) => ({ ...form, clientPay: 0 }));
+
+      setFormData((form) => {
+         const data = { ...form };
+         const clientPay = data.products.reduce((prev, cur) => prev + cur.count * cur.price, 0);
+         return { ...data, clientPay };
+      });
+   }, [formData.paymentWay, formData.products.length]);
+
+   useEffect(() => {
       if (!lists?.length) return;
 
       const category = lists?.find(({ category }) => category === product.category);
@@ -85,13 +96,11 @@ export const SaleStatement = () => {
 
    const handleSubmit = async (event) => {
       event.preventDefault();
-
-      return console.log(formData);
-
       const { toStore, ...data } = formData;
-      if (!Object.values(data).every((u) => u)) return alert("يجب ادخال جميع البيانات المطلوبة");
 
+      if (!Object.values(data).every((u) => u)) return alert("يجب ادخال جميع البيانات المطلوبة");
       if (!formData.products.length) return alert("يجب ادخال منتج واحد علي الاقل في الفاتورة");
+
       await refetch("put", "/products/sale-products", { ...formData, lang: i18next.language });
    };
 

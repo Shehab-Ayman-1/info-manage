@@ -40,18 +40,20 @@ export const Info = ({ isAdminPay, formData, setFormData }) => {
                onChange={(event) => setFormData((data) => ({ ...data, discount: event.target.value }))}
             />
 
-            <Field
-               type="number"
-               min="0"
-               value={isAdminPay ? formData.adminPay : formData.clientPay}
-               label={isAdminPay ? text("paidcost") : text("recievedcost")}
-               onChange={(event) =>
-                  setFormData((data) => ({
-                     ...data,
-                     [isAdminPay ? "adminPay" : "clientPay"]: event.target.value,
-                  }))
-               }
-            />
+            {formData.paymentWay !== text("statement-payment-way-project") && (
+               <Field
+                  type="number"
+                  min="0"
+                  label={isAdminPay ? text("paidcost") : text("recievedcost")}
+                  value={isAdminPay ? formData.adminPay : formData.clientPay}
+                  onChange={(event) =>
+                     setFormData((data) => ({
+                        ...data,
+                        [isAdminPay ? "adminPay" : "clientPay"]: event.target.value,
+                     }))
+                  }
+               />
+            )}
          </div>
       </Fragment>
    );

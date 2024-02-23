@@ -1,8 +1,8 @@
 import { model, Schema } from "mongoose";
 
 const schema = new Schema({
-	type: String, // bill or debt
-	place: String, // shop or store
+	type: String, // bill, or debt
+	place: String, // shop, or store
 	client: { type: String, trim: true },
 	phone: { type: String, trim: true },
 	date: { type: Date, default: new Date() },

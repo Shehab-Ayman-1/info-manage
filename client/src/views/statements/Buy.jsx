@@ -7,18 +7,17 @@ import { filterSelection, getSuppliers } from "@/redux/products";
 import { Form, Selectbox } from "@/components/ui";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
-
-const formState = {
-   supplier: "",
-   discount: 0,
-   paymentMethod: "", // visa - cash
-   paymentWay: "", // by milestones - pay all
-   adminPay: "",
-   toStore: true,
-   products: [],
-};
 export const BuyStatement = () => {
    const [text, i18next] = useTranslation();
+   const formState = {
+      paymentWay: text("statement-payment-way-project"),
+      paymentMethod: text("cash"), // visa, cash
+      supplier: "",
+      adminPay: "0",
+      discount: "0",
+      toStore: true,
+      products: [],
+   };
 
    const { refetch: sRefetch } = useAxios();
    const { data, isSubmitted, loading, error, refetch } = useAxios();
@@ -43,6 +42,17 @@ export const BuyStatement = () => {
    }, []);
 
    useEffect(() => {
+      if (formData.paymentWay !== text("statement-payment-way-project"))
+         return setFormData((form) => ({ ...form, adminPay: 0 }));
+
+      setFormData((form) => {
+         const data = { ...form };
+         const adminPay = data.products.reduce((prev, cur) => prev + cur.count * cur.price, 0);
+         return { ...data, adminPay };
+      });
+   }, [formData.paymentWay, formData.products.length]);
+
+   useEffect(() => {
       if (!products?.length) return;
 
       const produc = products?.find(({ name }) => name === product.name);
@@ -60,7 +70,7 @@ export const BuyStatement = () => {
       const { supplier, discount, paymentMethod, paymentWay, adminPay, products } = formData;
 
       if (!products.length || !supplier || !discount || !paymentMethod || !paymentWay || !adminPay) {
-         return alert("يجب ادخال منتج واحد علي الاقل في الفاتورة");
+         return alert("يجب ادخال جميع البيانات المطلوبه");
       }
 
       await refetch("put", "/products/buy-products", { ...formData, lang: i18next.language });

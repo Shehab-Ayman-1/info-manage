@@ -479,7 +479,6 @@ const creates = {
    product: {
       en: {
          "creates-product-title": "Create Product",
-         "creates-product-choose-supplier-optional": "Choose Supplier (Optional)",
          "creates-product-menu-btn": "Insert Product",
          "creates-product-menu-name": "Product Name",
          "creates-product-menu-barcode": "Barcode",
@@ -492,7 +491,6 @@ const creates = {
       },
       ar: {
          "creates-product-title": "انشاء منتج",
-         "creates-product-choose-supplier-optional": "اختار المندوب (اختياري)",
          "creates-product-menu-btn": "اضافه منتج",
          "creates-product-menu-name": "اسم المنتج",
          "creates-product-menu-barcode": "الباركود",

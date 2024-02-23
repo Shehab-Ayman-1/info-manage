@@ -98,7 +98,6 @@ export const productsSlice = createSlice({
             .sort((a, b) => a.name.localeCompare(b.name));
 
          state.lists[categoryIndex]?.companies[companyIndex].products.push(...products);
-         console.log(state.products);
          return state;
       },
    },

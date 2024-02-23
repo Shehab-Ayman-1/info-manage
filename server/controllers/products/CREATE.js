@@ -1,4 +1,4 @@
-import { Bills, Products } from "../../models/index.js";
+import { Bills, Locker, Products } from "../../models/index.js";
 
 export const CREATE_CATEGORY = async (req, res) => {
 	try {
@@ -39,7 +39,8 @@ export const CREATE_COMPANY = async (req, res) => {
 
 export const CREATE_PRODUCTS = async (req, res) => {
 	try {
-		const { category, company, products } = req.body;
+		const { supplier, category, company, products } = req.body;
+
 		if (!category || !company || !products.length)
 			return res.status(400).json({ error: "يجب ادخال جميع البيانات المطلوبه" });
 
@@ -64,6 +65,29 @@ export const CREATE_PRODUCTS = async (req, res) => {
 		// Just Create The Unique Products
 		const created = await Products.updateOne({ category, company }, { $push: { products: uniqueProducts } });
 		if (!created.modifiedCount) return res.status(400).json({ error: "حدث خطأ ولم يتم اضافه المنتجات" });
+
+		// Create New Bills To Calculate Profits
+		const bill = { client: supplier || "", phone: "----", place: "created", type: "debt" };
+		const storeBill = {
+			...bill,
+			products: uniqueProducts.map(({ name, count, price }) => ({
+				name: name,
+				count: count?.store,
+				price: price?.buy,
+				buyPrice: price?.buy,
+			})),
+		};
+		const shopBill = {
+			...bill,
+			products: uniqueProducts.map(({ name, count, price }) => ({
+				name: name,
+				count: count?.shop,
+				price: price?.sale,
+				buyPrice: price?.buy,
+			})),
+		};
+		await Bills.create([shopBill, storeBill]);
+		await Locker.create({ name: `تم اضافه منتجات جديدة الي المنظومة`, price: 0, method: "create" });
 
 		// Send Response
 		res.status(200).json({ success: "لقد تم اضافه المنتجات بنجاح" });

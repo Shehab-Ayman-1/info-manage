@@ -216,6 +216,7 @@ export const GET_PRODUCT_MOVEMENT = async (req, res) => {
 			list
 				.find(({ type }) => type === "debt")
 				?.data.map((item) => ({ date: `${item.month}-${item.day}`, series: item.series })) || [];
+
 		const sales =
 			list
 				.find(({ type }) => type === "bill")
@@ -223,7 +224,7 @@ export const GET_PRODUCT_MOVEMENT = async (req, res) => {
 
 		res.status(200).json({ buys, sales });
 	} catch (error) {
-		res.status(404).json(`PRODUCT_SALES: ${error.message}`);
+		res.status(404).json(`GET_PRODUCT_MOVEMENT: ${error.message}`);
 	}
 };
 

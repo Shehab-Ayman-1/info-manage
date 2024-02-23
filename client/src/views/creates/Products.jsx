@@ -11,14 +11,13 @@ import { FieldWithRedirectLink } from "@/components/statements";
 import { Loading } from "@/layout/Loading";
 import { useAxios } from "@/hooks/useAxios";
 
-const formState = { category: "", company: "", products: [] };
+const formState = { supplier: "", category: "", company: "", products: [] };
 const productState = {
    name: "",
    barcode: "",
    minmax: { min: 5, max: 10 },
    count: { store: 0, shop: 0 },
    price: { buy: 0, sale: 0 },
-   suppliers: [],
 };
 export const AddProducts = () => {
    const [text] = useTranslation();
@@ -97,8 +96,12 @@ export const AddProducts = () => {
 
    const handleSubmitForm = async (event) => {
       event.preventDefault();
+      const products = formData.products.map((product) => ({
+         ...product,
+         suppliers: formData.supplier ? [formData.supplier] : [],
+      }));
 
-      const { isSubmitted, error } = await refetch("post", "/products/create-products", formData);
+      const { isSubmitted, error } = await refetch("post", "/products/create-products", { ...formData, products });
       if (isSubmitted && error) return;
 
       dispatch(setProducts(formData));
@@ -137,11 +140,11 @@ export const AddProducts = () => {
 
          <FieldWithRedirectLink path="/creates/supplier" redirectTo="/creates/products">
             <Selectbox
-               label={text("creates-product-choose-supplier-optional")}
+               label={text("chooseSupplier") + text("optional")}
                options={suppliers}
-               value={product.suppliers[0]}
+               value={formData.supplier}
                loading={!ccIsSubmitted && ccLoading}
-               onChange={(value) => setProduct((product) => ({ ...product, suppliers: [value] }))}
+               onChange={(value) => setFormData((form) => ({ ...form, supplier: value }))}
             />
          </FieldWithRedirectLink>
 
@@ -222,7 +225,7 @@ export const AddProducts = () => {
                   id="count"
                   name="store"
                   min="0"
-                  disabled
+                  // disabled
                   value={product.count?.store}
                   containerStyle="sm:!w-[50%]"
                   onChange={handleFieldChange}
@@ -233,7 +236,7 @@ export const AddProducts = () => {
                   id="count"
                   name="shop"
                   min="0"
-                  disabled
+                  // disabled
                   value={product.count?.shop}
                   containerStyle="sm:!w-[50%]"
                   onChange={handleFieldChange}

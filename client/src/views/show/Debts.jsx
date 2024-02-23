@@ -36,7 +36,9 @@ export const ShowDebts = () => {
                <div className="flex-start">
                   <div className="flex">
                      <DeleteIcon id={_id} setData={setData} type="debt" />
+
                      <UpdateIcon id={_id} />
+
                      <PaymentIcon
                         data={data.data}
                         setData={setData}
