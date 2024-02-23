@@ -10,6 +10,7 @@ export const corsOrigins = {
 	optionsSuccessStatus: 200,
 	origin: (origin, callback) => {
 		const isAcceptable = whiteList.some((site) => site === origin);
+		console.log({ isAcceptable, origin });
 		if (isAcceptable || origin === undefined) callback(null, origin);
 		else callback(`${origin}: Not Allowed By CORS`);
 	},
