@@ -9,17 +9,18 @@ import { getClients } from "@/redux/bills";
 import { useAxios } from "@/hooks/useAxios";
 import { Loading } from "@/layout/Loading";
 
-const formState = {
-   client: "عميل غير معروف",
-   clientPay: "",
-   discount: "",
-   paymentMethod: "", // visa, cash
-   toStore: false,
-   products: [],
-};
 const productState = { category: "", company: "", name: "", count: "", price: "", buyPrice: 0 };
 export const SaleStatement = () => {
    const [text, i18next] = useTranslation();
+   const formState = {
+      client: text("statement-unknown-client"),
+      clientPay: "",
+      discount: "",
+      paymentMethod: text("cash"), // visa, cash
+      paymentWay: text("statement-payment-way-project"),
+      toStore: false,
+      products: [],
+   };
 
    const [formData, setFormData] = useState(formState);
    const [product, setProduct] = useState(productState);
@@ -85,6 +86,8 @@ export const SaleStatement = () => {
    const handleSubmit = async (event) => {
       event.preventDefault();
 
+      return console.log(formData);
+
       const { toStore, ...data } = formData;
       if (!Object.values(data).every((u) => u)) return alert("يجب ادخال جميع البيانات المطلوبة");
 
@@ -103,7 +106,7 @@ export const SaleStatement = () => {
 
          <FieldWithRedirectLink path="/creates/client" redirectTo="/statements/sale">
             <Selectbox
-               label={text("chooseClient")}
+               label={formData.client}
                options={clients}
                value={formData.client}
                loading={!lIsSubmitted && lLoading}

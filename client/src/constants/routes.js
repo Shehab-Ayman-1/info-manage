@@ -9,7 +9,7 @@ export const routes = {
       ...options,
    },
    remote: {
-      baseURL: "https://info-manage-server.vercel.app/api",
+      baseURL: "https://info-manage-server-b93a3r10k-shehab-ayman.vercel.app/api",
       ...options,
    },
 };

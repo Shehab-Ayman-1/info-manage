@@ -10,7 +10,7 @@ import { Loading } from "@/layout/Loading";
 
 const formState = {
    supplier: "",
-   discount: "",
+   discount: 0,
    paymentMethod: "", // visa - cash
    paymentWay: "", // by milestones - pay all
    adminPay: "",

@@ -31,20 +31,12 @@ export const Selectbox = ({
             })
          }
          className="select-box w-full text-base caret-primary dark:text-white/80 md:text-xl"
-         containerProps={{
-            className: `h-14 md:h-20 border-b-sp mt-4 !border-deep-purple-300 ${containerStyle}`,
-         }}
+         containerProps={{ className: `h-14 md:h-20 border-b-sp mt-4 !border-deep-purple-300 ${containerStyle}` }}
          labelProps={{
             className: `text-xl peer-focus:text-xl -top-4 md:-top-1.5 peer-placeholder-shown:text-xl ${labelStyle}`,
          }}
-         menuProps={{
-            className: `bg-gradient py-3 ${menuStyle}`,
-         }}
-         animate={{
-            initial: { y: 25 },
-            mount: { y: 0 },
-            unmount: { y: 25 },
-         }}
+         menuProps={{ className: `bg-gradient py-3 ${menuStyle}` }}
+         animate={{ initial: { y: 25 }, mount: { y: 0 }, unmount: { y: 25 } }}
          {...rest}
       >
          {options.length ? (

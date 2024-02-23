@@ -36,8 +36,8 @@ const general = {
       print: "Print Bill",
       search: "Search...",
 
-      discount: "Discount",
       recievedcost: "Recieved Cost",
+      discount: "Discount",
       paidcost: "paid Cost",
 
       paymentMethod: "Payment Method",
@@ -49,6 +49,7 @@ const general = {
       shop: "Shop",
       toShop: "To Shop",
 
+      optional: " ( Optional ) ",
       footerCreator: "Created With ❤️ By Shehab Ayman",
    },
    ar: {
@@ -101,6 +102,7 @@ const general = {
       shop: "المتجر",
       toShop: "الي المتجر",
 
+      optional: " ( اختياري ) ",
       footerCreator: "تم تطوير المنظومة مع ❤️ بواسطة شهاب ايمن",
    },
 };
@@ -427,6 +429,7 @@ const statements = {
       "statement-sale-title": "Bill Statement",
       "statement-buy-btn": "Buy",
       "statement-sale-btn": "Sale",
+      "statement-unknown-client": "Unknown Client",
       "statement-payment-way": "Payment",
       "statement-payment-way-project": "Pay All",
       "statement-payment-way-milestone": "By Milestones",
@@ -441,6 +444,7 @@ const statements = {
       "statement-transfer-title": "تحويل منتج",
       "statement-buy-btn": "شراء",
       "statement-sale-btn": "بيع",
+      "statement-unknown-client": "عميل غير معروف",
       "statement-payment-way": "الدفع",
       "statement-payment-way-project": "المبلغ كامل",
       "statement-payment-way-milestone": "دفع بالتقسيط",
