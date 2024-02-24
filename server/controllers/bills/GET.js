@@ -21,9 +21,13 @@ const LIMIT = 10;
 export const GET_BILLS = async (req, res) => {
 	try {
 		const { type, activePage } = req.query;
-		const pagination = await Bills.countDocuments({ type, products: { $ne: [] } });
+		const pagination = await Bills.countDocuments({
+			type,
+			place: { $ne: "created" },
+			products: { $ne: [] },
+		});
 
-		const bills = await Bills.find({ type, products: { $ne: [] } })
+		const bills = await Bills.find({ type, place: { $ne: "created" }, products: { $ne: [] } })
 			.sort({ date: -1 })
 			.skip((+activePage ?? 0) * +LIMIT)
 			.select(["_id", "date", "client", "products", "pay"]);
