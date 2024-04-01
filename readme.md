@@ -1,4 +1,4 @@
-<img src="./client/src/assets/images/favicon.png" alt="logo-img" width="50%" height="auto" />
+<img src="./client/src/assets/images/favicon.png" alt="logo-img" width="50%" height="auto" style="margin: auto;" />
 
 # Add A Profits For Year, Month, Years
 
