@@ -1,0 +1,1074 @@
+[{
+  "_id": {
+    "$oid": "65c2774a48c135ae27d3accc"
+  },
+  "type": "debt",
+  "client": "محمد أشرف",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-01-06T17:58:59.582Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c2787748c135ae27d3acd9"
+  },
+  "type": "bill",
+  "client": "يوسف رجب",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-01-06T17:58:59.582Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c279e9a4c67a9ccfc02f58"
+  },
+  "type": "bill",
+  "place": "shop",
+  "client": "يوسف رجب",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-06T18:26:45.384Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 100,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "تفاح 1 لتر",
+      "count": 5,
+      "price": 20,
+      "buyPrice": 0,
+      "_id": {
+        "$oid": "65c279e9a4c67a9ccfc02f59"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c27a2da4c67a9ccfc02f63"
+  },
+  "type": "bill",
+  "place": "shop",
+  "client": "يوسف رجب",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-06T18:26:45.384Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 100,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 5,
+      "price": 20,
+      "buyPrice": 0,
+      "_id": {
+        "$oid": "65c27a2da4c67a9ccfc02f64"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c27a8da4c67a9ccfc02f7f"
+  },
+  "type": "bill",
+  "client": "شهاب أيمن",
+  "phone": "010000000",
+  "date": {
+    "$date": "2024-02-06T18:26:45.384Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c27ae8a4c67a9ccfc02f8b"
+  },
+  "type": "bill",
+  "place": "shop",
+  "client": "شهاب أيمن",
+  "phone": "010000000",
+  "date": {
+    "$date": "2024-02-06T18:26:45.384Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 100,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "مانجا 1 لتر",
+      "count": 5,
+      "price": 20,
+      "buyPrice": 0,
+      "_id": {
+        "$oid": "65c27ae8a4c67a9ccfc02f8c"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c282911915b2d9bf2dec26"
+  },
+  "type": "debt",
+  "client": "محمد أشرف",
+  "phone": "",
+  "date": {
+    "$date": "2024-02-06T18:55:31.510Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c2836e1915b2d9bf2dec37"
+  },
+  "type": "debt",
+  "client": "محمد أشرف",
+  "phone": "",
+  "date": {
+    "$date": "2024-01-06T18:55:31.510Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c2842c1915b2d9bf2dec3d"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "محمد أشرف",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-06T18:55:31.510Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 500,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 50,
+      "price": 10,
+      "_id": {
+        "$oid": "65c2842c1915b2d9bf2dec3e"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c28614c69af63368621a31"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "محمد أشرف",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-06T19:13:02.097Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "كولا كانز",
+      "count": 50,
+      "price": 15,
+      "_id": {
+        "$oid": "65c28614c69af63368621a32"
+      }
+    },
+    {
+      "name": "كولا 2 لتر",
+      "count": 50,
+      "price": 10,
+      "buyPrice": 0,
+      "_id": {
+        "$oid": "65c28614c69af63368621a33"
+      }
+    },
+    {
+      "name": "كولا  لتر",
+      "count": 50,
+      "price": 10,
+      "buyPrice": 0,
+      "_id": {
+        "$oid": "65c28614c69af63368621a34"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c28f87d53fcabcbf3e08b6"
+  },
+  "type": "bill",
+  "place": "shop",
+  "client": "شهاب أيمن",
+  "phone": "010000000",
+  "date": {
+    "$date": "2024-02-06T19:44:48.388Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 200,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "كولا  لتر",
+      "count": 10,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65c28f87d53fcabcbf3e08b7"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ca69003fbcc8849e19505b"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "محمد أشرف",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-12T18:52:45.465Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 1000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 50,
+      "price": 10,
+      "_id": {
+        "$oid": "65ca69003fbcc8849e19505c"
+      }
+    },
+    {
+      "name": "تفاح 1 لتر",
+      "count": 50,
+      "price": 10,
+      "_id": {
+        "$oid": "65ca69003fbcc8849e19505d"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ca6e95586d443a0af9a1d9"
+  },
+  "type": "bill",
+  "place": "shop",
+  "client": "يوسف رجب",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-12T19:16:08.052Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 80,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "كولا  لتر",
+      "count": 4,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65ca6e95586d443a0af9a1da"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ca6ed3586d443a0af9a1ea"
+  },
+  "type": "bill",
+  "place": "shop",
+  "client": "شهاب أيمن",
+  "phone": "010000000",
+  "date": {
+    "$date": "2024-02-12T19:16:08.052Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 300,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "لبن 1 لتر",
+      "count": 10,
+      "price": 30,
+      "buyPrice": 15,
+      "_id": {
+        "$oid": "65ca6ed3586d443a0af9a1eb"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ca6f6a586d443a0af9a201"
+  },
+  "type": "bill",
+  "place": "store",
+  "client": "شهاب أيمن",
+  "phone": "010000000",
+  "date": {
+    "$date": "2024-02-12T19:16:08.052Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 400,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "كولا 2 لتر",
+      "count": 20,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65ca6f6a586d443a0af9a202"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ca84046926ae3bfa625b55"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "محمد أشرف",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-12T20:42:29.260Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 850,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 20,
+      "price": 10,
+      "_id": {
+        "$oid": "65ca84046926ae3bfa625b56"
+      }
+    },
+    {
+      "name": "كولا  لتر",
+      "count": 20,
+      "price": 10,
+      "buyPrice": 0,
+      "_id": {
+        "$oid": "65ca84046926ae3bfa625b57"
+      }
+    },
+    {
+      "name": "كولا كانز",
+      "count": 30,
+      "price": 15,
+      "buyPrice": 0,
+      "_id": {
+        "$oid": "65ca84046926ae3bfa625b58"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ca84c55d54718a0f7bd073"
+  },
+  "type": "bill",
+  "place": "shop",
+  "client": "يوسف رجب",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-12T20:42:34.078Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 300,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 5,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65ca84c55d54718a0f7bd074"
+      }
+    },
+    {
+      "name": "كولا  لتر",
+      "count": 5,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65ca84c55d54718a0f7bd075"
+      }
+    },
+    {
+      "name": "كولا 2 لتر",
+      "count": 5,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65ca84c55d54718a0f7bd076"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65cb9bccd7e31c4c7849bc75"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "محمد أشرف",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-13T16:40:44.376Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 100000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 10000,
+      "price": 10,
+      "_id": {
+        "$oid": "65cb9bccd7e31c4c7849bc76"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65cb9c37d7e31c4c7849bc87"
+  },
+  "type": "bill",
+  "place": "store",
+  "client": "يوسف رجب",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-13T16:40:44.376Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 11000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 550,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65cb9c37d7e31c4c7849bc88"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65cb9c980896e5a8d57e4ccb"
+  },
+  "type": "bill",
+  "place": "store",
+  "client": "يوسف رجب",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-13T16:40:49.294Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 10000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 500,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65cb9c980896e5a8d57e4ccc"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65cb9ccb0896e5a8d57e4cd7"
+  },
+  "type": "bill",
+  "place": "store",
+  "client": "شهاب أيمن",
+  "phone": "010000000",
+  "date": {
+    "$date": "2024-02-13T16:40:49.294Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 20000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 1000,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65cb9ccb0896e5a8d57e4cd8"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65cffd928e59951dc5200a53"
+  },
+  "type": "bill",
+  "place": "store",
+  "client": "يوسف رجب",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-17T00:23:30.859Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 10000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 500,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65cffd928e59951dc5200a54"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65cffdfbc0a33d50324b43d2"
+  },
+  "type": "bill",
+  "place": "store",
+  "client": "يوسف رجب",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-17T00:23:35.537Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 10000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 500,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65cffdfbc0a33d50324b43d3"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65cffe2c8e59951dc5200a5b"
+  },
+  "type": "bill",
+  "client": "مروان سالم",
+  "phone": "01000000000",
+  "date": {
+    "$date": "2024-02-17T00:23:30.859Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65cffe548e59951dc5200a64"
+  },
+  "type": "bill",
+  "place": "store",
+  "client": "مروان سالم",
+  "phone": "01000000000",
+  "date": {
+    "$date": "2024-02-17T00:23:30.859Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 10000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 500,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65cffe548e59951dc5200a65"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65cffe7e8e59951dc5200a6a"
+  },
+  "type": "bill",
+  "client": "أسامة محمد",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-17T00:23:30.859Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65cffed28e59951dc5200a73"
+  },
+  "type": "bill",
+  "place": "store",
+  "client": "أسامة محمد",
+  "phone": "0120000000",
+  "date": {
+    "$date": "2024-02-17T00:23:30.859Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 5000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 250,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65cffed28e59951dc5200a74"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65cfff12c0a33d50324b43e0"
+  },
+  "type": "bill",
+  "place": "store",
+  "client": "مروان سالم",
+  "phone": "01000000000",
+  "date": {
+    "$date": "2024-02-17T00:23:35.537Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 100,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "برتقال 1 لتر",
+      "count": 5,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65cfff12c0a33d50324b43e1"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65cfff7b8e59951dc5200a7b"
+  },
+  "type": "debt",
+  "client": "محمد أحمد",
+  "phone": "01200000000",
+  "date": {
+    "$date": "2024-02-17T00:23:30.859Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65cfffed8e59951dc5200a82"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "محمد أحمد",
+  "phone": "01200000000",
+  "date": {
+    "$date": "2024-02-17T00:23:30.859Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 50000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "تفاح 1 لتر",
+      "count": 5000,
+      "price": 10,
+      "_id": {
+        "$oid": "65cfffed8e59951dc5200a83"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65d000298e59951dc5200a88"
+  },
+  "type": "debt",
+  "client": "مصطفي محمد",
+  "phone": "0150000000",
+  "date": {
+    "$date": "2024-02-17T00:23:30.859Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65d00073c0a33d50324b43eb"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "مصطفي محمد",
+  "phone": "0150000000",
+  "date": {
+    "$date": "2024-02-17T00:23:35.537Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 50000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "كولا  لتر",
+      "count": 5000,
+      "price": 10,
+      "_id": {
+        "$oid": "65d00073c0a33d50324b43ec"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65d000d58e59951dc5200a8e"
+  },
+  "type": "debt",
+  "client": "أيمن الرمادي",
+  "phone": "010000000",
+  "date": {
+    "$date": "2024-02-17T00:23:30.859Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65d00145c0a33d50324b43f5"
+  },
+  "type": "debt",
+  "place": "store",
+  "client": "أيمن الرمادي",
+  "phone": "010000000",
+  "date": {
+    "$date": "2024-02-17T00:23:35.537Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 15000,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "مانجا 1 لتر",
+      "count": 4000,
+      "price": 10,
+      "buyPrice": 0,
+      "_id": {
+        "$oid": "65d00145c0a33d50324b43f6"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65d006ac405928f7e926a5c3"
+  },
+  "type": "bill",
+  "place": "shop",
+  "client": "شهاب أيمن",
+  "phone": "010000000",
+  "date": {
+    "$date": "2024-02-17T01:02:39.020Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 40,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "كولا  لتر",
+      "count": 2,
+      "price": 20,
+      "buyPrice": 10,
+      "_id": {
+        "$oid": "65d006ac405928f7e926a5c4"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65d92074f731449c481c10dc"
+  },
+  "type": "debt",
+  "place": "created",
+  "client": "أيمن الرمادي",
+  "phone": "----",
+  "date": {
+    "$date": "2024-02-23T22:45:24.948Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "جبنه جهينه",
+      "count": 25,
+      "price": 130,
+      "buyPrice": 100,
+      "_id": {
+        "$oid": "65d92074f731449c481c10dd"
+      }
+    },
+    {
+      "name": "جهينه لبن خالي الدسم",
+      "count": 20,
+      "price": 340,
+      "buyPrice": 300,
+      "_id": {
+        "$oid": "65d92074f731449c481c10de"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65d92074f731449c481c10df"
+  },
+  "type": "debt",
+  "place": "created",
+  "client": "أيمن الرمادي",
+  "phone": "----",
+  "date": {
+    "$date": "2024-02-23T22:45:24.948Z"
+  },
+  "pay": {
+    "completed": false,
+    "value": 0,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "جبنه جهينه",
+      "count": 15,
+      "price": 100,
+      "buyPrice": 100,
+      "_id": {
+        "$oid": "65d92074f731449c481c10e0"
+      }
+    },
+    {
+      "name": "جهينه لبن خالي الدسم",
+      "count": 25,
+      "price": 300,
+      "buyPrice": 300,
+      "_id": {
+        "$oid": "65d92074f731449c481c10e1"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65d9209cf731449c481c10f8"
+  },
+  "type": "bill",
+  "place": "shop",
+  "client": "Unknown Client",
+  "phone": "----",
+  "date": {
+    "$date": "2024-02-23T22:45:24.948Z"
+  },
+  "pay": {
+    "completed": true,
+    "value": 1750,
+    "discount": 0
+  },
+  "products": [
+    {
+      "name": "جهينه لبن خالي الدسم",
+      "count": 4,
+      "price": 340,
+      "buyPrice": 300,
+      "_id": {
+        "$oid": "65d9209cf731449c481c10f9"
+      }
+    },
+    {
+      "name": "جبنه جهينه",
+      "count": 3,
+      "price": 130,
+      "buyPrice": 100,
+      "_id": {
+        "$oid": "65d9209cf731449c481c10fa"
+      }
+    }
+  ],
+  "__v": 0
+}]

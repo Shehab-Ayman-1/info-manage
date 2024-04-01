@@ -32,7 +32,6 @@ export const Searchbar = () => {
       })();
    }, [startSearch, searchList]);
 
-
    useEffect(() => {
       if (!data?.length) return;
       const result = data.map((product) => {
@@ -79,7 +78,7 @@ export const Searchbar = () => {
          >
             <CardHeader
                className={`flex-between bg-gradient rounded-3xl text-dimWhite shadow-sp ${
-                  open ? `rounded-b-none` : ``
+                  open ? "rounded-b-none" : ""
                }`}
             >
                <i className="fa fa-search block px-3 text-xl md:text-2xl" />

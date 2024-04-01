@@ -50,6 +50,8 @@ const general = {
       toShop: "To Shop",
 
       optional: " ( Optional ) ",
+      completed: "Completed",
+      pending: "Pending",
       footerCreator: "Created With ❤️ By Shehab Ayman",
    },
    ar: {
@@ -103,6 +105,8 @@ const general = {
       toShop: "الي المتجر",
 
       optional: " ( اختياري ) ",
+      completed: "مكتمل",
+      pending: "غير مكتمل",
       footerCreator: "تم تطوير المنظومة مع ❤️ بواسطة شهاب ايمن",
    },
 };

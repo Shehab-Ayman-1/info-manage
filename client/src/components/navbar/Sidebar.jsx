@@ -70,7 +70,7 @@ export const Sidebar = () => {
                                     >
                                        <div className="flex-start">
                                           <i className={`${icon} text-lg group-hover:text-primary`} />
-                                          <p className="pb-2">{name}</p>
+                                          <p className="pb-2 group-hover:text-primary">{name}</p>
                                        </div>
                                        <i className={`fa fa-lock ${disabled ? "" : "!hidden"}`} />
                                     </ListItem>
@@ -88,7 +88,11 @@ export const Sidebar = () => {
             onClick={openSidebar ? closeDrawer : openDrawer}
             className="flex-center absolute top-1/2 h-[100px] w-[20px] -translate-y-1/2 cursor-pointer bg-deep-purple-500 hover:brightness-125 ltr:left-0 ltr:rounded-bl-2xl ltr:rounded-tl-2xl rtl:right-0 rtl:rounded-br-2xl rtl:rounded-tr-2xl"
          >
-            <i className="fa fa-chevron-left text-white hover:scale-100 hover:text-white" />
+            {i18next.language === "en" ? (
+               <i className="fa fa-chevron-left text-white hover:scale-100 hover:text-white" />
+            ) : (
+               <i className="fa fa-chevron-right text-white hover:scale-100 hover:text-white" />
+            )}
          </div>
       </Drawer>
    );

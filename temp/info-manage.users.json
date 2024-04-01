@@ -1,0 +1,33 @@
+[{
+  "_id": {
+    "$oid": "65620f724cde0eda6e6db0a8"
+  },
+  "name": "shehab ayman",
+  "email": "shehab@gmail.com",
+  "password": "$2b$10$mPQ9KD2dGdgHDBZRXFGlwOk9ykIQP20YC5je9sozfXod10BdGrR3a",
+  "phone": "01067421381",
+  "role": 5051,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65875bc4d1d63044423b5c70"
+  },
+  "name": "يوسف محمد",
+  "email": "youssef@gmail.com",
+  "password": "$2b$10$Ky50VcU0yki1KY2tNBGH.OjSBjAkMmA5/NWfcytd3soO6WYgZAkIW",
+  "phone": "01279305506",
+  "role": 5051,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c1607201f9a7f0bbb408eb"
+  },
+  "name": "Bob",
+  "email": "bob_store@gmail.com",
+  "password": "$2b$10$zaUyXGmxJNcPIWvSUa9pWe3QHhGU2LmKZ9GHxu84nK.owoBLxbVz.",
+  "phone": "01554566092",
+  "role": 5051,
+  "__v": 0
+}]

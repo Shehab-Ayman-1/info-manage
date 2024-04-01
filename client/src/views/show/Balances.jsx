@@ -16,7 +16,9 @@ export const ShowBalances = () => {
             <Typography variant="h4" className="p-4 text-white">
                {text("show-total-cash")}
             </Typography>
-            <Typography variant="h4" className="p-4 text-white">{`${data} ${text("pound")}`}</Typography>
+            <Typography variant="h4" className="p-4 text-white">
+               {`${data?.toLocaleString() || 0} ${text("pound")}`}
+            </Typography>
          </div>
       </Card>
    );

@@ -1,0 +1,293 @@
+[{
+  "_id": {
+    "$oid": "65c26ee5c8407fff55edbc2a"
+  },
+  "img": "",
+  "category": "عصائر ومشروبات غازية",
+  "company": "",
+  "products": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c26f7dc8407fff55edbc2d"
+  },
+  "img": "https://hapijournal.com/wp-content/uploads/2019/03/s.jpg",
+  "category": "عصائر ومشروبات غازية",
+  "company": "جهينة",
+  "products": [
+    {
+      "name": "مانجا 1 لتر",
+      "barcode": "111",
+      "suppliers": [
+        "محمد أشرف",
+        "أيمن الرمادي"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 10,
+        "sale": 20
+      },
+      "count": {
+        "store": 4010,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2024-01-06T17:58:59.578Z"
+        }
+      },
+      "_id": {
+        "$oid": "65c2766e48c135ae27d3aca2"
+      }
+    },
+    {
+      "name": "تفاح 1 لتر",
+      "barcode": "123",
+      "suppliers": [
+        "محمد أشرف",
+        "محمد أحمد"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 10,
+        "sale": 20
+      },
+      "count": {
+        "store": 5060,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2024-01-06T17:58:59.578Z"
+        }
+      },
+      "_id": {
+        "$oid": "65c2766e48c135ae27d3aca3"
+      }
+    },
+    {
+      "name": "برتقال 1 لتر",
+      "barcode": "222",
+      "suppliers": [
+        "محمد أشرف"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 10,
+        "sale": 20
+      },
+      "count": {
+        "store": 6295,
+        "shop": 25,
+        "updatedAt": {
+          "$date": "2023-12-06T17:58:59.578Z"
+        }
+      },
+      "_id": {
+        "$oid": "65c2766e48c135ae27d3aca4"
+      }
+    },
+    {
+      "name": "لبن 1 لتر",
+      "barcode": "564",
+      "suppliers": [],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 15,
+        "sale": 30
+      },
+      "count": {
+        "store": 0,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-11-06T19:59:54.742Z"
+        }
+      },
+      "_id": {
+        "$oid": "65c290149e6291886bd58203"
+      }
+    },
+    {
+      "name": "جبنه جهينه",
+      "barcode": "4",
+      "suppliers": [
+        "أيمن الرمادي"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 100,
+        "sale": 130
+      },
+      "count": {
+        "store": 15,
+        "shop": 22,
+        "updatedAt": {
+          "$date": "2024-02-23T22:45:24.945Z"
+        }
+      },
+      "_id": {
+        "$oid": "65d92074f731449c481c10d9"
+      }
+    },
+    {
+      "name": "جهينه لبن خالي الدسم",
+      "barcode": "33",
+      "suppliers": [
+        "أيمن الرمادي"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 300,
+        "sale": 340
+      },
+      "count": {
+        "store": 25,
+        "shop": 16,
+        "updatedAt": {
+          "$date": "2024-02-23T22:45:24.945Z"
+        }
+      },
+      "_id": {
+        "$oid": "65d92074f731449c481c10da"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65c27c5f7584e486f219db64"
+  },
+  "img": "https://scontent.faly2-2.fna.fbcdn.net/v/t39.30808-6/419344089_199404609922700_7442759954843267741_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=HnGym7ptzhUAX-NWZlv&_nc_ht=scontent.faly2-2.fna&oh=00_AfAiywjgdemARFv0Lp1TA-bgCDReKv_IbW-2RgH87G0O8Q&oe=65C6A711",
+  "category": "عصائر ومشروبات غازية",
+  "company": "سينا كولا",
+  "products": [
+    {
+      "name": "كولا  لتر",
+      "barcode": "1224",
+      "suppliers": [
+        "محمد أشرف",
+        "مصطفي محمد"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 10,
+        "sale": 20
+      },
+      "count": {
+        "store": 5040,
+        "shop": 9,
+        "updatedAt": {
+          "$date": "2023-11-06T18:55:31.506Z"
+        }
+      },
+      "_id": {
+        "$oid": "65c282181915b2d9bf2dec14"
+      }
+    },
+    {
+      "name": "كولا 2 لتر",
+      "barcode": "1234",
+      "suppliers": [
+        "محمد أشرف"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 10,
+        "sale": 20
+      },
+      "count": {
+        "store": 0,
+        "shop": 25,
+        "updatedAt": {
+          "$date": "2023-10-06T18:55:31.506Z"
+        }
+      },
+      "_id": {
+        "$oid": "65c282181915b2d9bf2dec15"
+      }
+    },
+    {
+      "name": "كولا كانز",
+      "barcode": "555",
+      "suppliers": [
+        "محمد أشرف"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 15,
+        "sale": 25
+      },
+      "count": {
+        "store": 80,
+        "shop": 0,
+        "updatedAt": {
+          "$date": "2023-10-06T19:13:02.094Z"
+        }
+      },
+      "_id": {
+        "$oid": "65c285b0c69af63368621a28"
+      }
+    },
+    {
+      "name": "تفاح 2 لتر",
+      "barcode": "123456",
+      "suppliers": [
+        "محمد أشرف"
+      ],
+      "minmax": {
+        "min": 5,
+        "max": 10
+      },
+      "price": {
+        "buy": 10,
+        "sale": 15
+      },
+      "count": {
+        "store": 20,
+        "shop": 30,
+        "updatedAt": {
+          "$date": "2023-10-13T00:21:13.479Z"
+        }
+      },
+      "_id": {
+        "$oid": "65cab6717897aaf15c0b0763"
+      }
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ca6ae6b991f1423dffd0db"
+  },
+  "img": "https://th.bing.com/th/id/OIP.9NvA4WyyvugTRHyXEMNmYwHaHa?rs=1&pid=ImgDetMain",
+  "category": "عصائر ومشروبات غازية",
+  "company": "سبيرو سباتس",
+  "products": [],
+  "__v": 0
+}]

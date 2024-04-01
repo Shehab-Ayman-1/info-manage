@@ -24,7 +24,7 @@ export const Form = ({
                   headerStyle || ""
                }`}
             >
-               <Typography variant="h3" className="text-2xl md:text-3xl">
+               <Typography variant="h3" className="text-2xl font-extrabold md:text-3xl">
                   {headerText}
                </Typography>
             </CardHeader>
@@ -36,9 +36,9 @@ export const Form = ({
                   <Button
                      type="submit"
                      variant="gradient"
-                     disabled={loading}
                      color="deep-purple"
                      className="bg-gradient-to-r from-primary-400 to-primary-900 text-xl hover:brightness-125 md:text-2xl"
+                     disabled={loading}
                      fullWidth
                   >
                      {buttonText}
