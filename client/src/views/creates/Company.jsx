@@ -24,8 +24,12 @@ export const AddCompany = () => {
       if (lists.length) return;
 
       (async () => {
-         const { data, isSubmitted, error } = await listsRefetch("get", "/products/get-products-list");
+         const { data, isSubmitted, error } = await listsRefetch(
+            "get",
+            "/products/get-products-list?isEmpty=true",
+         );
          if (isSubmitted && error) return;
+         console.log(data);
          dispatch(getLists(data));
       })();
    }, []);

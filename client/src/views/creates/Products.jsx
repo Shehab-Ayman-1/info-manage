@@ -43,7 +43,10 @@ export const AddProducts = () => {
 
       if (!lists.length) {
          (async () => {
-            const { data, isSubmitted, error } = await ccRefetch("get", "/products/get-products-list");
+            const { data, isSubmitted, error } = await ccRefetch(
+               "get",
+               "/products/get-products-list?isEmpty=true",
+            );
             if (isSubmitted && error) return;
             dispatch(getLists(data));
          })();
