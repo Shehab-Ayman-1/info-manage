@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
@@ -13,6 +13,13 @@ export const Login = () => {
 
    const [formData, setFormData] = useState({ email: "", password: "" });
    const { data, loading, error, isSubmitted, refetch } = useAxios();
+
+   useEffect(() => {
+      const user = localStorage.getItem("user");
+      if (!user) return;
+      dispatch(login(user));
+      navigate("/");
+   }, []);
 
    const dispatch = useDispatch();
    const navigate = useNavigate();
@@ -29,7 +36,7 @@ export const Login = () => {
       if (isSubmitted && error) return;
 
       dispatch(login(data.user));
-      sessionStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("user", JSON.stringify(data.user));
 
       navigate("/");
    };

@@ -12,7 +12,7 @@ export const User = () => {
    const navigate = useNavigate();
 
    const handleSignout = () => {
-      sessionStorage.removeItem("user");
+      localStorage.removeItem("user");
       window.location.reload();
    };
 

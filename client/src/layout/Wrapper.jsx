@@ -49,8 +49,6 @@ export const Wrapper = () => {
             </div>
             {CurrentPage !== Login && <Footer />}
          </Card>
-
-         {/* Footer */}
       </main>
    );
 };
