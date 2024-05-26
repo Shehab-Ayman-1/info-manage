@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import useScanDetection from "use-scan-detection";
 
 import { filterSelection, getLists, getSuppliers, setProducts } from "@/redux/products";
 import { Field, Form, MTDialog, Selectbox } from "@/components/ui";
@@ -30,8 +29,8 @@ export const AddProducts = () => {
    const [openDialog, setOpenDialog] = useState(false);
 
    const { lists, categories, companies, suppliers } = useSelector(({ products }) => products);
-   const dispatch = useDispatch();
    const { state } = useLocation();
+   const dispatch = useDispatch();
 
    useEffect(() => {
       if (!suppliers.length) {
@@ -54,11 +53,6 @@ export const AddProducts = () => {
    useEffect(() => {
       dispatch(filterSelection({ category: formData.category, company: "" }));
    }, [formData.category]);
-
-   useScanDetection({
-      onComplete: (barcode) => setProduct((product) => ({ ...product, barcode })),
-      minLength: 3,
-   });
 
    const handleOpenDialog = () => {
       setOpenDialog((o) => !o);
