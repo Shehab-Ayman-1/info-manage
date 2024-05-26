@@ -6,4 +6,9 @@ export default defineConfig({
    resolve: {
       alias: [{ find: "@", replacement: "/src" }],
    },
+   build: {
+      rollupOptions: {
+         external: ["use-scan-detection"],
+      },
+   },
 });
